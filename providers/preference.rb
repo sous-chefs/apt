@@ -37,13 +37,13 @@ action :add do
     action :nothing
   end
 
-  # write out the repo file, replace it if it already exists
+  # write out the preference file, replace it if it already exists
   preference_file.run_action(:create)
 end
 
 action :remove do
   if ::File.exists?("/etc/apt/preferences.d/#{new_resource.package_name}")
-    Chef::Log.info "Removing #{new_resource.package_name} repository from /etc/apt/preferences.d/"
+    Chef::Log.info "Un-pinning #{new_resource.package_name} from /etc/apt/preferences.d/"
     file "/etc/apt/preferences.d/#{new_resource.package_name}" do
       action :delete
     end
