@@ -1,7 +1,7 @@
 maintainer        "Opscode, Inc."
 maintainer_email  "cookbooks@opscode.com"
 license           "Apache 2.0"
-description       "Configures apt and apt services and an LWRP for managing apt repositories"
+description       "Configures apt and apt services and LWRPs for managing apt repositories and preferences"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           "1.4.0"
 recipe            "apt", "Runs apt-get update during compile phase and sets up preseed directories"
