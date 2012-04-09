@@ -53,7 +53,8 @@ Adding a new repository will notify running the
 - distribution: this is usually your release's codename...ie something
   like `karmic`, `lucid` or `maverick`
 - components: package groupings..when it doubt use `main`
-- deb_src: whether or not to add the repository as a source repo as well
+- deb_src: whether or not to add the repository as a source repo as
+  well - value can be `true` or `false`, default `false`.
 - key_server: the GPG keyserver where the key for the repo should be retrieved
 - key: if a `key_server` is provided, this is assumed to be the
   fingerprint, otherwise it can be either the URI to the GPG key for
@@ -79,6 +80,16 @@ Adding a new repository will notify running the
       key "C300EE8C"
     end
 
+    # add the Nginx PPA; grab key from keyserver, also add source repo
+    apt_repository "nginx-php" do
+      uri "http://ppa.launchpad.net/nginx/php5/ubuntu"
+      distribution node['lsb']['codename']
+      components ["main"]
+      keyserver "keyserver.ubuntu.com"
+      key "C300EE8C"
+      deb_src true
+    end
+
     # add the Cloudkick Repo
     apt_repository "cloudkick" do
       uri "http://packages.cloudkick.com/ubuntu"
@@ -94,7 +105,6 @@ Adding a new repository will notify running the
       components ["main"]
       key "cloudkick.packages.key"
     end
-
 
     # remove Zenoss repo
     apt_repository "zenoss" do
