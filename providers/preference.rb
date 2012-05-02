@@ -20,6 +20,7 @@
 # Build preferences.d file contents
 def build_pref(package_name, pin, pin_priority)
   preference_content = "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
+  preference_content
 end
 
 action :add do
@@ -32,13 +33,17 @@ action :add do
   preference_file = file "/etc/apt/preferences.d/#{new_resource.package_name}" do
     owner "root"
     group "root"
-    mode 0644
+    mode "0644"
     content preference
     action :nothing
   end
 
   # write out the preference file, replace it if it already exists
   preference_file.run_action(:create)
+
+  if preference_file.updated_by_last_action?
+    new_resource.updated_by_last_action(true)
+  end
 end
 
 action :remove do
