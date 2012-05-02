@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt
-# Recipe:: cacher-ng
+# Attributes:: default
 #
-# Copyright 2008-2012, Opscode, Inc.
+# Copyright 2012, Philipp Wollermann <wollermann_philipp@cyberagent.co.jp>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,4 @@
 # limitations under the License.
 #
 
-package "apt-cacher-ng" do
-  action :install
-end
-
-service "apt-cacher-ng" do
-  supports :restart => true, :status => false
-  action [ :enable, :start ]
-end
+default['apt']['cacher_ipaddress'] = '127.0.0.1'
