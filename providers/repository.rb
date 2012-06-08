@@ -75,31 +75,24 @@ action :add do
       install_key_from_uri(new_resource.key)
     end
 
+    execute "apt-get update" do
+      ignore_failure true
+      action :nothing
+    end
+
     # build repo file
     repository = build_repo(new_resource.uri,
                             new_resource.distribution,
                             new_resource.components,
                             new_resource.deb_src)
 
-    repo_file = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+    file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       owner "root"
       group "root"
       mode 0644
       content repository
-      action :nothing
-    end
-
-    # write out the repo file, replace it if it already exists
-    repo_file.run_action(:create)
-
-    apt_get_update = execute "apt-get update" do
-      ignore_failure true
-      action :nothing
-    end
-
-    if repo_file.updated_by_last_action?
-      new_resource.updated_by_last_action(true)
-      apt_get_update.run_action(:run)
+      action :create
+      notifies :run, resources(:execute => "apt-get update")
     end
 end
 
