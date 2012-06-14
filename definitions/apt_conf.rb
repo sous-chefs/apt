@@ -3,6 +3,6 @@ define :apt_conf, :level => 99, :options => {}, :override_filename => nil, :temp
     owner 'root'
     group 'root'
     mode 0644
-    content params[:options].map{|k,v| "#{k} \"#{v}\""}.join("\n")
+    content params[:options].map{|k,v| "#{k} \"#{v}\";"}.join("\n")
   end
 end
