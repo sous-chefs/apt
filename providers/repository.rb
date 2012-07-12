@@ -92,7 +92,7 @@ action :add do
       mode 0644
       content repository
       action :create
-      notifies :run, resources(:execute => "apt-get update")
+      notifies :run, resources(:execute => "apt-get update"), :immediately
     end
 end
 
