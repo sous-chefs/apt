@@ -92,7 +92,7 @@ action :add do
       mode 0644
       content repository
       action :create
-      notifies :run, resources(:execute => "apt-get update"), :immediately
+      notifies :run, resources(:execute => "apt-get update"), (new_resource.immediate_cache_rebuild ? :immediately : :delayed)
     end
 end
 
