@@ -33,7 +33,7 @@ def extract_gpg_ids_from_cmd(cmd)
   so = Mixlib::ShellOut.new(cmd)
   so.run_command
   so.stdout.split(/\n/).collect do |t|
-    if z = z = t.match(/^pub\s+\d+\w\/([0-9A-F]{8})/)
+    if z = t.match(/^pub\s+\d+\w\/([0-9A-F]{8})/)
       z[1]
     end
   end.compact
