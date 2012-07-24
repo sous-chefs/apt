@@ -66,6 +66,8 @@ Adding a new repository will notify running the
 - cookbook: if key should be a cookbook_file, specify a cookbook where
   the key is located for files/default. Defaults to nil, so it will
   use the cookbook where the resource is used.
+- immediate_cache_rebuild: if the APT cache should be updated after repository
+  addition - value can be `true` or `false`, default `true`.
 
 # Examples
 
@@ -108,6 +110,15 @@ Adding a new repository will notify running the
       distribution node['lsb']['codename']
       components ["main"]
       key "cloudkick.packages.key"
+    end
+
+    # add the Cloudkick Repo and don't trigger an APT cache update immediately
+    apt_repository "cloudkick" do
+      uri "http://packages.cloudkick.com/ubuntu"
+      distribution node['lsb']['codename']
+      components ["main"]
+      key "http://packages.cloudkick.com/cloudkick.packages.key"
+      immediate_cache_rebuild false
     end
 
     # remove Zenoss repo
