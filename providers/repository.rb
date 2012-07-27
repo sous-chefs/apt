@@ -43,7 +43,7 @@ end
 def install_key_from_uri(uri)
   key_name = uri.split(/\//).last
   cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
-  if (new_resource.key =~ /http/)
+  if new_resource.key =~ /http/
     r = remote_file cached_keyfile do
       source new_resource.key
       mode "0644"
@@ -60,15 +60,24 @@ def install_key_from_uri(uri)
 
   r.run_action(:create)
 
+<<<<<<< refs/remotes/upstream/master
   installed_ids = extract_gpg_ids_from_cmd("apt-key finger")
   key_ids = extract_gpg_ids_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
   unless installed_ids & key_ids == key_ids
+=======
+  if r.updated?
+>>>>>>> HEAD~0
     execute "install-key #{key_name}" do
       command "apt-key add #{cached_keyfile}"
       action :nothing
     end.run_action(:run)
+<<<<<<< refs/remotes/upstream/master
     new_resource.updated_by_last_action(true)
   end
+=======
+  end
+  new_resource.updated_by_last_action(true)
+>>>>>>> HEAD~0
 end
 
 # build repo file contents
@@ -105,15 +114,21 @@ action :add do
                             new_resource.components,
                             new_resource.deb_src)
 
-    file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+    notify_type = new_resource.immediate_cache_rebuild ? :immediately : :delayed
+    f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       owner "root"
       group "root"
       mode 0644
       content repository
       action :create
+<<<<<<< refs/remotes/upstream/master
     notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
     notifies :run, resources(:execute => "apt-get update"), :immediately
+=======
+      notifies :run, resources(:execute => "apt-get update"), notify_type if new_resource.cache_rebuild
+>>>>>>> HEAD~0
     end
+    new_resource.updated_by_last_action(f.updated?)
 end
 
 action :remove do
