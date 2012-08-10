@@ -38,6 +38,12 @@ execute "apt-get autoremove" do
   action :nothing
 end
 
+# Automatically remove .deb files for packages no longer on your system
+execute "apt-get autoclean" do
+  command "apt-get -y autoclean"
+  action :nothing
+end
+
 # provides /var/lib/apt/periodic/update-success-stamp on apt-get update
 package "update-notifier-common" do
   notifies :run, resources(:execute => "apt-get-update"), :immediately
