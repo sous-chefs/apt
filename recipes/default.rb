@@ -32,6 +32,12 @@ execute "apt-get update" do
   action :nothing
 end
 
+# Automatically remove packages that are no longer needed for depdencies
+execute "apt-get autoremove" do
+  command "apt-get -y autoremove"
+  action :nothing
+end
+
 # provides /var/lib/apt/periodic/update-success-stamp on apt-get update
 package "update-notifier-common" do
   notifies :run, resources(:execute => "apt-get-update"), :immediately
