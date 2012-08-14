@@ -2,7 +2,7 @@
 
 * [COOK-1229] - Allow cacher IP to be set manually in non-Chef Solo
   environments
-* Immediately update apt-cache when sources.list file is dropped off
+* [COOK-1530] - Immediately update apt-cache when sources.list file is dropped off
 
 ## v1.4.2:
 

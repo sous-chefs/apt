@@ -42,8 +42,8 @@ Managing repositories
 ---------------------
 
 This LWRP provides an easy way to manage additional APT repositories.
-Adding a new repository will notify running the
-`execute[apt-get-update]` resource.
+Adding a new repository will notify running the `execute[apt-get-update]`
+resource immediately.
 
 # Actions
 
