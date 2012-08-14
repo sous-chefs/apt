@@ -80,6 +80,10 @@ action :add do
       action :nothing
     end
 
+  file "/var/lib/apt/periodic/update-success-stamp" do
+    action :nothing
+  end
+
     # build repo file
     repository = build_repo(new_resource.uri,
                             new_resource.distribution,
@@ -92,7 +96,8 @@ action :add do
       mode 0644
       content repository
       action :create
-      notifies :run, resources(:execute => "apt-get update"), (new_resource.immediate_cache_rebuild ? :immediately : :delayed)
+    notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
+    notifies :run, resources(:execute => "apt-get update"), :immediately
     end
 end
 
