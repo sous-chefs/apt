@@ -29,7 +29,7 @@ action :add do
                           new_resource.pin,
                           new_resource.pin_priority)
 
-  preference_file = file "/etc/apt/preferences.d/#{new_resource.package_name}" do
+  preference_file = file "/etc/apt/preferences.d/#{new_resource.package_name}.pref" do
     owner "root"
     group "root"
     mode 0644
@@ -42,9 +42,9 @@ action :add do
 end
 
 action :remove do
-  if ::File.exists?("/etc/apt/preferences.d/#{new_resource.package_name}")
+  if ::File.exists?("/etc/apt/preferences.d/#{new_resource.package_name}.pref")
     Chef::Log.info "Un-pinning #{new_resource.package_name} from /etc/apt/preferences.d/"
-    file "/etc/apt/preferences.d/#{new_resource.package_name}" do
+    file "/etc/apt/preferences.d/#{new_resource.package_name}.pref" do
       action :delete
     end
     new_resource.updated_by_last_action(true)
