@@ -60,24 +60,15 @@ def install_key_from_uri(uri)
 
   r.run_action(:create)
 
-<<<<<<< refs/remotes/upstream/master
   installed_ids = extract_gpg_ids_from_cmd("apt-key finger")
   key_ids = extract_gpg_ids_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
   unless installed_ids & key_ids == key_ids
-=======
-  if r.updated?
->>>>>>> HEAD~0
     execute "install-key #{key_name}" do
       command "apt-key add #{cached_keyfile}"
       action :nothing
     end.run_action(:run)
-<<<<<<< refs/remotes/upstream/master
     new_resource.updated_by_last_action(true)
   end
-=======
-  end
-  new_resource.updated_by_last_action(true)
->>>>>>> HEAD~0
 end
 
 # build repo file contents
@@ -104,9 +95,9 @@ action :add do
       action :nothing
     end
 
-  file "/var/lib/apt/periodic/update-success-stamp" do
-    action :nothing
-  end
+    file "/var/lib/apt/periodic/update-success-stamp" do
+      action :nothing
+    end
 
     # build repo file
     repository = build_repo(new_resource.uri,
@@ -121,12 +112,8 @@ action :add do
       mode 0644
       content repository
       action :create
-<<<<<<< refs/remotes/upstream/master
-    notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
-    notifies :run, resources(:execute => "apt-get update"), :immediately
-=======
+      notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
       notifies :run, resources(:execute => "apt-get update"), notify_type if new_resource.cache_rebuild
->>>>>>> HEAD~0
     end
     new_resource.updated_by_last_action(f.updated?)
 end
