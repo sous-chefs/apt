@@ -37,6 +37,7 @@ servers += search(:node, 'recipes:apt\:\:cacher-ng') unless Chef::Config[:solo]
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
   proxy = "Acquire::http::Proxy \"http://#{servers[0].ipaddress}:3142\";\n"
+  proxy += "Acquire::https::Proxy \"DIRECT\";\n"
   file "/etc/apt/apt.conf.d/01proxy" do
     owner "root"
     group "root"
