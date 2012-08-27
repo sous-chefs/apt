@@ -105,7 +105,6 @@ action :add do
                             new_resource.components,
                             new_resource.deb_src)
 
-    notify_type = new_resource.immediate_cache_rebuild ? :immediately : :delayed
     f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       owner "root"
       group "root"
@@ -113,7 +112,7 @@ action :add do
       content repository
       action :create
       notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
-      notifies :run, resources(:execute => "apt-get update"), notify_type if new_resource.cache_rebuild
+      notifies :run, resources(:execute => "apt-get update"), :immediately if new_resource.cache_rebuild
     end
     new_resource.updated_by_last_action(f.updated?)
 end
