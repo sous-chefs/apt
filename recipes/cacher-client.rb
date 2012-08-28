@@ -48,6 +48,6 @@ else
   Chef::Log.info("No apt-cacher-ng server found.")
   file "/etc/apt/apt.conf.d/01proxy" do
     action :delete
-    only_if {File.exists?("/etc/apt/apt.conf.d/01proxy")}
+    only_if {::File.exists?("/etc/apt/apt.conf.d/01proxy")}
   end
 end
