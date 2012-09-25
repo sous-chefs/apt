@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+def whyrun_supported?
+  true
+end
+
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   unless system("apt-key list | grep #{key}")
