@@ -43,7 +43,7 @@ end
 def install_key_from_uri(uri)
   key_name = uri.split(/\//).last
   cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
-  if (new_resource.key =~ /http/)
+  if new_resource.key =~ /http/
     r = remote_file cached_keyfile do
       source new_resource.key
       mode "0644"
@@ -95,9 +95,9 @@ action :add do
       action :nothing
     end
 
-  file "/var/lib/apt/periodic/update-success-stamp" do
-    action :nothing
-  end
+    file "/var/lib/apt/periodic/update-success-stamp" do
+      action :nothing
+    end
 
     # build repo file
     repository = build_repo(new_resource.uri,
@@ -105,15 +105,16 @@ action :add do
                             new_resource.components,
                             new_resource.deb_src)
 
-    file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+    f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       owner "root"
       group "root"
       mode 0644
       content repository
       action :create
-    notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
-    notifies :run, resources(:execute => "apt-get update"), :immediately
+      notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
+      notifies :run, resources(:execute => "apt-get update"), :immediately if new_resource.cache_rebuild
     end
+    new_resource.updated_by_last_action(f.updated?)
 end
 
 action :remove do
