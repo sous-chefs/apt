@@ -168,6 +168,9 @@ Put `recipe[apt::cacher-ng]` in the run_list for a server to provide
 APT caching and add `recipe[apt::cacher-client]` on the rest of the
 Debian-based nodes to take advantage of the caching server.
 
+If you want to cleanup unused packages, there is also the `apt-get autoclean`
+and `apt-get autoremove` resources provided for automated cleanup.
+
 License and Author
 ==================
 
