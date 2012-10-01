@@ -24,6 +24,7 @@ def initialize(*args)
   @action = :add
 end
 
-attribute :package_name, :kind_of => String, :name_attribute => true
+attribute :package_name, :kind_of => String
 attribute :pin, :kind_of => String
+attribute :name, :kind_of => String, :name_attribute => true
 attribute :pin_priority, :kind_of => String
