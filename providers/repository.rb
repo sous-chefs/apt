@@ -62,7 +62,7 @@ def install_key_from_uri(uri)
 
   installed_ids = extract_gpg_ids_from_cmd("apt-key finger")
   key_ids = extract_gpg_ids_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
-  unless installed_ids & key_ids == key_ids
+  unless (installed_ids & key_ids).sort == key_ids.sort
     execute "install-key #{key_name}" do
       command "apt-key add #{cached_keyfile}"
       action :nothing
