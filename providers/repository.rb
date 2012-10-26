@@ -28,7 +28,6 @@ def install_key_from_keyserver(key, keyserver)
       command "apt-key adv --keyserver #{keyserver} --recv #{key}"
       action :nothing
     end.run_action(:run)
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -47,7 +46,7 @@ end
 def install_key_from_uri(uri)
   key_name = uri.split(/\//).last
   cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
-  if (new_resource.key =~ /http/)
+  if new_resource.key =~ /http/
     r = remote_file cached_keyfile do
       source new_resource.key
       mode "0644"
@@ -71,7 +70,6 @@ def install_key_from_uri(uri)
       command "apt-key add #{cached_keyfile}"
       action :nothing
     end.run_action(:run)
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -109,16 +107,16 @@ action :add do
                             new_resource.components,
                             new_resource.deb_src)
 
-    file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+    f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       owner "root"
       group "root"
       mode 0644
       content repository
       action :create
-
       notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
-      notifies :run, resources(:execute => "apt-get update"), :immediately
+      notifies :run, resources(:execute => "apt-get update"), :immediately if new_resource.cache_rebuild
     end
+    new_resource.updated_by_last_action(f.updated?)
 end
 
 action :remove do
@@ -127,6 +125,5 @@ action :remove do
     file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       action :delete
     end
-    new_resource.updated_by_last_action(true)
   end
 end
