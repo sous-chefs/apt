@@ -1,3 +1,13 @@
+## v1.5.0:
+
+* [COOK-1500] - Avoid triggering apt-get update
+* [COOK-1548] - Add execute commands for autoclean and autoremove
+* [COOK-1591] - Setting up the apt proxy should leave https
+  connections direct
+* [COOK-1596] - execute[apt-get-update-periodic] never runs
+* [COOK-1762] - create /etc/apt/preferences.d directory
+* [COOK-1776] - apt key check isn't idempotent
+
 ## v1.4.8:
 
 * Adds test-kitchen support
