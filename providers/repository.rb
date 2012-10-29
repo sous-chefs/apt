@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+def whyrun_supported?
+  true
+end
+
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   unless system("apt-key list | grep #{key}")
@@ -24,7 +28,6 @@ def install_key_from_keyserver(key, keyserver)
       command "apt-key adv --keyserver #{keyserver} --recv #{key}"
       action :nothing
     end.run_action(:run)
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -67,7 +70,6 @@ def install_key_from_uri(uri)
       command "apt-key add #{cached_keyfile}"
       action :nothing
     end.run_action(:run)
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -123,6 +125,5 @@ action :remove do
     file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
       action :delete
     end
-    new_resource.updated_by_last_action(true)
   end
 end
