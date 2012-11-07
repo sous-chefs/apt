@@ -32,7 +32,7 @@ action :add do
   preference_dir = directory "/etc/apt/preferences.d" do
     owner "root"
     group "root"
-    mode "0644"
+    mode 00644
     recursive true
     action :nothing
   end
@@ -40,7 +40,7 @@ action :add do
   preference_file = file "/etc/apt/preferences.d/#{new_resource.package_name}" do
     owner "root"
     group "root"
-    mode 0644
+    mode 00644
     content preference
     action :nothing
   end

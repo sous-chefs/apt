@@ -41,7 +41,7 @@ if servers.length > 0
   file "/etc/apt/apt.conf.d/01proxy" do
     owner "root"
     group "root"
-    mode "0644"
+    mode 00644
     content proxy
     action :create
   end
