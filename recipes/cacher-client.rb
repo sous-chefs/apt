@@ -42,7 +42,7 @@ if servers.length > 0
     group 'root'
     mode 00644
     variables(
-      :proxy => servers[0].ipaddress
+      :proxy => servers[0]['ipaddress']
       )
   end
 else
