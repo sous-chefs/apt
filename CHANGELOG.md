@@ -1,6 +1,7 @@
 ## v1.5.2
 
 * [COOK-1682] - use template instead of file resource in apt::cacher-client
+* [COOK-1875] - cacher-client should be Environment-aware
 
 ## V1.5.0:
 
