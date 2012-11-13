@@ -107,7 +107,7 @@ action :add do
                            new_resource.components,
                            new_resource.deb_src)
 
-  f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+  f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}.list" do
     owner "root"
     group "root"
     mode 00644
