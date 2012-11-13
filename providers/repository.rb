@@ -107,7 +107,7 @@ action :add do
                            new_resource.components,
                            new_resource.deb_src)
 
-  f = file "/etc/apt/sources.list.d/#{new_resource.repo_name}.list" do
+  f = file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
     owner "root"
     group "root"
     mode 00644
@@ -120,9 +120,9 @@ action :add do
 end
 
 action :remove do
-  if ::File.exists?("/etc/apt/sources.list.d/#{new_resource.repo_name}.list")
-    Chef::Log.info "Removing #{new_resource.repo_name} repository from /etc/apt/sources.list.d/"
-    file "/etc/apt/sources.list.d/#{new_resource.repo_name}.list" do
+  if ::File.exists?("/etc/apt/sources.list.d/#{new_resource.name}.list")
+    Chef::Log.info "Removing #{new_resource.name} repository from /etc/apt/sources.list.d/"
+    file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
       action :delete
     end
   end
