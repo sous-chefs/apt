@@ -120,9 +120,9 @@ action :add do
 end
 
 action :remove do
-  if ::File.exists?("/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list")
+  if ::File.exists?("/etc/apt/sources.list.d/#{new_resource.repo_name}.list")
     Chef::Log.info "Removing #{new_resource.repo_name} repository from /etc/apt/sources.list.d/"
-    file "/etc/apt/sources.list.d/#{new_resource.repo_name}-source.list" do
+    file "/etc/apt/sources.list.d/#{new_resource.repo_name}.list" do
       action :delete
     end
   end
