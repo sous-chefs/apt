@@ -32,7 +32,7 @@ action :add do
   preference_dir = directory "/etc/apt/preferences.d" do
     owner "root"
     group "root"
-    mode 00644
+    mode 00755
     recursive true
     action :nothing
   end
