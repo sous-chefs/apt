@@ -32,7 +32,12 @@ if node['apt'] && node['apt']['cacher_ipaddress']
   servers << cacher
 end
 
-servers += search(:node, 'recipes:apt\:\:cacher-ng') unless Chef::Config[:solo]
+unless Chef::Config[:solo]
+  query = 'recipes:apt\:\:cacher-ng'
+  query += " AND chef_environment:#{node.chef_environment}" if node['apt']['cacher-client']['restrict_environment']
+  Chef::Log.debug("apt::cacher-client searching for '#{query}'")
+  servers += search(:node, query)
+end
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
