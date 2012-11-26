@@ -19,7 +19,7 @@
 
 #remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
 #these are leftover from preseed installs
-execute "Remove proxy from /etc/apt/apt.conf" do
+execute 'Remove proxy from /etc/apt/apt.conf' do
   command "sed --in-place '/^Acquire::http::Proxy/d' /etc/apt/apt.conf"
   only_if "grep Acquire::http::Proxy /etc/apt/apt.conf"
 end
@@ -36,19 +36,18 @@ servers += search(:node, 'recipes:apt\:\:cacher-ng') unless Chef::Config[:solo]
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
-  proxy = "Acquire::http::Proxy \"http://#{servers[0].ipaddress}:3142\";\n"
-  proxy += "Acquire::https::Proxy \"DIRECT\";\n"
-  file "/etc/apt/apt.conf.d/01proxy" do
-    owner "root"
-    group "root"
+  template '/etc/apt/apt.conf.d/01proxy' do
+    source '01proxy.erb'
+    owner 'root'
+    group 'root'
     mode 00644
-    content proxy
-    action :create
+    variables(
+      :proxy => servers[0]['ipaddress']
+      )
   end
 else
-  Chef::Log.info("No apt-cacher-ng server found.")
-  file "/etc/apt/apt.conf.d/01proxy" do
+  Chef::Log.info('No apt-cacher-ng server found.')
+  file '/etc/apt/apt.conf.d/01proxy' do
     action :delete
-    only_if {::File.exists?("/etc/apt/apt.conf.d/01proxy")}
   end
 end

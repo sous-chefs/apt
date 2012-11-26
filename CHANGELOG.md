@@ -1,4 +1,8 @@
-## v1.5.0:
+## v1.5.2
+
+* [COOK-1682] - use template instead of file resource in apt::cacher-client
+
+## V1.5.0:
 
 * [COOK-1500] - Avoid triggering apt-get update
 * [COOK-1548] - Add execute commands for autoclean and autoremove
