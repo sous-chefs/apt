@@ -49,7 +49,7 @@ if servers.length > 0
     variables(
       :proxy => servers[0]['ipaddress']
       )
-  end
+  end.run_action(:create)
 else
   Chef::Log.info('No apt-cacher-ng server found.')
   file '/etc/apt/apt.conf.d/01proxy' do
