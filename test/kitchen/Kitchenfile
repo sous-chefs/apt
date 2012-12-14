@@ -1,3 +1,5 @@
 cookbook "apt" do
-  runtimes []
+  configuration "default"
+  configuration "cacher-ng"
+  configuration "lwrps"
 end
