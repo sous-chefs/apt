@@ -32,8 +32,8 @@ describe "apt_test::default" do
   end
 
   it 'creates the correct pinning preferences for chef' do
-    chef_policy = shell_out("apt-cache policy chef")
-    assert chef_policy.stdout.include?("Package pin: 10.16.2-1")
+    pinning_prefs = "Package: chef\nPin: version 10.16.2-1"
+    file("/etc/apt/preferences.d/chef").must_match(/#{pinning_prefs}/)
   end
 
 end
