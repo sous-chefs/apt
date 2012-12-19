@@ -29,6 +29,16 @@ apt_repository "opscode" do
   action :add
 end
 
+# Apt Repository with arch
+apt_repository "cloudera" do
+  uri "http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh"
+  arch "amd64"
+  distribution "precise-cdh4"
+  components ["contrib"]
+  key "http://archive.cloudera.com/debian/archive.key"
+  action :add
+end
+
 # Apt Preferences
 apt_preference "chef" do
   pin "version 10.16.2-1"

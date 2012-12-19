@@ -36,4 +36,8 @@ describe "apt_test::default" do
     file("/etc/apt/preferences.d/chef").must_match(/#{pinning_prefs}/)
   end
 
+  it 'creates a repo with an architecture' do
+    cloudera = "deb\s+arch=amd64 http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib"
+    file("/etc/apt/sources.list.d/cloudera.list").must_match(/#{cloudera}/)
+  end
 end
