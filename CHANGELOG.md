@@ -1,3 +1,7 @@
+## v1.7.0:
+
+* [COOK-2082] - add "arch" parameter to apt_repository LWRP
+
 ## v1.6.0:
 
 * [COOK-1893] - `apt_preference` use "`package_name`" resource instead of "name"
