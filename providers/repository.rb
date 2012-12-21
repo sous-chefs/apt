@@ -77,8 +77,8 @@ end
 def build_repo(uri, distribution, components, arch, add_deb_src)
   components = components.join(' ') if components.respond_to?(:join)
   repo_info = "#{uri} #{distribution} #{components}\n"
-  repo_info = "arch=#{arch} #{repo_info}" if arch
-  repo =  "deb     #{repo_info}"
+  repo_info = "[arch=#{arch}] #{repo_info}" if arch
+  repo =  "deb #{repo_info}"
   repo << "deb-src #{repo_info}" if add_deb_src
   repo
 end
