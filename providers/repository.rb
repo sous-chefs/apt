@@ -114,10 +114,11 @@ action :add do
     group "root"
     mode 00644
     content repository
-    action :create
+    action :nothing
     notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
     notifies :run, resources(:execute => "apt-get update"), :immediately if new_resource.cache_rebuild
   end
+  f.run_action(:create)
   new_resource.updated_by_last_action(f.updated?)
 end
 
