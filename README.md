@@ -36,6 +36,9 @@ cacher-client
 Configures the node to use the `apt-cacher-ng` server as a client. If you
 want to restrict your node to using the `apt-cacher-ng` server in your
 Environment, set `['apt']['cacher-client']['restrict_environment']` to `true`.
+To use a cacher server (or standard proxy server) not available via search 
+set the atttribute `['apt']['cacher-ipaddress']` and for a custom port 
+set `['apt']['cacher_port']`
 
 Resources/Providers
 ===================
