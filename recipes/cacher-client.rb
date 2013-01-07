@@ -48,7 +48,7 @@ if servers.length > 0
     mode 00644
     variables(
       :proxy => servers[0]['ipaddress'],
-      :port => node['apt']['cacher_port'] || 3142
+      :port => node['apt']['cacher_port']
       )
   end.run_action(:create)
 else
