@@ -32,7 +32,7 @@ execute "apt-get update" do
   action :nothing
 end
 
-# Automatically remove packages that are no longer needed for depdencies
+# Automatically remove packages that are no longer needed for dependencies
 execute "apt-get autoremove" do
   command "apt-get -y autoremove"
   action :nothing
