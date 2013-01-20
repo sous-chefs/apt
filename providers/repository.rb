@@ -83,7 +83,7 @@ end
 
 action :add do
   new_resource.updated_by_last_action(false)
-  repo_file = nil
+  @repo_file = nil
 
   recipe_eval do
     # add key
@@ -109,7 +109,7 @@ action :add do
                             new_resource.arch,
                             new_resource.deb_src)
 
-    repo_file = file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
+    @repo_file = file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
       owner "root"
       group "root"
       mode 00644
@@ -120,7 +120,8 @@ action :add do
     end
   end
 
-  new_resource.updated_by_last_action(repo_file.updated?)
+  raise RuntimeError, "WTF?" if @repo_file.nil?
+  new_resource.updated_by_last_action(@repo_file.updated?)
 end
 
 action :remove do
