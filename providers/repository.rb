@@ -120,7 +120,10 @@ action :add do
     end
   end
 
+  # Work around chef-10.14 recipe_eval regression (CHEF-3493)
+  converge if @repo_file.nil? && respond_to?(:converge)
   raise RuntimeError, "WTF?" if @repo_file.nil?
+
   new_resource.updated_by_last_action(@repo_file.updated?)
 end
 
