@@ -115,12 +115,12 @@ action :add do
       mode 00644
       content repository
       action :create
-      notifies :delete, resources(:file => "/var/lib/apt/periodic/update-success-stamp"), :immediately
-      notifies :run, resources(:execute => "apt-get update"), :immediately if new_resource.cache_rebuild
+      notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
+      notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
     end
   end
 
-  raise RuntimeError, "WTF?" if @repo_file.nil?
+  raise RuntimeError, "The repository file to create is nil, cannot continue." if @repo_file.nil?
   new_resource.updated_by_last_action(@repo_file.updated?)
 end
 
