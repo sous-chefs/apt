@@ -1,3 +1,8 @@
+## v1.8.2:
+
+* [COOK-2112] - need [] around "arch" in sources.list entries
+* [COOK-2171] - fixes a regression in the notification
+
 ## v1.8.0:
 
 * [COOK-2143] - Allow for a custom cacher-ng port
