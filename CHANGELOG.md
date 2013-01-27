@@ -1,3 +1,8 @@
+## v1.8.4:
+
+* [COOK-2171] - Update README to clarify required Chef version: 10.18.0
+  or higher.
+
 ## v1.8.2:
 
 * [COOK-2112] - need [] around "arch" in sources.list entries
