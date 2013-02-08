@@ -24,7 +24,11 @@ end
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   execute "install-key #{key}" do
-    command "apt-key adv --keyserver #{keyserver} --recv #{key}"
+    if !node['apt']['key_proxy'].empty?
+      command "apt-key adv --keyserver-options http-proxy=#{node['apt']['key_proxy']} --keyserver #{keyserver} --recv #{key}"
+    else
+      command "apt-key adv --keyserver #{keyserver} --recv #{key}"
+    end
     action :run
     not_if "apt-key list | grep #{key}"
   end
