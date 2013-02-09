@@ -25,7 +25,7 @@ end
 action :add do
   new_resource.updated_by_last_action(false)
 
-  preference = build_pref(new_resource.package_name,
+  preference = build_pref(new_resource.glob || new_resource.package_name,
                           new_resource.pin,
                           new_resource.pin_priority)
 
