@@ -1,3 +1,8 @@
+## v1.9.0:
+
+* [COOK-2185] - Proxy for apt-key
+* [COOK-2338] - Support pinning by glob() or regexp
+
 ## v1.8.4:
 
 * [COOK-2171] - Update README to clarify required Chef version: 10.18.0
