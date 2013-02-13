@@ -40,4 +40,9 @@ describe "apt_test::default" do
     cloudera = "deb\s+\\[arch=amd64\\] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib"
     file("/etc/apt/sources.list.d/cloudera.list").must_match(/#{cloudera}/)
   end
+
+  it 'creates the correct pinning preferences with a glob' do
+    pinning_prefs = "Package: \\*\nPin: origin packages.dotdeb.org"
+    file("/etc/apt/preferences.d/dotdeb").must_match(/#{pinning_prefs}/)
+  end
 end

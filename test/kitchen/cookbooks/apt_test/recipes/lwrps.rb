@@ -57,3 +57,10 @@ apt_preference "chef" do
   pin "version 10.16.2-1"
   pin_priority "700"
 end
+
+# COOK-2338
+apt_preference "dotdeb" do
+  glob "*"
+  pin "origin packages.dotdeb.org "
+  pin_priority "700"
+end
