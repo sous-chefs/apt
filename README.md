@@ -90,6 +90,7 @@ resource immediately.
 - key: if a `keyserver` is provided, this is assumed to be the
   fingerprint, otherwise it can be either the URI to the GPG key for
   the repo, or a cookbook_file.
+- key_proxy: if set, pass the specified proxy via `http-proxy=` to GPG.
 - cookbook: if key should be a cookbook_file, specify a cookbook where
   the key is located for files/default. Defaults to nil, so it will
   use the cookbook where the resource is used.
