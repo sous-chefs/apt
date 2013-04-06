@@ -1,3 +1,7 @@
+## v1.9.2:
+
+* [COOK-2631] - Create Ubuntu 10.04 specific template for apt-cacher-ng
+
 ## v1.9.0:
 
 * [COOK-2185] - Proxy for apt-key
