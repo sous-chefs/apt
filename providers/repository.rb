@@ -34,8 +34,30 @@ def install_key_from_keyserver(key, keyserver)
   end
 end
 
+def install_shellout
+  if defined?(chef_gem) then
+    r = chef_gem 'mixlib-shellout' do
+      action :nothing
+    end
+  else
+    r = gem_package 'mixlib-shellout' do
+      action :nothing
+    end
+  end
+  r.run_action(:install)
+  Gem.clear_paths
+  require 'mixlib/shellout'
+end
+
 # run command and extract gpg ids
 def extract_gpg_ids_from_cmd(cmd)
+  if not defined?(Mixlib::Shellout) then
+    begin
+      require 'mixlib/shellout'
+    rescue LoadError
+      install_shellout
+    end
+  end
   so = Mixlib::ShellOut.new(cmd)
   so.run_command
   so.stdout.split(/\n/).collect do |t|
