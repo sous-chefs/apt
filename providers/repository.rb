@@ -86,10 +86,11 @@ def build_repo(uri, distribution, components, arch, add_deb_src)
 end
 
 action :add do
-  new_resource.updated_by_last_action(false)
-  @repo_file = nil
-
-  recipe_eval do
+  sub_run_context = @run_context.dup
+  sub_run_context.resource_collection = Chef::ResourceCollection.new
+  
+  original_run_context, @run_context = @run_context, sub_run_context
+  begin
     # add key
     if new_resource.keyserver && new_resource.key
       install_key_from_keyserver(new_resource.key, new_resource.keyserver)
@@ -113,7 +114,7 @@ action :add do
                             new_resource.arch,
                             new_resource.deb_src)
 
-    @repo_file = file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
+    file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
       owner "root"
       group "root"
       mode 00644
@@ -122,10 +123,17 @@ action :add do
       notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
       notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
     end
+  ensure
+    @run_context = original_run_context
   end
 
-  raise RuntimeError, "The repository file to create is nil, cannot continue." if @repo_file.nil?
-  new_resource.updated_by_last_action(@repo_file.updated?)
+  begin
+    Chef::Runner.new(sub_run_context).converge
+  ensure
+    if sub_run_context.resource_collection.any?(&:updated?)
+      new_resource.updated_by_last_action(true)
+    end
+  end
 end
 
 action :remove do
