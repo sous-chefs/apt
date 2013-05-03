@@ -41,7 +41,7 @@ end
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
-  template '/etc/apt/apt.conf.d/01proxy' do
+  t = template '/etc/apt/apt.conf.d/01proxy' do
     source '01proxy.erb'
     owner 'root'
     group 'root'
@@ -50,7 +50,9 @@ if servers.length > 0
       :proxy => servers[0]['ipaddress'],
       :port => node['apt']['cacher_port']
       )
-  end.run_action(:create)
+    action( node['apt']['compiletime'] ? :nothing : :create )
+  end
+  t.run_action(:create) if node['apt']['compiletime']
 else
   Chef::Log.info('No apt-cacher-ng server found.')
   file '/etc/apt/apt.conf.d/01proxy' do
