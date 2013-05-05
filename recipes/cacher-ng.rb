@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+node.set['apt']['caching_server'] = true
+
 package "apt-cacher-ng" do
   action :install
 end
