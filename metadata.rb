@@ -15,16 +15,16 @@ end
 
 attribute "apt/cacher-client/restrict_environment",
   :description => "Whether to restrict the search for the caching server to the same environment as this node",
-  :default => false
+  :default => "false"
 
 attribute "apt/cacher_port",
   :description => "Default listen port for the caching server",
   :default => "3142"
 
 attribute "apt/key_proxy",
-  :description => "Passed as the proxy passed to GPG for the apt_repository resource"
+  :description => "Passed as the proxy passed to GPG for the apt_repository resource",
   :default => ""
 
 attribute "apt/caching_server",
-  :description => "Set this to true if the node is a caching server"
-  :default => false
+  :description => "Set this to true if the node is a caching server",
+  :default => "false"
