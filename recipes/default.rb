@@ -46,7 +46,7 @@ end
 
 # provides /var/lib/apt/periodic/update-success-stamp on apt-get update
 package "update-notifier-common" do
-  notifies :run, resources(:execute => "apt-get-update"), :immediately
+  notifies :run, 'execute[apt-get-update]', :immediately
 end
 
 execute "apt-get-update-periodic" do
