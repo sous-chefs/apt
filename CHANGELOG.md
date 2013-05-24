@@ -1,3 +1,15 @@
+## v1.10.0:
+
+### Improvement
+
+- [COOK-2885]: Improvements for apt cache server search
+
+### Bug
+
+- [COOK-2441]: Apt recipe broken in new chef version
+- [COOK-2660]: Create Debian 6.0 "squeeze" specific template for
+  apt-cacher-ng
+
 ## v1.9.2:
 
 * [COOK-2631] - Create Ubuntu 10.04 specific template for apt-cacher-ng
