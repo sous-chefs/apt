@@ -30,7 +30,11 @@ def install_key_from_keyserver(key, keyserver)
       command "apt-key adv --keyserver #{keyserver} --recv #{key}"
     end
     action :run
-    not_if "apt-key list | grep #{key}"
+    not_if do
+        extract_fingerprints_from_cmd("apt-key finger").any? do |fingerprint|
+            fingerprint.end_with?(key)
+        end
+    end
   end
 end
 
