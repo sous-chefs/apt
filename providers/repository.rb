@@ -32,7 +32,7 @@ def install_key_from_keyserver(key, keyserver)
     action :run
     not_if do
         extract_fingerprints_from_cmd("apt-key finger").any? do |fingerprint|
-            fingerprint.end_with?(key)
+            fingerprint.end_with?(key.upcase)
         end
     end
   end
