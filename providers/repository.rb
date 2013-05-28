@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
 def whyrun_supported?
   true
 end
@@ -86,46 +88,38 @@ def build_repo(uri, distribution, components, arch, add_deb_src)
 end
 
 action :add do
-  new_resource.updated_by_last_action(false)
-  @repo_file = nil
-
-  recipe_eval do
-    # add key
-    if new_resource.keyserver && new_resource.key
-      install_key_from_keyserver(new_resource.key, new_resource.keyserver)
-    elsif new_resource.key
-      install_key_from_uri(new_resource.key)
-    end
-
-    file "/var/lib/apt/periodic/update-success-stamp" do
-      action :nothing
-    end
-
-    execute "apt-get update" do
-      ignore_failure true
-      action :nothing
-    end
-
-    # build repo file
-    repository = build_repo(new_resource.uri,
-                            new_resource.distribution,
-                            new_resource.components,
-                            new_resource.arch,
-                            new_resource.deb_src)
-
-    @repo_file = file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
-      owner "root"
-      group "root"
-      mode 00644
-      content repository
-      action :create
-      notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
-      notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
-    end
+  # add key
+  if new_resource.keyserver && new_resource.key
+    install_key_from_keyserver(new_resource.key, new_resource.keyserver)
+  elsif new_resource.key
+    install_key_from_uri(new_resource.key)
   end
 
-  raise RuntimeError, "The repository file to create is nil, cannot continue." if @repo_file.nil?
-  new_resource.updated_by_last_action(@repo_file.updated?)
+  file "/var/lib/apt/periodic/update-success-stamp" do
+    action :nothing
+  end
+
+  execute "apt-get update" do
+    ignore_failure true
+    action :nothing
+  end
+
+  # build repo file
+  repository = build_repo(new_resource.uri,
+                          new_resource.distribution,
+                          new_resource.components,
+                          new_resource.arch,
+                          new_resource.deb_src)
+
+  file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
+    owner "root"
+    group "root"
+    mode 00644
+    content repository
+    action :create
+    notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
+    notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
+  end
 end
 
 action :remove do

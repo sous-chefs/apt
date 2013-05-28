@@ -10,7 +10,16 @@ an LWRP for pinning packages via /etc/apt/preferences.d.
 Requirements
 ============
 
-Version 1.8.2+ of this cookbook requires **Chef 10.16.4** or later.
+Version 2.0.0+ of this cookbook requires **Chef 11.0.0** or later.
+
+If your Chef version is earlier than 11.0.0, use version 1.10.0 of
+this cookbook.
+
+See [COOK-2258](http://tickets.opscode.com/browse/COOK-2258) for more
+information on this requirement.
+
+Version 1.8.2 to 1.10.0 of this cookbook requires **Chef 10.16.4** or
+later.
 
 If your Chef version is earlier than 10.16.4, use version 1.7.0 of
 this cookbook.
@@ -19,8 +28,7 @@ See [CHEF-3493](http://tickets.opscode.com/browse/CHEF-3493) and
 [this code comment](http://bit.ly/VgvCgf) for more information on this
 requirement.
 
-Platform
---------
+## Platform
 
 * Debian
 * Ubuntu
@@ -30,8 +38,7 @@ May work with or without modification on other Debian derivatives.
 Recipes
 =======
 
-default
--------
+## default
 
 This recipe installs the `update-notifier-common` package to provide
 the timestamp file used to only run `apt-get update` if the cache is
@@ -43,16 +50,14 @@ any `package` resources with Chef.
 
 This recipe also sets up a local cache directory for preseeding packages.
 
-cacher-ng
----------
+## cacher-ng
 
 Installs the `apt-cacher-ng` package and service so the system can
 provide APT caching. You can check the usage report at
 http://{hostname}:3142/acng-report.html. The `cacher-ng` recipe
 includes the `cacher-client` recipe, so it helps seed itself.
 
-cacher-client
--------------
+## cacher-client
 
 Configures the node to use the `apt-cacher-ng` server as a client. If you
 want to restrict your node to using the `apt-cacher-ng` server in your
@@ -65,19 +70,18 @@ set `['apt']['cacher_port']`.
 Resources/Providers
 ===================
 
-Managing repositories
----------------------
+## Managing repositories
 
 This LWRP provides an easy way to manage additional APT repositories.
 Adding a new repository will notify running the `execute[apt-get-update]`
 resource immediately.
 
-# Actions
+### Actions
 
 - :add: creates a repository file and builds the repository listing
 - :remove: removes the repository file
 
-# Attribute Parameters
+### Attribute Parameters
 
 - repo_name: name attribute. The name of the channel to discover
 - uri: the base of the Debian distribution
@@ -97,7 +101,7 @@ resource immediately.
   the key is located for files/default. Defaults to nil, so it will
   use the cookbook where the resource is used.
 
-# Examples
+### Examples
 
     # add the Zenoss repo
     apt_repository "zenoss" do
@@ -154,8 +158,7 @@ resource immediately.
       action :remove
     end
 
-Pinning packages
-----------------
+## Pinning packages
 
 This LWRP provides an easy way to pin packages in /etc/apt/preferences.d.
 Although apt-pinning is quite helpful from time to time please note that Debian
@@ -164,19 +167,19 @@ does not encourage its use without thorough consideration.
 Further information regarding apt-pinning is available via
 http://wiki.debian.org/AptPreferences.
 
-# Actions
+### Actions
 
 - :add: creates a preferences file under /etc/apt/preferences.d
 - :remove: Removes the file, therefore unpin the package
 
-# Attribute Parameters
+### Attribute Parameters
 
 - package_name: name attribute. The name of the package
 - glob: Pin by glob() expression or regexp surrounded by /.
 - pin: The package version/repository to pin
 - pin_priority: The pinning priority aka "the highest package version wins"
 
-# Examples
+### Examples
 
     # Pin libmysqlclient16 to version 5.1.49-3
     apt_preference "libmysqlclient16" do
@@ -225,7 +228,7 @@ Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Matt Ray (<matt@opscode.com>)
 Author:: Seth Chisamore (<schisamo@opscode.com>)
 
-Copyright 2009-2012 Opscode, Inc.
+Copyright 2009-2013 Opscode, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
