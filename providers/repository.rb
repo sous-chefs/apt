@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-use_inline_resources
+if Chef::VERSION.to_i >= 11
+  use_inline_resources
+end
 
 def whyrun_supported?
   true
