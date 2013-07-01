@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-use_inline_resources
+use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
   true
@@ -32,17 +32,21 @@ def install_key_from_keyserver(key, keyserver)
       command "apt-key adv --keyserver #{keyserver} --recv #{key}"
     end
     action :run
-    not_if "apt-key list | grep #{key}"
+    not_if do
+        extract_fingerprints_from_cmd("apt-key finger").any? do |fingerprint|
+            fingerprint.end_with?(key.upcase)
+        end
+    end
   end
 end
 
 # run command and extract gpg ids
-def extract_gpg_ids_from_cmd(cmd)
+def extract_fingerprints_from_cmd(cmd)
   so = Mixlib::ShellOut.new(cmd)
   so.run_command
   so.stdout.split(/\n/).collect do |t|
-    if z = t.match(/^pub\s+\d+\w\/([0-9A-F]{8})/)
-      z[1]
+    if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/)
+      z[1].split.join
     end
   end.compact
 end
@@ -70,9 +74,9 @@ def install_key_from_uri(uri)
     command "apt-key add #{cached_keyfile}"
     action :run
     not_if do
-      installed_ids = extract_gpg_ids_from_cmd("apt-key finger")
-      key_ids = extract_gpg_ids_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
-      (installed_ids & key_ids).sort == key_ids.sort
+      installed_keys = extract_fingerprints_from_cmd("apt-key finger")
+      proposed_keys = extract_fingerprints_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
+      (installed_keys & proposed_keys).sort == proposed_keys.sort
     end
   end
 end
