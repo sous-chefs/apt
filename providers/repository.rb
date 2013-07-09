@@ -29,7 +29,7 @@ def install_key_from_keyserver(key, keyserver)
     if !node['apt']['key_proxy'].empty?
       command "apt-key adv --keyserver-options http-proxy=#{node['apt']['key_proxy']} --keyserver #{keyserver} --recv #{key}"
     else
-      command "apt-key adv --keyserver #{keyserver} --recv #{key}"
+      command "apt-key adv --keyserver hkp://#{keyserver}:80 --recv #{key}"
     end
     action :run
     not_if do
