@@ -1,8 +1,7 @@
-
 # Letter case in directive names does not matter. Must be separated with colons.
 # Valid boolean values are a zero number for false, non-zero numbers for true.
 
-CacheDir: /var/cache/apt-cacher-ng
+CacheDir: <%= node['apt']['cacher_dir'] %>
 
 # set empty to disable logging
 LogDir: /var/log/apt-cacher-ng
