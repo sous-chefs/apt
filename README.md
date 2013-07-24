@@ -65,7 +65,8 @@ Environment, set `['apt']['cacher-client']['restrict_environment']` to `true`.
 
 To use a cacher server (or standard proxy server) not available via search
 set the atttribute `['apt']['cacher_ipaddress']` and for a custom port
-set `['apt']['cacher_port']`.
+set `['apt']['cacher_port']`. To move the location of the cached files set 
+the attribute `['apt']['cacher_dir']`.
 
 Resources/Providers
 ===================
