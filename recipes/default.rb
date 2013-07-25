@@ -18,6 +18,16 @@
 # limitations under the License.
 #
 
+# Run force update when we use Vagabond test environment
+v_run=execute "apt-get-update" do
+  command "apt-get update"
+  ignore_failure true
+  action :nothing
+end
+if node.chef_environment == "vagabond"
+  v_run.run_action(:run)
+end
+
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do
   command "apt-get update"
