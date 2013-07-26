@@ -25,6 +25,7 @@ v_run=execute "apt-get-update" do
   action :nothing
 end
 if node.chef_environment == "vagabond"
+  include_recipe "apt::openstack-keyring"
   v_run.run_action(:run)
 end
 
