@@ -54,8 +54,11 @@ This recipe also sets up a local cache directory for preseeding packages.
 
 Installs the `apt-cacher-ng` package and service so the system can
 provide APT caching. You can check the usage report at
-http://{hostname}:3142/acng-report.html. The `cacher-ng` recipe
-includes the `cacher-client` recipe, so it helps seed itself.
+http://{hostname}:3142/acng-report.html.
+
+If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly
+include the `cacher-client` recipe in your run list **after** `cacher-ng` or you
+will block your ability to install any packages (ie. `apt-cacher-ng`).
 
 ## cacher-client
 
