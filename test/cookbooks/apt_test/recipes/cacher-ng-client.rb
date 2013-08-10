@@ -19,3 +19,6 @@
 
 include_recipe "apt::cacher-ng"
 include_recipe "apt::cacher-client"
+
+#install a small, innocuous application to verify this works
+package "colordiff"
