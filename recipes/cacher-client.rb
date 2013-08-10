@@ -56,6 +56,7 @@ if servers.length > 0
       :port => node['apt']['cacher_port']
       )
     action( node['apt']['compiletime'] ? :nothing : :create )
+    notifies :run, 'execute[apt-get update]', :immediately
   end
   t.run_action(:create) if node['apt']['compiletime']
 else
@@ -64,3 +65,5 @@ else
     action :delete
   end
 end
+
+include_recipe 'apt::default'
