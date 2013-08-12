@@ -41,7 +41,7 @@ end
 
 # Apt repository and install a package it contains
 apt_repository "nginx" do
-  uri "http://nginx.org/packages/ubuntu"
+  uri "http://nginx.org/packages/#{node['platform']}"
   distribution node['lsb']['codename']
   components ["nginx"]
   key "http://nginx.org/keys/nginx_signing.key"
