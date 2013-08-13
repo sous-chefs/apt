@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Recipe:: cacher-client
 #
-# Copyright 2011, 2012 Opscode, Inc.
+# Copyright 2011-2013 Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,15 +25,20 @@ execute 'Remove proxy from /etc/apt/apt.conf' do
 end
 
 servers = []
-if node['apt'] && node['apt']['cacher_ipaddress']
-  cacher = Chef::Node.new
-  cacher.name(node['apt']['cacher_ipaddress'])
-  cacher.set['ipaddress'] = node['apt']['cacher_ipaddress']
-  servers << cacher
+if node['apt']
+  if node['apt']['cacher_ipaddress']
+    cacher = Chef::Node.new
+    cacher.name(node['apt']['cacher_ipaddress'])
+    cacher.set['ipaddress'] = node['apt']['cacher_ipaddress']
+    servers << cacher
+  elsif node['apt']['caching_server']
+    node.override['apt']['compiletime'] = false
+    servers << node
+  end
 end
 
-unless Chef::Config[:solo]
-  query = "apt_caching_server:true NOT name:#{node.name}"
+unless (Chef::Config[:solo] || servers.length > 0)
+  query = "apt_caching_server:true"
   query += " AND chef_environment:#{node.chef_environment}" if node['apt']['cacher-client']['restrict_environment']
   Chef::Log.debug("apt::cacher-client searching for '#{query}'")
   servers += search(:node, query)
@@ -41,7 +46,7 @@ end
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
-  template '/etc/apt/apt.conf.d/01proxy' do
+  t = template '/etc/apt/apt.conf.d/01proxy' do
     source '01proxy.erb'
     owner 'root'
     group 'root'
@@ -50,10 +55,15 @@ if servers.length > 0
       :proxy => servers[0]['ipaddress'],
       :port => node['apt']['cacher_port']
       )
-  end.run_action(:create)
+    action( node['apt']['compiletime'] ? :nothing : :create )
+    notifies :run, 'execute[apt-get update]', :immediately
+  end
+  t.run_action(:create) if node['apt']['compiletime']
 else
   Chef::Log.info('No apt-cacher-ng server found.')
   file '/etc/apt/apt.conf.d/01proxy' do
     action :delete
   end
 end
+
+include_recipe 'apt::default'

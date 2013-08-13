@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: apt
-# Recipe:: cacher-ng
+# Cookbook Name:: apt_test
+# Recipe:: cacher-client_test
 #
-# Copyright 2008-2013, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,21 +17,13 @@
 # limitations under the License.
 #
 
-node.set['apt']['caching_server'] = true
+require File.expand_path('../support/helpers', __FILE__)
 
-package "apt-cacher-ng" do
-  action :install
-end
+describe "apt_test::cacher-client" do
+  include Helpers::AptTest
 
-template "/etc/apt-cacher-ng/acng.conf" do
-  source "acng.conf.erb"
-  owner "root"
-  group "root"
-  mode 00644
-  notifies :restart, "service[apt-cacher-ng]", :immediately
-end
+  it 'does not create 01proxy' do
+    file('/etc/apt/apt.conf.d/01proxy').wont_exist
+  end
 
-service "apt-cacher-ng" do
-  supports :restart => true, :status => false
-  action [:enable, :start]
 end
