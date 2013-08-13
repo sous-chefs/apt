@@ -30,4 +30,8 @@ describe "apt_test::cacher-ng-client" do
     file('/etc/apt/apt.conf.d/01proxy').must_include "Acquire::http::Proxy \"http://#{node['ipaddress']}:#{node['apt']['cacher_port']}\";"
   end
 
+  it 'installed colordiff' do
+    package('colordiff').must_be_installed
+  end
+
 end
