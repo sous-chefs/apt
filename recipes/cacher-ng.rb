@@ -23,6 +23,12 @@ package "apt-cacher-ng" do
   action :install
 end
 
+directory node['apt']['cacher_dir'] do
+  owner "apt-cacher-ng"
+  group "apt-cacher-ng"
+  mode 0755
+end
+
 template "/etc/apt-cacher-ng/acng.conf" do
   source "acng.conf.erb"
   owner "root"
