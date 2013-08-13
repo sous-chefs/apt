@@ -67,8 +67,9 @@ want to restrict your node to using the `apt-cacher-ng` server in your
 Environment, set `['apt']['cacher-client']['restrict_environment']` to `true`.
 
 To use a cacher server (or standard proxy server) not available via search
-set the atttribute `['apt']['cacher-ipaddress']` and for a custom port
-set `['apt']['cacher_port']`.
+set the atttribute `['apt']['cacher_ipaddress']` and for a custom port
+set `['apt']['cacher_port']`. To move the location of the cached files set
+the attribute `['apt']['cacher_dir']`.
 
 Set `['apt']['compiletime']` to true to force the `cacher-client` recipe to
 run before other recipes. This can be useful in some cases as it forces apt
