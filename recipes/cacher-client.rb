@@ -28,9 +28,9 @@ servers = []
 if node['apt']
   if node['apt']['cacher_ipaddress']
     cacher = Chef::Node.new
-    cacher.name(node['apt']['cacher_ipaddress'])
-    cacher.set['ipaddress'] = node['apt']['cacher_ipaddress']
-    cacher.set['port'] = node['apt']['cacher_port']
+    cacher.default.name = node['apt']['cacher_ipaddress']
+    cacher.default.ipaddress = node['apt']['cacher_ipaddress']
+    cacher.default.apt.cacher_port = node['apt']['cacher_port']
     servers << cacher
   elsif node['apt']['caching_server']
     node.override['apt']['compiletime'] = false
