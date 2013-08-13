@@ -6,6 +6,7 @@
 - [COOK-1856]: apt cookbook should match keys without case sensitivity
 - [COOK-3255]: Attribute name incorrect in README
 - [COOK-3225]: Call use_inline_resources only if defined
+- [COOK-3386]: Cache dir for apt-cacher-ng
 - Greatly expanded test coverage with ChefSpec and Test-Kitchen
 
 ## v2.0.0:
