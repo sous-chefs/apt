@@ -7,6 +7,7 @@
 - [COOK-3255]: Attribute name incorrect in README
 - [COOK-3225]: Call use_inline_resources only if defined
 - [COOK-3386]: Cache dir for apt-cacher-ng
+- [COOK-3291]: apt_repository: enable usage of a keyserver on port 80
 - Greatly expanded test coverage with ChefSpec and Test-Kitchen
 
 ## v2.0.0:
