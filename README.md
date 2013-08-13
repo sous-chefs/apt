@@ -134,22 +134,6 @@ resource immediately.
       deb_src true
     end
 
-    # add the Cloudkick Repo
-    apt_repository "cloudkick" do
-      uri "http://packages.cloudkick.com/ubuntu"
-      distribution node['lsb']['codename']
-      components ["main"]
-      key "http://packages.cloudkick.com/cloudkick.packages.key"
-    end
-
-    # add the Cloudkick Repo with the key downloaded in the cookbook
-    apt_repository "cloudkick" do
-      uri "http://packages.cloudkick.com/ubuntu"
-      distribution node['lsb']['codename']
-      components ["main"]
-      key "cloudkick.packages.key"
-    end
-
     # add the Cloudera Repo of CDH4 packages for Ubuntu 12.04 on AMD64
     apt_repository "cloudera" do
       uri "http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh"
