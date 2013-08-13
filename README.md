@@ -67,11 +67,11 @@ will block your ability to install any packages (ie. `apt-cacher-ng`).
 Attributes
 ==========
 
-`['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
-`['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
-`['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-`['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
-`['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
+* `['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
+* `['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
+* `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
+* `['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
+* `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
 
 Resources/Providers
 ===================
