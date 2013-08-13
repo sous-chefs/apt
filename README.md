@@ -50,6 +50,10 @@ any `package` resources with Chef.
 
 This recipe also sets up a local cache directory for preseeding packages.
 
+## cacher-client
+
+Configures the node to use the `apt-cacher-ng` server as a client.
+
 ## cacher-ng
 
 Installs the `apt-cacher-ng` package and service so the system can
@@ -60,22 +64,14 @@ If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly
 include the `cacher-client` recipe in your run list **after** `cacher-ng` or you
 will block your ability to install any packages (ie. `apt-cacher-ng`).
 
-## cacher-client
+Attributes
+==========
 
-Configures the node to use the `apt-cacher-ng` server as a client. If you
-want to restrict your node to using the `apt-cacher-ng` server in your
-Environment, set `['apt']['cacher-client']['restrict_environment']` to `true`.
-
-To use a cacher server (or standard proxy server) not available via search
-set the atttribute `['apt']['cacher_ipaddress']` and for a custom port
-set `['apt']['cacher_port']`. To move the location of the cached files set
-the attribute `['apt']['cacher_dir']`.
-
-Set `['apt']['compiletime']` to true to force the `cacher-client` recipe to
-run before other recipes. This can be useful in some cases as it forces apt
-to use the proxy before other recipes run. Useful if your nodes have limited
-access to public apt repositories. This is overridden if the `cacher-ng` recipe
-is in your run list. Default is `false`.
+`['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
+`['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
+`['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
+`['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
+`['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
 
 Resources/Providers
 ===================
