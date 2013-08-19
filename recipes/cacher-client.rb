@@ -28,8 +28,9 @@ servers = []
 if node['apt']
   if node['apt']['cacher_ipaddress']
     cacher = Chef::Node.new
-    cacher.name(node['apt']['cacher_ipaddress'])
-    cacher.set['ipaddress'] = node['apt']['cacher_ipaddress']
+    cacher.default.name = node['apt']['cacher_ipaddress']
+    cacher.default.ipaddress = node['apt']['cacher_ipaddress']
+    cacher.default.apt.cacher_port = node['apt']['cacher_port']
     servers << cacher
   elsif node['apt']['caching_server']
     node.override['apt']['compiletime'] = false
@@ -53,7 +54,7 @@ if servers.length > 0
     mode 00644
     variables(
       :proxy => servers[0]['ipaddress'],
-      :port => node['apt']['cacher_port']
+      :port => servers[0]['apt']['cacher_port']
       )
     action( node['apt']['compiletime'] ? :nothing : :create )
     notifies :run, 'execute[apt-get update]', :immediately
