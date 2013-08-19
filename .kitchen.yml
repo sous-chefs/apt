@@ -57,6 +57,7 @@ suites:
   - recipe[apt_test::cacher-ng-client]
   attributes:
     apt:
+      cacher_dir: '/tmp/apt-cacher'
       cacher_port: '9876'
       compiletime: true
 
