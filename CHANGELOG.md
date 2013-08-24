@@ -3,6 +3,11 @@ apt Cookbook CHANGELOG
 This file is used to list changes made in each version of the apt cookbook.
 
 
+v2.1.1
+------
+### Bug
+- **[COOK-1856](https://tickets.opscode.com/browse/COOK-1856)** - Match GPG keys without case sensitivity
+
 v2.1.0
 ------
 - [COOK-3426]: cacher-ng fails with restrict_environment set to true
