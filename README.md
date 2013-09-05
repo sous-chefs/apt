@@ -100,6 +100,8 @@ resource immediately.
 - components: package groupings..when it doubt use `main`
 - arch: constrain package to a particular arch like `i386`, `amd64` or
   even `armhf` or `powerpc`. Defaults to nil.
+- trusted: set up a trusted repository (see sources.list(5), which is
+  generally a bad idea.
 - deb_src: whether or not to add the repository as a source repo as
   well - value can be `true` or `false`, default `false`.
 - keyserver: the GPG keyserver where the key for the repo should be retrieved
