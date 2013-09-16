@@ -82,10 +82,14 @@ def install_key_from_uri(uri)
 end
 
 # build repo file contents
-def build_repo(uri, distribution, components, arch, add_deb_src)
+def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
   components = components.join(' ') if components.respond_to?(:join)
+  repo_options = []
+  repo_options << "arch=#{arch}" if arch
+  repo_options << "trusted=yes" if trusted
+  repo_options = "[" + repo_options.join(' ') + "]" unless repo_options.empty?
   repo_info = "#{uri} #{distribution} #{components}\n"
-  repo_info = "[arch=#{arch}] #{repo_info}" if arch
+  repo_info = "#{repo_options} #{repo_info}" unless repo_options.empty?
   repo =  "deb     #{repo_info}"
   repo << "deb-src #{repo_info}" if add_deb_src
   repo
@@ -108,12 +112,13 @@ action :add do
     action :nothing
   end
 
-  # build repo file
-  repository = build_repo(new_resource.uri,
-                          new_resource.distribution,
-                          new_resource.components,
-                          new_resource.arch,
-                          new_resource.deb_src)
+    # build repo file
+    repository = build_repo(new_resource.uri,
+                            new_resource.distribution,
+                            new_resource.components,
+                            new_resource.trusted,
+                            new_resource.arch,
+                            new_resource.deb_src)
 
   file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
     owner "root"
