@@ -30,8 +30,12 @@ requirement.
 
 ## Platform
 
-* Debian
-* Ubuntu
+Please refer to the [TESTING file](TESTING.md) to see the currently (and passing) tested platforms. The release was tested on:
+* Ubuntu 10.04
+* Ubuntu 12.04
+* Ubuntu 13.04
+* Debian 7.1
+* Debian 6.0 (have with manual testing)
 
 May work with or without modification on other Debian derivatives.
 
@@ -214,11 +218,13 @@ and `apt-get autoremove` resources provided for automated cleanup.
 License and Author
 ==================
 
-Author:: Joshua Timberman (<joshua@opscode.com>)
-Author:: Matt Ray (<matt@opscode.com>)
-Author:: Seth Chisamore (<schisamo@opscode.com>)
-
-Copyright 2009-2013 Opscode, Inc.
+|                      |                                         |
+|:---------------------|:----------------------------------------|
+| **Author**           | Joshua Timberman <joshua@opscode.com>   |
+| **Author**           | Matt Ray (<matt@opscode.com>)           |
+| **Author**           | Seth Chisamore (<schisamo@opscode.com>) |
+|                      |                                         |
+| **Copyright**        | Copyright (c) 2009-2013, Opscode, Inc.  |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
