@@ -18,6 +18,9 @@
 # limitations under the License.
 #
 
+# this is true on Debian systems, see README.md "Attributes" section
+return unless node['apt']['apt_installed']
+
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do
   command "apt-get update"

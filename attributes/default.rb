@@ -23,3 +23,10 @@ default['apt']['cacher_port'] = 3142
 default['apt']['caching_server'] = false
 default['apt']['compiletime'] = false
 default['apt']['key_proxy'] = ''
+
+case node['platform_family']
+when 'debian'
+  default['apt']['apt_installed'] = true
+else
+  default['apt']['apt_installed'] = false
+end
