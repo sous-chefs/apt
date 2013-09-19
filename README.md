@@ -32,6 +32,8 @@ This recipe should appear first in the run list of Debian or Ubuntu nodes to ens
 
 This recipe also sets up a local cache directory for preseeding packages.
 
+**Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
+
 ### cacher-client
 Configures the node to use the `apt-cacher-ng` server as a client.
 
