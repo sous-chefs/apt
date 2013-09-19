@@ -22,7 +22,6 @@ Please refer to the [TESTING file](TESTING.md) to see the currently (and passing
 
 May work with or without modification on other Debian derivatives.
 
-
 Recipes
 -------
 ### default
@@ -40,7 +39,6 @@ Installs the `apt-cacher-ng` package and service so the system can provide APT c
 
 If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly include the `cacher-client` recipe in your run list **after** `cacher-ng` or you will block your ability to install any packages (ie. `apt-cacher-ng`).
 
-
 Attributes
 ----------
 * `['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
@@ -48,7 +46,12 @@ Attributes
 * `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
 * `['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
 * `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-
+* `['apt']['apt_installed']` - whether the apt package manager is
+  installed. This attribute is true by default if
+  `node['platform_family']` is Debian, otherwise it is false. If your
+  system is not detected as a Debian family distribution, or if you've
+  otherwise installed apt on your system to manage packages, set this
+  to true.
 
 Resources/Providers
 -------------------
