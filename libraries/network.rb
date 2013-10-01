@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt
-# Attributes:: default
+# library:: network
 #
-# Copyright 2009-2013, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,17 @@
 # limitations under the License.
 #
 
-default['apt']['cacher-client']['restrict_environment'] = false
-default['apt']['cacher_dir'] = '/var/cache/apt-cacher-ng'
-default['apt']['cacher_interface'] = nil
-default['apt']['cacher_port'] = 3142
-default['apt']['caching_server'] = false
-default['apt']['compiletime'] = false
-default['apt']['key_proxy'] = ''
+module ::Apt
+  def interface_ipaddress(host, interface)
+    if interface
+      addresses = host['network']['interfaces'][interface]['addresses']
+      addresses.select do |ip, data|
+        if data['family'].eql?('inet')
+          return ip
+        end
+      end
+    else
+      return host.ipaddress
+    end
+  end
+end
