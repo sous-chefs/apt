@@ -3,6 +3,11 @@ apt Cookbook CHANGELOG
 This file is used to list changes made in each version of the apt cookbook.
 
 
+v2.2.0
+------
+### Bug
+- **[COOK-3707](https://tickets.opscode.com/browse/COOK-3707)** - multiple nics confuse apt::cacher-client
+
 v2.1.2
 ------
 ### Improvement
