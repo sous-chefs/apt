@@ -59,6 +59,8 @@ def install_key_from_uri(uri)
     remote_file cached_keyfile do
       source new_resource.key
       mode 00644
+      retries 5
+      retry_delay 2
       action :create
     end
   else
