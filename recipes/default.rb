@@ -19,7 +19,7 @@
 #
 
 class ::Chef::Recipe
-  include ::Chef::Apt::Helpers
+  include Apt::Helpers
 end
 
 # On systems where apt is not installed, this recipe does not execute
