@@ -3,6 +3,12 @@ apt Cookbook CHANGELOG
 This file is used to list changes made in each version of the apt cookbook.
 
 
+v2.2.1
+------
+### Improvement
+- **[COOK-664](https://tickets.opscode.com/browse/COOK-664)** - Check platform before running apt-specific commands
+
+
 v2.2.0
 ------
 ### Bug
