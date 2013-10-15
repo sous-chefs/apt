@@ -18,8 +18,6 @@
 # limitations under the License.
 #
 
-::Chef::Recipe.send(:include, ::Apt::Helpers)
-
 # On systems where apt is not installed, the resources in this recipe are not
 # executed. However, they _must_ still be present in the resource collection
 # or other cookbooks which notify these resources will fail on non-apt-enabled
