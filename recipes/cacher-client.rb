@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+class ::Chef::Recipe
+  include ::Apt
+end
+
 #remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
 #these are leftover from preseed installs
 execute 'Remove proxy from /etc/apt/apt.conf' do
@@ -31,6 +35,7 @@ if node['apt']
     cacher.default.name = node['apt']['cacher_ipaddress']
     cacher.default.ipaddress = node['apt']['cacher_ipaddress']
     cacher.default.apt.cacher_port = node['apt']['cacher_port']
+    cacher.default.apt_cacher_interface = node['apt']['cacher_interface']
     servers << cacher
   elsif node['apt']['caching_server']
     node.override['apt']['compiletime'] = false
@@ -47,14 +52,20 @@ end
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
+  if servers[0]['apt']['cacher_interface']
+    cacher_ipaddress = interface_ipaddress(servers[0], servers[0]['apt']['cacher_interface'])
+  else
+    cacher_ipaddress = servers[0].ipaddress
+  end
   t = template '/etc/apt/apt.conf.d/01proxy' do
     source '01proxy.erb'
     owner 'root'
     group 'root'
     mode 00644
     variables(
-      :proxy => servers[0]['ipaddress'],
-      :port => servers[0]['apt']['cacher_port']
+      :proxy => cacher_ipaddress,
+      :port => servers[0]['apt']['cacher_port'],
+      :bypass => node['apt']['cache_bypass']
       )
     action( node['apt']['compiletime'] ? :nothing : :create )
     notifies :run, 'execute[apt-get update]', :immediately
