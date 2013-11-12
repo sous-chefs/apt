@@ -24,6 +24,18 @@ def initialize(*args)
   @action = :add
 end
 
+state_attrs :arch,
+            :cache_rebuild
+            :components,
+            :cookbook,
+            :deb_src,
+            :distribution,
+            :key,
+            :keyserver,
+            :repo_name,
+            :trusted,
+            :uri
+
 #name of the repo, used for source.list filename
 attribute :repo_name, :kind_of => String, :name_attribute => true
 attribute :uri, :kind_of => String
