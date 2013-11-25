@@ -68,7 +68,7 @@ execute "apt-get-update-periodic" do
   only_if do
     apt_installed? &&
     ::File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
-    ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
+    ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - node['apt']['periodic_update_min_delay']
   end
 end
 
