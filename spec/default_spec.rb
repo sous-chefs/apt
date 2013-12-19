@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'apt::default' do
   let(:chef_run) do
-    runner = ChefSpec::ChefRunner.new()
+    runner = ChefSpec::ChefRunner.new
     runner.converge('apt::default')
   end
 

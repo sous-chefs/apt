@@ -19,7 +19,7 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe "apt_test::cacher-client" do
+describe 'apt_test::cacher-client' do
   include Helpers::AptTest
 
   it 'does not create 01proxy' do

@@ -17,50 +17,50 @@
 # limitations under the License.
 #
 
-include_recipe "apt"
+include_recipe 'apt'
 
 # Apt Repository
-apt_repository "opscode" do
-  uri "http://apt.opscode.com"
-  components ["main"]
+apt_repository 'opscode' do
+  uri 'http://apt.opscode.com'
+  components ['main']
   distribution "#{node['lsb']['codename']}-0.10"
-  key "2940ABA983EF826A"
-  keyserver "pgpkeys.mit.edu"
+  key '2940ABA983EF826A'
+  keyserver 'pgpkeys.mit.edu'
   action :add
 end
 
 # Apt Repository with arch
-apt_repository "cloudera" do
-  uri "http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh"
-  arch "amd64"
-  distribution "precise-cdh4"
-  components ["contrib"]
-  key "http://archive.cloudera.com/debian/archive.key"
+apt_repository 'cloudera' do
+  uri 'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
+  arch 'amd64'
+  distribution 'precise-cdh4'
+  components ['contrib']
+  key 'http://archive.cloudera.com/debian/archive.key'
   action :add
 end
 
 # Apt repository and install a package it contains
-apt_repository "nginx" do
+apt_repository 'nginx' do
   uri "http://nginx.org/packages/#{node['platform']}"
   distribution node['lsb']['codename']
-  components ["nginx"]
-  key "http://nginx.org/keys/nginx_signing.key"
+  components ['nginx']
+  key 'http://nginx.org/keys/nginx_signing.key'
   deb_src true
 end
 
-package "nginx-debug" do
+package 'nginx-debug' do
   action :upgrade
 end
 
 # Apt Preferences
-apt_preference "chef" do
-  pin "version 10.16.2-1"
-  pin_priority "700"
+apt_preference 'chef' do
+  pin 'version 10.16.2-1'
+  pin_priority '700'
 end
 
 # COOK-2338
-apt_preference "dotdeb" do
-  glob "*"
-  pin "origin packages.dotdeb.org "
-  pin_priority "700"
+apt_preference 'dotdeb' do
+  glob '*'
+  pin 'origin packages.dotdeb.org '
+  pin_priority '700'
 end

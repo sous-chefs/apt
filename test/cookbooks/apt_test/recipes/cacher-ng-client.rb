@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "apt::cacher-ng"
-include_recipe "apt::cacher-client"
+include_recipe 'apt::cacher-ng'
+include_recipe 'apt::cacher-client'
 
-#install a small, innocuous application to verify this works
-package "colordiff"
+# install a small, innocuous application to verify this works
+package 'colordiff'

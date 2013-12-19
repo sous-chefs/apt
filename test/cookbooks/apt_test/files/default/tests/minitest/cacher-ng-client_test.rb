@@ -19,15 +19,15 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe "apt_test::cacher-ng-client" do
+describe 'apt_test::cacher-ng-client' do
   include Helpers::AptTest
 
   it 'creates the cacher_dir' do
-    directory(node['apt']['cacher_dir']).must_exist.with(:owner, "apt-cacher-ng")
+    directory(node['apt']['cacher_dir']).must_exist.with(:owner, 'apt-cacher-ng')
   end
 
   it 'runs the cacher service' do
-    service("apt-cacher-ng").must_be_running
+    service('apt-cacher-ng').must_be_running
   end
 
   it 'creates 01proxy' do

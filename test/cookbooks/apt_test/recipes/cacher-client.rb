@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-include_recipe "apt::cacher-client"
+include_recipe 'apt::cacher-client'

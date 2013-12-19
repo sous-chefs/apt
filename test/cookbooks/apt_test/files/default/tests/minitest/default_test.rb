@@ -19,7 +19,7 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe "apt_test::default" do
+describe 'apt_test::default' do
   include Helpers::AptTest
 
   it 'creates the preseeding directory' do
