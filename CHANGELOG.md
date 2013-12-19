@@ -5,6 +5,10 @@ This file is used to list changes made in each version of the apt cookbook.
 
 v2.3.2
 ------
+
+
+v2.3.2
+------
 - [COOK-3905] apt-get-update-periodic: configuration for the update period
 - Updating style for rubocops
 - Updating test-kitchen harness
