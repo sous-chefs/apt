@@ -18,7 +18,9 @@
 #
 
 actions :add, :remove
+default_action :add
 
+# Needed for Chef versions < 0.10.10
 def initialize(*args)
   super
   @action = :add
