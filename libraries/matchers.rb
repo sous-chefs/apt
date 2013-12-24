@@ -8,7 +8,7 @@ if defined?(ChefSpec)
   end
 
   def add_apt_repository(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:apt_repository, :remove, resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:apt_repository, :add, resource_name)
   end
 
   def remove_apt_repository(resource_name)
