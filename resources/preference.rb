@@ -18,7 +18,7 @@
 #
 
 actions :add, :remove
-default_action :add
+default_action :add if defined?(default_action) # Chef > 10.8
 
 # Needed for Chef versions < 0.10.10
 def initialize(*args)
