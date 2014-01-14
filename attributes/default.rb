@@ -1,27 +1,20 @@
-#
-# Cookbook Name:: apt
-# Attributes:: default
-#
-# Copyright 2009-2013, Opscode, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-default['apt']['cacher-client']['restrict_environment'] = false
-default['apt']['cacher_dir'] = '/var/cache/apt-cacher-ng'
-default['apt']['cacher_interface'] = nil
-default['apt']['cacher_port'] = 3142
-default['apt']['caching_server'] = false
-default['apt']['compiletime'] = false
-default['apt']['key_proxy'] = ''
-default['apt']['cache_bypass'] = {}
+default[:rackspace_apt][:config][:acng][:CacheDir] = "/var/cache/apt-cacher-ng"
+default[:rackspace_apt][:config][:acng][:LogDir] = "/var/log/apt-cacher-ng"
+default[:rackspace_apt][:config][:acng][:Port] = "3142"
+default[:rackspace_apt][:config][:acng][:'Remap-debrep'] = "file:deb_mirror*.gz /debian ; file:backends_debian"
+default[:rackspace_apt][:config][:acng][:'Remap-uburep'] = "file:ubuntu_mirrors /ubuntu ; file:backends_ubuntu"
+default[:rackspace_apt][:config][:acng][:'Remap-debvol'] = "file:debvol_mirror*.gz /debian-volatile ; file:backends_debvol"
+default[:rackspace_apt][:config][:acng][:'Remap-cygwin'] = "file:cygwin_mirrors /cygwin"
+default[:rackspace_apt][:config][:acng][:'Remap-sfnet'] = "file:sfnet_mirrors"
+default[:rackspace_apt][:config][:acng][:'Remap-alxrep'] = "file:archlx_mirrors /archlinux"
+default[:rackspace_apt][:config][:acng][:'Remap-fedora'] = "file:fedora_mirrors"
+default[:rackspace_apt][:config][:acng][:'Remap-epel'] = "file:epel_mirrors" 
+default[:rackspace_apt][:config][:acng][:'Remap-slrep'] = "file:sl_mirrors"
+default[:rackspace_apt][:config][:acng][:ReportPage] = "acng-report.html"
+default[:rackspace_apt][:config][:acng][:ExTreshold] = "4"
+default[:rackspace_apt][:config][:'01proxy']['cache_bypass'] = {}
+default[:rackspace_apt][:switch][:'cacher-client'][:restrict_environment] = false
+default[:rackspace_apt][:switch][:cacher_interface] = nil
+default[:rackspace_apt][:switch][:caching_server] = false
+default[:rackspace_apt][:switch][:compiletime] = false
+default[:rackspace_apt]['key_proxy'] = ''

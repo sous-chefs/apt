@@ -17,13 +17,13 @@
 # limitations under the License.
 #
 
-node.set['apt']['caching_server'] = true
+node.set[:rackspace_apt][:switch][:caching_server] = true
 
 package "apt-cacher-ng" do
   action :install
 end
 
-directory node['apt']['cacher_dir'] do
+directory node[:rackspace_apt][:config][:acng][:CacheDir] do
   owner "apt-cacher-ng"
   group "apt-cacher-ng"
   mode 0755
