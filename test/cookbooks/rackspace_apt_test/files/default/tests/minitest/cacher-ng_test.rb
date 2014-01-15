@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: apt_test
+# Cookbook Name:: rackspace_apt_test
 # Recipe:: default
 #
 # Copyright 2012, Opscode, Inc.
@@ -17,13 +17,12 @@
 # limitations under the License.
 #
 
-module Helpers
-  module AptTest
-    require 'chef/mixin/shell_out'
-    include Chef::Mixin::ShellOut
-    include MiniTest::Chef::Assertions
-    include MiniTest::Chef::Context
-    include MiniTest::Chef::Resources
+require File.expand_path('../support/helpers', __FILE__)
 
+describe "rackspace_apt_test::default" do
+  include Helpers::RackspaceAptTest
+
+  it 'runs the cacher service' do
+    service("apt-cacher-ng").must_be_running
   end
 end

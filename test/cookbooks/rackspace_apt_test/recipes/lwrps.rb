@@ -17,10 +17,10 @@
 # limitations under the License.
 #
 
-include_recipe "apt"
+include_recipe "rackspace_apt"
 
 # Apt Repository
-apt_repository "opscode" do
+rackspace_apt_repository "opscode" do
   uri "http://apt.opscode.com"
   components ["main"]
   distribution "#{node['lsb']['codename']}-0.10"
@@ -30,7 +30,7 @@ apt_repository "opscode" do
 end
 
 # Apt Repository with arch
-apt_repository "cloudera" do
+rackspace_apt_repository "cloudera" do
   uri "http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh"
   arch "amd64"
   distribution "precise-cdh4"
@@ -40,7 +40,7 @@ apt_repository "cloudera" do
 end
 
 # Apt repository and install a package it contains
-apt_repository "nginx" do
+rackspace_apt_repository "nginx" do
   uri "http://nginx.org/packages/#{node['platform']}"
   distribution node['lsb']['codename']
   components ["nginx"]
@@ -53,13 +53,13 @@ package "nginx-debug" do
 end
 
 # Apt Preferences
-apt_preference "chef" do
+rackspace_apt_preference "chef" do
   pin "version 10.16.2-1"
   pin_priority "700"
 end
 
 # COOK-2338
-apt_preference "dotdeb" do
+rackspace_apt_preference "dotdeb" do
   glob "*"
   pin "origin packages.dotdeb.org "
   pin_priority "700"

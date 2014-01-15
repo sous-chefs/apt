@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-module ::Apt
+module ::RackspaceApt
   def interface_ipaddress(host, interface)
     if interface
       addresses = host['network']['interfaces'][interface]['addresses']

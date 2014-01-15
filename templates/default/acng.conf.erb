@@ -1,3 +1,5 @@
-<% node[:rackspace_apt][:config][:acng].each do |key,value| -%>
+<% node[:rackspace_apt][:config][:acng].each do |key,hash| -%>
+<% value = hash[:value] -%>
+<% value += " # #{hash[:comment]}" if hash[:comment] -%>
 <%= "#{key} = #{value}" %>
 <% end -%>

@@ -23,7 +23,7 @@ package "apt-cacher-ng" do
   action :install
 end
 
-directory node[:rackspace_apt][:config][:acng][:CacheDir] do
+directory node[:rackspace_apt][:config][:acng][:CacheDir][:value] do
   owner "apt-cacher-ng"
   group "apt-cacher-ng"
   mode 0755

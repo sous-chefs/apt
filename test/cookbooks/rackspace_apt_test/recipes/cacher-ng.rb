@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt_test
-# Recipe:: cacher-client
+# Recipe:: cacher-ng
 #
-# Copyright 2013, Opscode, Inc.
+# Copyright 2012, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-include_recipe "apt::cacher-client"
+include_recipe "rackspace_apt::cacher-ng"

@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: apt_test
-# Recipe:: cacher-ng
+# Cookbook Name:: rackspace_apt_test
+# Recipe:: cacher-client_test
 #
-# Copyright 2012, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,13 @@
 # limitations under the License.
 #
 
-include_recipe "apt::cacher-ng"
+require File.expand_path('../support/helpers', __FILE__)
+
+describe "rackspace_apt_test::cacher-client" do
+  include Helpers::RackspaceAptTest
+
+  it 'does not create 01proxy' do
+    file('/etc/apt/apt.conf.d/01proxy').wont_exist
+  end
+
+end

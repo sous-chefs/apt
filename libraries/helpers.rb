@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-module Apt
+module RackspaceApt
   module Helpers
     # Determines if apt is installed on a system.
     #
@@ -42,6 +42,6 @@ module Apt
   end
 end
 
-Chef::Recipe.send(:include, ::Apt::Helpers)
-Chef::Resource.send(:include, ::Apt::Helpers)
-Chef::Provider.send(:include, ::Apt::Helpers)
+Chef::Recipe.send(:include, ::RackspaceApt::Helpers)
+Chef::Resource.send(:include, ::RackspaceApt::Helpers)
+Chef::Provider.send(:include, ::RackspaceApt::Helpers)

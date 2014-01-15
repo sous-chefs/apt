@@ -17,12 +17,13 @@
 # limitations under the License.
 #
 
-require File.expand_path('../support/helpers', __FILE__)
+module Helpers
+  module RackspaceAptTest
+    require 'chef/mixin/shell_out'
+    include Chef::Mixin::ShellOut
+    include MiniTest::Chef::Assertions
+    include MiniTest::Chef::Context
+    include MiniTest::Chef::Resources
 
-describe "apt_test::default" do
-  include Helpers::AptTest
-
-  it 'runs the cacher service' do
-    service("apt-cacher-ng").must_be_running
   end
 end

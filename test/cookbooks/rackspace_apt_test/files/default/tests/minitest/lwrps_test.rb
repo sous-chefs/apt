@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: apt_test
+# Cookbook Name:: rackspace_apt_test
 # Recipe:: lwrps
 #
 # Copyright 2012, Opscode, Inc.
@@ -19,8 +19,8 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe "apt_test::lwrps" do
-  include Helpers::AptTest
+describe "rackspace_apt_test::lwrps" do
+  include Helpers::RackspaceAptTest
 
   it 'creates the Opscode sources.list' do
     file("/etc/apt/sources.list.d/opscode.list").must_exist

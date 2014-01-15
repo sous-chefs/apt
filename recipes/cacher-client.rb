@@ -18,7 +18,7 @@
 #
 
 class ::Chef::Recipe
-  include ::Apt
+  include ::RackspaceApt
 end
 
 #remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
@@ -34,7 +34,7 @@ if node[:rackspace_apt][:config][:acng]
     cacher = Chef::Node.new
     cacher.default.name = node[:rackspace_apt][:config][:acng][:cacher_ipaddress]
     cacher.default.ipaddress = node[:rackspace_apt][:config][:acng][:cacher_ipaddress]
-    cacher.default.rackspace_apt.config.Port = node[:rackspace_apt][:config][:acng][:Port]
+    cacher.default.rackspace_apt.config.Port = node[:rackspace_apt][:config][:acng][:Port][:value]
     cacher.default.rackspace_apt.cacher_interface = node[:rackspace_apt][:switch][:cacher_interface]
     servers << cacher
   elsif node[:rackspace_apt][:switch][:caching_server]
@@ -64,7 +64,7 @@ if servers.length > 0
     mode 00644
     variables(
       :proxy => cacher_ipaddress,
-      :port => servers[0][:rackspace_apt][:config][:acng][:Port],
+      :port => servers[0][:rackspace_apt][:config][:acng][:Port][:value],
       :bypass => node[:rackspace_apt][:config][:'01proxy'][:cache_bypass]
       )
     action( node[:rackspace_apt][:switch][:compiletime] ? :nothing : :create )

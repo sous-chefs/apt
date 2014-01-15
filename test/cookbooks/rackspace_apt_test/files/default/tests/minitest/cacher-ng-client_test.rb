@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: apt_test
-# Recipe:: cacher-client_test
+# Cookbook Name:: rackspace_apt_test
+# Recipe:: cacher-ng-client_test.rb
 #
 # Copyright 2013, Opscode, Inc.
 #
@@ -19,11 +19,23 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe "apt_test::cacher-client" do
-  include Helpers::AptTest
+describe "rackspace_apt_test::cacher-ng-client" do
+  include Helpers::RackspaceAptTest
 
-  it 'does not create 01proxy' do
-    file('/etc/apt/apt.conf.d/01proxy').wont_exist
+  it 'creates the cacher_dir' do
+    directory(node[:rackspace_apt][:config][:acng][:CacheDir]).must_exist.with(:owner, "apt-cacher-ng")
+  end
+
+  it 'runs the cacher service' do
+    service("apt-cacher-ng").must_be_running
+  end
+
+  it 'creates 01proxy' do
+    file('/etc/apt/apt.conf.d/01proxy').must_include "Acquire::http::Proxy \"http://#{node['ipaddress']}:#{node[:rackspace_apt][:config][:acng][:Port]}\";"
+  end
+
+  it 'installed colordiff' do
+    package('colordiff').must_be_installed
   end
 
 end

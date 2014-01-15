@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt_test
-# Recipe:: default
+# Recipe:: cacher-ng-client
 #
-# Copyright 2012, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "apt::default"
+include_recipe "rackspace_apt::cacher-ng"
+include_recipe "rackspace_apt::cacher-client"
+
+#install a small, innocuous application to verify this works
+package "colordiff"
