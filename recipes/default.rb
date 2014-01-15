@@ -23,7 +23,7 @@
 # or other cookbooks which notify these resources will fail on non-apt-enabled
 # systems.
 
-require File.expand_path('../libraries/helpers', __FILE__)
+require File.expand_path('../../libraries/helpers', __FILE__)
 
 Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
 
