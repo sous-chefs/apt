@@ -13,22 +13,22 @@ recipe            "rackspace_apt::cacher-client", "Client for the apt::cacher-ng
   supports os
 end
 
-attribute "rackspace_apt/cacher-client/restrict_environment",
+attribute "rackspace_apt/cacher_client/restrict_environment",
   :description => "Whether to restrict the search for the caching server to the same environment as this node",
   :default => "false"
 
-attribute "rackspace_apt/config/acng/Port",
+attribute "rackspace_apt/config/cacher_server/Port/value",
   :description => "Default listen port for the caching server",
   :default => "3142"
 
-attribute "rackspace_apt/switch/cacher_interface",
+attribute "rackspace_apt/switch/cacher_server/cacher_interface",
   :description => "Default listen interface for the caching server",
   :default => nil
 
-attribute "apt/config/key_proxy",
+attribute "rackspace_apt/config/key_proxy",
   :description => "Passed as the proxy passed to GPG for the apt_repository resource",
   :default => ""
 
-attribute "apt/switch/caching_server",
+attribute "rackspace_apt/switch/caching_server",
   :description => "Set this to true if the node is a caching server",
   :default => "false"
