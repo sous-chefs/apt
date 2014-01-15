@@ -7,28 +7,14 @@ platforms:
 - name: ubuntu-12.04
   driver_config:
     box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
   run_list:
   - recipe[apt]
 
-- name: ubuntu-10.04
+- name: debian-7.2.0
   driver_config:
-    box: opscode-ubuntu-10.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
-  run_list:
-  - recipe[apt]
-
-- name: debian-7.1.0
-  driver_config:
-    box: opscode-debian-7.1.0
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.1.0_provisionerless.box
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-13.04
-  driver_config:
-    box: opscode-ubuntu-13.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box
+    box: opscode-debian-7.2.0
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
   run_list:
   - recipe[apt]
 
@@ -36,34 +22,40 @@ suites:
 - name: default
   run_list:
   - recipe[minitest-handler]
-  - recipe[apt_test]
+  - recipe[rackspace_apt_test]
   attributes: {}
 
 - name: cacher-client
   run_list:
   - recipe[minitest-handler]
-  - recipe[apt_test::cacher-client]
+  - recipe[rackspace_apt_test::cacher-client]
   attributes: {}
 
 - name: cacher-ng
   run_list:
   - recipe[minitest-handler]
-  - recipe[apt_test::cacher-ng]
+  - recipe[rackspace_apt_test::cacher-ng]
   attributes: {}
 
 - name: cacher-ng-client
   run_list:
   - recipe[minitest-handler]
-  - recipe[apt_test::cacher-ng-client]
+  - recipe[rackspace_apt_test::cacher-ng-client]
   attributes:
-    apt:
-      cacher_dir: '/tmp/apt-cacher'
-      cacher_port: '9876'
-      cacher_interface: 'eth0'
-      compiletime: true
+    rackspace_apt:
+      config: 
+        cacher_server: 
+          CacheDir: 
+            value:'/tmp/apt-cacher'
+          Port: 
+            value: '9876'
+      switch:
+        cacher_server:       
+          cacher_interface: 'eth0'
+        compiletime: true
 
 - name: lwrps
   run_list:
   - recipe[minitest-handler]
-  - recipe[apt_test::lwrps]
+  - recipe[rackspace_apt_test::lwrps]
   attributes: {}
