@@ -23,7 +23,7 @@ describe "rackspace_apt_test::cacher-ng-client" do
   include Helpers::RackspaceAptTest
 
   it 'creates the cacher_dir' do
-    directory(node[:rackspace_apt][:config][:acng][:CacheDir]).must_exist.with(:owner, "apt-cacher-ng")
+    directory(node[:rackspace_apt][:config][:cacher_server][:CacheDir][:value]).must_exist.with(:owner, "apt-cacher-ng")
   end
 
   it 'runs the cacher service' do
@@ -31,7 +31,7 @@ describe "rackspace_apt_test::cacher-ng-client" do
   end
 
   it 'creates 01proxy' do
-    file('/etc/apt/apt.conf.d/01proxy').must_include "Acquire::http::Proxy \"http://#{node['ipaddress']}:#{node[:rackspace_apt][:config][:acng][:Port]}\";"
+    file('/etc/apt/apt.conf.d/01proxy').must_include "Acquire::http::Proxy \"http://#{node['ipaddress']}:#{node[:rackspace_apt][:config][:cacher_server][:Port][:value]}\";"
   end
 
   it 'installed colordiff' do

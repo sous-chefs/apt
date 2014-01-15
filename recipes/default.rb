@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: apt
+# Cookbook Name:: rackspace_apt
 # Recipe:: default
 #
 # Copyright 2008-2013, Opscode, Inc.

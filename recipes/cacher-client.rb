@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: apt
+# Cookbook Name:: rackspace_apt
 # Recipe:: cacher-client
 #
 # Copyright 2011-2013 Opscode, Inc.
@@ -29,13 +29,13 @@ execute 'Remove proxy from /etc/apt/apt.conf' do
 end
 
 servers = []
-if node[:rackspace_apt][:config][:acng]
-  if node[:rackspace_apt][:config][:acng][:cacher_ipaddress]
+if node[:rackspace_apt][:config][:cacher_server]
+  if node[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]
     cacher = Chef::Node.new
-    cacher.default.name = node[:rackspace_apt][:config][:acng][:cacher_ipaddress]
-    cacher.default.ipaddress = node[:rackspace_apt][:config][:acng][:cacher_ipaddress]
-    cacher.default.rackspace_apt.config.Port = node[:rackspace_apt][:config][:acng][:Port][:value]
-    cacher.default.rackspace_apt.cacher_interface = node[:rackspace_apt][:switch][:cacher_interface]
+    cacher.default.name = node[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]
+    cacher.default.ipaddress = node[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]
+    cacher.default.rackspace_apt.config.Port = node[:rackspace_apt][:config][:cacher_server][:Port][:value]
+    cacher.default.rackspace_apt.cacher_interface = node[:rackspace_apt][:switch][:cacher_server][:cacher_interface]
     servers << cacher
   elsif node[:rackspace_apt][:switch][:caching_server]
     node.override[:rackspace_apt][:switch][:compiletime] = false
@@ -44,16 +44,16 @@ if node[:rackspace_apt][:config][:acng]
 end
 
 unless (Chef::Config[:solo] || servers.length > 0)
-  query = "apt_caching_server:true"
-  query += " AND chef_environment:#{node.chef_environment}" if node[:rackspace_apt][:switch][:'cacher-client'][:restrict_environment]
-  Chef::Log.debug("apt::cacher-client searching for '#{query}'")
+  query = "rackspace_apt_switch_caching_server:true"
+  query += " AND chef_environment:#{node.chef_environment}" if node[:rackspace_apt][:switch][:cacher_client][:restrict_environment]
+  Chef::Log.debug("rackspace_apt::cacher-client searching for '#{query}'")
   servers += search(:node, query)
 end
 
 if servers.length > 0
   Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
-  if servers[0][:rackspace_apt][:switch][:cacher_interface]
-    cacher_ipaddress = interface_ipaddress(servers[0], servers[0][:rackspace_apt][:switch][:cacher_interface])
+  if servers[0][:rackspace_apt][:switch][:cacher_server][:cacher_interface]
+    cacher_ipaddress = interface_ipaddress(servers[0], servers[0][:rackspace_apt][:switch][:cacher_server][:cacher_interface])
   else
     cacher_ipaddress = servers[0].ipaddress
   end
@@ -64,8 +64,8 @@ if servers.length > 0
     mode 00644
     variables(
       :proxy => cacher_ipaddress,
-      :port => servers[0][:rackspace_apt][:config][:acng][:Port][:value],
-      :bypass => node[:rackspace_apt][:config][:'01proxy'][:cache_bypass]
+      :port => servers[0][:rackspace_apt][:config][:cacher_server][:Port][:value],
+      :bypass => node[:rackspace_apt][:config][:cacher_client][:cache_bypass]
       )
     action( node[:rackspace_apt][:switch][:compiletime] ? :nothing : :create )
     notifies :run, 'execute[apt-get update]', :immediately

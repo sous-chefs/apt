@@ -1,7 +1,11 @@
 apt Cookbook CHANGELOG
 ======================
-This file is used to list changes made in each version of the apt cookbook.
+This file is used to list changes made in each version of the rackspace_apt cookbook.
 
+v3.0.0
+------
+### Improvement
+- Initial changes for Rackspace DevOps fork
 
 v2.3.0
 ------

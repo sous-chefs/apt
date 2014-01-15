@@ -44,10 +44,16 @@ To do this, you need to override the `cache_bypass` attribute with an array of r
 ```json
 {
     ...,
-    'apt': {
+    'rackspace_apt': {
         ...,
-        'cache_bypass': {
-            URL: PROTOCOL
+        'config': {
+            ...,
+            'cacher_client': {
+                 ...,
+                 'cache_bypass': {
+                     URL: PROTOCOL
+                 }
+             }
         }
     }
 }
@@ -57,9 +63,17 @@ For example, to prevent caching and directly connect to the repository at `downl
 
 ```json
 {
-    'apt': {
-        'cache_bypass': {
-            'download.oracle.com': 'http'
+    ...,
+    'rackspace_apt': {
+        ...,
+        'config': {
+            ...,
+            'cacher_client': {
+                 ...,                 
+                 'cache_bypass': {
+                     'download.oracle.com': 'http'
+                 }
+             }
         }
     }
 }
@@ -73,21 +87,21 @@ If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly 
 
 Attributes
 ----------
-* `['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
-* `['apt']['cacher_interface]` - interface to connect to the cacher-ng service, no default.
-* `['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
-* `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-* `['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
-* `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-* `['apt']['cache_bypass']` - array of URLs to bypass the cache. Accepts the URL and protocol to  fetch directly from the remote repository and not attempt to cache
+* `[:rackspace_apt][:switch][:cacher_server][:cacher_interface]` - interface to connect to the cacher-ng service, no default.
+* `[:rackspace_apt][:config][:cacher_server][:Port][:value]` - port for the cacher-ng service (either client or server), default is '3142'
+* `[:rackspace_apt][:config][:cacher_server][:CacheDir][:value]` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
+* `[:rackspace_apt][:switch][:cacher_client][:restrict_environment]` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
+* `[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]` - use a cacher server (or standard proxy server) not available via search, no default.
+* `[:rackspace_apt][:config][:cacher_client][:cache_bypass]` - array of URLs to bypass the cache. Accepts the URL and protocol to  fetch directly from the remote repository and not attempt to cache
+* `[:rackspace_apt][:switch][:compiletime]` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
 
 Libraries
 ---------
-There is an `interface_ipaddress` method that returns the IP address for a particular host and interface, used by the `cacher-client` recipe. To enable it on the server use the `['apt']['cacher_interface']` attribute.
+There is an `interface_ipaddress` method that returns the IP address for a particular host and interface, used by the `cacher-client` recipe. To enable it on the server use the `[:rackspace_apt][:switch][:cacher_server][:cacher_interface]` attribute.
 
 Resources/Providers
 -------------------
-### `apt_repository`
+### `rackspace_apt_repository`
 This LWRP provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
 
 #### Actions
@@ -112,7 +126,7 @@ This LWRP provides an easy way to manage additional APT repositories. Adding a n
 Add the Zenoss repo:
 
 ```ruby
-apt_repository 'zenoss' do
+rackspace_apt_repository 'zenoss' do
   uri        'http://dev.zenoss.org/deb'
   components ['main', 'stable']
 end
@@ -121,7 +135,7 @@ end
 Add the Nginx PPA, grabbing the key from keyserver:
 
 ```ruby
-apt_repository 'nginx-php' do
+rackspace_apt_repository 'nginx-php' do
   uri          'http://ppa.launchpad.net/nginx/php5/ubuntu'
   distribution node['lsb']['codename']
   components   ['main']
@@ -133,7 +147,7 @@ end
 Add the Nginx PPA, grab the key from the keyserver, and add source repo:
 
 ```ruby
-apt_repository 'nginx-php' do
+rackspace_apt_repository 'nginx-php' do
   uri          'http://ppa.launchpad.net/nginx/php5/ubuntu'
   distribution node['lsb']['codename']
   components   ['main']
@@ -146,7 +160,7 @@ end
 Add the Cloudera Repo of CDH4 packages for Ubuntu 12.04 on AMD64:
 
 ```ruby
-apt_repository 'cloudera' do
+rackspace_apt_repository 'cloudera' do
   uri          'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
   arch         'amd64'
   distribution 'precise-cdh4'
@@ -158,12 +172,12 @@ end
 Remove Zenoss repo:
 
 ```ruby
-apt_repository 'zenoss' do
+rackspace_apt_repository 'zenoss' do
   action :remove
 end
 ```
 
-### `apt_preference`
+### `rackspace_apt_preference`
 This LWRP provides an easy way to pin packages in /etc/apt/preferences.d. Although apt-pinning is quite helpful from time to time please note that Debian does not encourage its use without thorough consideration.
 
 Further information regarding apt-pinning is available via http://wiki.debian.org/AptPreferences.
@@ -182,7 +196,7 @@ Further information regarding apt-pinning is available via http://wiki.debian.or
 Pin libmysqlclient16 to version 5.1.49-3:
 
 ```ruby
-apt_preference 'libmysqlclient16' do
+rackspace_apt_preference 'libmysqlclient16' do
   pin          'version 5.1.49-3'
   pin_priority '700'
 end
@@ -191,7 +205,7 @@ end
 Unpin libmysqlclient16:
 
 ```ruby
-apt_preference 'libmysqlclient16' do
+rackspace_apt_preference 'libmysqlclient16' do
   action :remove
 end
 ```
@@ -199,7 +213,7 @@ end
 Pin all packages from dotdeb.org:
 
 ```ruby
-apt_preference 'dotdeb' do
+rackspace_apt_preference 'dotdeb' do
   glob         '*'
   pin          'origin packages.dotdeb.org'
   pin_priority '700'
@@ -209,7 +223,7 @@ end
 
 Usage
 -----
-Put `recipe[apt]` first in the run list. If you have other recipes that you want to use to configure how apt behaves, like new sources, notify the execute resource to run, e.g.:
+Put `recipe[rackspace_apt]` first in the run list. If you have other recipes that you want to use to configure how apt behaves, like new sources, notify the execute resource to run, e.g.:
 
 ```ruby
 template '/etc/apt/sources.list.d/my_apt_sources.list' do
@@ -219,7 +233,7 @@ end
 
 The above will run during execution phase since it is a normal template resource, and should appear before other package resources that need the sources in the template.
 
-Put `recipe[apt::cacher-ng]` in the run_list for a server to provide APT caching and add `recipe[apt::cacher-client]` on the rest of the Debian-based nodes to take advantage of the caching server.
+Put `recipe[rackspace_apt::cacher-ng]` in the run_list for a server to provide APT caching and add `recipe[rackspace_apt::cacher-client]` on the rest of the Debian-based nodes to take advantage of the caching server.
 
 If you want to cleanup unused packages, there is also the `apt-get autoclean` and `apt-get autoremove` resources provided for automated cleanup.
 

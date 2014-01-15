@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: apt
+# Cookbook Name:: rackspace_apt
 # Recipe:: cacher-ng
 #
 # Copyright 2008-2013, Opscode, Inc.
@@ -23,7 +23,7 @@ package "apt-cacher-ng" do
   action :install
 end
 
-directory node[:rackspace_apt][:config][:acng][:CacheDir][:value] do
+directory node[:rackspace_apt][:config][:cacher_server][:CacheDir][:value] do
   owner "apt-cacher-ng"
   group "apt-cacher-ng"
   mode 0755
