@@ -4,7 +4,7 @@ describe 'rackspace_apt::cacher-ng' do
 
   context 'server' do
     let(:chef_run) do
-      runner = ChefSpec::ChefRunner.new
+      runner = ChefSpec::Runner.new
       runner.node.set[:rackspace_apt][:config][:cacher_server][:Port][:value] = '9876'
       runner.converge('rackspace_apt::cacher-ng')
     end
@@ -14,12 +14,12 @@ describe 'rackspace_apt::cacher-ng' do
     end
 
     it 'creates acng.conf file' do
-      expect(chef_run).to create_file('/etc/apt-cacher-ng/acng.conf')
+      expect(chef_run).to create_template('/etc/apt-cacher-ng/acng.conf')
     end
 
     it 'enables and starts apt-cacher-ng' do
-      expect(chef_run).to set_service_to_start_on_boot 'apt-cacher-ng'
-      expect(chef_run).to start_service 'apt-cacher-ng'
+      expect(chef_run).to enable_service('apt-cacher-ng')
+      expect(chef_run).to start_service('apt-cacher-ng')
     end
 
   end
