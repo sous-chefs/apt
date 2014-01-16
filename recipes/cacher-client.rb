@@ -78,4 +78,4 @@ else
   end
 end
 
-include_recipe 'apt::default'
+include_recipe 'rackspace_apt::default'

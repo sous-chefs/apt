@@ -4,5 +4,5 @@ metadata
 
 group :integration do
   cookbook "minitest-handler"
-  cookbook "apt_test", :path => "./test/cookbooks/apt_test"
+  cookbook "rackspace_apt_test", :path => "./test/cookbooks/rackspace_apt_test"
 end

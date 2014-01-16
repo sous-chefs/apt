@@ -9,14 +9,14 @@ platforms:
     box: opscode-ubuntu-12.04
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
   run_list:
-  - recipe[apt]
+  - recipe[rackspace_apt]
 
 - name: debian-7.2.0
   driver_config:
     box: opscode-debian-7.2.0
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
   run_list:
-  - recipe[apt]
+  - recipe[rackspace_apt]
 
 suites:
 - name: default
@@ -46,7 +46,7 @@ suites:
       config: 
         cacher_server: 
           CacheDir: 
-            value:'/tmp/apt-cacher'
+            value: '/tmp/apt-cacher'
           Port: 
             value: '9876'
       switch:
