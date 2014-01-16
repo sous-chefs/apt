@@ -1,3 +1,4 @@
+default[:rackspace_apt][:templates_cookbook] = "rackspace_apt"
 default[:rackspace_apt][:config][:cacher_server][:CacheDir][:value] = "/var/cache/apt-cacher-ng"
 default[:rackspace_apt][:config][:cacher_server][:LogDir][:value] = "/var/log/apt-cacher-ng"
 default[:rackspace_apt][:config][:cacher_server][:Port][:value] = "3142"

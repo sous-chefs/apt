@@ -30,6 +30,7 @@ directory node[:rackspace_apt][:config][:cacher_server][:CacheDir][:value] do
 end
 
 template "/etc/apt-cacher-ng/acng.conf" do
+  cookbook node[:rackspace_apt][:templates_cookbook]
   source "acng.conf.erb"
   owner "root"
   group "root"

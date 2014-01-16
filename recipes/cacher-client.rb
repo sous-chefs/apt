@@ -58,6 +58,7 @@ if servers.length > 0
     cacher_ipaddress = servers[0].ipaddress
   end
   t = template '/etc/apt/apt.conf.d/01proxy' do
+    cookbook node[:rackspace_apt][:templates_cookbook]
     source '01proxy.erb'
     owner 'root'
     group 'root'
