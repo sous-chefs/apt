@@ -1,5 +1,5 @@
 name              "rackspace_apt_test"
-maintainer        "Opscode, Inc."
+maintainer        "Rackspace, US Inc."
 maintainer_email  "cookbooks@opscode.com"
 license           "Apache 2.0"
 description       "This cookbook is used with test-kitchen to test the parent, apt cookbok"
