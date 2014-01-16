@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe 'apt::cacher-client' do
+describe 'rackspace_apt::cacher-client' do
 
   context 'no server' do
     let(:chef_run) do
       runner = ChefSpec::ChefRunner.new
-      runner.converge('apt::cacher-client')
+      runner.converge('rackspace_apt::cacher-client')
     end
 
     it 'does not create 01proxy file' do
@@ -16,9 +16,9 @@ describe 'apt::cacher-client' do
   context 'server provided' do
     let(:chef_run) do
       runner = ChefSpec::ChefRunner.new
-      runner.node.set['apt']['cacher_ipaddress'] = '22.33.44.55'
-      runner.node.set['apt']['cacher_port'] = '9876'
-      runner.converge('apt::cacher-client')
+      runner.node.set[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress] = '22.33.44.55'
+      runner.node.set[:rackspace_apt][:config][:cacher_server][:Port][:value] = '9876'
+      runner.converge('rackspace_apt::cacher-client')
     end
 
     it 'creates 01proxy file' do

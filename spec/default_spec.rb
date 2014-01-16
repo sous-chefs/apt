@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'apt::default' do
+describe 'rackspace_apt::default' do
   let(:chef_run) do
     runner = ChefSpec::ChefRunner.new()
-    runner.converge('apt::default')
+    runner.converge('rackspace_apt::default')
   end
 
   it 'installs update-notifier-common' do

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe 'apt::cacher-ng' do
+describe 'rackspace_apt::cacher-ng' do
 
   context 'server' do
     let(:chef_run) do
       runner = ChefSpec::ChefRunner.new
-      runner.node.set['apt']['cacher_port'] = '9876'
-      runner.converge('apt::cacher-ng')
+      runner.node.set[:rackspace_apt][:config][:cacher_server][:Port][:value] = '9876'
+      runner.converge('rackspace_apt::cacher-ng')
     end
 
     it 'installs apt-cacher-ng' do
