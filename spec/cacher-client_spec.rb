@@ -27,7 +27,6 @@ describe 'rackspace_apt::cacher-client' do
 
     it 'creates 01proxy file' do
       expect(chef_run).to render_file('/etc/apt/apt.conf.d/01proxy').with_content('Acquire::http::Proxy "http://22.33.44.55:9876";')
-#      expect(chef_run).to create_file_with_content('/etc/apt/apt.conf.d/01proxy', 'Acquire::http::Proxy "http://22.33.44.55:9876";')
     end
 
   end
