@@ -25,15 +25,18 @@
 if node[:rackspace_apt][:supported_platforms].has_key?(node[:platform]) &&
    node[:rackspace_apt][:supported_platforms][node[:platform]].has_key?(node[:platform_version])
 
-    node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}"] = [:main, :restricted, :universe, :multiverse]
-    node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-updates"] = [:main, :restricted, :universe, :multiverse]
-    node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-backports"] = [:main, :restricted, :universe, :multiverse]
-    node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-security"] = [:main, :restricted, :universe, :multiverse]
+    case node[:platform]
+    when 'ubuntu'
+      node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}"] = [:main, :restricted, :universe, :multiverse]
+      node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-updates"] = [:main, :restricted, :universe, :multiverse]
+      node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-backports"] = [:main, :restricted, :universe, :multiverse]
+      node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-security"] = [:main, :restricted, :universe, :multiverse]
+    when 'debian'
+      node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}"] = [:main]
+      node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}-security_#{node[:lsb][:codename]}/updates"] = [:main]
+      node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-backports"] = [:main]
+    end
 
-    node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}"] = [:main]
-    node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}-security_#{node[:lsb][:codename]}/updates"] = [:main]
-    node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'][:repos][:"#{node[:platform]}_#{node[:lsb][:codename]}-backports"] = [:main]
-    
     node[:rackspace_apt][:supported_platforms][node[:platform]][node[:platform_version]][:repos].each do |dist, components|
       rackspace_apt_repository "rackspace-#{dist}".gsub("/","-") do
         uri "http://mirror.rackspace.com/#{dist.split("_")[0]}/"
