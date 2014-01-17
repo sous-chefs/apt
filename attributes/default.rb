@@ -20,3 +20,4 @@ default[:rackspace_apt][:switch][:cacher_client][:restrict_environment] = false
 default[:rackspace_apt][:switch][:caching_server] = false
 default[:rackspace_apt][:switch][:cacher_server][:cacher_interface] = nil
 default[:rackspace_apt][:switch][:compiletime] = false
+default[:rackspace_apt][:switch][:enable_rackspace_mirrors] = false

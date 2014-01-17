@@ -24,10 +24,16 @@
 # systems.
 
 node.default[:rackspace_apt][:apt_installed] = true
+node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'] = {} 
+node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'] = {} 
 
 unless apt_installed?
   Chef::Log.debug "apt is not installed. Apt-specific resources will not be executed."
   node.default[:rackspace_apt][:apt_installed] = false
+end
+
+if node[:rackspace_apt][:switch][:enable_rackspace_mirrors] 
+  include_recipe 'rackspace_apt::rackspace_mirrors'
 end
 
 # Run apt-get update to create the stamp file
@@ -49,7 +55,7 @@ end
 # Automatically remove packages that are no longer needed for dependencies
 execute "apt-get autoremove" do
   command "apt-get -y autoremove"
-  only_if { node[:rackspace_apt][:apt_installed] }
+  only_if { node[:rackspace_apt][:apt_installed] } 
   action :nothing
 end
 
