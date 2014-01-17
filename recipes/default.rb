@@ -24,8 +24,6 @@
 # systems.
 
 node.default[:rackspace_apt][:apt_installed] = true
-node.default[:rackspace_apt][:supported_platforms][:ubuntu][:'12.04'] = {} 
-node.default[:rackspace_apt][:supported_platforms][:debian][:'7.2'] = {} 
 
 unless apt_installed?
   Chef::Log.debug "apt is not installed. Apt-specific resources will not be executed."
