@@ -33,10 +33,13 @@ This recipe also sets up a local cache directory for preseeding packages.
 **Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
 
 ### repos
-This recipes walks the `node[:rackspace_apt][:repos]` hash and defines rackspace_apt_repository LWRPs for each repo defined. As a convenience, you may set the flag `node[:rackspace_apt][:switch][:enable_rackspace_mirrors]` to `true` and mirror.rackspace.com will be enabled for your operating system. If your OS is unsupported, (i.e. an older Ubuntu like 10.04), this flag will not work and you must define any repositories yourself.
+This recipes walks the `node[:rackspace_apt][:repos]` hash and defines rackspace_apt_repository lightweight resources for each repository defined. As a convenience, you may set the flag `node[:rackspace_apt][:switch][:enable_rackspace_mirrors]` to true and mirror.rackspace.com will be enabled for your operating system. If your OS is unsupported, (e.g. an an older Ubuntu like 10.04, any version of RHEL, etc), setting this flag will not configure Rackspace mirrors and you must define any desired repositories yourself. Operating systems currently supported by `:enable_rackspace_mirrors` are:
 
-You may of course define repos via the rackspace_apt_repository LWRP, but alternatively you may define repos in the 
-`node[:rackspace_apt][:repos]` hash. Define a new repository like so:
+- Ubuntu 12.04 (precise)
+- Debian 7.2 (wheezy)
+
+You may of course define repos via a rackspace_apt_repository LWRP, but alternatively you may define repos in the 
+`node[:rackspace_apt][:repos]`. Define a new repository like so:
 
 `node[:rackspace_apt][:repos][:'apt.opscode.com'][:"precise-0.10"] = [:main, :testing]`
 
