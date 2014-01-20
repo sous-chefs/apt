@@ -22,25 +22,25 @@ May work with or without modification on other Debian derivatives.
 
 -------
 ### default
-First, this recipe includes the `rackspace_apt::repos` to enable Rackspace (mirror.rackspace.com) or user-defined repositories. 
+First, this recipe includes the `rackspace_apt::repos` recipe to enable Rackspace (mirror.rackspace.com) or user-defined repositories. 
 
-This recipe installs the `update-notifier-common` package to provide the timestamp file used to only run `apt-get update` if the cache is more than one day old.
+Then the recipe installs the `update-notifier-common` package to provide the timestamp file used to only run `apt-get update` if the cache is more than one day old.
 
-This recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before managing any `package` resources with Chef.
+This default recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before managing any `package` resources with Chef.
 
 This recipe also sets up a local cache directory for preseeding packages.
 
 **Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
 
 ### repos
-This recipes walks the `node[:rackspace_apt][:repos]` hash and defines rackspace_apt_repository LWRPs for each repo defined. As a convenience, you may set the flag `node[:rackspace_apt][:switch][:enable_rackspace_mirrors]` to `true` and mirror.rackspace.com will be enabled for your OS. If your OS is unsupported, (i.e. an older Ubuntu like 10.04), this flag will not work and you must define any repositories yourself.
+This recipes walks the `node[:rackspace_apt][:repos]` hash and defines rackspace_apt_repository LWRPs for each repo defined. As a convenience, you may set the flag `node[:rackspace_apt][:switch][:enable_rackspace_mirrors]` to `true` and mirror.rackspace.com will be enabled for your operating system. If your OS is unsupported, (i.e. an older Ubuntu like 10.04), this flag will not work and you must define any repositories yourself.
 
 You may of course define repos via the rackspace_apt_repository LWRP, but alternatively you may define repos in the 
 `node[:rackspace_apt][:repos]` hash. Define a new repository like so:
 
 `node[:rackspace_apt][:repos][:'apt.opscode.com'][:"precise-0.10"] = [:main, :testing]`
 
-This will create a rackspace_apt_repository lightweight resource like the following:
+This will create a rackspace_apt_repository lightweight resource with the following parameters:
 
 ```ruby
 rackspace_apt_repository "apt.opscode.com-precise-0.10" do
@@ -57,7 +57,7 @@ end
 The `only_if` and `not_if` blocks prevent the repository from being configured if `apt` is not installed or if the repository is already configured
 in /etc/apt/sources.list (respectively).
 
-The `repos` recipe is included at the beginning of the default recipe and should not be called specifically in a run list.
+The `repos` recipe is included at the beginning of the default recipe; you should not explicity include it in a run list.
 
 ### cacher-client
 Configures the node to use the `apt-cacher-ng` server as a client.
