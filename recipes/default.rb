@@ -30,9 +30,7 @@ unless apt_installed?
   node.default[:rackspace_apt][:apt_installed] = false
 end
 
-if node[:rackspace_apt][:switch][:enable_rackspace_mirrors] 
-  include_recipe 'rackspace_apt::rackspace_mirrors'
-end
+include_recipe 'rackspace_apt::repos' if node[:rackspace_apt][:apt_installed]
 
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do

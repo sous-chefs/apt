@@ -27,6 +27,9 @@ suites:
     rackspace_apt:
       switch:
         enable_rackspace_mirrors: true
+      repos:
+        apt.puppetlabs.com:
+          precise: [main,dependencies]        
 
 - name: cacher-client
   run_list:

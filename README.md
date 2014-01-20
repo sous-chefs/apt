@@ -14,17 +14,16 @@ If your Chef version is earlier than 10.16.4, use version 1.7.0 of this cookbook
 ### Platform
 Please refer to the [TESTING file](TESTING.md) to see the currently (and passing) tested platforms. The release was tested on:
 
-* Ubuntu 10.04
 * Ubuntu 12.04
-* Ubuntu 13.04
-* Debian 7.1
-* Debian 6.0 (have with manual testing)
+* Debian 7.2
 
 May work with or without modification on other Debian derivatives.
 
 
 -------
 ### default
+First, this recipe includes the `rackspace_apt::repos` to enable Rackspace (mirror.rackspace.com) or user-defined repositories. 
+
 This recipe installs the `update-notifier-common` package to provide the timestamp file used to only run `apt-get update` if the cache is more than one day old.
 
 This recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before managing any `package` resources with Chef.
@@ -32,6 +31,33 @@ This recipe should appear first in the run list of Debian or Ubuntu nodes to ens
 This recipe also sets up a local cache directory for preseeding packages.
 
 **Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
+
+### repos
+This recipes walks the `node[:rackspace_apt][:repos]` hash and defines rackspace_apt_repository LWRPs for each repo defined. As a convenience, you may set the flag `node[:rackspace_apt][:switch][:enable_rackspace_mirrors]` to `true` and mirror.rackspace.com will be enabled for your OS. If your OS is unsupported, (i.e. an older Ubuntu like 10.04), this flag will not work and you must define any repositories yourself.
+
+You may of course define repos via the rackspace_apt_repository LWRP, but alternatively you may define repos in the 
+`node[:rackspace_apt][:repos]` hash. Define a new repository like so:
+
+`node[:rackspace_apt][:repos][:'apt.opscode.com'][:"precise-0.10"] = [:main, :testing]`
+
+This will create a rackspace_apt_repository lightweight resource like the following:
+
+```ruby
+rackspace_apt_repository "apt.opscode.com-precise-0.10" do
+  uri "http://apt.opscode.com/"
+  distribution "precise-0.10"
+  components [:main, :testing]
+  deb_src true
+  only_if { node[:rackspace_apt][:apt_installed] }
+  not_if { "egrep 'apt.opscode.com precise-0.10' /etc/apt/sources.list" } 
+  action :add
+end
+```
+
+The `only_if` and `not_if` blocks prevent the repository from being configured if `apt` is not installed or if the repository is already configured
+in /etc/apt/sources.list (respectively).
+
+The `repos` recipe is included at the beginning of the default recipe and should not be called specifically in a run list.
 
 ### cacher-client
 Configures the node to use the `apt-cacher-ng` server as a client.
@@ -90,10 +116,12 @@ Attributes
 * `[:rackspace_apt][:switch][:cacher_server][:cacher_interface]` - interface to connect to the cacher-ng service, no default.
 * `[:rackspace_apt][:config][:cacher_server][:Port][:value]` - port for the cacher-ng service (either client or server), default is '3142'
 * `[:rackspace_apt][:config][:cacher_server][:CacheDir][:value]` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-* `[:rackspace_apt][:switch][:cacher_client][:restrict_environment]` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
-* `[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]` - use a cacher server (or standard proxy server) not available via search, no default.
+* `[:rackspace_apt][:switch][:cacher_client][:restrict_environment]` - restrict your node to using the `apt-cacher-ng` server in your Environment. Default is `false`
+* `[:rackspace_apt][:config][:cacher_client][:cacher_ipaddress]` - use a cacher server (or standard proxy server) not available via search. No default (unset).
 * `[:rackspace_apt][:config][:cacher_client][:cache_bypass]` - array of URLs to bypass the cache. Accepts the URL and protocol to  fetch directly from the remote repository and not attempt to cache
 * `[:rackspace_apt][:switch][:compiletime]` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
+* `[:rackspace_apt][:switch][:enable_rackspace_mirrors]` - enable mirror.rackspace.com apt repositories for your supported Ubuntu or Debian server. Default is `false`.
+* `[:rackspace_apt][:switch][:delete_sources_list]` - set to `true` to remove the file /etc/apt/sources.list. Typically you would only want to do this if enabling mirror.rackspace.com or some other major repository via rackspace_apt_repository lightweight resources or node[:rackspace_apt][:repos]. Default is `false`.
 
 Libraries
 ---------
@@ -240,10 +268,10 @@ If you want to cleanup unused packages, there is also the `apt-get autoclean` an
 
 License & Authors
 -----------------
-- Author:: Kent Shultz (kent.shultz@rackspace.com)
 - Author:: Joshua Timberman (joshua@opscode.com)
 - Author:: Matt Ray (matt@opscode.com)
 - Author:: Seth Chisamore (schisamo@opscode.com)
+- Author:: Kent Shultz (kent.shultz@rackspace.com)
 
 ```text
 Copyright 2014, Rackspace, US Inc.

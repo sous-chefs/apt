@@ -12,7 +12,3 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
-
-def apt_installed?
-  true
-end
