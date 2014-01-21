@@ -21,8 +21,8 @@ class ::Chef::Recipe
   include ::RackspaceApt
 end
 
-#remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
-#these are leftover from preseed installs
+# remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
+# these are leftover from preseed installs
 execute 'Remove proxy from /etc/apt/apt.conf' do
   command 'sed --in-place "/^Acquire::http::Proxy/d" /etc/apt/apt.conf'
   only_if 'grep Acquire::http::Proxy /etc/apt/apt.conf'
@@ -43,7 +43,7 @@ if node['rackspace_apt']['config']['cacher_server']
   end
 end
 
-unless (Chef::Config['solo'] || servers.length > 0)
+unless Chef::Config['solo'] || servers.length > 0
   query = 'rackspace_apt_switch_caching_server:true'
   query += " AND chef_environment:#{node.chef_environment}" if node['rackspace_apt']['switch']['cacher_client']['restrict_environment']
   Chef::Log.debug("rackspace_apt::cacher-client searching for '#{query}'")
@@ -64,11 +64,11 @@ if servers.length > 0
     group 'root'
     mode 00644
     variables(
-      :proxy => cacher_ipaddress,
-      :port => servers[0]['rackspace_apt']['config']['cacher_server']['Port']['value'],
-      :bypass => node['rackspace_apt']['config']['cacher_client']['cache_bypass']
+      proxy: cacher_ipaddress,
+      port: servers[0]['rackspace_apt']['config']['cacher_server']['Port']['value'],
+      bypass: node['rackspace_apt']['config']['cacher_client']['cache_bypass']
       )
-    action( node['rackspace_apt']['switch']['compiletime'] ? :nothing : :create )
+    action(node['rackspace_apt']['switch']['compiletime'] ? :nothing : :create)
     notifies :run, 'execute[apt-get update]', :immediately
   end
   t.run_action(:create) if node['rackspace_apt']['switch']['compiletime']

@@ -33,9 +33,9 @@ def install_key_from_keyserver(key, keyserver)
     end
     action :run
     not_if do
-        extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
-            fingerprint.end_with?(key.upcase)
-        end
+      extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
+        fingerprint.end_with?(key.upcase)
+      end
     end
   end
 end
@@ -44,10 +44,9 @@ end
 def extract_fingerprints_from_cmd(cmd)
   so = Mixlib::ShellOut.new(cmd)
   so.run_command
-  so.stdout.split(/\n/).collect do |t|
-    if z = t.match(/^ +Key fingerprint = ([0-9A-F ']+)/)
-      z[1].split.join
-    end
+  so.stdout.split(/\n/).map do |t|
+    z = t.match(/^ +Key fingerprint = ([0-9A-F ']+)/)
+    z[1].split.join if z
   end.compact
 end
 
@@ -112,13 +111,13 @@ action :add do
     action :nothing
   end
 
-    # build repo file
-    repository = build_repo(new_resource.uri,
-                            new_resource.distribution,
-                            new_resource.components,
-                            new_resource.trusted,
-                            new_resource.arch,
-                            new_resource.deb_src)
+  # build repo file
+  repository = build_repo(new_resource.uri,
+                          new_resource.distribution,
+                          new_resource.components,
+                          new_resource.trusted,
+                          new_resource.arch,
+                          new_resource.deb_src)
 
   file '/etc/apt/sources.list.d/#{new_resource.name}.list' do
     owner 'root'

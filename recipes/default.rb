@@ -37,7 +37,7 @@ execute 'apt-get-update' do
   command 'apt-get update'
   ignore_failure true
   only_if { node['rackspace_apt']['apt_installed'] }
-  not_if do ::File.exists?('/var/lib/apt/periodic/update-success-stamp') end
+  not_if { ::File.exists?('/var/lib/apt/periodic/update-success-stamp') }
 end
 
 # For other recipes to call to force an update
@@ -51,7 +51,7 @@ end
 # Automatically remove packages that are no longer needed for dependencies
 execute 'apt-get autoremove' do
   command 'apt-get -y autoremove'
-  only_if { node['rackspace_apt']['apt_installed'] } 
+  only_if { node['rackspace_apt']['apt_installed'] }
   action :nothing
 end
 
@@ -74,7 +74,7 @@ execute 'apt-get-update-periodic' do
   only_if do
     node['rackspace_apt']['apt_installed'] &&
     ::File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
-    ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
+    ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86_400
   end
 end
 

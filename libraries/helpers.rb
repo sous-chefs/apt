@@ -16,11 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 module RackspaceApt
+  # for use in rackspace_apt cookbooks
   module Helpers
     # Determines if apt is installed on a system.
-    #
     # @return [Boolean']
     def apt_installed?
       !which('apt-get').nil?

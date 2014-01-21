@@ -33,7 +33,7 @@ if node['rackspace_apt']['switch']['enable_rackspace_mirrors']
     case node['platform_version']
     when '12.04'
       node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise'] = [:main, :restricted, :universe, :multiverse]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-updates'] = [:main, :restricted, :universe, :multiverse]   
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-updates'] = [:main, :restricted, :universe, :multiverse]
       node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-backports'] = [:main, :restricted, :universe, :multiverse]
       node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-security'] = [:main, :restricted, :universe, :multiverse]
     end
@@ -47,15 +47,15 @@ if node['rackspace_apt']['switch']['enable_rackspace_mirrors']
   end
 end
 
-# only add repos if running a supported platform, although end user may also define repos and they'll be defined here 
+# only add repos if running a supported platform, although end user may also define repos and they'll be defined here
 if node['rackspace_apt']['repos']
   node['rackspace_apt']['repos'].each_key do |repo|
     node['rackspace_apt']['repos'][repo].each do |dist, components|
-      rackspace_apt_repository "#{repo}-#{dist}".gsub('/','-') do
+      rackspace_apt_repository "#{repo}-#{dist}".gsub('/', '-') do
         uri "http://#{repo}"
         distribution dist
         components components
-        deb_src :true 
+        deb_src :true
         only_if { node['rackspace_apt']['apt_installed'] }
         not_if "egrep '#{repo}/? #{dist}' /etc/apt/sources.list" # do not define duplicate entries
         action :add

@@ -20,5 +20,5 @@
 include_recipe 'rackspace_apt::cacher-ng'
 include_recipe 'rackspace_apt::cacher-client'
 
-#install a small, innocuous application to verify this works
+# install a small, innocuous application to verify this works
 package 'colordiff'
