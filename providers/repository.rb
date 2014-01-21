@@ -80,19 +80,21 @@ def install_key_from_uri(uri)
   end
 end
 
+# rubocop:disable CyclomaticComplexity
 # build repo file contents
-def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
-  components = components.join(' ') if components.respond_to?(:join)
+def build_repo(resource)
+  components = resource.components.join(' ') if resource.components.respond_to?(:join)
   repo_options = []
-  repo_options << "arch=#{arch}" if arch
-  repo_options << 'trusted=yes' if trusted
+  repo_options << "arch=#{resource.arch}" if resource.arch
+  repo_options << 'trusted=yes' if resource.trusted
   repo_options = '[' + repo_options.join(' ') + ']' unless repo_options.empty?
-  repo_info = "#{uri} #{distribution} #{components}\n"
+  repo_info = "#{resource.uri} #{resource.distribution} #{components}\n"
   repo_info = "#{repo_options} #{repo_info}" unless repo_options.empty?
   repo =  "deb     #{repo_info}"
-  repo << "deb-src #{repo_info}" if add_deb_src
+  repo << "deb-src #{repo_info}" if resource.deb_src
   repo
 end
+# rubocop:enable CyclomaticComplexity
 
 action :add do
   # add key
@@ -112,12 +114,7 @@ action :add do
   end
 
   # build repo file
-  repository = build_repo(new_resource.uri,
-                          new_resource.distribution,
-                          new_resource.components,
-                          new_resource.trusted,
-                          new_resource.arch,
-                          new_resource.deb_src)
+  repository = build_repo(new_resource)
 
   file '/etc/apt/sources.list.d/#{new_resource.name}.list' do
     owner 'root'
