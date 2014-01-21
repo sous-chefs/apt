@@ -74,7 +74,7 @@ def install_key_from_uri(uri)
     action :run
     not_if do
       installed_keys = extract_fingerprints_from_cmd('apt-key finger')
-      proposed_keys = extract_fingerprints_from_cmd('gpg --with-fingerprint #{cached_keyfile}')
+      proposed_keys = extract_fingerprints_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
       (installed_keys & proposed_keys).sort == proposed_keys.sort
     end
   end
@@ -116,7 +116,7 @@ action :add do
   # build repo file
   repository = build_repo(new_resource)
 
-  file '/etc/apt/sources.list.d/#{new_resource.name}.list' do
+  file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
     owner 'root'
     group 'root'
     mode 00644

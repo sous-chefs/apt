@@ -22,11 +22,6 @@
 # or other cookbooks which notify these resources will fail on non-apt-enabled
 # systems.
 
-file '/etc/apt/sources.list' do
-  action :delete
-  only_if { node['rackspace_apt']['switch']['delete_sources_list'] }
-end
-
 if node['rackspace_apt']['switch']['enable_rackspace_mirrors']
   case node['platform']
   when 'ubuntu'
@@ -62,4 +57,9 @@ if node['rackspace_apt']['repos']
       end
     end
   end
+end
+
+file '/etc/apt/sources.list' do
+  action :delete
+  only_if { node['rackspace_apt']['switch']['delete_sources_list'] }
 end
