@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'rackspace_apt::cacher-client' do
 
   before do
-    stub_command("grep Acquire::http::Proxy /etc/apt/apt.conf").and_return(true)
+    stub_command('grep Acquire::http::Proxy /etc/apt/apt.conf').and_return(true)
   end
 
   context 'no server' do

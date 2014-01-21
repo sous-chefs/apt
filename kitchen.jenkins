@@ -1,0 +1,19 @@
+---
+driver:
+  name: rackspace
+  require_chef_omnibus: '11.8.2'
+  rackspace_username: <%= ENV['rackspace_username'] %>
+  rackspace_api_key:  <%= ENV['rackspace_api_key'] %>
+  rackspace_region: 'ord'
+  public_key_path: <%= ENV['sshpubkey'] %>
+
+platforms:
+- name: centos-6.4
+  driver_config:
+    image_id: 'f70ed7c7-b42e-4d77-83d8-40fa29825b85'
+- name: ubuntu-12.04
+  driver_config:
+    image_id: '80fbcb55-b206-41f9-9bc2-2dd7aac6c061'
+- name: debian-7.2
+  driver_config:
+    image_id: '857d7d36-34f3-409f-8435-693e8797be8b'

@@ -4,14 +4,14 @@
 #
 # Copyright 2014, Rackspace, US Inc.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -33,7 +33,7 @@ def install_key_from_keyserver(key, keyserver)
     end
     action :run
     not_if do
-        extract_fingerprints_from_cmd("apt-key finger").any? do |fingerprint|
+        extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
             fingerprint.end_with?(key.upcase)
         end
     end
@@ -74,8 +74,8 @@ def install_key_from_uri(uri)
     command "apt-key add #{cached_keyfile}"
     action :run
     not_if do
-      installed_keys = extract_fingerprints_from_cmd("apt-key finger")
-      proposed_keys = extract_fingerprints_from_cmd("gpg --with-fingerprint #{cached_keyfile}")
+      installed_keys = extract_fingerprints_from_cmd('apt-key finger')
+      proposed_keys = extract_fingerprints_from_cmd('gpg --with-fingerprint #{cached_keyfile}')
       (installed_keys & proposed_keys).sort == proposed_keys.sort
     end
   end
@@ -86,8 +86,8 @@ def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
   components = components.join(' ') if components.respond_to?(:join)
   repo_options = []
   repo_options << "arch=#{arch}" if arch
-  repo_options << "trusted=yes" if trusted
-  repo_options = "[" + repo_options.join(' ') + "]" unless repo_options.empty?
+  repo_options << 'trusted=yes' if trusted
+  repo_options = '[' + repo_options.join(' ') + ']' unless repo_options.empty?
   repo_info = "#{uri} #{distribution} #{components}\n"
   repo_info = "#{repo_options} #{repo_info}" unless repo_options.empty?
   repo =  "deb     #{repo_info}"
@@ -103,11 +103,11 @@ action :add do
     install_key_from_uri(new_resource.key)
   end
 
-  file "/var/lib/apt/periodic/update-success-stamp" do
+  file '/var/lib/apt/periodic/update-success-stamp' do
     action :nothing
   end
 
-  execute "apt-get update" do
+  execute 'apt-get update' do
     ignore_failure true
     action :nothing
   end
@@ -120,14 +120,14 @@ action :add do
                             new_resource.arch,
                             new_resource.deb_src)
 
-  file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
-    owner "root"
-    group "root"
+  file '/etc/apt/sources.list.d/#{new_resource.name}.list' do
+    owner 'root'
+    group 'root'
     mode 00644
     content repository
     action :create
-    notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
-    notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
+    notifies :delete, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+    notifies :run, 'execute[apt-get update]', :immediately if new_resource.cache_rebuild
   end
 end
 
