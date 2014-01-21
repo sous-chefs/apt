@@ -20,7 +20,7 @@
 module ::RackspaceApt
   def interface_ipaddress(host, interface)
     if interface
-      addresses = host['network']['interfaces'][interface]['addresses']
+      addresses = host['network']['interfaces']['interface']['addresses']
       addresses.select do |ip, data|
         if data['family'].eql?('inet')
           return ip

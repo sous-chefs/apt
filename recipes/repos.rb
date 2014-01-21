@@ -24,39 +24,39 @@
 
 file "/etc/apt/sources.list" do
   action :delete
-  only_if { node[:rackspace_apt][:switch][:delete_sources_list] }
+  only_if { node['rackspace_apt']['switch']['delete_sources_list'] }
 end
 
-if node[:rackspace_apt][:switch][:enable_rackspace_mirrors]
-  case node[:platform]
+if node['rackspace_apt']['switch']['enable_rackspace_mirrors']
+  case node['platform']
   when 'ubuntu'
-    case node[:platform_version]
+    case node['platform_version']
     when '12.04'
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/ubuntu"][:precise] = [:main, :restricted, :universe, :multiverse]
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/ubuntu"][:"precise-updates"] = [:main, :restricted, :universe, :multiverse]   
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/ubuntu"][:"precise-backports"] = [:main, :restricted, :universe, :multiverse]
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/ubuntu"][:"precise-security"] = [:main, :restricted, :universe, :multiverse]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise'] = [:main, :restricted, :universe, :multiverse]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-updates'] = [:main, :restricted, :universe, :multiverse]   
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-backports'] = [:main, :restricted, :universe, :multiverse]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-security'] = [:main, :restricted, :universe, :multiverse]
     end
   when 'debian'
-    case node[:platform_version]
+    case node['platform_version']
     when '7.2'
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/debian"][:wheezy] = [:main]
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/debian-security"][:"wheezy/updates"] = [:main]
-      node.default[:rackspace_apt][:repos][:"mirror.rackspace.com/debian"][:"wheezy-backports"] = [:main]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy'] = [:main]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian-security']['wheezy/updates'] = [:main]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy-backports'] = [:main]
     end
   end
 end
 
 # only add repos if running a supported platform, although end user may also define repos and they'll be defined here 
-if node[:rackspace_apt][:repos]
-  node[:rackspace_apt][:repos].each_key do |repo|
-    node[:rackspace_apt][:repos][repo].each do |dist, components|
+if node['rackspace_apt']['repos']
+  node['rackspace_apt']['repos'].each_key do |repo|
+    node['rackspace_apt']['repos'][repo].each do |dist, components|
       rackspace_apt_repository "#{repo}-#{dist}".gsub("/","-") do
         uri "http://#{repo}"
         distribution dist
         components components
         deb_src :true 
-        only_if { node[:rackspace_apt][:apt_installed] }
+        only_if { node['rackspace_apt']['apt_installed'] }
         not_if "egrep '#{repo}/? #{dist}' /etc/apt/sources.list" # do not define duplicate entries
         action :add
       end

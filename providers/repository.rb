@@ -26,8 +26,8 @@ end
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   execute "install-key #{key}" do
-    if !node[:rackspace_apt][:config][:key_proxy].empty?
-      command "apt-key adv --keyserver-options http-proxy=#{node[:rackspace_apt][:config][:key_proxy]} --keyserver hkp://#{keyserver}:80 --recv #{key}"
+    if !node['rackspace_apt']['config']['key_proxy'].empty?
+      command "apt-key adv --keyserver-options http-proxy=#{node['rackspace_apt']['config']['key_proxy']} --keyserver hkp://#{keyserver}:80 --recv #{key}"
     else
       command "apt-key adv --keyserver #{keyserver} --recv #{key}"
     end
@@ -45,7 +45,7 @@ def extract_fingerprints_from_cmd(cmd)
   so = Mixlib::ShellOut.new(cmd)
   so.run_command
   so.stdout.split(/\n/).collect do |t|
-    if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/)
+    if z = t.match(/^ +Key fingerprint = ([0-9A-F ']+)/)
       z[1].split.join
     end
   end.compact
@@ -54,7 +54,7 @@ end
 # install apt key from URI
 def install_key_from_uri(uri)
   key_name = uri.split(/\//).last
-  cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
+  cached_keyfile = "#{Chef::Config['file_cache_path']}/#{key_name}"
   if new_resource.key =~ /http/
     remote_file cached_keyfile do
       source new_resource.key

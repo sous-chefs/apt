@@ -5,7 +5,7 @@ describe 'rackspace_apt::cacher-ng' do
   context 'server' do
     let(:chef_run) do
       runner = ChefSpec::Runner.new
-      runner.node.set[:rackspace_apt][:config][:cacher_server][:Port][:value] = '9876'
+      runner.node.set['rackspace_apt']['config']['cacher_server']['Port']['value'] = '9876'
       runner.converge('rackspace_apt::cacher-ng')
     end
 

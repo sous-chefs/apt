@@ -22,7 +22,7 @@ include_recipe "rackspace_apt"
 # Apt Repository
 rackspace_apt_repository "opscode" do
   uri "http://apt.opscode.com"
-  components ["main"]
+  components ['main']
   distribution "#{node['lsb']['codename']}-0.10"
   key "2940ABA983EF826A"
   keyserver "pgpkeys.mit.edu"
@@ -34,7 +34,7 @@ rackspace_apt_repository "cloudera" do
   uri "http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh"
   arch "amd64"
   distribution "precise-cdh4"
-  components ["contrib"]
+  components ['contrib']
   key "http://archive.cloudera.com/debian/archive.key"
   action :add
 end
@@ -43,7 +43,7 @@ end
 rackspace_apt_repository "nginx" do
   uri "http://nginx.org/packages/#{node['platform']}"
   distribution node['lsb']['codename']
-  components ["nginx"]
+  components ['nginx']
   key "http://nginx.org/keys/nginx_signing.key"
   deb_src true
 end

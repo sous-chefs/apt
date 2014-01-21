@@ -17,20 +17,20 @@
 # limitations under the License.
 #
 
-node.set[:rackspace_apt][:switch][:caching_server] = true
+node.set['rackspace_apt']['switch']['caching_server'] = true
 
 package "apt-cacher-ng" do
   action :install
 end
 
-directory node[:rackspace_apt][:config][:cacher_server][:CacheDir][:value] do
+directory node['rackspace_apt']['config']['cacher_server']['CacheDir']['value'] do
   owner "apt-cacher-ng"
   group "apt-cacher-ng"
   mode 0755
 end
 
 template "/etc/apt-cacher-ng/acng.conf" do
-  cookbook node[:rackspace_apt][:templates_cookbook]
+  cookbook node['rackspace_apt']['templates_cookbook']
   source "acng.conf.erb"
   owner "root"
   group "root"

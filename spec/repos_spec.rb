@@ -13,8 +13,8 @@ describe 'rackspace_apt::repos' do
     let(:chef_run) do
       ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04', 
 			   :step_into => ['rackspace_apt_repository']) do |node|
-        node.set[:rackspace_apt][:apt_installed] = true
-	node.set[:rackspace_apt][:switch][:enable_rackspace_mirrors] = true
+        node.set['rackspace_apt']['apt_installed'] = true
+	node.set['rackspace_apt']['switch']['enable_rackspace_mirrors'] = true
       end.converge(described_recipe)
     end
 
@@ -37,8 +37,8 @@ describe 'rackspace_apt::repos' do
     let(:chef_run) do
       ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04', 
 			   :step_into => ['rackspace_apt_repository']) do |node|
-        node.set[:rackspace_apt][:apt_installed] = true
-	node.set[:rackspace_apt][:switch][:enable_rackspace_mirrors] = true
+        node.set['rackspace_apt']['apt_installed'] = true
+	node.set['rackspace_apt']['switch']['enable_rackspace_mirrors'] = true
       end.converge(described_recipe)
     end
 
@@ -60,8 +60,8 @@ describe 'rackspace_apt::repos' do
     let(:chef_run) do
       ChefSpec::Runner.new(:platform => 'debian', :version => '7.2', 
 			   :step_into => ['rackspace_apt_repository']) do |node|
-        node.set[:rackspace_apt][:apt_installed] = true
-	node.set[:rackspace_apt][:switch][:enable_rackspace_mirrors] = true
+        node.set['rackspace_apt']['apt_installed'] = true
+	node.set['rackspace_apt']['switch']['enable_rackspace_mirrors'] = true
       end.converge(described_recipe)
     end
 
@@ -75,8 +75,8 @@ describe 'rackspace_apt::repos' do
   context 'remove sources.list' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
-        node.set[:rackspace_apt][:apt_installed] = true
-	node.set[:rackspace_apt][:switch][:delete_sources_list] = true
+        node.set['rackspace_apt']['apt_installed'] = true
+	node.set['rackspace_apt']['switch']['delete_sources_list'] = true
       end.converge(described_recipe)
     end
 
@@ -92,8 +92,8 @@ describe 'rackspace_apt::repos' do
 
     let(:chef_run) do
       ChefSpec::Runner.new(:step_into => ['rackspace_apt_repository']) do |node|
-        node.set[:rackspace_apt][:apt_installed] = true
-	node.set[:rackspace_apt][:repos][:"apt.opscode.com"][:"precise-0.10"] = [:main, :testing]
+        node.set['rackspace_apt']['apt_installed'] = true
+	node.set['rackspace_apt']['repos']['apt.opscode.com']['precise-0.10'] = ['main', 'testing']
       end.converge(described_recipe)
     end
 

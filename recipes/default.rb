@@ -23,20 +23,20 @@
 # or other cookbooks which notify these resources will fail on non-apt-enabled
 # systems.
 
-node.default[:rackspace_apt][:apt_installed] = true
+node.default['rackspace_apt']['apt_installed'] = true
 
 unless apt_installed?
   Chef::Log.debug "apt is not installed. Apt-specific resources will not be executed."
-  node.default[:rackspace_apt][:apt_installed] = false
+  node.default['rackspace_apt']['apt_installed'] = false
 end
 
-include_recipe 'rackspace_apt::repos' if node[:rackspace_apt][:apt_installed]
+include_recipe 'rackspace_apt::repos' if node['rackspace_apt']['apt_installed']
 
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do
   command "apt-get update"
   ignore_failure true
-  only_if { node[:rackspace_apt][:apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
   not_if do ::File.exists?('/var/lib/apt/periodic/update-success-stamp') end
 end
 
@@ -44,35 +44,35 @@ end
 execute "apt-get update" do
   command "apt-get update"
   ignore_failure true
-  only_if { node[:rackspace_apt][:apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
   action :nothing
 end
 
 # Automatically remove packages that are no longer needed for dependencies
 execute "apt-get autoremove" do
   command "apt-get -y autoremove"
-  only_if { node[:rackspace_apt][:apt_installed] } 
+  only_if { node['rackspace_apt']['apt_installed'] } 
   action :nothing
 end
 
 # Automatically remove .deb files for packages no longer on your system
 execute "apt-get autoclean" do
   command "apt-get -y autoclean"
-  only_if { node[:rackspace_apt][:apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
   action :nothing
 end
 
 # provides /var/lib/apt/periodic/update-success-stamp on apt-get update
 package "update-notifier-common" do
   notifies :run, 'execute[apt-get-update]', :immediately
-  only_if { node[:rackspace_apt][:apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
 end
 
 execute "apt-get-update-periodic" do
   command "apt-get update"
   ignore_failure true
   only_if do
-    node[:rackspace_apt][:apt_installed] &&
+    node['rackspace_apt']['apt_installed'] &&
     ::File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
     ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
   end
@@ -84,6 +84,6 @@ end
     group "root"
     mode  00755
     action :create
-    only_if { node[:rackspace_apt][:apt_installed] }
+    only_if { node['rackspace_apt']['apt_installed'] }
   end
 end

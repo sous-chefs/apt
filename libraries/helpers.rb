@@ -21,14 +21,14 @@ module RackspaceApt
   module Helpers
     # Determines if apt is installed on a system.
     #
-    # @return [Boolean]
+    # @return [Boolean']
     def apt_installed?
       !which('apt-get').nil?
     end
 
     # Finds a command in $PATH
     #
-    # @return [String, nil]
+    # @return [String, nil']
     def which(cmd)
       paths = (ENV['PATH'].split(::File::PATH_SEPARATOR) + %w(/bin /usr/bin /sbin /usr/sbin))
 
