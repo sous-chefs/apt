@@ -90,7 +90,7 @@ describe 'rackspace_apt::repos' do
     let(:chef_run) do
       ChefSpec::Runner.new(step_into: ['rackspace_apt_repository']) do |node|
         node.set['rackspace_apt']['apt_installed'] = true
-        node.set['rackspace_apt']['repos']['apt.opscode.com']['precise-0.10'] = %w{ main testing}
+        node.set['rackspace_apt']['repos']['apt.opscode.com']['precise-0.10'] = %w{main testing}
       end.converge(described_recipe)
     end
 

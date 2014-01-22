@@ -27,17 +27,17 @@ if node['rackspace_apt']['switch']['enable_rackspace_mirrors']
   when 'ubuntu'
     case node['platform_version']
     when '12.04'
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise'] = [:main, :restricted, :universe, :multiverse]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-updates'] = [:main, :restricted, :universe, :multiverse]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-backports'] = [:main, :restricted, :universe, :multiverse]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-security'] = [:main, :restricted, :universe, :multiverse]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise'] = %w{main restricted universe multiverse}
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-updates'] = %w{main restricted universe multiverse}
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-backports'] = %w{main restricted universe multiverse}
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/ubuntu']['precise-security'] = %w{main restricted universe multiverse}
     end
   when 'debian'
     case node['platform_version']
     when '7.2'
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy'] = [:main]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian-security']['wheezy/updates'] = [:main]
-      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy-backports'] = [:main]
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy'] = %w{main}
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian-security']['wheezy/updates'] = %w{main}
+      node.default['rackspace_apt']['repos']['mirror.rackspace.com/debian']['wheezy-backports'] = %w{main}
     end
   end
 end

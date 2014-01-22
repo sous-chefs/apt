@@ -19,5 +19,5 @@ default['rackspace_apt']['switch']['cacher_client']['restrict_environment'] = fa
 default['rackspace_apt']['switch']['caching_server'] = false
 default['rackspace_apt']['switch']['cacher_server']['cacher_interface'] = nil
 default['rackspace_apt']['switch']['compiletime'] = false
-default['rackspace_apt']['switch']['enable_rackspace_mirrors'] = false
+default['rackspace_apt']['switch']['enable_rackspace_mirrors'] = true
 default['rackspace_apt']['switch']['delete_sources_list'] = false

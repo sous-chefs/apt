@@ -42,7 +42,7 @@ You may of course define repos via a rackspace_apt_repository LWRP, but alternat
 `node['rackspace_apt'['repos'`. Define a new repository like so:
 
 ```ruby
-node['rackspace_apt'['repos'][<URI>][<DIST>] = %w{<COMPONENT1>, <COMPONENT2>}
+node['rackspace_apt'['repos'][<URI>][<DIST>] = %w{<COMPONENT1> <COMPONENT2>}
 ```
 
 This will create a rackspace_apt_repository lightweight resource with the following parameters:
@@ -62,7 +62,7 @@ end
 To give a concrete example, specifying this:
 
 ```ruby 
-node['rackspace_apt'['repos'['apt.opscode.com']['precise-0.10'] = %w{main, testing} 
+node['rackspace_apt'['repos'['apt.opscode.com']['precise-0.10'] = %w{main testing}
 ```
 
 will create a rackspace_apt_repository lightweight resource like this:
@@ -145,7 +145,7 @@ Attributes
 * `['rackspace_apt']['config']['cacher_client']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search. No default (unset).
 * `['rackspace_apt']['config']['cacher_client']['cache_bypass']` - array of URLs to bypass the cache. Accepts the URL and protocol to  fetch directly from the remote repository and not attempt to cache
 * `['rackspace_apt']['switch']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-* `['rackspace_apt']['switch']['enable_rackspace_mirrors']` - enable mirror.rackspace.com apt repositories for your supported Ubuntu or Debian server. Default is `false`.
+* `['rackspace_apt']['switch']['enable_rackspace_mirrors']` - enable mirror.rackspace.com apt repositories for your supported Ubuntu or Debian server. Default is `true`.
 * `['rackspace_apt']['switch']['delete_sources_list']` - set to `true` to remove the file /etc/apt/sources.list. Typically you would only want to do this if enabling mirror.rackspace.com or some other major repository via rackspace_apt_repository lightweight resources or node['rackspace_apt]['repos]. Default is `false`.
 
 Libraries
