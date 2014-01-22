@@ -80,7 +80,6 @@ def install_key_from_uri(uri)
   end
 end
 
-# rubocop:disable CyclomaticComplexity
 # build repo file contents
 def build_repo(resource)
   components = resource.components.join(' ') if resource.components.respond_to?(:join)
@@ -94,7 +93,6 @@ def build_repo(resource)
   repo << "deb-src #{repo_info}" if resource.deb_src
   repo
 end
-# rubocop:enable CyclomaticComplexity
 
 action :add do
   # add key

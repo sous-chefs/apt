@@ -19,3 +19,7 @@ RedundantReturn:
 #   and it will likely require building of over-length lines.
 IfUnlessModifier:
   Enabled: false
+
+# Raise allowed CyclomaticComplexity to 10.
+CyclomaticComplexity:
+  Max: 10
