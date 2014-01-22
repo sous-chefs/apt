@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'rackspace_apt::default' do
   let(:chef_run) do
     ChefSpec::Runner.new do |node|
-      node.set[:rackspace_apt][:apt_installed] = true
+      node.set['rackspace_apt']['apt_installed'] = true
     end.converge(described_recipe)
   end
 
