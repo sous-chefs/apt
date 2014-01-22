@@ -33,16 +33,16 @@ This recipe also sets up a local cache directory for preseeding packages.
 **Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
 
 ### repos
-This recipes walks the `node['rackspace_apt]['repos]` hash and defines rackspace_apt_repository lightweight resources for each repository defined. As a convenience, you may set the flag `node['rackspace_apt]['switch]['enable_rackspace_mirrors]` to true and mirror.rackspace.com will be enabled for your operating system. If your OS is unsupported, (e.g. an an older Ubuntu like 10.04, any version of RHEL, etc), setting this flag will not configure Rackspace mirrors and you must define any desired repositories yourself. Operating systems currently supported by `:enable_rackspace_mirrors` are:
+This recipes walks the `node['rackspace_apt']['repos']` hash and defines rackspace_apt_repository lightweight resources for each repository defined. As a convenience, you may set the flag `node['rackspace_apt']['switch']['enable_rackspace_mirrors']` to true and mirror.rackspace.com will be enabled for your operating system. If your OS is unsupported, (e.g. an an older Ubuntu like 10.04, any version of RHEL, etc), setting this flag will not configure Rackspace mirrors and you must define any desired repositories yourself. Operating systems currently supported by `enable_rackspace_mirrors` are:
 
 - Ubuntu 12.04 (precise)
 - Debian 7.2 (wheezy)
 
 You may of course define repos via a rackspace_apt_repository LWRP, but alternatively you may define repos in the 
-`node['rackspace_apt'['repos'`. Define a new repository like so:
+`node['rackspace_apt']['repos']`. Define a new repository like so:
 
 ```ruby
-node['rackspace_apt'['repos'][<URI>][<DIST>] = %w{<COMPONENT1> <COMPONENT2>}
+node['rackspace_apt']['repos'][<URI>][<DIST>] = %w{<COMPONENT1> <COMPONENT2>}
 ```
 
 This will create a rackspace_apt_repository lightweight resource with the following parameters:
@@ -53,7 +53,7 @@ rackspace_apt_repository "apt.opscode.com-precise-0.10" do
   distribution <DIST>
   components [<COMPONENT1>, <COMPONENT2>]
   deb_src true
-  only_if { node['rackspace_apt]['apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
   not_if { "egrep 'apt.opscode.com precise-0.10' /etc/apt/sources.list" } 
   action :add
 end
@@ -62,7 +62,7 @@ end
 To give a concrete example, specifying this:
 
 ```ruby 
-node['rackspace_apt'['repos'['apt.opscode.com']['precise-0.10'] = %w{main testing}
+node['rackspace_apt']['repos']['apt.opscode.com']['precise-0.10'] = %w{main testing}
 ```
 
 will create a rackspace_apt_repository lightweight resource like this:
@@ -73,7 +73,7 @@ rackspace_apt_repository "apt.opscode.com-precise-0.10" do
   distribution "precise-0.10"
   components ['main', 'testing']
   deb_src true
-  only_if { node['rackspace_apt]['apt_installed] }
+  only_if { node['rackspace_apt']['apt_installed'] }
   not_if { "egrep 'apt.opscode.com precise-0.10' /etc/apt/sources.list" } 
   action :add
 end
