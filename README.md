@@ -41,7 +41,9 @@ This recipes walks the `node['rackspace_apt]['repos]` hash and defines rackspace
 You may of course define repos via a rackspace_apt_repository LWRP, but alternatively you may define repos in the 
 `node['rackspace_apt'['repos'`. Define a new repository like so:
 
-`node['rackspace_apt'['repos'][<URI>][<DIST>] = %w{<COMPONENT1>, <COMPONENT2>}`
+```ruby
+node['rackspace_apt'['repos'][<URI>][<DIST>] = %w{<COMPONENT1>, <COMPONENT2>}
+```
 
 This will create a rackspace_apt_repository lightweight resource with the following parameters:
 
@@ -58,8 +60,10 @@ end
 ```
 
 To give a concrete example, specifying this:
- 
-`node['rackspace_apt'['repos'['apt.opscode.com']['precise-0.10'] = %w{main, testing}`
+
+```ruby 
+node['rackspace_apt'['repos'['apt.opscode.com']['precise-0.10'] = %w{main, testing} 
+```
 
 will create a rackspace_apt_repository lightweight resource like this:
 
