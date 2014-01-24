@@ -122,14 +122,17 @@ action :add do
     new_resource.deb_src
     )
 
-  file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
-    owner 'root'
-    group 'root'
-    mode 00644
-    content repository
-    action :create
-    notifies :delete, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-    notifies :run, 'execute[apt-get update]', :immediately if new_resource.cache_rebuild
+  description = "have placed /etc/apt/sources.list.d/#{new_resource.name}.list"
+  converge_by(description) do
+    file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
+      owner 'root'
+      group 'root'
+      mode 00644
+      content repository
+      action :create
+      notifies :delete, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+      notifies :run, 'execute[apt-get update]', :immediately if new_resource.cache_rebuild
+    end
   end
 end
 
