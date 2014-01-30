@@ -107,9 +107,16 @@ action :add do
     action :nothing
   end
 
-  execute 'apt-get update' do
+  execute 'apt-cache gencaches' do
     ignore_failure true
     action :nothing
+  end
+
+  execute 'apt-get update' do
+    command "apt-get update -o Dir::Etc::sourcelist='sources.list.d/#{new_resource.name}.list' -o Dir::Etc::sourceparts='-' -o APT::Get::List-Cleanup='0'"
+    ignore_failure true
+    action :nothing
+    notifies :run, 'execute[apt-cache gencaches]', :immediately
   end
 
   # build repo file
