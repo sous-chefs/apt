@@ -14,17 +14,6 @@ driver_config:
   sudo: false
 
 platforms:
-# - name: debian-60
-#   driver_plugin: digitalocean
-#   driver_config:
-#     image_id: 12573
-#     flavor_id: 63
-#     region_id: 1
-#     ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-#
-#  run_list:
-#  - recipe[apt]
-
 - name: debian-70
   driver_plugin: digitalocean
   driver_config:
