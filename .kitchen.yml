@@ -1,101 +1,46 @@
----
-driver_plugin: vagrant
-driver_plugin: digitalocean
-driver_config:
-  digitalocean_client_id: <%= ENV['DIGITAL_OCEAN_CLIENT_ID'] %>
-  digitalocean_api_key: <%= ENV['DIGITAL_OCEAN_API_KEY'] %>
-  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %> 
-  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
-  ssh_key: <%= ENV['AWS_PRIVATE_KEY_PATH'] %>
-  rackspace_username: <%= ENV['RACKSPACE_USERNAME'] %>
-  rackspace_api_key: <%= ENV['RACKSPACE_API_KEY'] %>
-  require_chef_omnibus: latest
-  sudo: false
+driver:
+  name: vagrant
 
 platforms:
-- name: debian-70
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 308287
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-1004
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 14097
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-1204
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 1505447
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-1304
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 350076
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
-
-- name: ubuntu-1310
-  driver_plugin: digitalocean
-  driver_config:
-    image_id: 1505699
-    flavor_id: 63
-    region_id: 4
-    ssh_key_ids: <%= ENV['DIGITAL_OCEAN_SSH_KEY_IDS'] %>
-  run_list:
-  - recipe[apt]
+  - name: debian-7.2.0
+    run_list: apt::default
+  - name: ubuntu-10.04
+    run_list: apt::default
+  - name: ubuntu-12.04
+    run_list: apt::default
+  - name: ubuntu-13.04
+    run_list: apt::default
+  - name: ubuntu-13.10
+    run_list: apt::default
 
 suites:
-- name: default
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[apt_test]
-  attributes: {}
+  - name: default
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test]
 
-- name: cacher-client
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[apt_test::cacher-client]
-  attributes: {}
+  - name: cacher-client
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::cacher-client]
 
-- name: cacher-ng
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[apt_test::cacher-ng]
-  attributes: {}
+  - name: cacher-ng
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::cacher-ng]
 
-- name: cacher-ng-client
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[apt_test::cacher-ng-client]
-  attributes:
-    apt:
-      cacher_dir: '/tmp/apt-cacher'
-      cacher_port: '9876'
-      cacher_interface: 'eth0'
-      compiletime: true
+  - name: cacher-ng-client
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::cacher-ng-client]
+    attributes:
+      apt:
+        cacher_dir: '/tmp/apt-cacher'
+        cacher_port: '9876'
+        cacher_interface: 'eth0'
+        compiletime: true
 
-- name: lwrps
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[apt_test::lwrps]
-  attributes: {}
+  - name: lwrps
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::lwrps]

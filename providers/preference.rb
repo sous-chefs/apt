@@ -19,7 +19,7 @@
 
 # Build preferences.d file contents
 def build_pref(package_name, pin, pin_priority)
-  preference_content = "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
+  "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
 end
 
 action :add do

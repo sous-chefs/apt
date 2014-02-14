@@ -18,17 +18,17 @@ attribute 'apt/cacher-client/restrict_environment',
           :default => 'false'
 
 attribute 'apt/cacher_port',
-         :description => 'Default listen port for the caching server',
-         :default => '3142'
+          :description => 'Default listen port for the caching server',
+          :default => '3142'
 
 attribute 'apt/cacher_interface',
-         :description => 'Default listen interface for the caching server',
-         :default => nil
+          :description => 'Default listen interface for the caching server',
+          :default => nil
 
 attribute 'apt/key_proxy',
-         :description => 'Passed as the proxy passed to GPG for the apt_repository resource',
-         :default => ''
+          :description => 'Passed as the proxy passed to GPG for the apt_repository resource',
+          :default => ''
 
 attribute 'apt/caching_server',
-         :description => 'Set this to true if the node is a caching server',
-         :default => 'false'
+          :description => 'Set this to true if the node is a caching server',
+          :default => 'false'
