@@ -1,5 +1,5 @@
 name              'apt'
-maintainer        'Opscode, Inc.'
+maintainer        'Chef Software, Inc.'
 maintainer_email  'cookbooks@opscode.com'
 license           'Apache 2.0'
 description       'Configures apt and apt services and LWRPs for managing apt repositories and preferences'
