@@ -44,3 +44,24 @@ default['apt']['unattended_upgrades']['mail_only_on_error'] = true
 default['apt']['unattended_upgrades']['remove_unused_dependencies'] = false
 default['apt']['unattended_upgrades']['automatic_reboot'] = false
 default['apt']['unattended_upgrades']['dl_limit'] = nil
+
+default['apt']['mirrors']['preferred'] = :us
+default['apt']['mirrors']['ubuntu'] = {
+    :us => 'us.archive.ubuntu.com',
+    :de => 'de.archive.ubuntu.com',
+    :it => 'it.archive.ubuntu.com'
+}
+default['apt']['mirrors']['debian'] = {
+    :us => 'ftp.us.debian.org',
+    :de => 'ftp.de.debian.org',
+    :it => 'ftp.it.debian.org'
+}
+default['apt']['version_to_codename']['ubuntu'] = {
+    '10.04' => 'lucid',
+    '12.04' => 'precise',
+    '13.04' => 'raring',
+    '13.10' => 'saucy'
+}
+default['apt']['version_to_codename']['debian'] = {
+    '7.20' => 'wheezy'
+}

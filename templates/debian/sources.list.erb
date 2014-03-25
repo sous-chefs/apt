@@ -1,0 +1,8 @@
+deb http://<%= @mirror %>/debian <%= @codename %> main
+deb-src http://<%= @mirror %>/debian <%= @codename %> main
+
+deb http://<%= @mirror %>/debian <%= @codename %>-updates main
+deb-src http://<%= @mirror %>/debian <%= @codename %>-updates main
+
+deb http://security.debian.org/ <%= @codename %>/updates main
+deb-src http://security.debian.org/ <%= @codename %>/updates main

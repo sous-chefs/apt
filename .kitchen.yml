@@ -56,3 +56,8 @@ suites:
         unattended_upgrades:
           enabled: true
 
+  - name: sources_list
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::sources_list]
+
