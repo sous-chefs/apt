@@ -1,0 +1,17 @@
+# Managed by Chef
+
+deb <%= @archive_url %> <%= @codename %> <%= @components %>
+<% if @sources -%>deb-src <%= @archive_url %> <%= @codename %> <%= @components %><% end -%>
+
+deb <%= @security_url %> <%= @codename %>/updates <%= @components %>
+<% if @sources -%>deb-src <%= @security_url %> <%= @codename %>/updates <%= @components %><% end -%>
+
+<% if @updates -%>
+deb <%= @archive_url %> <%= @codename %>-updates <%= @components %>
+<% if @sources -%>deb-src <%= @archive_url %> <%= @codename %>-updates <%= @components %><% end -%>
+<% end -%>
+
+<% if @backports -%>
+deb <%= @archive_url %> <%= @codename %>-backports <%= @components %>
+<% if @sources -%>deb-src <%= @archive_url %> <%= @codename %>-backports <%= @components %><% end -%>
+<% end -%>

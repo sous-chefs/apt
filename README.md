@@ -83,6 +83,9 @@ Installs and configures the `unattended-upgrades` package to provide automatic p
 
 To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy). 
 
+### sources_list
+
+Configure the `/etc/apt/sources.list` file according to the attributes set in `['apt']['sources_list']`.
 
 Attributes
 ----------
@@ -116,6 +119,31 @@ Attributes
 * `['apt']['unattended_upgrades']['remove_unused_dependencies']` Do automatic removal of new unused dependencies after the upgrade. Defaults to false.
 * `['apt']['unattended_upgrades']['automatic_reboot']` — Automatically reboots *without confirmation* if a restart is required after the upgrade. Defaults to false.
 * `['apt']['unattended_upgrades']['dl_limit']` — Limits the bandwidth used by apt to download packages. Value given as an integer in kb/sec. Defaults to nil (no limit).
+
+### sources.list
+
+* `['apt']['sources_list']['include_source_packages']` — Add deb-src entries. Defaults to true.
+* `['apt']['sources_list']['enable_cdn']` — Use a Content Distribution Network to automatically use mirrors nears you. Default to false.
+
+#### sources.list for Ubuntu
+
+* `['apt']['sources_list']['ubuntu']['cdn_url']` — The URL to use when CDN is enabled.
+* `['apt']['sources_list']['ubuntu']['archive_url']` — The URL of the default Ubuntu mirror.
+* `['apt']['sources_list']['ubuntu']['security_url']` — The URL of the default Ubuntu security mirror.
+* `['apt']['sources_list']['ubuntu']['partners_url']` — The URL of the default Ubuntu partner mirror.
+* `['apt']['sources_list']['ubuntu']['components']` — The components to enable for Ubuntu repositories. Defaults to 'main restricted universe multiverse'.
+* `['apt']['sources_list']['ubuntu']['enable_updates']` — Enables the Ubuntu updates repository. Defaults to true.
+* `['apt']['sources_list']['ubuntu']['enable_backports'] ` — Enables the Ubuntu backports repository. Defaults to true.
+* `['apt']['sources_list']['ubuntu']['enable_partners']` — Enables the Ubuntu partners repository. Defaults to false.
+
+#### source.list for Debian
+
+* `['apt']['sources_list']['debian']['cdn_url']` — The URL to use when CDN is enabled.
+* `['apt']['sources_list']['debian']['archive_url']` — The URL of the default Debian mirror.
+* `['apt']['sources_list']['debian']['security_url']` — The URL of the default Debian security mirror.
+* `['apt']['sources_list']['debian']['components']` — The components to enable for Debian repositories. Defaults to 'main contrib non-free'.
+* `['apt']['sources_list']['debian']['enable_updates']` — Enables the Debian updates repository. Defaults to true.
+* `['apt']['sources_list']['debian']['enable_backports']` — Enables the Debian backports repository. Defaults to false.
 
 Libraries
 ---------

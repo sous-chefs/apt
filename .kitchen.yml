@@ -60,3 +60,15 @@ suites:
         unattended_upgrades:
           enable: true
 
+  - name: sources_list
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::sources_list]
+    attributes:
+      apt:
+        sources_list:
+          enable_cdn: true
+          ubuntu:
+            enable_partners: true
+          debian:
+            enable_backports: true
