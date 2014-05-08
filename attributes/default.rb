@@ -23,6 +23,7 @@ default['apt']['cacher_interface'] = nil
 default['apt']['cacher_port'] = 3142
 default['apt']['caching_server'] = false
 default['apt']['compiletime'] = false
+default['apt']['compile_time_update'] = false
 default['apt']['key_proxy'] = ''
 default['apt']['cache_bypass'] = {}
 default['apt']['periodic_update_min_delay'] = 86_400
