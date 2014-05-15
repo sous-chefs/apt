@@ -25,6 +25,15 @@
 
 Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
 
+# If compile_time_update run apt-get update at compile time
+e = execute 'apt-get-update' do
+  command 'apt-get update'
+  ignore_failure true
+  only_if { apt_installed? }
+  action :nothing
+end
+e.run_action(:run) if node['apt']['compile_time_update']
+
 # Run apt-get update to create the stamp file
 execute 'apt-get-update' do
   command 'apt-get update'
