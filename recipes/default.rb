@@ -26,7 +26,7 @@
 Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
 
 execute 'apt-archive-repo' do
-    command 'sed -i -e "s/archive.ubuntu.com\|security.ubuntu.com\|mirrors.digitalocean.com/old-releases.ubuntu.com/g" /etc/apt/sources.list'
+    command 'sed -i -e "s/archive.ubuntu.com\|security.ubuntu.com\|mirrors.digitalocean.com\|mirror.rackspace.com/old-releases.ubuntu.com/g" /etc/apt/sources.list'
     action :nothing
     only_if { node['platform_version'] == '12.10' }
 end.run_action(:run)
