@@ -12,6 +12,8 @@ platforms:
     run_list: apt::default
   - name: ubuntu-13.10
     run_list: apt::default
+  - name: ubuntu-14.0.4
+    run_list: apt::default
 
 suites:
   - name: default
@@ -44,3 +46,13 @@ suites:
     run_list:
       - recipe[minitest-handler]
       - recipe[apt_test::lwrps]
+
+  - name: unattended-upgrades
+    run_list:
+      - recipe[minitest-handler]
+      - recipe[apt_test::unattended-upgrades]
+    attributes:
+      apt:
+        unattended_upgrades:
+          enabled: true
+
