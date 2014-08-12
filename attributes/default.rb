@@ -27,3 +27,16 @@ default['apt']['compile_time_update'] = false
 default['apt']['key_proxy'] = ''
 default['apt']['cache_bypass'] = {}
 default['apt']['periodic_update_min_delay'] = 86_400
+default['apt']['unattended_upgrades']['enable'] = false
+default['apt']['unattended_upgrades']['update_package_lists'] = true
+# this needs a good default
+default['apt']['unattended_upgrades']['allowed_origins'] = []
+default['apt']['unattended_upgrades']['package_blacklist'] = []
+default['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg'] = false
+default['apt']['unattended_upgrades']['minimal_steps'] = false
+default['apt']['unattended_upgrades']['install_on_shutdown'] = false
+default['apt']['unattended_upgrades']['mail'] = nil
+default['apt']['unattended_upgrades']['mail_only_on_error'] = true
+default['apt']['unattended_upgrades']['remove_unused_dependencies'] = false
+default['apt']['unattended_upgrades']['automatic_reboot'] = false
+default['apt']['unattended_upgrades']['dl_limit'] = nil
