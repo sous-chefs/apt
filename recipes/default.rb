@@ -25,29 +25,24 @@
 
 Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
 
-# If compile_time_update run apt-get update at compile time
+# For other recipes to call to force an update
 e = execute 'apt-get-update' do
   command 'apt-get update'
   ignore_failure true
   only_if { apt_installed? }
   action :nothing
 end
-e.run_action(:run) if node['apt']['compile_time_update']
+# If compile_time_update run apt-get update at compile time
+if node['apt']['compile_time_update'] && ! ::File.exists?('/var/lib/apt/periodic/update-success-stamp')
+  e.run_action(:run)
+end
 
 # Run apt-get update to create the stamp file
-execute 'apt-get-update' do
+execute 'apt-get-update (first run)' do
   command 'apt-get update'
   ignore_failure true
   only_if { apt_installed? }
   not_if { ::File.exists?('/var/lib/apt/periodic/update-success-stamp') }
-end
-
-# For other recipes to call to force an update
-execute 'apt-get update' do
-  command 'apt-get update'
-  ignore_failure true
-  only_if { apt_installed? }
-  action :nothing
 end
 
 # Automatically remove packages that are no longer needed for dependencies
