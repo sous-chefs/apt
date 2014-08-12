@@ -99,14 +99,14 @@ Resources/Providers
 This LWRP provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
 
 #### Actions
-- :add: creates a repository file and builds the repository listing
+- :add: creates a repository file and builds the repository listing (default)
 - :remove: removes the repository file
 
 #### Attribute Parameters
 - repo_name: name attribute. The name of the channel to discover
 - uri: the base of the Debian distribution
 - distribution: this is usually your release's codename...ie something like `karmic`, `lucid` or `maverick`
-- components: package groupings..when it doubt use `main`
+- components: package groupings... when in doubt use `main`
 - arch: constrain package to a particular arch like `i386`, `amd64` or even `armhf` or `powerpc`. Defaults to nil.
 - trusted: treat all packages from this repository as authenticated regardless of signature
 - deb_src: whether or not to add the repository as a source repo as well - value can be `true` or `false`, default `false`.
