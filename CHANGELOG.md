@@ -2,6 +2,10 @@ apt Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the apt cookbook.
 
+v2.5.1 (2014-08-14)
+-------------------
+- fix breakage introduced in apt 2.5.0
+
 v2.5.0 (2014-08-12)
 -------------------
 - Add unattended-upgrades recipe
