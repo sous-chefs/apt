@@ -44,6 +44,14 @@ execute 'apt-get-update' do
   not_if { ::File.exists?('/var/lib/apt/periodic/update-success-stamp') }
 end
 
+# For other recipes to call to force an update
+execute 'apt-get update' do
+  command 'apt-get update'
+  ignore_failure true
+  only_if { apt_installed? }
+  action :nothing
+end
+
 # Automatically remove packages that are no longer needed for dependencies
 execute 'apt-get autoremove' do
   command 'apt-get -y autoremove'
