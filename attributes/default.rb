@@ -30,8 +30,9 @@ default['apt']['periodic_update_min_delay'] = 86_400
 default['apt']['unattended_upgrades']['enable'] = false
 default['apt']['unattended_upgrades']['update_package_lists'] = true
 # this needs a good default
+codename = node.attribute?('lsb') ? node['lsb']['codename'] : 'notlinux'
 default['apt']['unattended_upgrades']['allowed_origins'] = [
-  "#{node['platform'].capitalize} #{node['lsb']['codename']}-security"
+  "#{node['platform'].capitalize} #{codename}"
 ]
 default['apt']['unattended_upgrades']['package_blacklist'] = []
 default['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg'] = false
