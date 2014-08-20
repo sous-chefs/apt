@@ -83,6 +83,7 @@ end
 
 # build repo file contents
 def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
+  uri = '"' + uri + '"' if uri.match(' ')
   components = components.join(' ') if components.respond_to?(:join)
   repo_options = []
   repo_options << "arch=#{arch}" if arch
