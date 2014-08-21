@@ -2,7 +2,7 @@
 Unattended-Upgrade::Allowed-Origins {
 <% unless node['apt']['unattended_upgrades']['allowed_origins'].empty? -%>
 <% node['apt']['unattended_upgrades']['allowed_origins'].each do |origin| -%>
-	<%= origin %>
+	"<%= origin %>";
 <% end -%>
 <% end -%>
 };
@@ -12,7 +12,7 @@ Unattended-Upgrade::Allowed-Origins {
 Unattended-Upgrade::Package-Blacklist {
 <% unless node['apt']['unattended_upgrades']['package_blacklist'].empty? -%>
 <% node['apt']['unattended_upgrades']['package_blacklist'].each do |package| -%>
-	<%= package %>
+	"<%= package %>";
 <% end -%>
 <% end -%>
 };
