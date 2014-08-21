@@ -2,6 +2,10 @@ apt Cookbook CHANGELOG
 ======================
 This file is used to list changes made in each version of the apt cookbook.
 
+v2.5.3 (2014-08-14)
+-------------------
+- #87 - Improve default settings, account for non-linux platforms
+
 v2.5.2 (2014-08-14)
 -------------------
 - Fully restore fully restore 2.3.10 behaviour
