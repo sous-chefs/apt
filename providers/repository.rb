@@ -101,7 +101,7 @@ def get_ppa_key(ppa_owner, ppa_repo)
   # configurable to provide some sort of workaround if api 1.0 ceases to exist.
   # See https://launchpad.net/+apidoc/
   launchpad_ppa_api = "https://launchpad.net/api/#{node['apt']['launchpad_api_version']}/~%s/+archive/%s"
-  default_keyserver = "keyserver.ubuntu.com"
+  default_keyserver = 'keyserver.ubuntu.com'
 
   require 'open-uri'
   api_query = sprintf("#{launchpad_ppa_api}/signing_key_fingerprint", ppa_owner, ppa_repo)
@@ -120,11 +120,11 @@ end
 
 # fetch ppa key, return full repo url
 def get_ppa_url(ppa)
-  repo_schema       = "http://ppa.launchpad.net/%s/%s/ubuntu"
+  repo_schema       = 'http://ppa.launchpad.net/%s/%s/ubuntu'
 
   # ppa:user/repo logic ported from
   # http://bazaar.launchpad.net/~ubuntu-core-dev/software-properties/main/view/head:/softwareproperties/ppa.py#L86
-  return false unless ppa.start_with?("ppa:")
+  return false unless ppa.start_with?('ppa:')
 
   ppa_name = ppa.split(':')[1]
   ppa_owner = ppa_name.split('/')[0]
@@ -160,12 +160,12 @@ action :add do
     notifies :run, 'execute[apt-cache gencaches]', :immediately
   end
 
-  if new_resource.uri.start_with?("ppa:")
+  if new_resource.uri.start_with?('ppa:')
     # build ppa repo file
     repository = build_repo(
       get_ppa_url(new_resource.uri),
       new_resource.distribution,
-      "main",
+      'main',
       new_resource.trusted,
       new_resource.arch,
       new_resource.deb_src
