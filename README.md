@@ -126,15 +126,12 @@ apt_repository 'zenoss' do
 end
 ```
 
-Add the Nginx PPA, grabbing the key from keyserver:
+Add the Nginx PPA, autodetect the key and repository url:
 
 ```ruby
 apt_repository 'nginx-php' do
-  uri          'http://ppa.launchpad.net/nginx/php5/ubuntu'
+  uri          'ppa:nginx/stable'
   distribution node['lsb']['codename']
-  components   ['main']
-  keyserver    'keyserver.ubuntu.com'
-  key          'C300EE8C'
 end
 ```
 
