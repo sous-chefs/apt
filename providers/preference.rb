@@ -39,7 +39,7 @@ action :add do
     action :nothing
   end
 
-  preference_file = file "/etc/apt/preferences.d/#{new_resource.name}" do
+  preference_file = file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
     owner 'root'
     group 'root'
     mode 00644
