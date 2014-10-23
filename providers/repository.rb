@@ -26,11 +26,11 @@ end
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   execute "install-key #{key}" do
-    if !node['apt']['key_proxy'].empty?
-      command "apt-key adv --keyserver-options http-proxy=#{node['apt']['key_proxy']} --keyserver hkp://#{keyserver}:80 --recv #{key}"
-    else
-      command "apt-key adv --keyserver #{keyserver} --recv #{key}"
-    end
+    options = []
+    keyserver = node['apt']['keyserver_port'].nil? ? keyserver : "hkp://#{keyserver}:#{node['apt']['keyserver_port']}"
+    options << "--keyserver #{keyserver} --recv #{key}"
+    options << "--keyserver-options http-proxy=#{node['apt']['key_proxy']}" unless node['apt']['key_proxy'].nil?
+    command "apt-key adv #{options.join(' ')}"
     action :run
     not_if do
       extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
