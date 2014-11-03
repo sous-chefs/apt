@@ -41,6 +41,9 @@ action :add do
 
   preference_old_file = file "/etc/apt/preferences.d/#{new_resource.name}" do
     action :nothing
+    if ::File.exists?("/etc/apt/preferences.d/#{new_resource.name}")
+      Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
+    end
   end
 
   preference_file = file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
