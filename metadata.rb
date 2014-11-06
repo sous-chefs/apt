@@ -21,6 +21,10 @@ attribute 'apt/cacher_port',
           :description => 'Default listen port for the caching server',
           :default => '3142'
 
+attribute 'apt/cacher_ssl_support',
+          :description => 'The caching server supports upstream SSL servers via CONNECT',
+          :default => 'false'
+
 attribute 'apt/cacher_interface',
           :description => 'Default listen interface for the caching server',
           :default => nil
