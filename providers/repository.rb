@@ -33,9 +33,17 @@ def install_key_from_keyserver(key, keyserver)
     end
     action :run
     not_if do
-      extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
+      key_present = extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
         fingerprint.end_with?(key.upcase)
       end
+
+      return (key_present and key_is_valid('apt-key list', key.upcase))
+    end
+  end
+
+  ruby_block "validate-key #{key}" do
+    block do
+      raise "The key #{key} is no longer valid and cannot be used for an apt repository." unless key_is_valid('apt-key list', key.upcase)
     end
   end
 end
@@ -49,6 +57,25 @@ def extract_fingerprints_from_cmd(cmd)
       z[1].split.join
     end
   end.compact
+end
+
+# determine whether apt thinks the key is still valid
+def key_is_valid(cmd, key)
+  valid = true
+
+  so = Mixlib::ShellOut.new(cmd)
+  so.run_command
+  so.stdout.split(/\n/).map do |t|
+    if t.match(/^\/#{key}.*\[expired: .*\]$/)
+      Chef::Log.debug "Found expired key: #{t}"
+      valid = false
+      break
+    else
+    end
+  end
+
+  Chef::Log.debug "key #{key} validity: #{valid}"
+  valid
 end
 
 # install apt key from URI
@@ -67,6 +94,12 @@ def install_key_from_uri(uri)
       cookbook new_resource.cookbook
       mode 00644
       action :create
+    end
+
+    ruby_block "validate-key #{cached_keyfile}" do
+      block do
+        raise "The key #{cached_keyfile} is no longer valid and cannot be used for an apt repository." unless key_is_valid("gpg #{cached_keyfile}", '')
+      end
     end
   end
 
