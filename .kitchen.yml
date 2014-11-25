@@ -54,5 +54,5 @@ suites:
     attributes:
       apt:
         unattended_upgrades:
-          enabled: true
+          enable: true
 
