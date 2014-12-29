@@ -1,6 +1,9 @@
 apt Cookbook CHANGELOG
 ======================
-This file is used to list changes made in each version of the apt cookbook.
+
+v2.6.1 (2014-12-29)
+-------------------
+- Remove old preference files without .pref extension from previous versions
 
 v2.6.0 (2014-09-09)
 -------------------
