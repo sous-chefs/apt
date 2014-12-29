@@ -39,6 +39,13 @@ action :add do
     action :nothing
   end
 
+  preference_old_file = file "/etc/apt/preferences.d/#{new_resource.name}" do
+    action :nothing
+    if ::File.exists?("/etc/apt/preferences.d/#{new_resource.name}")
+      Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
+    end
+  end
+
   preference_file = file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
     owner 'root'
     group 'root'
@@ -50,6 +57,8 @@ action :add do
   preference_dir.run_action(:create)
   # write out the preference file, replace it if it already exists
   preference_file.run_action(:create)
+  # remove preference files from previous apt cookbook version
+  preference_old_file.run_action(:delete)
 end
 
 action :remove do
