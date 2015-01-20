@@ -36,6 +36,7 @@ if node['apt']
     cacher.default.ipaddress = node['apt']['cacher_ipaddress']
     cacher.default.apt.cacher_port = node['apt']['cacher_port']
     cacher.default.apt_cacher_interface = node['apt']['cacher_interface']
+    cacher.default.apt.cacher_ssl_support = node['apt']['cacher_ssl_support']
     servers << cacher
   elsif node['apt']['caching_server']
     node.override['apt']['compiletime'] = false
