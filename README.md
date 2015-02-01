@@ -1,11 +1,11 @@
 apt Cookbook
 ============
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/opscode-cookbooks/apt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Cookbook Version](http://img.shields.io/cookbook/v/apt.svg)][cookbook]
-[![Build Status](http://img.shields.io/travis/opscode-cookbooks/apt.svg)][travis]
+[![Cookbook Version](https://img.shields.io/cookbook/v/apt.svg)][cookbook]
+[![Build Status](https://img.shields.io/travis/opscode-cookbooks/apt.svg)][travis]
 
 [cookbook]: https://community.opscode.com/cookbooks/apt
-[travis]: http://travis-ci.org/opscode-cookbooks/apt
+[travis]: https://travis-ci.org/opscode-cookbooks/apt
 
 This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a LWRP for managing APT repositories in /etc/apt/sources.list.d as well as an LWRP for pinning packages via /etc/apt/preferences.d.
 
