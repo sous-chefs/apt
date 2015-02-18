@@ -2,7 +2,7 @@
 # Cookbook Name:: apt_test
 # Recipe:: lwrps
 #
-# Copyright 2012, Opscode, Inc.
+# Copyright 2012, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@
 include_recipe 'apt'
 
 # Apt Repository
-apt_repository 'opscode' do
-  uri 'http://apt.opscode.com'
+apt_repository 'chef' do
+  uri 'http://apt.chef.io'
   components ['main']
   distribution "#{node['lsb']['codename']}-0.10"
   key '2940ABA983EF826A'

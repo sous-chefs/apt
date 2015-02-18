@@ -43,7 +43,7 @@ v2.3.10 (2014-04-23)
 v2.3.8 (2014-02-14)
 -------------------
 ### Bug
-- **[COOK-4287](https://tickets.opscode.com/browse/COOK-4287)** - Cleanup the Kitchen
+- **[COOK-4287](https://tickets.chef.io/browse/COOK-4287)** - Cleanup the Kitchen
 
 
 v2.3.6
@@ -73,32 +73,32 @@ v2.3.2
 v2.3.0
 ------
 ### Bug
-- **[COOK-3812](https://tickets.opscode.com/browse/COOK-3812)** - Add a way to bypass the apt existence check
+- **[COOK-3812](https://tickets.chef.io/browse/COOK-3812)** - Add a way to bypass the apt existence check
 
 ### Improvement
-- **[COOK-3567](https://tickets.opscode.com/browse/COOK-3567)** - Allow users to bypass apt-cache via attributes
+- **[COOK-3567](https://tickets.chef.io/browse/COOK-3567)** - Allow users to bypass apt-cache via attributes
 
 
 v2.2.1
 ------
 ### Improvement
-- **[COOK-664](https://tickets.opscode.com/browse/COOK-664)** - Check platform before running apt-specific commands
+- **[COOK-664](https://tickets.chef.io/browse/COOK-664)** - Check platform before running apt-specific commands
 
 
 v2.2.0
 ------
 ### Bug
-- **[COOK-3707](https://tickets.opscode.com/browse/COOK-3707)** - multiple nics confuse apt::cacher-client
+- **[COOK-3707](https://tickets.chef.io/browse/COOK-3707)** - multiple nics confuse apt::cacher-client
 
 v2.1.2
 ------
 ### Improvement
-- **[COOK-3551](https://tickets.opscode.com/browse/COOK-3551)** - Allow user to set up a trusted APT repository
+- **[COOK-3551](https://tickets.chef.io/browse/COOK-3551)** - Allow user to set up a trusted APT repository
 
 v2.1.1
 ------
 ### Bug
-- **[COOK-1856](https://tickets.opscode.com/browse/COOK-1856)** - Match GPG keys without case sensitivity
+- **[COOK-1856](https://tickets.chef.io/browse/COOK-1856)** - Match GPG keys without case sensitivity
 
 v2.1.0
 ------
