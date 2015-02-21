@@ -29,7 +29,7 @@ package 'unattended-upgrades' do
 end
 
 if node['apt']['unattended_upgrades']['mail']
-  package 'mailutils'
+  package 'bsd-mailx'
 end
 
 template '/etc/apt/apt.conf.d/20auto-upgrades' do
