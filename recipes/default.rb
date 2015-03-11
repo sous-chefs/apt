@@ -30,6 +30,7 @@ first_run_file = File.join(Chef::Config[:file_cache_path], "apt_compile_time_upd
 file '/var/lib/apt/periodic/update-success-stamp' do
   owner 'root'
   group 'root'
+  only_if { apt_installed? }
   action :nothing
 end
 
