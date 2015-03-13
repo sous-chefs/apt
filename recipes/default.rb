@@ -75,6 +75,7 @@ end
 package 'update-notifier-common' do
   notifies :run, 'execute[apt-get-update]', :immediately
   only_if { apt_installed? }
+  ignore_failure true
 end
 
 execute 'apt-get-update-periodic' do
