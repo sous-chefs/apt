@@ -41,6 +41,11 @@ if node['apt']['compile_time_update'] && ( !::File.exist?('/var/lib/apt/periodic
   e.run_action(:run)
 end
 
+# Updates 'apt-get update' timestamp after each update success
+cookbook_file '/etc/apt/apt.conf.d/30updatetimestamp' do
+    source '30updatetimestamp'
+end
+
 # Run apt-get update to create the stamp file
 execute 'apt-get-update' do
   command 'apt-get update'
@@ -69,12 +74,6 @@ execute 'apt-get autoclean' do
   command 'apt-get -y autoclean'
   only_if { apt_installed? }
   action :nothing
-end
-
-# provides /var/lib/apt/periodic/update-success-stamp on apt-get update
-package 'update-notifier-common' do
-  notifies :run, 'execute[apt-get-update]', :immediately
-  only_if { apt_installed? }
 end
 
 execute 'apt-get-update-periodic' do
