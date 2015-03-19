@@ -25,10 +25,10 @@
 
 Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
 
-first_run_file = File.join(Chef::Config[:file_cache_path], "apt_compile_time_update_first_run")
+first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run')
 
 # If compile_time_update run apt-get update at compile time
-if node['apt']['compile_time_update'] && ( !::File.exist?('/var/lib/apt/periodic/update-success-stamp') || !::File.exist?(first_run_file) )
+if node['apt']['compile_time_update'] && (!::File.exist?('/var/lib/apt/periodic/update-success-stamp') || !::File.exist?(first_run_file))
   e = bash 'apt-get-update at compile time' do
     code <<-EOH
       apt-get update
@@ -82,16 +82,16 @@ execute 'apt-get-update-periodic' do
   ignore_failure true
   only_if do
     apt_installed? &&
-    ::File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
-    ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - node['apt']['periodic_update_min_delay']
+      ::File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
+      ::File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - node['apt']['periodic_update_min_delay']
   end
 end
 
-%w{/var/cache/local /var/cache/local/preseeding}.each do |dirname|
+%w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
   directory dirname do
     owner 'root'
     group 'root'
-    mode  00755
+    mode 00755
     action :create
     only_if { apt_installed? }
   end

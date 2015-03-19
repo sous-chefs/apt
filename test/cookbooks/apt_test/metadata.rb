@@ -1,3 +1,4 @@
+# rubocop:disable SingleSpaceBeforeFirstArg
 name              'apt_test'
 maintainer        'Chef Software, Inc.'
 maintainer_email  'cookbooks@chef.io'

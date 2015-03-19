@@ -30,6 +30,7 @@ end
 
 if node['apt']['unattended_upgrades']['mail']
   package 'mailutils'
+  action :install
 end
 
 template '/etc/apt/apt.conf.d/20auto-upgrades' do
