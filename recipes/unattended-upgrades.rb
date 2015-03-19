@@ -28,8 +28,8 @@ package 'unattended-upgrades' do
   action :install
 end
 
-if node['apt']['unattended_upgrades']['mail']
-  package 'mailutils'
+package 'mailutils' do
+  only_if { node['apt']['unattended_upgrades']['mail'] }
 end
 
 template '/etc/apt/apt.conf.d/20auto-upgrades' do

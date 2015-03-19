@@ -37,5 +37,4 @@ describe 'apt_test::cacher-ng-client' do
   it 'installed colordiff' do
     package('colordiff').must_be_installed
   end
-
 end

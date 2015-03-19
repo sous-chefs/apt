@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'apt::cacher-ng' do
-
   context 'server' do
     let(:chef_run) do
       runner = ChefSpec::Runner.new

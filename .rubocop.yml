@@ -1,7 +1,17 @@
 AllCops:
-  Excludes:
+  Exclude:
     - vendor/**
+    - metadata.rb
+    - Guardfile
+    - test/cookbooks/apt_test/metadata.rb
 
+# Disable ABCSize because it doesn't fit well with resources
+AbcSize:
+  Enabled: false
+AssignmentInCondition:
+  Enabled: false
+ClassAndModuleChildren:
+  Enabled: false
 ClassLength:
   Enabled: false
 CyclomaticComplexity:
@@ -10,16 +20,17 @@ Documentation:
   Enabled: false
 Encoding:
   Enabled: false
+FileName:
+  Enabled: false
 HashSyntax:
   Enabled: false
 LineLength:
   Enabled: false
 MethodLength:
   Enabled: false
-TrailingComma:
-  Enabled: false
-
-AssignmentInCondition:
-  Enabled: false
 ParameterLists:
+  Enabled: false
+# StringLiterals:
+#   EnforcedStyle: double_quotes
+TrailingComma:
   Enabled: false

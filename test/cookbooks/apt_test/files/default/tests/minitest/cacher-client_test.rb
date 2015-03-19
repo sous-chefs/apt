@@ -25,5 +25,4 @@ describe 'apt_test::cacher-client' do
   it 'does not create 01proxy' do
     file('/etc/apt/apt.conf.d/01proxy').wont_exist
   end
-
 end

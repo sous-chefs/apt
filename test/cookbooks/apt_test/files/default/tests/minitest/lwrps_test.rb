@@ -22,11 +22,11 @@ require File.expand_path('../support/helpers', __FILE__)
 describe 'apt_test::lwrps' do
   include Helpers::AptTest
 
-  it 'creates the Chef Software sources.list' do
+  it 'creates the JuJu sources.list' do
     file('/etc/apt/sources.list.d/juju.list').must_exist
   end
 
-  it 'adds the Chef Software package signing key' do
+  it 'adds the JuJu package signing key' do
     chef_key = shell_out('apt-key list')
     assert chef_key.stdout.include?('Launchpad Ensemble PPA')
   end
