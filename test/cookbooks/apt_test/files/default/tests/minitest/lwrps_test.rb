@@ -22,18 +22,13 @@ require File.expand_path('../support/helpers', __FILE__)
 describe 'apt_test::lwrps' do
   include Helpers::AptTest
 
-  it 'creates the Chef Software sources.list' do
-    file('/etc/apt/sources.list.d/chef.list').must_exist
+  it 'creates the nginx sources.list' do
+    file('/etc/apt/sources.list.d/nginx.list').must_exist
   end
 
-  it 'adds the Chef Software package signing key' do
+  it 'adds the nginx package signing key' do
     chef_key = shell_out('apt-key list')
-    assert chef_key.stdout.include?('Chef Software Packages <packages@chef.io>')
-  end
-
-  it 'creates the correct pinning preferences for chef' do
-    pinning_prefs = 'Package: chef\nPin: version 10.16.2-1'
-    file('/etc/apt/preferences.d/chef').must_match(/#{pinning_prefs}/)
+    assert chef_key.stdout.include?('nginx signing key <signing-key@nginx.com>')
   end
 
   it 'creates a repo with an architecture' do
@@ -43,6 +38,6 @@ describe 'apt_test::lwrps' do
 
   it 'creates the correct pinning preferences with a glob' do
     pinning_prefs = 'Package: \\*\nPin: origin packages.dotdeb.org'
-    file('/etc/apt/preferences.d/dotdeb').must_match(/#{pinning_prefs}/)
+    file('/etc/apt/preferences.d/dotdeb.pref').must_match(/#{pinning_prefs}/)
   end
 end

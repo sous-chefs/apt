@@ -23,6 +23,7 @@ def whyrun_supported?
   true
 end
 
+# rubocop:disable AbcSize
 # install apt key from keyserver
 def install_key_from_keyserver(key, keyserver)
   execute "install-key #{key}" do
@@ -39,6 +40,7 @@ def install_key_from_keyserver(key, keyserver)
     end
   end
 end
+# rubocop:enable AbcSize
 
 # run command and extract gpg ids
 def extract_fingerprints_from_cmd(cmd)
@@ -51,6 +53,7 @@ def extract_fingerprints_from_cmd(cmd)
   end.compact
 end
 
+# rubocop:disable AbcSize
 # install apt key from URI
 def install_key_from_uri(uri)
   key_name = uri.split(/\//).last
@@ -80,6 +83,7 @@ def install_key_from_uri(uri)
     end
   end
 end
+# rubocop:enable AbcSize
 
 # build repo file contents
 def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
@@ -95,6 +99,7 @@ def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
   repo
 end
 
+# rubocop:disable AbcSize
 def get_ppa_key(ppa_owner, ppa_repo)
   # Launchpad has currently only one stable API which is marked as EOL April 2015.
   # The new api in devel still uses the same api call for +archive, so I made the version
@@ -104,7 +109,7 @@ def get_ppa_key(ppa_owner, ppa_repo)
   default_keyserver = 'keyserver.ubuntu.com'
 
   require 'open-uri'
-  api_query = sprintf("#{launchpad_ppa_api}/signing_key_fingerprint", ppa_owner, ppa_repo)
+  api_query = format("#{launchpad_ppa_api}/signing_key_fingerprint", ppa_owner, ppa_repo)
   begin
     key_id = open(api_query).read.delete('"')
   rescue OpenURI::HTTPError => e
@@ -117,6 +122,7 @@ def get_ppa_key(ppa_owner, ppa_repo)
 
   install_key_from_keyserver(key_id, default_keyserver)
 end
+# rubocop:enable AbcSize
 
 # fetch ppa key, return full repo url
 def get_ppa_url(ppa)
@@ -133,7 +139,7 @@ def get_ppa_url(ppa)
 
   get_ppa_key(ppa_owner, ppa_repo)
 
-  sprintf(repo_schema, ppa_owner, ppa_repo)
+  format(repo_schema, ppa_owner, ppa_repo)
 end
 
 action :add do
@@ -194,7 +200,7 @@ action :add do
 end
 
 action :remove do
-  if ::File.exists?("/etc/apt/sources.list.d/#{new_resource.name}.list")
+  if ::File.exist?("/etc/apt/sources.list.d/#{new_resource.name}.list")
     Chef::Log.info "Removing #{new_resource.name} repository from /etc/apt/sources.list.d/"
     file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
       action :delete

@@ -17,9 +17,11 @@
 # limitations under the License.
 #
 
-class ::Chef::Recipe
-  include ::Apt
+# rubocop:disable ClassAndModuleChildren
+class Chef::Recipe
+  include Apt
 end
+# rubocop:enable ClassAndModuleChildren
 
 # remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
 # these are leftover from preseed installs

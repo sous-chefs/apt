@@ -21,10 +21,9 @@ If your Chef version is earlier than 10.16.4, use version 1.7.0 of this cookbook
 ### Platform
 Please refer to the [TESTING file](TESTING.md) to see the currently (and passing) tested platforms. The release was tested on:
 
-* Ubuntu 10.04
 * Ubuntu 12.04
-* Ubuntu 13.04
-* Debian 7.1
+* Ubuntu 14.04
+* Debian 7.8
 * Debian 6.0 (have with manual testing)
 
 May work with or without modification on other Debian derivatives.

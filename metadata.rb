@@ -1,3 +1,4 @@
+# rubocop:disable SingleSpaceBeforeFirstArg
 name              'apt'
 maintainer        'Chef Software, Inc.'
 maintainer_email  'cookbooks@chef.io'
@@ -9,7 +10,7 @@ recipe            'apt', 'Runs apt-get update during compile phase and sets up p
 recipe            'apt::cacher-ng', 'Set up an apt-cacher-ng caching proxy'
 recipe            'apt::cacher-client', 'Client for the apt::cacher-ng caching proxy'
 
-%w{ ubuntu debian }.each do |os|
+%w( ubuntu debian ).each do |os|
   supports os
 end
 

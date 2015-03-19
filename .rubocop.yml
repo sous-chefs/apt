@@ -1,6 +1,7 @@
 AllCops:
-  Excludes:
+  Exclude:
     - vendor/**
+    - .kitchen/**
 
 ClassLength:
   Enabled: false
@@ -23,3 +24,9 @@ AssignmentInCondition:
   Enabled: false
 ParameterLists:
   Enabled: false
+
+Style/FileName:
+  Enabled: false
+RegexpLiteral:
+  Exclude:
+    - '**/Guardfile'
