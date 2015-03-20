@@ -34,6 +34,13 @@ file '/var/lib/apt/periodic/update-success-stamp' do
   action :nothing
 end
 
+file '/var/lib/apt/periodic/update-success-stamp' do
+  owner 'root'
+  group 'root'
+  only_if { apt_installed? }
+  action :nothing
+end
+
 # If compile_time_update run apt-get update at compile time
 if node['apt']['compile_time_update'] && (!::File.exist?('/var/lib/apt/periodic/update-success-stamp') || !::File.exist?(first_run_file))
   e = bash 'apt-get-update at compile time' do
