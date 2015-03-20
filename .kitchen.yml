@@ -4,6 +4,8 @@ driver:
 platforms:
   - name: debian-7.2.0
     run_list: apt::default
+  # - name: debian-8.0
+  #   run_list: apt::default
   - name: ubuntu-10.04
     run_list: apt::default
   - name: ubuntu-12.04
@@ -14,6 +16,8 @@ platforms:
     run_list: apt::default
   - name: ubuntu-14.0.4
     run_list: apt::default
+    # driver:
+    #   box: chef/ubuntu-14.04
 
 suites:
   - name: default
