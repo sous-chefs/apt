@@ -43,4 +43,5 @@ default['apt']['unattended_upgrades']['mail'] = nil
 default['apt']['unattended_upgrades']['mail_only_on_error'] = true
 default['apt']['unattended_upgrades']['remove_unused_dependencies'] = false
 default['apt']['unattended_upgrades']['automatic_reboot'] = false
+default['apt']['unattended_upgrades']['automatic_reboot_time'] = 'now'
 default['apt']['unattended_upgrades']['dl_limit'] = nil
