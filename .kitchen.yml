@@ -14,7 +14,7 @@ platforms:
     run_list: apt::default
   - name: ubuntu-13.10
     run_list: apt::default
-  - name: ubuntu-14.0.4
+  - name: ubuntu-14.04
     run_list: apt::default
     # driver:
     #   box: chef/ubuntu-14.04
@@ -58,5 +58,5 @@ suites:
     attributes:
       apt:
         unattended_upgrades:
-          enabled: true
+          enable: true
 
