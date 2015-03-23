@@ -163,16 +163,17 @@ apt_repository 'nginx-php' do
 end
 ```
 
-Add the Nginx PPA, grab the key from the keyserver, and add source repo:
+Add the JuJu PPA, grab the key from the keyserver, and add source repo:
 
 ```ruby
-apt_repository 'nginx-php' do
-  uri          'http://ppa.launchpad.net/nginx/php5/ubuntu'
-  distribution node['lsb']['codename']
-  components   ['main']
-  keyserver    'keyserver.ubuntu.com'
-  key          'C300EE8C'
-  deb_src      true
+apt_repository 'juju' do
+  uri 'http://ppa.launchpad.net/juju/stable/ubuntu'
+  components ['main']
+  distribution 'trusty'
+  key 'C8068B11'
+  keyserver 'keyserver.ubuntu.com'
+  action :add
+  deb_src true
 end
 ```
 
