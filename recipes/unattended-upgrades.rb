@@ -28,7 +28,7 @@ package 'unattended-upgrades' do
   action :install
 end
 
-package 'mailutils' do
+package 'bsd-mailx' do
   only_if { node['apt']['unattended_upgrades']['mail'] }
 end
 
