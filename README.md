@@ -32,7 +32,7 @@ May work with or without modification on other Debian derivatives.
 
 -------
 ### default
-This recipe installs the `update-notifier-common` package to provide the timestamp file used to only run `apt-get update` if the cache is more than one day old.
+This recipe manually updates the timestamp file used to only run `apt-get update` if the cache is more than one day old.
 
 This recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before managing any `package` resources with Chef.
 
