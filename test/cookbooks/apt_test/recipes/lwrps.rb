@@ -31,7 +31,7 @@ end
 
 # PPA Repository
 apt_repository 'rust' do
-  uri          'ppa:hansjorg/rust'
+  uri 'ppa:hansjorg/rust'
   distribution node['lsb']['codename']
   not_if { node['platform'] == 'debian' }
 end
@@ -66,11 +66,11 @@ apt_preference 'chef' do
 end
 
 # Preference file renaming
-file "/etc/apt/preferences.d/wget" do
+file '/etc/apt/preferences.d/wget' do
   action :touch
 end
 
-apt_preference "wget" do
+apt_preference 'wget' do
   pin 'version 1.13.4-3'
 end
 

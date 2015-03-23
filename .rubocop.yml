@@ -4,6 +4,7 @@ AllCops:
     - metadata.rb
     - Guardfile
     - test/cookbooks/apt_test/metadata.rb
+    - .kitchen/**
 
 # Disable ABCSize because it doesn't fit well with resources
 AbcSize:

@@ -57,7 +57,6 @@ action :add do
     content preference
     action :create
   end
-
 end
 
 action :remove do
