@@ -26,6 +26,11 @@ def initialize(*args)
   @action = :add
 end
 
+state_attrs :glob,
+            :package_name,
+            :pin,
+            :pin_priority
+
 attribute :package_name, :kind_of => String, :name_attribute => true
 attribute :glob, :kind_of => String
 attribute :pin, :kind_of => String
