@@ -36,6 +36,12 @@ describe 'apt_test::lwrps' do
     file('/etc/apt/preferences.d/chef.pref').must_match(/#{pinning_prefs}/)
   end
 
+  it 'correctly handles a ppa: repository' do
+    skip("not on ubuntu") unless node['platform'] == 'ubuntu'
+    rust = 'http://ppa.launchpad.net/hansjorg/rust/ubuntu'
+    file('/etc/apt/sources.list.d/rust.list').must_match(/#{rust}/)
+  end
+
   it 'renames an old preferences file' do
     file('/etc/apt/preferences.d/wget').wont_exist
     file('/etc/apt/preferences.d/wget.pref').must_exist

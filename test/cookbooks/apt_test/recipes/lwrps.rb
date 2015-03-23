@@ -29,6 +29,13 @@ apt_repository 'juju' do
   action :add
 end
 
+# PPA Repository
+apt_repository 'rust' do
+  uri          'ppa:hansjorg/rust'
+  distribution node['lsb']['codename']
+  not_if { node['platform'] == 'debian' }
+end
+
 # Apt Repository with arch
 apt_repository 'cloudera' do
   uri 'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
