@@ -39,7 +39,7 @@ state_attrs :arch,
             :uri
 
 # name of the repo, used for source.list filename
-attribute :repo_name, :kind_of => String, :name_attribute => true, :regex => [ /^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/ ]
+attribute :repo_name, :kind_of => String, :name_attribute => true, :regex => [/^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/]
 attribute :uri, :kind_of => String
 attribute :distribution, :kind_of => String
 attribute :components, :kind_of => Array, :default => []

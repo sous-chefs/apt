@@ -50,6 +50,10 @@ if node['apt']['compile_time_update'] && (!::File.exist?('/var/lib/apt/periodic/
 end
 
 # Updates 'apt-get update' timestamp after each update success
+directory '/etc/apt/apt.conf.d' do
+  recursive true
+end
+
 cookbook_file '/etc/apt/apt.conf.d/15update-stamp' do
   source '15update-stamp'
 end
