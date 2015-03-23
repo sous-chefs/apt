@@ -42,7 +42,7 @@ end
 
 # run command and extract gpg ids
 def extract_fingerprints_from_cmd(cmd)
-  so = Mixlib::ShellOut.new(cmd, env: {"LANG" => "en_US"})
+  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US' })
   so.run_command
   so.stdout.split(/\n/).map do |t|
     if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/)
