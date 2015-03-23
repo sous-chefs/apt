@@ -58,6 +58,15 @@ apt_preference 'chef' do
   pin_priority '700'
 end
 
+# Preference file renaming
+file "/etc/apt/preferences.d/wget" do
+  action :touch
+end
+
+apt_preference "wget" do
+  pin 'version 1.13.4-3'
+end
+
 # COOK-2338
 apt_preference 'dotdeb' do
   glob '*'

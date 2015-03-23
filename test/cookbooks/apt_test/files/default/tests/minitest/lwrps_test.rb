@@ -36,6 +36,11 @@ describe 'apt_test::lwrps' do
     file('/etc/apt/preferences.d/chef.pref').must_match(/#{pinning_prefs}/)
   end
 
+  it 'renames an old preferences file' do
+    file('/etc/apt/preferences.d/wget').wont_exist
+    file('/etc/apt/preferences.d/wget.pref').must_exist
+  end
+
   it 'creates a repo with an architecture' do
     cloudera = 'deb\s+\\[arch=amd64\\] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib'
     file('/etc/apt/sources.list.d/cloudera.list').must_match(/#{cloudera}/)

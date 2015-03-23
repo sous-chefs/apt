@@ -17,56 +17,54 @@
 # limitations under the License.
 #
 
+use_inline_resources if defined?(use_inline_resources)
+
+def whyrun_supported?
+  true
+end
+
 # Build preferences.d file contents
 def build_pref(package_name, pin, pin_priority)
   "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
 end
 
 action :add do
-  new_resource.updated_by_last_action(false)
-
   preference = build_pref(
     new_resource.glob || new_resource.package_name,
     new_resource.pin,
     new_resource.pin_priority
     )
 
-  preference_dir = directory '/etc/apt/preferences.d' do
+  directory '/etc/apt/preferences.d' do
     owner 'root'
     group 'root'
     mode 00755
     recursive true
-    action :nothing
+    action :create
   end
 
-  preference_old_file = file "/etc/apt/preferences.d/#{new_resource.name}" do
-    action :nothing
+  file "/etc/apt/preferences.d/#{new_resource.name}" do
+    action :delete
     if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
       Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
     end
   end
 
-  preference_file = file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+  file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
     owner 'root'
     group 'root'
     mode 00644
     content preference
-    action :nothing
+    action :create
   end
 
-  preference_dir.run_action(:create)
-  # write out the preference file, replace it if it already exists
-  preference_file.run_action(:create)
-  # remove preference files from previous apt cookbook version
-  preference_old_file.run_action(:delete)
 end
 
 action :remove do
-  if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
+  if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
     Chef::Log.info "Un-pinning #{new_resource.name} from /etc/apt/preferences.d/"
-    file "/etc/apt/preferences.d/#{new_resource.name}" do
+    file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
       action :delete
     end
-    new_resource.updated_by_last_action(true)
   end
 end
