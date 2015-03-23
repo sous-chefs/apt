@@ -1,6 +1,12 @@
 apt Cookbook CHANGELOG
 ======================
 
+v2.7.0 (2015-03-23)
+-------------------
+- Support Debian 8.0
+- Filename verification for LWRPs
+- Support SSL enabled apt repositories
+
 v2.6.1 (2014-12-29)
 -------------------
 - Remove old preference files without .pref extension from previous versions
