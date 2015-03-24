@@ -63,7 +63,7 @@ end
 def key_is_valid(cmd, key)
   valid = true
 
-  so = Mixlib::ShellOut.new(cmd)
+  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US' })
   so.run_command
   so.stdout.split(/\n/).map do |t|
     if t.match(/^\/#{key}.*\[expired: .*\]$/)
