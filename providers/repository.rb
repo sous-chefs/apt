@@ -37,7 +37,7 @@ def install_key_from_keyserver(key, keyserver)
         fingerprint.end_with?(key.upcase)
       end
 
-      return (key_present and key_is_valid('apt-key list', key.upcase))
+      key_present && key_is_valid('apt-key list', key.upcase)
     end
   end
 
