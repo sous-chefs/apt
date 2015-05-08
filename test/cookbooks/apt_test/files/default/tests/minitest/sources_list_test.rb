@@ -23,12 +23,12 @@ describe 'apt_test::sources_list' do
   include Helpers::AptTest
 
   describe 'creates sources.list and has proper permissions' do
-    let(:config) { file("/etc/apt/sources.list") }
-    it { config.must_have(:mode, "644") }
-    it { config.must_have(:owner, "root") }
-    it { config.must_have(:group, "root") }
-    it { config.must_match /^# Managed by Chef$/}
-    it { config.must_match /(lucid|precise|trusty|utopic|vivid|wheezy)/}
+    let(:config) { file('/etc/apt/sources.list') }
+    it { config.must_have(:mode, '644') }
+    it { config.must_have(:owner, 'root') }
+    it { config.must_have(:group, 'root') }
+    it { config.must_match(/^# Managed by Chef$/) }
+    it { config.must_match(/(lucid|precise|trusty|utopic|vivid|wheezy)/) }
   end
 
 end

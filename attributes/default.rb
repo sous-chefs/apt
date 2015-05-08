@@ -47,7 +47,6 @@ default['apt']['unattended_upgrades']['automatic_reboot'] = false
 default['apt']['unattended_upgrades']['automatic_reboot_time'] = 'now'
 default['apt']['unattended_upgrades']['dl_limit'] = nil
 
-
 default['apt']['sources_list']['include_source_packages'] = true
 default['apt']['sources_list']['enable_cdn'] = false
 

@@ -1,1 +1,1 @@
-include_recipe "apt::sources_list"
+include_recipe 'apt::sources_list'
