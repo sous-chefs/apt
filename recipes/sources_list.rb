@@ -9,11 +9,11 @@ end
 template_hash = {
   :codename => node['lsb']['codename'],
   :sources => node['apt']['sources_list']['include_source_packages'],
-  :archive_url => node['apt']['sources_list']["#{platform}"]["#{repo}_url"],
-  :security_url => node['apt']['sources_list']["#{platform}"]['security_url'],
-  :components => node['apt']['sources_list']["#{platform}"]['components'],
-  :updates => node['apt']['sources_list']["#{platform}"]['enable_updates'],
-  :backports => node['apt']['sources_list']["#{platform}"]['enable_backports'],
+  :archive_url => node['apt']['sources_list'][platform]["#{repo}_url"],
+  :security_url => node['apt']['sources_list'][platform]['security_url'],
+  :components => node['apt']['sources_list'][platform]['components'],
+  :updates => node['apt']['sources_list'][platform]['enable_updates'],
+  :backports => node['apt']['sources_list'][platform]['enable_backports'],
 }
 
 if node['platform'] == 'ubuntu'
