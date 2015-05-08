@@ -68,7 +68,7 @@ if servers.length > 0
       :port => servers[0]['apt']['cacher_port'],
       :proxy_ssl => servers[0]['apt']['cacher_ssl_support'],
       :bypass => node['apt']['cache_bypass']
-      )
+    )
     action(node['apt']['compiletime'] ? :nothing : :create)
     notifies :run, 'execute[apt-get update]', :immediately
   end

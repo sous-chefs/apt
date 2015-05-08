@@ -33,7 +33,7 @@ action :add do
     new_resource.glob || new_resource.package_name,
     new_resource.pin,
     new_resource.pin_priority
-    )
+  )
 
   directory '/etc/apt/preferences.d' do
     owner 'root'

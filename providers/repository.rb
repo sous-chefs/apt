@@ -43,7 +43,7 @@ def install_key_from_keyserver(key, keyserver)
 
   ruby_block "validate-key #{key}" do
     block do
-      raise "The key #{key} is no longer valid and cannot be used for an apt repository." unless key_is_valid('apt-key list', key.upcase)
+      fail "The key #{key} is no longer valid and cannot be used for an apt repository." unless key_is_valid('apt-key list', key.upcase)
     end
   end
 end
@@ -65,12 +65,12 @@ def key_is_valid(cmd, key)
 
   so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US' })
   so.run_command
+  # rubocop:disable Style/Next
   so.stdout.split(/\n/).map do |t|
-    if t.match(/^\/#{key}.*\[expired: .*\]$/)
+    if t.match(%r{^\/#{key}.*\[expired: .*\]$})
       Chef::Log.debug "Found expired key: #{t}"
       valid = false
       break
-    else
     end
   end
 
@@ -80,7 +80,7 @@ end
 
 # install apt key from URI
 def install_key_from_uri(uri)
-  key_name = uri.split(/\//).last
+  key_name = uri.split(%r{\/}).last
   cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
   if new_resource.key =~ /http/
     remote_file cached_keyfile do
@@ -98,7 +98,7 @@ def install_key_from_uri(uri)
 
     ruby_block "validate-key #{cached_keyfile}" do
       block do
-        raise "The key #{cached_keyfile} is no longer valid and cannot be used for an apt repository." unless key_is_valid("gpg #{cached_keyfile}", '')
+        fail "The key #{cached_keyfile} is no longer valid and cannot be used for an apt repository." unless key_is_valid("gpg #{cached_keyfile}", '')
       end
     end
   end
@@ -202,7 +202,7 @@ action :add do
       new_resource.trusted,
       new_resource.arch,
       new_resource.deb_src
-      )
+    )
   else
     # build repo file
     repository = build_repo(
@@ -212,7 +212,7 @@ action :add do
       new_resource.trusted,
       new_resource.arch,
       new_resource.deb_src
-      )
+    )
   end
 
   file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
