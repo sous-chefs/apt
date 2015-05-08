@@ -1,6 +1,10 @@
 apt Cookbook CHANGELOG
 ======================
 
+unreleased (2015)
+-------------------
+- Access keyservers on port 80
+
 v2.7.0 (2015-03-23)
 -------------------
 - Support Debian 8.0
