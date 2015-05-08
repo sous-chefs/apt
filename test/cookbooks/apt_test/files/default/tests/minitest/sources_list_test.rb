@@ -30,5 +30,4 @@ describe 'apt_test::sources_list' do
     it { config.must_match(/^# Managed by Chef$/) }
     it { config.must_match(/(lucid|precise|trusty|utopic|vivid|wheezy)/) }
   end
-
 end
