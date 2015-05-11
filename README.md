@@ -50,11 +50,9 @@ To do this, you need to override the `cache_bypass` attribute with an array of r
 
 ```json
 {
-    ...,
-    'apt': {
-        ...,
-        'cache_bypass': {
-            URL: PROTOCOL
+    "apt": {
+        "cache_bypass": {
+            "URL": "PROTOCOL"
         }
     }
 }
@@ -64,9 +62,9 @@ For example, to prevent caching and directly connect to the repository at `downl
 
 ```json
 {
-    'apt': {
-        'cache_bypass': {
-            'download.oracle.com': 'http'
+    "apt": {
+        "cache_bypass": {
+            "download.oracle.com": "http"
         }
     }
 }
