@@ -34,6 +34,7 @@ state_attrs :arch,
             :distribution,
             :key,
             :keyserver,
+            :key_proxy,
             :repo_name,
             :trusted,
             :uri
@@ -49,6 +50,7 @@ attribute :trusted, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :deb_src, :default => false
 attribute :keyserver, :kind_of => String, :default => nil
 attribute :key, :kind_of => String, :default => nil
+attribute :key_proxy, :kind_of => String, :default => node[:apt][:key_proxy]
 attribute :cookbook, :kind_of => String, :default => nil
 # trigger cache rebuild
 # If not you can trigger in the recipe itself after checking the status of resource.updated{_by_last_action}?
