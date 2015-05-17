@@ -24,12 +24,12 @@ def whyrun_supported?
 end
 
 # install apt key from keyserver
-def install_key_from_keyserver(key, keyserver)
+def install_key_from_keyserver(key, keyserver, key_proxy)
   execute "install-key #{key}" do
-    if !node['apt']['key_proxy'].empty?
-      command "apt-key adv --keyserver-options http-proxy=#{node['apt']['key_proxy']} --keyserver hkp://#{keyserver}:80 --recv #{key}"
-    else
+    if key_proxy.empty?
       command "apt-key adv --keyserver hkp://#{keyserver}:80 --recv #{key}"
+    else
+      command "apt-key adv --keyserver-options http-proxy=#{key_proxy} --keyserver hkp://#{keyserver}:80 --recv #{key}"
     end
     action :run
     not_if do
@@ -128,7 +128,7 @@ def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
   repo
 end
 
-def get_ppa_key(ppa_owner, ppa_repo)
+def get_ppa_key(ppa_owner, ppa_repo, key_proxy)
   # Launchpad has currently only one stable API which is marked as EOL April 2015.
   # The new api in devel still uses the same api call for +archive, so I made the version
   # configurable to provide some sort of workaround if api 1.0 ceases to exist.
@@ -148,11 +148,11 @@ def get_ppa_key(ppa_owner, ppa_repo)
     raise error
   end
 
-  install_key_from_keyserver(key_id, default_keyserver)
+  install_key_from_keyserver(key_id, default_keyserver, key_proxy)
 end
 
 # fetch ppa key, return full repo url
-def get_ppa_url(ppa)
+def get_ppa_url(ppa, key_proxy)
   repo_schema       = 'http://ppa.launchpad.net/%s/%s/ubuntu'
 
   # ppa:user/repo logic ported from
@@ -164,7 +164,7 @@ def get_ppa_url(ppa)
   ppa_repo  = ppa_name.split('/')[1]
   ppa_repo  = 'ppa' if ppa_repo.nil?
 
-  get_ppa_key(ppa_owner, ppa_repo)
+  get_ppa_key(ppa_owner, ppa_repo, key_proxy)
 
   format(repo_schema, ppa_owner, ppa_repo)
 end
@@ -172,7 +172,7 @@ end
 action :add do
   # add key
   if new_resource.keyserver && new_resource.key
-    install_key_from_keyserver(new_resource.key, new_resource.keyserver)
+    install_key_from_keyserver(new_resource.key, new_resource.keyserver, new_resource.key_proxy)
   elsif new_resource.key
     install_key_from_uri(new_resource.key)
   end
@@ -196,7 +196,7 @@ action :add do
   if new_resource.uri.start_with?('ppa:')
     # build ppa repo file
     repository = build_repo(
-      get_ppa_url(new_resource.uri),
+      get_ppa_url(new_resource.uri, new_resource.key_proxy),
       new_resource.distribution,
       'main',
       new_resource.trusted,
