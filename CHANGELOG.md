@@ -4,6 +4,7 @@ apt Cookbook CHANGELOG
 unreleased (2015)
 -------------------
 - Access keyservers on port 80
+- Adds key\_proxy as LWRP attribute for apt\_repository 
 
 v2.7.0 (2015-03-23)
 -------------------
