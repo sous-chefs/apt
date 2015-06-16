@@ -90,7 +90,7 @@ execute 'apt-get autoclean' do
   action :nothing
 end
 
-execute 'apt-get-update-periodic' do
+periodic_update = execute 'apt-get-update-periodic' do
   command 'apt-get update'
   ignore_failure true
   only_if do
@@ -100,6 +100,7 @@ execute 'apt-get-update-periodic' do
   end
   notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
 end
+periodic_update.run_action(:run) if node['apt']['compile_time_update']
 
 %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
   directory dirname do
