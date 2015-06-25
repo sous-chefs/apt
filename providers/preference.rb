@@ -43,14 +43,14 @@ action :add do
     action :create
   end
 
-  file "/etc/apt/preferences.d/#{new_resource.name}" do
+  file "/etc/apt/preferences.d/#{new_resource.name.gsub('.', '_')}" do
     action :delete
-    if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
+    if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name.gsub('.', '_')}")
       Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
     end
   end
 
-  file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+  file "/etc/apt/preferences.d/#{new_resource.name.gsub('.', '_')}.pref" do
     owner 'root'
     group 'root'
     mode 00644
@@ -60,9 +60,9 @@ action :add do
 end
 
 action :remove do
-  if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
+  if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name.gsub('.', '_')}.pref")
     Chef::Log.info "Un-pinning #{new_resource.name} from /etc/apt/preferences.d/"
-    file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+    file "/etc/apt/preferences.d/#{new_resource.name.gsub('.', '_')}.pref" do
       action :delete
     end
   end
