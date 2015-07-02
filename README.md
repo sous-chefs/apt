@@ -152,6 +152,17 @@ apt_repository 'zenoss' do
 end
 ```
 
+Enable Ubuntu [multiverse](https://help.ubuntu.com/community/Repositories/Ubuntu) repositories:
+
+```ruby
+apt_repository 'security-ubuntu-multiverse' do
+  uri        'http://security.ubuntu.com/ubuntu'
+  distribution 'trusty-security'
+  components ['multiverse']
+  deb_src 'true'
+end
+```
+
 Add the Nginx PPA, autodetect the key and repository url:
 
 ```ruby
