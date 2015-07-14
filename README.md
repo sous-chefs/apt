@@ -92,7 +92,7 @@ Attributes
 ### Caching
 
 * `['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
-* `['apt']['cacher_interface]` - interface to connect to the cacher-ng service, no default.
+* `['apt']['cacher_interface']` - interface to connect to the cacher-ng service, no default.
 * `['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
 * `['apt']['cacher_ssl_support']` - indicates whether the cacher supports upstream SSL servers, default is 'false'
 * `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
