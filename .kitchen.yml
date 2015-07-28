@@ -1,39 +1,36 @@
 driver:
   name: vagrant
 
+provisioner:
+  name: chef_zero
+
 platforms:
   - name: debian-7.2.0
     run_list: apt::default
-  # - name: debian-8.0
-  #   run_list: apt::default
-  - name: ubuntu-10.04
+  - name: debian-8.0
     run_list: apt::default
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
     run_list: apt::default
-  - name: ubuntu-14.10
-    run_list: apt::default
+#  - name: ubuntu-15.04
+#    run_list: apt::default
 
 suites:
   - name: default
     run_list:
-      - recipe[minitest-handler]
-      - recipe[apt_test]
+      - recipe[apt]
 
   - name: cacher-client
     run_list:
-      - recipe[minitest-handler]
-      - recipe[apt_test::cacher-client]
+      - recipe[apt::cacher-client]
 
   - name: cacher-ng
     run_list:
-      - recipe[minitest-handler]
-      - recipe[apt_test::cacher-ng]
+      - recipe[apt::cacher-ng]
 
   - name: cacher-ng-client
     run_list:
-      - recipe[minitest-handler]
       - recipe[apt_test::cacher-ng-client]
     attributes:
       apt:
@@ -44,13 +41,11 @@ suites:
 
   - name: lwrps
     run_list:
-      - recipe[minitest-handler]
       - recipe[apt_test::lwrps]
 
   - name: unattended-upgrades
     run_list:
-      - recipe[minitest-handler]
-      - recipe[apt_test::unattended-upgrades]
+      - recipe[apt::unattended-upgrades]
     attributes:
       apt:
         unattended_upgrades:

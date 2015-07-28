@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt_test
-# Recipe:: default
+# Recipe:: cacher-client_test
 #
-# Copyright 2012, Chef Software, Inc.
+# Copyright 2013, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@
 # limitations under the License.
 #
 
-require File.expand_path('../support/helpers', __FILE__)
+require_relative './spec_helper'
 
-describe 'apt_test::default' do
-  include Helpers::AptTest
-
-  it 'runs the cacher service' do
-    service('apt-cacher-ng').must_be_running
+describe 'apt_test::cacher-client' do
+  it 'does not create 01proxy' do
+    expect(file('/etc/apt/apt.conf.d/01proxy')).to_not exist
   end
 end
