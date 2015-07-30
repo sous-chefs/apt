@@ -17,43 +17,40 @@
 # limitations under the License.
 #
 
-require File.expand_path('../support/helpers', __FILE__)
+require_relative './spec_helper'
 
 describe 'apt_test::lwrps' do
-  include Helpers::AptTest
-
   it 'creates the JuJu sources.list' do
-    file('/etc/apt/sources.list.d/juju.list').must_exist
+    expect(file('/etc/apt/sources.list.d/juju.list')).to exist
   end
 
   it 'adds the JuJu package signing key' do
-    chef_key = shell_out('apt-key list')
-    assert chef_key.stdout.include?('Launchpad Ensemble PPA')
+    expect(command('apt-key list').stdout).to contain('Launchpad Ensemble PPA')
   end
 
   it 'creates the correct pinning preferences for chef' do
     pinning_prefs = 'Package: chef\nPin: version 10.16.2-1'
-    file('/etc/apt/preferences.d/chef.pref').must_match(/#{pinning_prefs}/)
+    expect(file('/etc/apt/preferences.d/chef.pref').content).to match(/#{pinning_prefs}/)
   end
 
   it 'correctly handles a ppa: repository' do
-    skip('not on ubuntu') unless node['platform'] == 'ubuntu'
+    skip('not on ubuntu') unless os[:family] == 'ubuntu'
     rust = 'http://ppa.launchpad.net/hansjorg/rust/ubuntu'
-    file('/etc/apt/sources.list.d/rust.list').must_match(/#{rust}/)
+    expect(file('/etc/apt/sources.list.d/rust.list').content).to match(/#{rust}/)
   end
 
   it 'renames an old preferences file' do
-    file('/etc/apt/preferences.d/wget').wont_exist
-    file('/etc/apt/preferences.d/wget.pref').must_exist
+    expect(file('/etc/apt/preferences.d/wget')).to_not exist
+    expect(file('/etc/apt/preferences.d/wget.pref')).to exist
   end
 
   it 'creates a repo with an architecture' do
     cloudera = 'deb\s+\\[arch=amd64\\] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib'
-    file('/etc/apt/sources.list.d/cloudera.list').must_match(/#{cloudera}/)
+    expect(file('/etc/apt/sources.list.d/cloudera.list').content).to match(/#{cloudera}/)
   end
 
   it 'creates the correct pinning preferences with a glob' do
     pinning_prefs = 'Package: \\*\nPin: origin packages.dotdeb.org'
-    file('/etc/apt/preferences.d/dotdeb.pref').must_match(/#{pinning_prefs}/)
+    expect(file('/etc/apt/preferences.d/dotdeb.pref').content).to match(/#{pinning_prefs}/)
   end
 end

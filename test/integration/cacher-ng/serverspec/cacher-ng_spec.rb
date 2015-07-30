@@ -17,14 +17,10 @@
 # limitations under the License.
 #
 
-# helpers
-module Helpers
-  # include apt related methods
-  module AptTest
-    require 'chef/mixin/shell_out'
-    include Chef::Mixin::ShellOut
-    include MiniTest::Chef::Assertions
-    include MiniTest::Chef::Context
-    include MiniTest::Chef::Resources
+require_relative './spec_helper'
+
+describe 'apt_test::default' do
+  it 'runs the cacher service' do
+    expect(service('apt-cacher-ng')).to be_running
   end
 end
