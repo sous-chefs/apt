@@ -20,10 +20,9 @@
 require_relative './spec_helper'
 
 describe 'apt_test::cacher-ng-client' do
-  
   it 'creates the cacher_dir' do
-    expect(file("/var/cache/apt-cacher-ng")).to be_directory
-    expect(file("/var/cache/apt-cacher-ng")).to be_owned_by('apt-cacher-ng')
+    expect(file('/var/cache/apt-cacher-ng')).to be_directory
+    expect(file('/var/cache/apt-cacher-ng')).to be_owned_by('apt-cacher-ng')
   end
 
   it 'runs the cacher service' do
@@ -31,7 +30,7 @@ describe 'apt_test::cacher-ng-client' do
   end
 
   it 'creates 01proxy' do
-    expect(file('/etc/apt/apt.conf.d/01proxy').content).to match(/Acquire::http::Proxy \"http:\/\/.*:9876\";/)
+    expect(file('/etc/apt/apt.conf.d/01proxy').content).to match(%r{Acquire::http::Proxy "http://.*:9876";})
   end
 
   it 'installed colordiff' do
