@@ -50,7 +50,7 @@ end
 
 # run command and extract gpg ids
 def extract_fingerprints_from_cmd(cmd)
-  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US' })
+  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US', 'LANGUAGE' => 'en_US' })
   so.run_command
   so.stdout.split(/\n/).map do |t|
     if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/)
@@ -63,7 +63,7 @@ end
 def key_is_valid(cmd, key)
   valid = true
 
-  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US' })
+  so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US', 'LANGUAGE' => 'en_US' })
   so.run_command
   # rubocop:disable Style/Next
   so.stdout.split(/\n/).map do |t|
