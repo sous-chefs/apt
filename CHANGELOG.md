@@ -1,6 +1,10 @@
 apt Cookbook CHANGELOG
 ======================
 
+v2.8.1 (2015-08-18)
+-------------------
+- Handle keyservers as URLs and bare hostnames
+
 v2.8.0 (2015-08-18)
 -------------------
 - Access keyservers on port 80

@@ -6,7 +6,7 @@ description       'Configures apt and apt services and LWRPs for managing apt re
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 issues_url        'https://github.com/opscode-cookbooks/apt/issues'
 source_url        'https://github.com/opscode-cookbooks/apt'
-version           '2.8.0'
+version           '2.8.1'
 recipe            'apt', 'Runs apt-get update during compile phase and sets up preseed directories'
 recipe            'apt::cacher-ng', 'Set up an apt-cacher-ng caching proxy'
 recipe            'apt::cacher-client', 'Client for the apt::cacher-ng caching proxy'
