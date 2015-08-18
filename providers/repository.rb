@@ -116,13 +116,13 @@ end
 
 # build repo file contents
 def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
+  uri = '"' + uri + '"' unless uri.start_with?("\"", "'")
   components = components.join(' ') if components.respond_to?(:join)
   repo_options = []
   repo_options << "arch=#{arch}" if arch
   repo_options << 'trusted=yes' if trusted
-  repo_options = '[' + repo_options.join(' ') + ']' unless repo_options.empty?
-  repo_info = "#{uri} #{distribution} #{components}\n"
-  repo_info = "#{repo_options} #{repo_info}" unless repo_options.empty?
+  repo_opts = '[' + repo_options.join(' ') + ']' unless repo_options.empty?
+  repo_info = "#{repo_opts} #{uri} #{distribution} #{components}\n".lstrip
   repo =  "deb     #{repo_info}"
   repo << "deb-src #{repo_info}" if add_deb_src
   repo

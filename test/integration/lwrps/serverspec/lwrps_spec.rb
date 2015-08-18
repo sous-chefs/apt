@@ -24,6 +24,11 @@ describe 'apt_test::lwrps' do
     expect(file('/etc/apt/sources.list.d/juju.list')).to exist
   end
 
+  it 'creates a repo with a url that is already quoted' do
+    src = 'deb\s+\"http://ppa.launchpad.net/juju/stable/ubuntu\" trusty main'
+    expect(file('/etc/apt/sources.list.d/juju.list').content).to match(/#{src}/)
+  end
+
   it 'adds the JuJu package signing key' do
     expect(command('apt-key list').stdout).to contain('Launchpad Ensemble PPA')
   end
@@ -45,7 +50,7 @@ describe 'apt_test::lwrps' do
   end
 
   it 'creates a repo with an architecture' do
-    cloudera = 'deb\s+\\[arch=amd64\\] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib'
+    cloudera = 'deb\s+\\[arch=amd64\\] \"http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh\" precise-cdh4 contrib'
     expect(file('/etc/apt/sources.list.d/cloudera.list').content).to match(/#{cloudera}/)
   end
 
