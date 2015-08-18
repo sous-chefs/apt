@@ -28,6 +28,10 @@ def build_pref(package_name, pin, pin_priority)
   "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
 end
 
+def safe_name(name)
+  name.tr('.', '_').gsub('*', 'wildcard')
+end
+
 action :add do
   preference = build_pref(
     new_resource.glob || new_resource.package_name,
@@ -43,6 +47,16 @@ action :add do
     action :create
   end
 
+  name = safe_name(new_resource.name)
+
+  file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+    action :delete
+    if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
+      Chef::Log.warn "Replacing #{new_resource.name}.pref with #{name}.pref in /etc/apt/preferences.d/"
+    end
+    only_if { name != new_resource.name }
+  end
+
   file "/etc/apt/preferences.d/#{new_resource.name}" do
     action :delete
     if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
@@ -50,7 +64,7 @@ action :add do
     end
   end
 
-  file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+  file "/etc/apt/preferences.d/#{name}.pref" do
     owner 'root'
     group 'root'
     mode 00644
@@ -60,9 +74,10 @@ action :add do
 end
 
 action :remove do
-  if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
-    Chef::Log.info "Un-pinning #{new_resource.name} from /etc/apt/preferences.d/"
-    file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+  name = safe_name(name)
+  if ::File.exist?("/etc/apt/preferences.d/#{name}.pref")
+    Chef::Log.info "Un-pinning #{name} from /etc/apt/preferences.d/"
+    file "/etc/apt/preferences.d/#{name}.pref" do
       action :delete
     end
   end

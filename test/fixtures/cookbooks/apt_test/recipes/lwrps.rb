@@ -80,3 +80,12 @@ apt_preference 'dotdeb' do
   pin 'origin packages.dotdeb.org '
   pin_priority '700'
 end
+
+# rename preferences with wildcards
+file '/etc/apt/preferences.d/*.pref' do
+  action :touch
+end
+
+apt_preference '*' do
+  pin 'origin nginx.org'
+end
