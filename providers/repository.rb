@@ -153,7 +153,7 @@ end
 
 # fetch ppa key, return full repo url
 def get_ppa_url(ppa, key_proxy)
-  repo_schema       = 'http://ppa.launchpad.net/%s/%s/ubuntu'
+  repo_schema = 'http://ppa.launchpad.net/%s/%s/ubuntu'
 
   # ppa:user/repo logic ported from
   # http://bazaar.launchpad.net/~ubuntu-core-dev/software-properties/main/view/head:/softwareproperties/ppa.py#L86

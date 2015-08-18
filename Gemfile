@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 group :lint do
-  gem 'foodcritic', '~> 3.0'
+  gem 'foodcritic', git: 'https://github.com/acrmp/foodcritic.git'
   gem 'rubocop', '~> 0.23'
   gem 'rainbow', '< 2.0'
 end
