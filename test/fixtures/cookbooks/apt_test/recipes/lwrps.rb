@@ -29,6 +29,16 @@ apt_repository 'juju' do
   action :add
 end
 
+# Apt Repository
+apt_repository 'nodejs' do
+  uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
+  components ['main']
+  distribution 'trusty'
+  key 'C7917B12'
+  keyserver 'hkp://keyserver.ubuntu.com:80'
+  action :add
+end
+
 # PPA Repository
 apt_repository 'rust' do
   uri 'ppa:hansjorg/rust'
