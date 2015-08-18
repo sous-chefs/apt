@@ -1,10 +1,13 @@
 apt Cookbook CHANGELOG
 ======================
 
-unreleased (2015)
+v2.8.0 (2015-08-18)
 -------------------
 - Access keyservers on port 80
-- Adds key\_proxy as LWRP attribute for apt\_repository 
+- Adds key\_proxy as LWRP attribute for apt\_repository
+- Fix wildcard glob preferences files
+- Fix text output verification for non en\_US locales
+- Quote repo URLs to deal with spaces
 
 v2.7.0 (2015-03-23)
 -------------------
