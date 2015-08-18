@@ -24,6 +24,10 @@ describe 'apt_test::lwrps' do
     expect(file('/etc/apt/sources.list.d/juju.list')).to exist
   end
 
+  it 'creates the NodeJS sources.list' do
+    expect(file('/etc/apt/sources.list.d/nodejs.list')).to exist
+  end
+
   it 'creates a repo with a url that is already quoted' do
     src = 'deb\s+\"http://ppa.launchpad.net/juju/stable/ubuntu\" trusty main'
     expect(file('/etc/apt/sources.list.d/juju.list').content).to match(/#{src}/)
