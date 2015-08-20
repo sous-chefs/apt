@@ -110,3 +110,10 @@ end
     only_if { apt_installed? }
   end
 end
+
+template '/etc/apt/apt.conf.d/10recommends' do
+  owner 'root'
+  group 'root'
+  mode '644'
+  source '10recommends.erb'
+end
