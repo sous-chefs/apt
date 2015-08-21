@@ -74,7 +74,7 @@ action :add do
 end
 
 action :remove do
-  name = safe_name(name)
+  name = safe_name(new_resource.name)
   if ::File.exist?("/etc/apt/preferences.d/#{name}.pref")
     Chef::Log.info "Un-pinning #{name} from /etc/apt/preferences.d/"
     file "/etc/apt/preferences.d/#{name}.pref" do
