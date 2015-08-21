@@ -1,6 +1,5 @@
 apt Cookbook
 ============
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/chef-cookbooks/apt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://img.shields.io/travis/opscode-cookbooks/apt.svg)][travis]
 [![Cookbook Version](https://img.shields.io/cookbook/v/apt.svg)][cookbook]
 
