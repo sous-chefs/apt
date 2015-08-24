@@ -46,3 +46,22 @@ default['apt']['unattended_upgrades']['remove_unused_dependencies'] = false
 default['apt']['unattended_upgrades']['automatic_reboot'] = false
 default['apt']['unattended_upgrades']['automatic_reboot_time'] = 'now'
 default['apt']['unattended_upgrades']['dl_limit'] = nil
+
+default['apt']['sources_list']['include_source_packages'] = true
+default['apt']['sources_list']['enable_cdn'] = false
+
+default['apt']['sources_list']['ubuntu']['cdn_url'] = 'mirror://mirrors.ubuntu.com/mirrors.txt'
+default['apt']['sources_list']['ubuntu']['archive_url']  = 'http://us.archive.ubuntu.com/ubuntu'
+default['apt']['sources_list']['ubuntu']['security_url'] = 'http://security.ubuntu.com/ubuntu'
+default['apt']['sources_list']['ubuntu']['partners_url'] = 'http://archive.canonical.com/ubuntu'
+default['apt']['sources_list']['ubuntu']['components'] = 'main restricted universe multiverse'
+default['apt']['sources_list']['ubuntu']['enable_updates'] = true
+default['apt']['sources_list']['ubuntu']['enable_backports'] = true
+default['apt']['sources_list']['ubuntu']['enable_partners'] = false
+
+default['apt']['sources_list']['debian']['cdn_url']  = 'http://httpredir.debian.org/debian'
+default['apt']['sources_list']['debian']['archive_url']  = 'http://mirrors.kernel.org/debian'
+default['apt']['sources_list']['debian']['security_url'] = 'http://security.debian.org/'
+default['apt']['sources_list']['debian']['components'] = 'main contrib non-free'
+default['apt']['sources_list']['debian']['enable_updates'] = true
+default['apt']['sources_list']['debian']['enable_backports'] = false
