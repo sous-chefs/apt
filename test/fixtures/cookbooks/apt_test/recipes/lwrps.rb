@@ -99,3 +99,13 @@ end
 apt_preference '*' do
   pin 'origin nginx.org'
 end
+
+# Preference file removal
+file '/etc/apt/preferences.d/camel.pref' do
+  action :touch
+end
+
+apt_preference 'camel' do
+  action :remove
+end
+

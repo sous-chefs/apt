@@ -58,6 +58,10 @@ describe 'apt_test::lwrps' do
     expect(file('/etc/apt/preferences.d/wildcard.pref')).to exist
   end
 
+  it 'removes a preferences file' do
+    expect(file('/etc/apt/preferences.d/camel.pref')).to_not exist
+  end
+
   it 'creates a repo with an architecture' do
     cloudera = 'deb\s+\\[arch=amd64\\] \"http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh\" precise-cdh4 contrib'
     expect(file('/etc/apt/sources.list.d/cloudera.list').content).to match(/#{cloudera}/)
