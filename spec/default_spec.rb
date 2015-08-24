@@ -6,6 +6,12 @@ describe 'apt::default' do
     runner.converge('apt::default')
   end
 
+  it 'creates 10recommends file' do
+    expect(chef_run).to render_file('/etc/apt/apt.conf.d/10recommends').with_content('# Managed by Chef')
+    expect(chef_run).to render_file('/etc/apt/apt.conf.d/10recommends').with_content('APT::Install-Recommends "1";')
+    expect(chef_run).to render_file('/etc/apt/apt.conf.d/10recommends').with_content('APT::Install-Suggests "0";')
+  end
+
   # it 'installs update-notifier-common' do
   #   expect(chef_run).to install_package 'update-notifier-common'
   # end

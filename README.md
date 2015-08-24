@@ -114,6 +114,11 @@ Attributes
 * `['apt']['unattended_upgrades']['automatic_reboot']` - Automatically reboots *without confirmation* if a restart is required after the upgrade. Defaults to false.
 * `['apt']['unattended_upgrades']['dl_limit']` - Limits the bandwidth used by apt to download packages. Value given as an integer in kb/sec. Defaults to nil (no limit).
 
+### Configuration for APT
+
+* `['apt']['confd']['install_recommends']` - Consider recommended packages as a dependency for installing. (default: true)
+* `['apt']['confd']['install_suggests']` - Consider suggested packages as a dependency for installing. (default: false)
+
 Libraries
 ---------
 There is an `interface_ipaddress` method that returns the IP address for a particular host and interface, used by the `cacher-client` recipe. To enable it on the server use the `['apt']['cacher_interface']` attribute.
