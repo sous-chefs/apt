@@ -110,3 +110,12 @@ end
     only_if { apt_installed? }
   end
 end
+
+node['apt']['repositories'].each do |name, attrs|
+  apt_repository name do
+    attrs.each do |attr, value|
+      send attr, value
+    end
+  end
+end
+
