@@ -65,6 +65,17 @@ apt_repository 'nginx' do
   deb_src true
 end
 
+# Apt repository that suppresses output for sensitive resources.
+apt_repository 'haproxy' do
+  uri 'http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu'
+  distribution node['lsb']['codename']
+  components ['main']
+  keyserver 'keyserver.ubuntu.com'
+  key '1C61B9CD'
+  sensitive true
+  action :add
+end
+
 package 'nginx-debug' do
   action :upgrade
 end
@@ -108,4 +119,3 @@ end
 apt_preference 'camel' do
   action :remove
 end
-
