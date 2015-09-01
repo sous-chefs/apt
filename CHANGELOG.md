@@ -1,6 +1,15 @@
 apt Cookbook CHANGELOG
 ======================
 
+v2.9.0 (Unreleased)
+-------------------
+- Add `sensitive` flag for apt\_repositories
+- Enable installation of recommended or suggested packages
+
+v2.8.2 (2015-08-24)
+-------------------
+- Fix removal of apt\_preferences
+
 v2.8.1 (2015-08-18)
 -------------------
 - Handle keyservers as URLs and bare hostnames
@@ -34,7 +43,7 @@ v2.5.3 (2014-08-14)
 
 v2.5.2 (2014-08-14)
 -------------------
-- Fully restore fully restore 2.3.10 behaviour
+- Fully restore 2.3.10 behaviour
 
 v2.5.1 (2014-08-14)
 -------------------
