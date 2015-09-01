@@ -37,7 +37,8 @@ state_attrs :arch,
             :key_proxy,
             :repo_name,
             :trusted,
-            :uri
+            :uri,
+            :sensitive
 
 # name of the repo, used for source.list filename
 attribute :repo_name, :kind_of => String, :name_attribute => true, :regex => [/^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/]
@@ -55,3 +56,5 @@ attribute :cookbook, :kind_of => String, :default => nil
 # trigger cache rebuild
 # If not you can trigger in the recipe itself after checking the status of resource.updated{_by_last_action}?
 attribute :cache_rebuild, :kind_of => [TrueClass, FalseClass], :default => true
+# Hide content of the source file, don't show output for commands being run, etc.
+attribute :sensitive, :kind_of => [TrueClass, FalseClass], :default => false
