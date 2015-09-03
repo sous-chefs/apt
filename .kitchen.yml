@@ -13,8 +13,8 @@ platforms:
     run_list: apt::default
   - name: ubuntu-14.04
     run_list: apt::default
-#  - name: ubuntu-15.04
-#    run_list: apt::default
+  - name: ubuntu-15.04
+    run_list: apt::default
 
 suites:
   - name: default
@@ -38,6 +38,13 @@ suites:
         cacher_port: '9876'
         cacher_interface: 'eth0'
         compiletime: true
+
+  - name: compile_time
+    run_list:
+      - recipe[apt::default]
+    attributes:
+      apt:
+        compile_time_update: true
 
   - name: lwrps
     run_list:
