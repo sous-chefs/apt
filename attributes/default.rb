@@ -33,9 +33,15 @@ default['apt']['unattended_upgrades']['enable'] = false
 default['apt']['unattended_upgrades']['update_package_lists'] = true
 # this needs a good default
 codename = node.attribute?('lsb') ? node['lsb']['codename'] : 'notlinux'
-default['apt']['unattended_upgrades']['allowed_origins'] = [
-  "#{node['platform'].capitalize} #{codename}"
-]
+archive = case node['platform']
+          when 'debian'
+            case codename
+            when 'wheezy' then 'oldstable'
+            when 'jessie' then 'stable'
+            end
+          when 'ubuntu' then '${distro_codename}'
+          end
+default['apt']['unattended_upgrades']['allowed_origins'] = ["${distro_id} #{archive}"]
 default['apt']['unattended_upgrades']['package_blacklist'] = []
 default['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg'] = false
 default['apt']['unattended_upgrades']['minimal_steps'] = false
