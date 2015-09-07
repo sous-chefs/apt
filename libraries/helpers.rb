@@ -32,7 +32,7 @@ module Apt
     # @return [Boolean]
     def apt_up_to_date?
       if ::File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
-          ::File.mtime('/var/lib/apt/periodic/update-success-stamp') > Time.now - node['apt']['periodic_update_min_delay']
+         ::File.mtime('/var/lib/apt/periodic/update-success-stamp') > Time.now - node['apt']['periodic_update_min_delay']
         true
       else
         false
