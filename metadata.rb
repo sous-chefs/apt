@@ -16,25 +16,25 @@ recipe 'apt::cacher-client', 'Client for the apt::cacher-ng caching proxy'
 end
 
 attribute 'apt/cacher-client/restrict_environment',
-          :description => 'Whether to restrict the search for the caching server to the same environment as this node',
-          :default => 'false'
+          description: 'Whether to restrict the search for the caching server to the same environment as this node',
+          default: 'false'
 
 attribute 'apt/cacher_port',
-          :description => 'Default listen port for the caching server',
-          :default => '3142'
+          description: 'Default listen port for the caching server',
+          default: '3142'
 
 attribute 'apt/cacher_ssl_support',
-          :description => 'The caching server supports upstream SSL servers via CONNECT',
-          :default => 'false'
+          description: 'The caching server supports upstream SSL servers via CONNECT',
+          default: 'false'
 
 attribute 'apt/cacher_interface',
-          :description => 'Default listen interface for the caching server',
-          :default => nil
+          description: 'Default listen interface for the caching server',
+          default: nil
 
 attribute 'apt/key_proxy',
-          :description => 'Passed as the proxy passed to GPG for the apt_repository resource',
-          :default => ''
+          description: 'Passed as the proxy passed to GPG for the apt_repository resource',
+          default: ''
 
 attribute 'apt/caching_server',
-          :description => 'Set this to true if the node is a caching server',
-          :default => 'false'
+          description: 'Set this to true if the node is a caching server',
+          default: 'false'
