@@ -1,35 +1,29 @@
 AllCops:
   Exclude:
     - vendor/**/*
-    - metadata.rb
     - Guardfile
-    - test/fixtures/cookbooks/apt_test/metadata.rb
-    - .kitchen/**
 
-# Disable ABCSize because it doesn't fit well with resources
-AbcSize:
-  Enabled: false
-AssignmentInCondition:
-  Enabled: false
-ClassAndModuleChildren:
+AlignParameters:
   Enabled: false
 ClassLength:
   Enabled: false
 CyclomaticComplexity:
-  Max: 15
+  Enabled: false
 Documentation:
   Enabled: false
 Encoding:
-  Enabled: false
-FileName:
-  Enabled: false
-HashSyntax:
   Enabled: false
 LineLength:
   Enabled: false
 MethodLength:
   Enabled: false
-ParameterLists:
+Metrics/AbcSize:
   Enabled: false
-TrailingComma:
+PerceivedComplexity:
+  Enabled: false
+SingleSpaceBeforeFirstArg:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/FileName:
   Enabled: false
