@@ -7,7 +7,7 @@ provisioner:
 platforms:
   - name: debian-7.8
     run_list: apt::default
-  - name: debian-8.0
+  - name: debian-8.1
     run_list: apt::default
   - name: ubuntu-12.04
     run_list: apt::default
