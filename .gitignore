@@ -1,46 +1,18 @@
-# ruby and bundler files
-.bundle
-Gemfile.lock
-lib/bundler/man
 *.gem
-*.rbc
-
-# rbenv / rvm files
-.ruby-version
-.ruby-gemset
-.rvmrc
-
-# YARD artifacts
-.yardoc
-_yardoc
-doc/
-
-# berkshelf files
-vendor/
-Berksfile.lock
-
-#chef files
-Policyfile.lock.json
 .zero-knife.rb
-
-# kitchen files
-.kitchen/
-.kitchen.local.yml
-
-#vagrant files
-.vagrant/
-.vagrant.d/
-
-# other files
+*.rbc
+.bundle
 .config
 coverage
 InstalledFiles
+lib/bundler/man
 pkg
 rdoc
 spec/reports
 test/tmp
 test/version_tmp
 tmp
+Gemfile.lock
 _Store
 *~
 *#
@@ -51,5 +23,24 @@ _Store
 *.tmp
 *.bk
 *.bkup
-.coverage/
+.ruby-version
+.ruby-gemset
+.rvmrc
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
 .idea
+
+#chef stuff
+Berksfile.lock
+.kitchen
+.kitchen.local.yml
+vendor/
+.coverage/
+
+#vagrant stuff
+.vagrant/
+.vagrant.d/
+.kitchen/
