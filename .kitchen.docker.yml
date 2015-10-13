@@ -1,0 +1,77 @@
+settings:
+  parallel: true
+
+driver:
+  name: docker
+  # privileged is required otherwise the container doesn't boot right
+  privileged: true
+
+platforms:
+- name: centos-7.1
+  driver:
+    image: centos:7
+    platform: rhel
+    run_command: /usr/lib/systemd/systemd
+    provision_command:
+      - /bin/yum install -y initscripts net-tools wget
+- name: ubuntu-12.04
+  driver:
+    image: ubuntu-upstart:12.04
+    platform: ubuntu
+    disable_upstart: false
+    run_command: /sbin/init
+    provision_command:
+      - /usr/bin/apt-get update
+      - /usr/bin/apt-get install apt-transport-https net-tools -y
+- name: ubuntu-14.04
+  driver:
+    image: ubuntu-upstart:14.04
+    platform: ubuntu
+    disable_upstart: false
+    run_command: /sbin/init
+    provision_command:
+      - /usr/bin/apt-get update
+      - /usr/bin/apt-get install apt-transport-https net-tools -y
+
+suites:
+  - name: default
+    run_list:
+      - recipe[apt]
+
+  - name: cacher-client
+    run_list:
+      - recipe[apt::cacher-client]
+
+  - name: cacher-ng
+    run_list:
+      - recipe[apt::cacher-ng]
+
+  - name: cacher-ng-client
+    run_list:
+      - recipe[apt_test::cacher-ng-client]
+    attributes:
+      apt:
+        cacher_dir: '/tmp/apt-cacher'
+        cacher_port: '9876'
+        cacher_interface: 'eth0'
+        compiletime: true
+
+  - name: compile-time
+    run_list:
+      - recipe[apt::default]
+    attributes:
+      apt:
+        compile_time_update: true
+
+  - name: lwrps
+    run_list:
+      - recipe[apt_test::lwrps]
+
+  - name: unattended-upgrades
+    run_list:
+      - recipe[apt::unattended-upgrades]
+    attributes:
+      apt:
+        unattended_upgrades:
+          enable: true
+

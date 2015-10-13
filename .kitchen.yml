@@ -39,7 +39,7 @@ suites:
         cacher_interface: 'eth0'
         compiletime: true
 
-  - name: compile_time
+  - name: compile-time
     run_list:
       - recipe[apt::default]
     attributes:
