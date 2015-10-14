@@ -6,6 +6,8 @@ v2.9.0 (Unreleased)
 - Add `sensitive` flag for apt\_repositories
 - Enable installation of recommended or suggested packages
 - Tidy up `apt-get update` logic
+- Make `Allowed-Origins` compatible with debian systems for
+  `apt::unattended-upgrade`.[[GH-163]](https://github.com/chef-cookbooks/apt/issues/162)
 
 v2.8.2 (2015-08-24)
 -------------------
