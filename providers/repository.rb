@@ -39,7 +39,6 @@ def install_key_from_keyserver(key, keyserver, key_proxy)
       key_present = extract_fingerprints_from_cmd('apt-key finger').any? do |fingerprint|
         fingerprint.end_with?(key.upcase)
       end
-
       key_present && key_is_valid('apt-key list', key.upcase)
     end
   end
@@ -89,6 +88,8 @@ def install_key_from_uri(uri)
     remote_file cached_keyfile do
       source new_resource.key
       mode 00644
+      retries new_resource.keyserver_retries
+      retry_delay new_resource.keyserver_retry_delay
       sensitive new_resource.sensitive if respond_to?(:sensitive)
       action :create
     end
