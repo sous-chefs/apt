@@ -78,13 +78,19 @@ If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly 
 
 Installs and configures the `unattended-upgrades` package to provide automatic package updates. This can be configured to upgrade all packages or to just install security updates by setting `['apt']['unattended_upgrades']['allowed_origins']`.
 
-To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy). 
+To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy).
 
+### keyserver_retries
+Instructs chef to retry fetching the keyfile from a remote repository on failure.
+This attribute accepts an integer as a value on how many times it should retry to fetch the remote file.
+
+### keyserver_retry_delay
+Sets the delay (in seconds) in between the keyserver_retries as mentioned above.
 
 Attributes
 ----------
 
-### General 
+### General
 * `['apt']['compile_time_update']` - force the default recipe to run `apt-get update` at compile time.
 * `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) beetween two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
 

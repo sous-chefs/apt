@@ -38,7 +38,9 @@ state_attrs :arch,
             :repo_name,
             :trusted,
             :uri,
-            :sensitive
+            :sensitive,
+            :keyserver_retries,
+            :keyserver_retry_delay
 
 # name of the repo, used for source.list filename
 attribute :repo_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/]
@@ -53,6 +55,8 @@ attribute :keyserver, kind_of: String, default: nil
 attribute :key, kind_of: String, default: nil
 attribute :key_proxy, kind_of: String, default: node['apt']['key_proxy']
 attribute :cookbook, kind_of: String, default: nil
+attribute :keyserver_retries, Integer, default: node['apt']['keyserver_retries']
+attribute :keyserver_retry_delay, Integer, default: node['apt']['keyserver_retry_delay']
 # trigger cache rebuild
 # If not you can trigger in the recipe itself after checking the status of resource.updated{_by_last_action}?
 attribute :cache_rebuild, kind_of: [TrueClass, FalseClass], default: true

@@ -49,6 +49,10 @@ suites:
   - name: lwrps
     run_list:
       - recipe[apt_test::lwrps]
+    attributes:
+      apt:
+        keyserver_retries: 3
+        keyserver_retry_delay: 5
 
   - name: unattended-upgrades
     run_list:
@@ -57,4 +61,3 @@ suites:
       apt:
         unattended_upgrades:
           enable: true
-

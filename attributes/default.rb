@@ -49,3 +49,6 @@ default['apt']['unattended_upgrades']['dl_limit'] = nil
 
 default['apt']['confd']['install_recommends'] = true
 default['apt']['confd']['install_suggests'] = false
+
+default['apt']['keyserver_retries'] = 0
+default['apt']['keyserver_retry_delay'] = 0
