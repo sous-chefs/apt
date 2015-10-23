@@ -46,8 +46,9 @@ def install_key_from_keyserver(key, keyserver, key_proxy)
 
   ruby_block "validate-key #{key}" do
     block do
-      fail "The key #{key} is no longer valid and cannot be used for an apt repository." unless key_is_valid('apt-key list', key.upcase)
+      fail "The key #{key} is no longer valid and cannot be used for an apt repository."
     end
+    not_if { key_is_valid('apt-key list', key.upcase) }
   end
 end
 
