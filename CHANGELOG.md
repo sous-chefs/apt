@@ -1,11 +1,12 @@
 apt Cookbook CHANGELOG
 ======================
 
-v2.9.0 (Unreleased)
+v2.9.0
 -------------------
 - Add `sensitive` flag for apt\_repositories
 - Enable installation of recommended or suggested packages
 - Tidy up `apt-get update` logic
+- Fixing not_if guard on ruby_block[validate-key #{key}]
 
 v2.8.2 (2015-08-24)
 -------------------
