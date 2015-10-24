@@ -1,6 +1,10 @@
 apt Cookbook CHANGELOG
 ======================
 
+v2.9.1
+-------------------
+- Adding package apt-transport-https to default.rb
+
 v2.9.0
 -------------------
 - Add `sensitive` flag for apt\_repositories
