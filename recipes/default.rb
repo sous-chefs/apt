@@ -105,3 +105,7 @@ template '/etc/apt/apt.conf.d/10recommends' do
   mode '644'
   source '10recommends.erb'
 end
+
+package 'apt-transport-https' do
+  action :install
+end
