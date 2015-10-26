@@ -107,5 +107,6 @@ template '/etc/apt/apt.conf.d/10recommends' do
 end
 
 package 'apt-transport-https' do
+  only_if { apt_installed? }
   action :install
 end
