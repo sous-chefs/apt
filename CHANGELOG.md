@@ -1,6 +1,10 @@
 apt Cookbook CHANGELOG
 ======================
 
+v2.9.2
+-------------------
+- #168 Adding guard to package resource.
+
 v2.9.1
 -------------------
 - Adding package apt-transport-https to default.rb

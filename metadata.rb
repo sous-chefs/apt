@@ -5,7 +5,7 @@ license 'Apache 2.0'
 description 'Configures apt and apt services. Ships resources for managing apt repositories'
 issues_url 'https://github.com/chef-cookbooks/apt/issues' if respond_to?(:issues_url)
 source_url 'https://github.com/chef-cookbooks/apt' if respond_to?(:source_url)
-version '2.9.1'
+version '2.9.2'
 
 recipe 'apt::default', 'Runs apt-get update during compile phase and sets up preseed directories'
 recipe 'apt::cacher-ng', 'Set up an apt-cacher-ng caching proxy'
