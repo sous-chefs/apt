@@ -84,7 +84,7 @@ end
 
 # install apt key from URI
 def install_key_from_uri(uri)
-  key_name = uri.split(%r{\/}).last
+  key_name = uri.gsub(/[^0-9A-Za-z\-]/, '_')
   cached_keyfile = "#{Chef::Config[:file_cache_path]}/#{key_name}"
   if new_resource.key =~ /http/
     remote_file cached_keyfile do
