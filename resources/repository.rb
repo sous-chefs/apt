@@ -35,13 +35,14 @@ state_attrs :arch,
             :key,
             :keyserver,
             :key_proxy,
-            :repo_name,
+            :name,
             :trusted,
             :uri,
             :sensitive
 
 # name of the repo, used for source.list filename
-attribute :repo_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/]
+attribute :name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/]
+attribute :repo_name, kind_of: String # Unused.  Present for backwards compatibility
 attribute :uri, kind_of: String
 attribute :distribution, kind_of: String
 attribute :components, kind_of: Array, default: []
