@@ -70,6 +70,9 @@ end
 # Automatically remove packages that are no longer needed for dependencies
 execute 'apt-get autoremove' do
   command 'apt-get -y autoremove'
+  environment(
+    'DEBIAN_FRONTEND' => 'noninteractive'
+  )
   only_if { apt_installed? }
   action :nothing
 end
