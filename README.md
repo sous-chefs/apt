@@ -133,7 +133,7 @@ This LWRP provides an easy way to manage additional APT repositories. Adding a n
 - :remove: removes the repository file
 
 #### Attribute Parameters
-- repo_name: name attribute. The name of the channel to discover
+- name: name attribute. The name of the channel to discover
 - uri: the base of the Debian distribution
 - distribution: this is usually your release's codename...ie something like `karmic`, `lucid` or `maverick`
 - components: package groupings... when in doubt use `main`
