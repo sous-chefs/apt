@@ -78,13 +78,13 @@ If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly 
 
 Installs and configures the `unattended-upgrades` package to provide automatic package updates. This can be configured to upgrade all packages or to just install security updates by setting `['apt']['unattended_upgrades']['allowed_origins']`.
 
-To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy). 
+To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy).
 
 
 Attributes
 ----------
 
-### General 
+### General
 * `['apt']['compile_time_update']` - force the default recipe to run `apt-get update` at compile time.
 * `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) beetween two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
 
@@ -144,6 +144,7 @@ This LWRP provides an easy way to manage additional APT repositories. Adding a n
 - key: if a `keyserver` is provided, this is assumed to be the fingerprint, otherwise it can be either the URI to the GPG key for the repo, or a cookbook_file.
 - key_proxy: if set, pass the specified proxy via `http-proxy=` to GPG.
 - cookbook: if key should be a cookbook_file, specify a cookbook where the key is located for files/default. Defaults to nil, so it will use the cookbook where the resource is used.
+- ignore_apt_update_failure: set to false if you don't want to ignore `apt update` failing to fetch the repository
 
 #### Examples
 
