@@ -52,10 +52,12 @@ end
 # Updates 'apt-get update' timestamp after each update success
 directory '/etc/apt/apt.conf.d' do
   recursive true
+  only_if { apt_installed? }
 end
 
 cookbook_file '/etc/apt/apt.conf.d/15update-stamp' do
   source '15update-stamp'
+  only_if { apt_installed? }
 end
 
 # For other recipes to call to force an update
@@ -96,7 +98,7 @@ end
   directory dirname do
     owner 'root'
     group 'root'
-    mode 00755
+    mode '0755'
     action :create
     only_if { apt_installed? }
   end
@@ -105,8 +107,9 @@ end
 template '/etc/apt/apt.conf.d/10recommends' do
   owner 'root'
   group 'root'
-  mode '644'
+  mode '0644'
   source '10recommends.erb'
+  only_if { apt_installed? }
 end
 
 package 'apt-transport-https' do
