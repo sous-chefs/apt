@@ -24,6 +24,7 @@ suites:
   - name: cacher-ng
     run_list:
       - recipe[apt::cacher-ng]
+    excludes: centos-7.2
 
   - name: cacher-ng-client
     run_list:
@@ -34,6 +35,7 @@ suites:
         cacher_port: '9876'
         cacher_interface: 'eth0'
         compiletime: true
+    excludes: centos-7.2
 
   - name: compile-time
     run_list:
@@ -41,10 +43,12 @@ suites:
     attributes:
       apt:
         compile_time_update: true
+    excludes: centos-7.2
 
   - name: lwrps
     run_list:
       - recipe[apt_test::lwrps]
+    excludes: centos-7.2
 
   - name: unattended-upgrades
     run_list:
@@ -53,4 +57,4 @@ suites:
       apt:
         unattended_upgrades:
           enable: true
-
+    excludes: centos-7.2
