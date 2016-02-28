@@ -11,23 +11,17 @@ This cookbook includes recipes to execute apt-get update to ensure the local APT
 
 Requirements
 ------------
-**Version 2.0.0+ of this cookbook requires Chef 11.0.0 or later**. If your Chef version is earlier than 11.0.0, use version 1.10.0 of this cookbook.
-
-Version 1.8.2 to 1.10.0 of this cookbook requires **Chef 10.16.4** or later.
-
-If your Chef version is earlier than 10.16.4, use version 1.7.0 of this cookbook.
-
 ### Platform
-Please refer to the [TESTING file](TESTING.md) to see the currently (and passing) tested platforms. The release was tested on:
-
-* Ubuntu 10.04
-* Ubuntu 12.04
-* Ubuntu 13.04
-* Debian 7.1
-* Debian 6.0 (have with manual testing)
+* Ubuntu 12.04+
+* Debian 7+
 
 May work with or without modification on other Debian derivatives.
 
+### Chef
+* Chef 11+
+
+### Cookbooks
+* None
 
 -------
 ### default
