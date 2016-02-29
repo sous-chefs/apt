@@ -62,7 +62,7 @@ if servers.length > 0
     source '01proxy.erb'
     owner 'root'
     group 'root'
-    mode 00644
+    mode '0644'
     variables(
       proxy: cacher_ipaddress,
       port: servers[0]['apt']['cacher_port'],
