@@ -23,96 +23,87 @@
 # or other cookbooks which notify these resources will fail on non-apt-enabled
 # systems.
 
-Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.' unless apt_installed?
+if apt_installed?
+  first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run')
 
-first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run')
+  file '/var/lib/apt/periodic/update-success-stamp' do
+    owner 'root'
+    group 'root'
+    only_if {  }
+    action :nothing
+  end
 
-file '/var/lib/apt/periodic/update-success-stamp' do
-  owner 'root'
-  group 'root'
-  only_if { apt_installed? }
-  action :nothing
-end
+  # If compile_time_update run apt-get update at compile time
+  if node['apt']['compile_time_update'] && (!apt_up_to_date? || !::File.exist?(first_run_file))
+    e = bash 'apt-get-update at compile time' do
+      code <<-EOH
+        apt-get update
+        touch #{first_run_file}
+      EOH
+      ignore_failure true
+      action :nothing
+      notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+    end
+    e.run_action(:run)
+  end
 
-# If compile_time_update run apt-get update at compile time
-if node['apt']['compile_time_update'] && (!apt_up_to_date? || !::File.exist?(first_run_file))
-  e = bash 'apt-get-update at compile time' do
-    code <<-EOH
-      apt-get update
-      touch #{first_run_file}
-    EOH
+  # Updates 'apt-get update' timestamp after each update success
+  directory '/etc/apt/apt.conf.d' do
+    recursive true
+  end
+
+  cookbook_file '/etc/apt/apt.conf.d/15update-stamp' do
+    source '15update-stamp'
+  end
+
+  # For other recipes to call to force an update
+  execute 'apt-get update' do
+    command 'apt-get update'
     ignore_failure true
-    only_if { apt_installed? }
     action :nothing
     notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
   end
-  e.run_action(:run)
-end
 
-# Updates 'apt-get update' timestamp after each update success
-directory '/etc/apt/apt.conf.d' do
-  recursive true
-  only_if { apt_installed? }
-end
+  # Automatically remove packages that are no longer needed for dependencies
+  execute 'apt-get autoremove' do
+    command 'apt-get -y autoremove'
+    environment(
+      'DEBIAN_FRONTEND' => 'noninteractive'
+    )
+    action :nothing
+  end
 
-cookbook_file '/etc/apt/apt.conf.d/15update-stamp' do
-  source '15update-stamp'
-  only_if { apt_installed? }
-end
+  # Automatically remove .deb files for packages no longer on your system
+  execute 'apt-get autoclean' do
+    command 'apt-get -y autoclean'
+    action :nothing
+  end
 
-# For other recipes to call to force an update
-execute 'apt-get update' do
-  command 'apt-get update'
-  ignore_failure true
-  only_if { apt_installed? }
-  action :nothing
-  notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-end
+  execute 'apt-get-update-periodic' do
+    command 'apt-get update'
+    ignore_failure true
+    not_if { apt_up_to_date? }
+    notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+  end
 
-# Automatically remove packages that are no longer needed for dependencies
-execute 'apt-get autoremove' do
-  command 'apt-get -y autoremove'
-  environment(
-    'DEBIAN_FRONTEND' => 'noninteractive'
-  )
-  only_if { apt_installed? }
-  action :nothing
-end
+  %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
+    directory dirname do
+      owner 'root'
+      group 'root'
+      mode '0755'
+      action :create
+    end
+  end
 
-# Automatically remove .deb files for packages no longer on your system
-execute 'apt-get autoclean' do
-  command 'apt-get -y autoclean'
-  only_if { apt_installed? }
-  action :nothing
-end
-
-execute 'apt-get-update-periodic' do
-  command 'apt-get update'
-  ignore_failure true
-  only_if { apt_installed? }
-  not_if { apt_up_to_date? }
-  notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-end
-
-%w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
-  directory dirname do
+  template '/etc/apt/apt.conf.d/10recommends' do
     owner 'root'
     group 'root'
-    mode '0755'
-    action :create
-    only_if { apt_installed? }
+    mode '0644'
+    source '10recommends.erb'
   end
-end
 
-template '/etc/apt/apt.conf.d/10recommends' do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  source '10recommends.erb'
-  only_if { apt_installed? }
-end
+  package 'apt-transport-https'
 
-package 'apt-transport-https' do
-  only_if { apt_installed? }
-  action :install
+else
+  Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.'
 end
