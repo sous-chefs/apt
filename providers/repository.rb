@@ -89,7 +89,7 @@ def install_key_from_uri(uri)
   if new_resource.key =~ /http/
     remote_file cached_keyfile do
       source new_resource.key
-      mode 00644
+      mode '0644'
       sensitive new_resource.sensitive if respond_to?(:sensitive)
       action :create
     end
@@ -97,7 +97,7 @@ def install_key_from_uri(uri)
     cookbook_file cached_keyfile do
       source new_resource.key
       cookbook new_resource.cookbook
-      mode 00644
+      mode '0644'
       sensitive new_resource.sensitive if respond_to?(:sensitive)
       action :create
     end
@@ -226,7 +226,7 @@ action :add do
   file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
     owner 'root'
     group 'root'
-    mode 00644
+    mode '0644'
     content repository
     sensitive new_resource.sensitive if respond_to?(:sensitive)
     action :create

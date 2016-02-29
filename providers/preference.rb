@@ -42,7 +42,7 @@ action :add do
   directory '/etc/apt/preferences.d' do
     owner 'root'
     group 'root'
-    mode 00755
+    mode '0755'
     recursive true
     action :create
   end
@@ -67,7 +67,7 @@ action :add do
   file "/etc/apt/preferences.d/#{name}.pref" do
     owner 'root'
     group 'root'
-    mode 00644
+    mode '0644'
     content preference
     action :create
   end

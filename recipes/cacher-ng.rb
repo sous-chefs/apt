@@ -31,7 +31,7 @@ template '/etc/apt-cacher-ng/acng.conf' do
   source 'acng.conf.erb'
   owner 'root'
   group 'root'
-  mode 00644
+  mode '0644'
   notifies :restart, 'service[apt-cacher-ng]', :immediately
 end
 
