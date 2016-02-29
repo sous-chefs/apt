@@ -13,6 +13,5 @@ recipe 'apt::cacher-client', 'Client for the apt::cacher-ng caching proxy'
 %w(ubuntu debian).each do |os|
   supports os
 end
-
-issues_url 'https://github.com/chef-cookbooks/apt/issues' if respond_to?(:issues_url)
 source_url 'https://github.com/chef-cookbooks/apt' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/apt/issues' if respond_to?(:issues_url)
