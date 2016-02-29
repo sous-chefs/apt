@@ -6,6 +6,8 @@
 - Updated the autoremove command in the default recipe to run in non-interactive mode
 - Added CentOS 7 to Test Kitchenwith tests to ensure we don't create any files on RHEL or other non-Debian hosts
 - Updated Chefspec to 4.X format
+- Properly mock the existence of apt for the Chefspec runs so they don't just skip over the resources
+- Fixed lwrp test kitchen tests to pass
 - Resolved or disabled all Rubocop warnings
 - Enabled testing in Travis CI
 - Removed Apt Cacher NG support for Ubuntu 10.04 and Debian 6.X as they are both deprecated
