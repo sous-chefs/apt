@@ -46,7 +46,7 @@ def install_key_from_keyserver(key, keyserver, key_proxy)
 
   ruby_block "validate-key #{key}" do
     block do
-      fail "The key #{key} is no longer valid and cannot be used for an apt repository."
+      raise "The key #{key} is no longer valid and cannot be used for an apt repository."
     end
     not_if { key_is_valid('apt-key list', key.upcase) }
   end
@@ -57,7 +57,7 @@ def extract_fingerprints_from_cmd(cmd)
   so = Mixlib::ShellOut.new(cmd, env: { 'LANG' => 'en_US', 'LANGUAGE' => 'en_US' })
   so.run_command
   so.stdout.split(/\n/).map do |t|
-    if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/)
+    if z = t.match(/^ +Key fingerprint = ([0-9A-F ]+)/) # rubocop: disable Lint/AssignmentInCondition
       z[1].split.join
     end
   end.compact
@@ -71,7 +71,7 @@ def key_is_valid(cmd, key)
   so.run_command
   # rubocop:disable Style/Next
   so.stdout.split(/\n/).map do |t|
-    if t.match(%r{^\/#{key}.*\[expired: .*\]$})
+    if t =~ %r{^\/#{key}.*\[expired: .*\]$}
       Chef::Log.debug "Found expired key: #{t}"
       valid = false
       break
@@ -104,7 +104,7 @@ def install_key_from_uri(uri)
 
     ruby_block "validate-key #{cached_keyfile}" do
       block do
-        fail "The key #{cached_keyfile} is no longer valid and cannot be used for an apt repository." unless key_is_valid("gpg #{cached_keyfile}", '')
+        raise "The key #{cached_keyfile} is no longer valid and cannot be used for an apt repository." unless key_is_valid("gpg #{cached_keyfile}", '')
       end
     end
   end
@@ -122,8 +122,8 @@ def install_key_from_uri(uri)
 end
 
 # build repo file contents
-def build_repo(uri, distribution, components, trusted, arch, add_deb_src)
-  uri = '"' + uri + '"' unless uri.start_with?("\"", "'")
+def build_repo(uri, distribution, components, trusted, arch, add_deb_src) # rubocop: disable Metrics/ParameterLists
+  uri = '"' + uri + '"' unless uri.start_with?('"', "'")
   components = components.join(' ') if components.respond_to?(:join)
   repo_options = []
   repo_options << "arch=#{arch}" if arch
@@ -201,27 +201,27 @@ action :add do
     notifies :run, 'execute[apt-cache gencaches]', :immediately
   end
 
-  if new_resource.uri.start_with?('ppa:')
-    # build ppa repo file
-    repository = build_repo(
-      get_ppa_url(new_resource.uri, new_resource.key_proxy),
-      new_resource.distribution,
-      'main',
-      new_resource.trusted,
-      new_resource.arch,
-      new_resource.deb_src
-    )
-  else
-    # build repo file
-    repository = build_repo(
-      new_resource.uri,
-      new_resource.distribution,
-      new_resource.components,
-      new_resource.trusted,
-      new_resource.arch,
-      new_resource.deb_src
-    )
-  end
+  repository = if new_resource.uri.start_with?('ppa:')
+                 # build ppa repo file
+                 build_repo(
+                   get_ppa_url(new_resource.uri, new_resource.key_proxy),
+                   new_resource.distribution,
+                   'main',
+                   new_resource.trusted,
+                   new_resource.arch,
+                   new_resource.deb_src
+                 )
+               else
+                 # build repo file
+                 build_repo(
+                   new_resource.uri,
+                   new_resource.distribution,
+                   new_resource.components,
+                   new_resource.trusted,
+                   new_resource.arch,
+                   new_resource.deb_src
+                 )
+               end
 
   file "/etc/apt/sources.list.d/#{new_resource.name}.list" do
     owner 'root'
