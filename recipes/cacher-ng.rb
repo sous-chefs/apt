@@ -19,14 +19,12 @@
 
 node.set['apt']['caching_server'] = true
 
-package 'apt-cacher-ng' do
-  action :install
-end
+package 'apt-cacher-ng'
 
 directory node['apt']['cacher_dir'] do
   owner 'apt-cacher-ng'
   group 'apt-cacher-ng'
-  mode 0755
+  mode '0755'
 end
 
 template '/etc/apt-cacher-ng/acng.conf' do
