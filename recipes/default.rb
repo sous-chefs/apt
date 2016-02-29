@@ -29,7 +29,6 @@ if apt_installed?
   file '/var/lib/apt/periodic/update-success-stamp' do
     owner 'root'
     group 'root'
-    only_if {  }
     action :nothing
   end
 

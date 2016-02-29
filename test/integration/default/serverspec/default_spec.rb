@@ -1,6 +1,6 @@
 require_relative './spec_helper'
 
-if ['debian', 'ubuntu'].include?(os[:family])
+if %w(debian ubuntu).include?(os[:family])
   describe 'apt::default' do
     describe file('/var/cache/local/preseeding') do
       it 'is a directory' do

@@ -19,7 +19,7 @@
 
 module ::Apt
   def interface_ipaddress(host, interface)
-    if interface
+    if interface # rubocop: disable Style/GuardClause
       addresses = host['network']['interfaces'][interface]['addresses']
       addresses.select do |ip, data|
         return ip if data['family'].eql?('inet')
