@@ -6,11 +6,10 @@ describe 'apt::default' do
       node.automatic[:lsb][:codename] = 'trusty'
     end.converge('apt::default')
   end
-  
-  before{
-    allow(::File).to receive(:executable?).and_return(true)
-  }
 
+  before do
+    allow(::File).to receive(:executable?).and_return(true)
+  end
 
   it 'creates 10recommends file' do
     expect(chef_run).to render_file('/etc/apt/apt.conf.d/10recommends').with_content('# Managed by Chef')
