@@ -1,6 +1,5 @@
 # apt Cookbook CHANGELOG
-
-## UNRELEASED
+## 3.0.0 (2015-03-01)
 - Removed Chef 10 compatibility code. This cookbook requires Chef 11 or greater now
 - The default recipe will no longer create /etc/apt/ and other directories on non-Debian based systems
 - Updated the autoremove command in the default recipe to run in non-interactive mode
@@ -11,6 +10,7 @@
 - Resolved or disabled all Rubocop warnings
 - Enabled testing in Travis CI
 - Removed Apt Cacher NG support for Ubuntu 10.04 and Debian 6.X as they are both deprecated
+- Fixed + signs in packages names with the preference LWRP being rejected
 
 ## v2.9.2
 - #168 Adding guard to package resource.
