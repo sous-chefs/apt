@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Resource:: preference
 #
-# Copyright 2010-2013, Chef Software, Inc.
+# Copyright 2010-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,20 +18,14 @@
 #
 
 actions :add, :remove
-default_action :add if defined?(default_action) # Chef > 10.8
-
-# Needed for Chef versions < 0.10.10
-def initialize(*args)
-  super
-  @action = :add
-end
+default_action :add
 
 state_attrs :glob,
             :package_name,
             :pin,
             :pin_priority
 
-attribute :package_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*)+$/]
+attribute :package_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*|\+)+$/]
 attribute :glob, kind_of: String
 attribute :pin, kind_of: String
 attribute :pin_priority, kind_of: String

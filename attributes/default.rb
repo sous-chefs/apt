@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Attributes:: default
 #
-# Copyright 2009-2013, Chef Software, Inc.
+# Copyright 2009-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

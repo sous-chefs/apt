@@ -7,7 +7,7 @@ driver:
   privileged: true
 
 platforms:
-- name: centos-7.1
+- name: centos-7
   driver:
     image: centos:7
     platform: rhel

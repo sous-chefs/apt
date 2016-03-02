@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # library:: network
 #
-# Copyright 2013, Chef Software, Inc.
+# Copyright 2013-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
 module ::Apt
   def interface_ipaddress(host, interface)
-    if interface
+    if interface # rubocop: disable Style/GuardClause
       addresses = host['network']['interfaces'][interface]['addresses']
       addresses.select do |ip, data|
         return ip if data['family'].eql?('inet')

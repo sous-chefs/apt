@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Provider:: preference
 #
-# Copyright 2010-2011, Chef Software, Inc.
+# Copyright 2010-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
@@ -42,7 +42,7 @@ action :add do
   directory '/etc/apt/preferences.d' do
     owner 'root'
     group 'root'
-    mode 00755
+    mode '0755'
     recursive true
     action :create
   end
@@ -67,7 +67,7 @@ action :add do
   file "/etc/apt/preferences.d/#{name}.pref" do
     owner 'root'
     group 'root'
-    mode 00644
+    mode '0644'
     content preference
     action :create
   end
