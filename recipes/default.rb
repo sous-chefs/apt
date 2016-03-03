@@ -24,7 +24,7 @@
 # systems.
 
 if apt_installed?
-  first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run')
+  first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run') # rubocop: disable Lint/UselessAssignment
 
   file '/var/lib/apt/periodic/update-success-stamp' do
     owner 'root'
@@ -34,7 +34,7 @@ if apt_installed?
 
   # If compile_time_update run apt-get update at compile time
   if node['apt']['compile_time_update']
-    apt_update("compile time").run_action(:periodic)
+    apt_update('compile time').run_action(:periodic)
   end
 
   # Updates 'apt-get update' timestamp after each update success
@@ -69,7 +69,7 @@ if apt_installed?
     action :nothing
   end
 
-  apt_update "periodic"
+  apt_update 'periodic'
 
   %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
     directory dirname do
