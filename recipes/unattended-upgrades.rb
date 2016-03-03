@@ -2,7 +2,7 @@
 # Cookbook Name:: apt
 # Recipe:: unattended-upgrades
 #
-# Copyright 2014, Chef Software, Inc.
+# Copyright 2014-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -35,13 +35,13 @@ end
 template '/etc/apt/apt.conf.d/20auto-upgrades' do
   owner 'root'
   group 'root'
-  mode '644'
+  mode '0644'
   source '20auto-upgrades.erb'
 end
 
 template '/etc/apt/apt.conf.d/50unattended-upgrades' do
   owner 'root'
   group 'root'
-  mode '644'
+  mode '0644'
   source '50unattended-upgrades.erb'
 end

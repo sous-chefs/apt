@@ -42,7 +42,7 @@ describe 'apt_test::lwrps' do
   end
 
   it 'creates the correct pinning preferences for chef' do
-    pinning_prefs = 'Package: chef\nPin: version 10.16.2-1'
+    pinning_prefs = 'Package: chef\nPin: version 12.7.2-1'
     expect(file('/etc/apt/preferences.d/chef.pref').content).to match(/#{pinning_prefs}/)
   end
 

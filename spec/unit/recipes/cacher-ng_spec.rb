@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'apt::cacher-ng' do
   context 'server' do
     let(:chef_run) do
-      runner = ChefSpec::Runner.new
+      runner = ChefSpec::ServerRunner.new
       runner.node.set['apt']['cacher_port'] = '9876'
       runner.converge('apt::cacher-ng')
     end

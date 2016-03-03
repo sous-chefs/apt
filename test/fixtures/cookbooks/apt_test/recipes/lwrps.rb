@@ -2,7 +2,7 @@
 # Cookbook Name:: apt_test
 # Recipe:: lwrps
 #
-# Copyright 2012, Chef Software, Inc.
+# Copyright 2012-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,13 +76,13 @@ apt_repository 'haproxy' do
   action :add
 end
 
-package 'nginx-debug' do
+package 'nginx' do
   action :upgrade
 end
 
 # Apt Preferences
 apt_preference 'chef' do
-  pin 'version 10.16.2-1'
+  pin 'version 12.7.2-1'
   pin_priority '700'
 end
 
