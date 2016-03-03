@@ -33,17 +33,8 @@ if apt_installed?
   end
 
   # If compile_time_update run apt-get update at compile time
-  if node['apt']['compile_time_update'] && (!apt_up_to_date? || !::File.exist?(first_run_file))
-    e = bash 'apt-get-update at compile time' do
-      code <<-EOH
-        apt-get update
-        touch #{first_run_file}
-      EOH
-      ignore_failure true
-      action :nothing
-      notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-    end
-    e.run_action(:run)
+  if node['apt']['compile_time_update']
+    apt_update("compile time").run_action(:periodic)
   end
 
   # Updates 'apt-get update' timestamp after each update success
@@ -78,12 +69,7 @@ if apt_installed?
     action :nothing
   end
 
-  execute 'apt-get-update-periodic' do
-    command 'apt-get update'
-    ignore_failure true
-    not_if { apt_up_to_date? }
-    notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-  end
+  apt_update "periodic"
 
   %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
     directory dirname do
