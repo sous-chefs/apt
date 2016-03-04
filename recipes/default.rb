@@ -23,72 +23,65 @@
 # or other cookbooks which notify these resources will fail on non-apt-enabled
 # systems.
 
-if apt_installed?
-  first_run_file = File.join(Chef::Config[:file_cache_path], 'apt_compile_time_update_first_run') # rubocop: disable Lint/UselessAssignment
+file '/var/lib/apt/periodic/update-success-stamp' do
+  owner 'root'
+  group 'root'
+  action :nothing
+end
 
-  file '/var/lib/apt/periodic/update-success-stamp' do
+# If compile_time_update run apt-get update at compile time
+if node['apt']['compile_time_update']
+  apt_update('compile time').run_action(:periodic)
+end
+
+apt_update 'periodic' do
+  only_if { apt_installed? }
+end
+
+# For other recipes to call to force an update
+execute 'apt-get update' do
+  command 'apt-get update'
+  ignore_failure true
+  action :nothing
+  notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
+  only_if { apt_installed? }
+end
+
+# Automatically remove packages that are no longer needed for dependencies
+execute 'apt-get autoremove' do
+  command 'apt-get -y autoremove'
+  environment(
+    'DEBIAN_FRONTEND' => 'noninteractive'
+  )
+  action :nothing
+  only_if { apt_installed? }
+end
+
+# Automatically remove .deb files for packages no longer on your system
+execute 'apt-get autoclean' do
+  command 'apt-get -y autoclean'
+  action :nothing
+  only_if { apt_installed? }
+end
+
+%w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
+  directory dirname do
     owner 'root'
     group 'root'
-    action :nothing
+    mode '0755'
+    action :create
+    only_if { apt_installed? }
   end
+end
 
-  # If compile_time_update run apt-get update at compile time
-  if node['apt']['compile_time_update']
-    apt_update('compile time').run_action(:periodic)
-  end
+template '/etc/apt/apt.conf.d/10recommends' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  source '10recommends.erb'
+  only_if { apt_installed? }
+end
 
-  # Updates 'apt-get update' timestamp after each update success
-  directory '/etc/apt/apt.conf.d' do
-    recursive true
-  end
-
-  cookbook_file '/etc/apt/apt.conf.d/15update-stamp' do
-    source '15update-stamp'
-  end
-
-  # For other recipes to call to force an update
-  execute 'apt-get update' do
-    command 'apt-get update'
-    ignore_failure true
-    action :nothing
-    notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
-  end
-
-  # Automatically remove packages that are no longer needed for dependencies
-  execute 'apt-get autoremove' do
-    command 'apt-get -y autoremove'
-    environment(
-      'DEBIAN_FRONTEND' => 'noninteractive'
-    )
-    action :nothing
-  end
-
-  # Automatically remove .deb files for packages no longer on your system
-  execute 'apt-get autoclean' do
-    command 'apt-get -y autoclean'
-    action :nothing
-  end
-
-  apt_update 'periodic'
-
-  %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
-    directory dirname do
-      owner 'root'
-      group 'root'
-      mode '0755'
-      action :create
-    end
-  end
-
-  template '/etc/apt/apt.conf.d/10recommends' do
-    owner 'root'
-    group 'root'
-    mode '0644'
-    source '10recommends.erb'
-  end
-
-  package 'apt-transport-https'
-
-else
-  Chef::Log.debug 'apt is not installed. Apt-specific resources will not be executed.'
+package 'apt-transport-https' do
+  only_if { apt_installed? }
 end
