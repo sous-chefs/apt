@@ -17,4 +17,6 @@ end
 source_url 'https://github.com/chef-cookbooks/apt' if respond_to?(:source_url)
 issues_url 'https://github.com/chef-cookbooks/apt/issues' if respond_to?(:issues_url)
 
+chef_version '>= 12.0' if respond_to?(:chef_version)
+
 depends 'compat_resource'
