@@ -74,14 +74,6 @@ end
   end
 end
 
-template '/etc/apt/apt.conf.d/10recommends' do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  source '10recommends.erb'
-  only_if { apt_installed? }
-end
-
 package 'apt-transport-https' do
   only_if { apt_installed? }
 end
