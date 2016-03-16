@@ -64,7 +64,7 @@ If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly 
 ### unattended-upgrades
 Installs and configures the `unattended-upgrades` package to provide automatic package updates. This can be configured to upgrade all packages or to just install security updates by setting `['apt']['unattended_upgrades']['allowed_origins']`.
 
-To pull just security updates, you'd set `allowed_origins` to something link `["Ubuntu trusty-security"]` (for Ubuntu trusty) or `["Debian wheezy-security"]` (for Debian wheezy).
+To pull just security updates, set `origins_patterns` to something like `["origin=Ubuntu,archive=trusty-security"]` (for Ubuntu trusty) or `["origin=Debian,label=Debian-Security"]` (for Debian).
 
 ## Attributes
 ### General
@@ -85,6 +85,7 @@ To pull just security updates, you'd set `allowed_origins` to something link `["
 - `['apt']['unattended_upgrades']['enable']` - enables unattended upgrades, default is false
 - `['apt']['unattended_upgrades']['update_package_lists']` - automatically update package list (`apt-get update`) daily, default is true
 - `['apt']['unattended_upgrades']['allowed_origins']` - array of allowed apt origins from which to pull automatic upgrades, defaults to a guess at the system's main origin and should almost always be overridden
+- `['apt']['unattended_upgrades']['origins_patterns']` - array of allowed apt origin patterns from which to pull automatic upgrades, defaults to none.
 - `['apt']['unattended_upgrades']['package_blacklist']` - an array of package which should never be automatically upgraded, defaults to none
 - `['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg']` - attempts to repair dpkg state with `dpkg --force-confold --configure -a` if it exits uncleanly, defaults to false (contrary to the unattended-upgrades default)
 - `['apt']['unattended_upgrades']['minimal_steps']` - Split the upgrade into the smallest possible chunks. This makes the upgrade a bit slower but it has the benefit that shutdown while a upgrade is running is possible (with a small delay). Defaults to false.
