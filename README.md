@@ -94,6 +94,7 @@ To pull just security updates, you'd set `allowed_origins` to something link `["
 - `['apt']['unattended_upgrades']['remove_unused_dependencies']` Do automatic removal of new unused dependencies after the upgrade. Defaults to false.
 - `['apt']['unattended_upgrades']['automatic_reboot']` - Automatically reboots _without confirmation_ if a restart is required after the upgrade. Defaults to false.
 - `['apt']['unattended_upgrades']['dl_limit']` - Limits the bandwidth used by apt to download packages. Value given as an integer in kb/sec. Defaults to nil (no limit).
+- `['apt']['unattended_upgrades']['random_sleep]'` - Wait a random number of seconds up to this value before running daily periodic apt actions. System default is 1800 seconds (30 minutes).
 
 ### Configuration for APT
 - `['apt']['confd']['install_recommends']` - Consider recommended packages as a dependency for installing. (default: true)
