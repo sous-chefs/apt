@@ -36,6 +36,7 @@ codename = node.attribute?('lsb') ? node['lsb']['codename'] : 'notlinux'
 default['apt']['unattended_upgrades']['allowed_origins'] = [
   "#{node['platform'].capitalize} #{codename}"
 ]
+default['apt']['unattended_upgrades']['origins_patterns'] = []
 default['apt']['unattended_upgrades']['package_blacklist'] = []
 default['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg'] = false
 default['apt']['unattended_upgrades']['minimal_steps'] = false
