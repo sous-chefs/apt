@@ -12,19 +12,27 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-centos-7  
+  - INSTANCE=default-centos-7
+  - INSTANCE=default-debian-8 
+  - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
+  - INSTANCE=cacher-client-ubuntu-1604
   - INSTANCE=cacher-client-ubuntu-1404
   - INSTANCE=cacher-client-ubuntu-1204
+  - INSTANCE=cacher-ng-ubuntu-1604
   - INSTANCE=cacher-ng-ubuntu-1404
   - INSTANCE=cacher-ng-ubuntu-1204
+  - INSTANCE=cacher-ng-client-ubuntu-1604
   - INSTANCE=cacher-ng-client-ubuntu-1404
   - INSTANCE=cacher-ng-client-ubuntu-1204
+  - INSTANCE=compile-time-ubuntu-1604
   - INSTANCE=compile-time-ubuntu-1404
   - INSTANCE=compile-time-ubuntu-1204
+  - INSTANCE=lwrps-ubuntu-1604
   - INSTANCE=lwrps-ubuntu-1404
   - INSTANCE=lwrps-ubuntu-1204
+  - INSTANCE=unattended-upgrades-ubuntu-1604
   - INSTANCE=unattended-upgrades-ubuntu-1404
   - INSTANCE=unattended-upgrades-ubuntu-1204
 
@@ -36,7 +44,8 @@ before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
+
 script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/rubocop --version
