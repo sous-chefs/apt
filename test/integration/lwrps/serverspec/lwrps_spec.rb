@@ -67,7 +67,7 @@ describe 'apt_test::lwrps' do
   end
 
   it 'creates a repo with an architecture' do
-    cloudera = 'deb\s+\\[arch=amd64\\] \"http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh\" precise-cdh4 contrib'
+    cloudera = 'deb\s+\[arch=amd64 \] \"http:\/\/archive.cloudera.com\/cdh4\/ubuntu\/precise\/amd64\/cdh\" precise-cdh4 contrib'
     expect(file('/etc/apt/sources.list.d/cloudera.list').content).to match(/#{cloudera}/)
   end
 
