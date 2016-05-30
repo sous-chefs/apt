@@ -139,10 +139,10 @@ Enable Ubuntu [multiverse](https://help.ubuntu.com/community/Repositories/Ubuntu
 
 ```ruby
 apt_repository 'security-ubuntu-multiverse' do
-  uri        'http://security.ubuntu.com/ubuntu'
+  uri          'http://security.ubuntu.com/ubuntu'
   distribution 'trusty-security'
-  components ['multiverse']
-  deb_src 'true'
+  components   ['multiverse']
+  deb_src      true
 end
 ```
 
