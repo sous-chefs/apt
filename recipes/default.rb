@@ -29,6 +29,12 @@ file '/var/lib/apt/periodic/update-success-stamp' do
   action :nothing
 end
 
+execute 'apt-archive-repo' do
+    command 'sed -i -e "s/archive.ubuntu.com\|security.ubuntu.com\|mirrors.digitalocean.com\|mirror.rackspace.com/old-releases.ubuntu.com/g" /etc/apt/sources.list'
+    action :nothing
+    only_if { node['platform_version'] == '12.10' }
+end.run_action(:run)
+
 # If compile_time_update run apt-get update at compile time
 if node['apt']['compile_time_update']
   apt_update('compile time').run_action(:periodic)
