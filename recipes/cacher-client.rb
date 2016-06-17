@@ -48,7 +48,11 @@ unless Chef::Config[:solo] || !servers.empty?
   query = 'apt_caching_server:true'
   query += " AND chef_environment:#{node.chef_environment}" if node['apt']['cacher-client']['restrict_environment']
   Chef::Log.debug("apt::cacher-client searching for '#{query}'")
-  servers += search(:node, query)
+    if Chef::Config[:solo]
+    Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
+  else
+    servers += search(:node, query)
+  end
 end
 
 if !servers.empty?
