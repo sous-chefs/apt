@@ -30,7 +30,7 @@ file '/var/lib/apt/periodic/update-success-stamp' do
 end
 
 # If compile_time_update run apt-get update at compile time
-if node['apt']['compile_time_update']
+if node['apt']['compile_time_update'] && apt_installed?
   apt_update('compile time').run_action(:periodic)
 end
 
