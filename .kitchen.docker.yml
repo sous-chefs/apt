@@ -1,4 +1,3 @@
----
 driver:
   name: dokken
   chef_version: latest
@@ -15,22 +14,30 @@ verifier:
   sudo: false
 
 platforms:
+- name: debian-7
+  driver:
+    image: debian:7
+    pid_one_command: /sbin/init
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install lsb-release -y
+
 - name: debian-8
   driver:
     image: debian:8
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
+      - RUN /usr/bin/apt-get install lsb-release -y
 
 
 - name: centos-7
   driver:
     image: centos:7
-    intermediate_instructions:
-      - RUN yum clean all
-      - RUN yum -y install net-tools lsof
+    platform: rhel
     pid_one_command: /usr/lib/systemd/systemd
+    intermediate_instructions:
+      - RUN yum -y install lsof which
 
 - name: ubuntu-12.04
   driver:
@@ -38,7 +45,6 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
 
 - name: ubuntu-14.04
   driver:
@@ -46,7 +52,6 @@ platforms:
     pid_one_command: /sbin/init
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
 
 - name: ubuntu-16.04
   driver:
@@ -54,7 +59,7 @@ platforms:
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
+
 
 suites:
   - name: default
