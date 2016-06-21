@@ -1,5 +1,9 @@
 # apt Cookbook CHANGELOG
 
+## 4.0.1 (2016-06-21)
+
+- Fix bug that prevented adding the cookbook to non Debian/Ubuntu nodes without chef run failures
+
 ## 4.0.0 (2016-06-02)
 
 This cookbook now requires Chef 12\. If you require Chef 11 compatibility you will need to pin to the 3.X cookbook version

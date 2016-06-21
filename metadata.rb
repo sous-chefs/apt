@@ -4,7 +4,7 @@ maintainer_email 'cookbooks@chef.io'
 license 'Apache 2.0'
 description 'Configures apt and apt services. Ships resources for managing apt repositories'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '4.0.0'
+version '4.0.1'
 
 recipe 'apt::default', 'Runs apt-get update during compile phase and sets up preseed directories'
 recipe 'apt::cacher-ng', 'Set up an apt-cacher-ng caching proxy'
