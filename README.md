@@ -11,7 +11,7 @@ This cookbook includes recipes to execute apt-get update to ensure the local APT
 May work with or without modification on other Debian derivatives.
 
 ### Chef
-- Chef 12+
+- Chef 12.1+
 
 ### Cookbooks
 - None
