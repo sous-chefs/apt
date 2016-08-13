@@ -1,8 +1,11 @@
 unless defined? Chef::Resource::AptUpdate
   require 'chef_compat/copied_from_chef/chef/dsl/declare_resource'
+  require 'chef/mixin/shell_out'
 
   class AptUpdate < ChefCompat::Resource
     include ChefCompat::CopiedFromChef::Chef::DSL::DeclareResource
+    include Chef::Mixin::ShellOut
+
     resource_name :apt_update
 
     provides :apt_update, os: 'linux'
