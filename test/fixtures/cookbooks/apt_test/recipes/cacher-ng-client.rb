@@ -2,7 +2,7 @@
 # Cookbook Name:: apt_test
 # Recipe:: cacher-ng-client
 #
-# Copyright 2013, Chef Software, Inc.
+# Copyright 2013-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+apt_update 'update'
 
 include_recipe 'apt::cacher-ng'
 include_recipe 'apt::cacher-client'
