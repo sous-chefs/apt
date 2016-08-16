@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe 'apt::default' do
-  let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '14.04') do |node|
-      node.automatic[:lsb][:codename] = 'trusty'
-    end.converge('apt::default')
-  end
+  let(:runner) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') }
+  let(:chef_run) { runner.converge('apt::default') }
 
   before do
     allow(::File).to receive(:executable?).and_return(true)
