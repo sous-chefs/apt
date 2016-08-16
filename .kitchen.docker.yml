@@ -54,10 +54,12 @@ suites:
 
   - name: cacher-client
     run_list:
+      - recipe[apt::default]
       - recipe[apt::cacher-client]
 
   - name: cacher-ng
     run_list:
+      - recipe[apt::default]
       - recipe[apt::cacher-ng]
 
   - name: cacher-ng-client
@@ -88,4 +90,3 @@ suites:
       apt:
         unattended_upgrades:
           enable: true
-

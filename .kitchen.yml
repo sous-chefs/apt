@@ -24,10 +24,12 @@ suites:
 
   - name: cacher-client
     run_list:
+      - recipe[apt::default]
       - recipe[apt::cacher-client]
 
   - name: cacher-ng
     run_list:
+      - recipe[apt::default]
       - recipe[apt::cacher-ng]
     excludes: centos-7.2
 
