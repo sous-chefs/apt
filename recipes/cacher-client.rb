@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-
 # remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
 # these are leftover from preseed installs
 execute 'Remove proxy from /etc/apt/apt.conf' do
