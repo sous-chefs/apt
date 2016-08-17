@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt_test
-# Recipe:: default
+# Recipe:: cacher
 #
-# Copyright 2012, Chef Software, Inc.
+# Copyright 2013-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,19 @@
 # limitations under the License.
 #
 
-require_relative './spec_helper'
+node.default['apt']['cacher_dir'] = '/tmp/apt-cacher'
+node.default['apt']['cacher_port'] = '9876'
+node.default['apt']['cacher_interface'] = 'eth0'
+node.default['apt']['cacher_client']['cacher_server'] = {
+  host: 'localhost',
+  port: 9876,
+  proxy_ssl: true
+}
 
-describe 'apt_test::default' do
-  it 'runs the cacher service' do
-    expect(service('apt-cacher-ng')).to be_running
-  end
-end
+apt_update 'update'
+
+include_recipe 'apt::cacher-ng'
+include_recipe 'apt::cacher-client'
+
+# install a small, innocuous application to verify this works
+package 'colordiff'
