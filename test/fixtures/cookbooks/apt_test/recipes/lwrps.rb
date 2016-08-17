@@ -19,30 +19,41 @@
 
 include_recipe 'apt'
 
-# Apt Repository
-apt_repository 'juju' do
-  uri '"http://ppa.launchpad.net/juju/stable/ubuntu"'
-  components ['main']
-  distribution 'trusty'
-  key 'C8068B11'
-  keyserver 'keyserver.ubuntu.com'
-  action :add
-end
+if node['platform'] == 'ubuntu'
+  # Apt Repository
+  apt_repository 'juju' do
+    uri '"http://ppa.launchpad.net/juju/stable/ubuntu"'
+    components ['main']
+    distribution 'trusty'
+    key 'C8068B11'
+    keyserver 'keyserver.ubuntu.com'
+    action :add
+  end
 
-# Apt Repository
-apt_repository 'nodejs' do
-  uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
-  components ['main']
-  distribution 'trusty'
-  key 'C7917B12'
-  keyserver 'hkp://keyserver.ubuntu.com:80'
-  action :add
-end
+  # Apt Repository
+  apt_repository 'nodejs' do
+    uri 'http://ppa.launchpad.net/chris-lea/node.js/ubuntu'
+    components ['main']
+    distribution 'trusty'
+    key 'C7917B12'
+    keyserver 'hkp://keyserver.ubuntu.com:80'
+    action :add
+  end
 
-# PPA Repository
-apt_repository 'gimp' do
-  uri 'ppa:otto-kesselgulasch/gimp'
-  not_if { node['platform'] == 'debian' }
+  # PPA Repository
+  apt_repository 'gimp' do
+    uri 'ppa:otto-kesselgulasch/gimp'
+  end
+
+  # Apt repository that suppresses output for sensitive resources.
+  apt_repository 'haproxy' do
+    uri 'http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu'
+    components ['main']
+    keyserver 'keyserver.ubuntu.com'
+    key '1C61B9CD'
+    sensitive true
+    action :add
+  end
 end
 
 # Apt Repository with arch
@@ -61,16 +72,6 @@ apt_repository 'nginx' do
   components ['nginx']
   key 'http://nginx.org/keys/nginx_signing.key'
   deb_src true
-end
-
-# Apt repository that suppresses output for sensitive resources.
-apt_repository 'haproxy' do
-  uri 'http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu'
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key '1C61B9CD'
-  sensitive true
-  action :add
 end
 
 package 'nginx' do
