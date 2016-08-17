@@ -19,6 +19,9 @@
 
 include_recipe 'apt'
 
+# without this dist data won't be populated by Ohai in docker
+package 'lsb-release'
+
 if node['platform'] == 'ubuntu'
   # Apt Repository
   apt_repository 'juju' do

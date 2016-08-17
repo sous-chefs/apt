@@ -26,7 +26,7 @@ env:
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
-  - INSTANCE=cacher-debian-7
+  # - INSTANCE=cacher-debian-7 #ipv6 failures
   - INSTANCE=cacher-debian-8
   - INSTANCE=cacher-ubuntu-1604
   - INSTANCE=cacher-ubuntu-1404
