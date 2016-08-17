@@ -17,10 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'apt'
-
-# without this dist data won't be populated by Ohai in docker
-package 'lsb-release'
+include_recipe 'apt_test::base'
 
 if node['platform'] == 'ubuntu'
   # Apt Repository

@@ -69,7 +69,7 @@ suites:
 
   - name: unattended-upgrades
     run_list:
-      - recipe[apt::unattended-upgrades]
+      - recipe[apt_test::unattended-upgrades]
     attributes:
       apt:
         unattended_upgrades:
