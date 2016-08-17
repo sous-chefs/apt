@@ -39,6 +39,12 @@ apt_repository 'nodejs' do
   action :add
 end
 
+# PPA Repository
+apt_repository 'gimp' do
+  uri 'ppa:otto-kesselgulasch/gimp'
+  not_if { node['platform'] == 'debian' }
+end
+
 # Apt Repository with arch
 apt_repository 'cloudera' do
   uri 'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
@@ -68,7 +74,7 @@ apt_repository 'haproxy' do
 end
 
 package 'nginx' do
-  action :upgrade
+  action :install
 end
 
 # Apt Preferences

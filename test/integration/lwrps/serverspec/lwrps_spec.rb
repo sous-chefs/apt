@@ -48,8 +48,8 @@ describe 'apt_test::lwrps' do
 
   it 'correctly handles a ppa: repository' do
     skip('not on ubuntu') unless os[:family] == 'ubuntu'
-    rust = 'http://ppa.launchpad.net/hansjorg/rust/ubuntu'
-    expect(file('/etc/apt/sources.list.d/rust.list').content).to match(/#{rust}/)
+    gimp = 'http://ppa.launchpad.net/otto-kesselgulasch/gimp/ubuntu'
+    expect(file('/etc/apt/sources.list.d/gimp.list').content).to match(/#{gimp}/)
   end
 
   it 'renames an old preferences file' do
@@ -67,7 +67,7 @@ describe 'apt_test::lwrps' do
   end
 
   it 'creates a repo with an architecture' do
-    cloudera = 'deb\s+\[arch=amd64 \] \"http:\/\/archive.cloudera.com\/cdh4\/ubuntu\/precise\/amd64\/cdh\" precise-cdh4 contrib'
+    cloudera = 'deb\s+\[arch=amd64\] "http:\/\/archive.cloudera.com\/cdh4\/ubuntu\/precise\/amd64\/cdh" precise-cdh4 contrib'
     expect(file('/etc/apt/sources.list.d/cloudera.list').content).to match(/#{cloudera}/)
   end
 
