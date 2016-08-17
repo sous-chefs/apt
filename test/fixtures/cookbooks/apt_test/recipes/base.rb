@@ -19,7 +19,16 @@
 
 apt_update 'update'
 
-include_recipe 'apt::default'
-
 # without this dist data won't be populated by Ohai in docker
-package 'lsb-release'
+if platform?('debian')
+  package 'lsb-release' do
+    action :install
+    notifies :reload, 'ohai[reload_ohai]', :immediately
+  end
+
+  ohai 'reload_ohai' do
+    action :nothing
+  end
+end
+
+include_recipe 'apt::default'
