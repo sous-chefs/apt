@@ -39,13 +39,6 @@ apt_repository 'nodejs' do
   action :add
 end
 
-# PPA Repository
-apt_repository 'rust' do
-  uri 'ppa:hansjorg/rust'
-  distribution node['lsb']['codename']
-  not_if { node['platform'] == 'debian' }
-end
-
 # Apt Repository with arch
 apt_repository 'cloudera' do
   uri 'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
@@ -59,7 +52,6 @@ end
 # Apt repository and install a package it contains
 apt_repository 'nginx' do
   uri "http://nginx.org/packages/#{node['platform']}"
-  distribution node['lsb']['codename']
   components ['nginx']
   key 'http://nginx.org/keys/nginx_signing.key'
   deb_src true
@@ -68,7 +60,6 @@ end
 # Apt repository that suppresses output for sensitive resources.
 apt_repository 'haproxy' do
   uri 'http://ppa.launchpad.net/vbernat/haproxy-1.5/ubuntu'
-  distribution node['lsb']['codename']
   components ['main']
   keyserver 'keyserver.ubuntu.com'
   key '1C61B9CD'

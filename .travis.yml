@@ -40,7 +40,6 @@ env:
   - INSTANCE=lwrps-ubuntu-1604
   - INSTANCE=lwrps-ubuntu-1404
   - INSTANCE=lwrps-ubuntu-1204
-  - INSTANCE=unattended-upgrades-ubuntu-1604
   - INSTANCE=unattended-upgrades-ubuntu-1404
   - INSTANCE=unattended-upgrades-ubuntu-1204
 
