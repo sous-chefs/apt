@@ -23,7 +23,11 @@ node.default['apt']['cacher_interface'] = 'eth0'
 node.default['apt']['cacher_client']['cacher_server'] = {
   host: 'localhost',
   port: 9876,
-  proxy_ssl: true
+  proxy_ssl: true,
+  cache_bypass: {
+    'download.oracle.com' => 'https',
+    'nginx.org' => 'https'
+  }
 }
 
 include_recipe 'apt_test::base'

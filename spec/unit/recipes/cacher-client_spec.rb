@@ -5,7 +5,7 @@ describe 'apt::cacher-client' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
     before do
-      stub_command("grep Acquire::http::Proxy /etc/apt/apt.conf").and_return(false)
+      stub_command('grep Acquire::http::Proxy /etc/apt/apt.conf').and_return(false)
     end
 
     it 'does not create 01proxy file' do
@@ -25,7 +25,7 @@ describe 'apt::cacher-client' do
     end
 
     before do
-      stub_command("grep Acquire::http::Proxy /etc/apt/apt.conf").and_return(false)
+      stub_command('grep Acquire::http::Proxy /etc/apt/apt.conf').and_return(false)
     end
 
     it 'creates 01proxy file' do

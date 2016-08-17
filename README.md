@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/chef-cookbooks/apt.svg)][travis] [![Cookbook Version](https://img.shields.io/cookbook/v/apt.svg)][cookbook]
 
-This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a LWRP for managing APT repositories in /etc/apt/sources.list.d as well as an LWRP for pinning packages via /etc/apt/preferences.d.
+This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a custom resource for managing APT repositories in /etc/apt/sources.list.d as well as an custom resource for pinning packages via /etc/apt/preferences.d.
 
 ## Requirements
 
@@ -31,35 +31,61 @@ This recipe should appear first in the run list of Debian or Ubuntu nodes to ens
 
 This recipe also sets up a local cache directory for preseeding packages.
 
-**Including the default recipe on a node that does not support apt (such as Windows) results in a noop.**
+**Including the default recipe on a node that does not support apt (such as Windows or RHEL) results in a noop.**
 
 ### cacher-client
 
-Configures the node to use the `apt-cacher-ng` server as a client.
-
-#### Bypassing the cache
-
-Occasionally you may come across repositories that do not play nicely when the node is using an `apt-cacher-ng` server. You can configure `cacher-client` to bypass the server and connect directly to the repository with the `cache_bypass` attribute.
-
-To do this, you need to override the `cache_bypass` attribute with an array of repositories, with each array key as the repository URL and value as the protocol to use:
+Configures the node to use a `apt-cacher-ng` server to cache apt requests. Configuration of the server to use is located in `default['apt']['cacher_client']['cacher_server']` which is a hash containing `host`, `port`, `proxy_ssl`, and `bypass` keys. Example:
 
 ```json
 {
     "apt": {
-        "cache_bypass": {
-            "URL": "PROTOCOL"
+        "cacher_client": {
+            "cacher_server": {
+                "host": "cache_server.mycorp.dmz",
+                "port": 1234,
+                "proxy_ssl": true,
+                "cache_bypass": {
+                    "download.oracle.com": "http"
+                }
+            }
         }
     }
 }
 ```
 
-For example, to prevent caching and directly connect to the repository at `download.oracle.com` via http:
+#### Bypassing the cache
+
+Occasionally you may come across repositories that do not play nicely when the node is using an `apt-cacher-ng` server. You can configure `cacher-client` to bypass the server and connect directly to the repository with the `cache_bypass` attribute.
+
+To do this, you need to override the `cache_bypass` attribute with an hash of repositories, with each key as the repository URL and value as the protocol to use:
 
 ```json
 {
     "apt": {
-        "cache_bypass": {
-            "download.oracle.com": "http"
+        "cacher_client": {
+            "cacher_server": {
+                "cache_bypass": {
+                    "URL": "PROTOCOL"
+                }
+            }
+        }
+    }
+}
+```
+
+For example, to prevent caching and directly connect to the repository at `download.oracle.com` via http and the repo at `nginx.org` via https
+
+```json
+{
+    "apt": {
+        "cacher_client": {
+            "cacher_server": {
+                "cache_bypass": {
+                    "download.oracle.com": "http",
+                    "nginx.org": "https"  
+                }
+            }
         }
     }
 }
@@ -82,18 +108,15 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 ### General
 
 - `['apt']['compile_time_update']` - force the default recipe to run `apt-get update` at compile time.
-- `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) beetween two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
+- `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) between two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
 
 ### Caching
 
-- `['apt']['cacher_ipaddress']` - use a cacher server (or standard proxy server) not available via search
+- `['apt']['cacher_client']['cacher_server']` - Hash containing server information used by clients for caching. See the example in the recipes section above for the full format of the hash.
 - `['apt']['cacher_interface']` - interface to connect to the cacher-ng service, no default.
-- `['apt']['cacher_port']` - port for the cacher-ng service (either client or server), default is '3142'
-- `['apt']['cacher_ssl_support']` - indicates whether the cacher supports upstream SSL servers, default is 'false'
+- `['apt']['cacher_port']` - port for the cacher-ng service (used by server recipe only), default is '3142'
 - `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-- `['apt']['cacher-client']['restrict_environment']` - restrict your node to using the `apt-cacher-ng` server in your Environment, default is 'false'
 - `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-- `['apt']['cache_bypass']` - array of URLs to bypass the cache. Accepts the URL and protocol to fetch directly from the remote repository and not attempt to cache
 
 ### Unattended Upgrades
 
@@ -278,7 +301,7 @@ If you want to cleanup unused packages, there is also the `apt-get autoclean` an
 
 **Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
-**Copyright:** 2009-2015, Chef Software, Inc.
+**Copyright:** 2009-2016, Chef Software, Inc.
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
