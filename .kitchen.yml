@@ -22,26 +22,9 @@ suites:
     run_list:
       - recipe[apt]
 
-  - name: cacher-client
+  - name: cacher
     run_list:
-      - recipe[apt::default]
-      - recipe[apt::cacher-client]
-
-  - name: cacher-ng
-    run_list:
-      - recipe[apt::default]
-      - recipe[apt::cacher-ng]
-    excludes: centos-7.2
-
-  - name: cacher-ng-client
-    run_list:
-      - recipe[apt_test::cacher-ng-client]
-    attributes:
-      apt:
-        cacher_dir: '/tmp/apt-cacher'
-        cacher_port: '9876'
-        cacher_interface: 'eth0'
-        compiletime: true
+      - recipe[apt_test::cacher]
     excludes: centos-7.2
 
   - name: compile-time
@@ -59,7 +42,7 @@ suites:
 
   - name: unattended-upgrades
     run_list:
-      - recipe[apt::unattended-upgrades]
+      - recipe[apt_test::unattended-upgrades]
     attributes:
       apt:
         unattended_upgrades:

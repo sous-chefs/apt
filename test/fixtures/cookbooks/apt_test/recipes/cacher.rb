@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: apt
-# library:: network
+# Cookbook Name:: apt_test
+# Recipe:: cacher
 #
 # Copyright 2013-2016, Chef Software, Inc.
 #
@@ -17,15 +17,23 @@
 # limitations under the License.
 #
 
-module ::Apt
-  def interface_ipaddress(host, interface)
-    if interface # rubocop: disable Style/GuardClause
-      addresses = host['network']['interfaces'][interface]['addresses']
-      addresses.select do |ip, data|
-        return ip if data['family'].eql?('inet')
-      end
-    else
-      return host.ipaddress
-    end
-  end
-end
+node.default['apt']['cacher_dir'] = '/tmp/apt-cacher'
+node.default['apt']['cacher_port'] = '9876'
+node.default['apt']['cacher_interface'] = 'eth0'
+node.default['apt']['cacher_client']['cacher_server'] = {
+  host: 'localhost',
+  port: 9876,
+  proxy_ssl: true,
+  cache_bypass: {
+    'download.oracle.com' => 'https',
+    'nginx.org' => 'https'
+  }
+}
+
+include_recipe 'apt_test::base'
+
+include_recipe 'apt::cacher-ng'
+include_recipe 'apt::cacher-client'
+
+# install a small, innocuous application to verify this works
+package 'colordiff'

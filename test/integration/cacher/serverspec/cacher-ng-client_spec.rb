@@ -19,7 +19,11 @@
 
 require_relative './spec_helper'
 
-describe 'apt_test::cacher-ng-client' do
+describe 'apt_test::cacher' do
+  it 'runs the cacher service' do
+    expect(service('apt-cacher-ng')).to be_running
+  end
+
   it 'creates the cacher_dir' do
     expect(file('/var/cache/apt-cacher-ng')).to be_directory
     expect(file('/var/cache/apt-cacher-ng')).to be_owned_by('apt-cacher-ng')

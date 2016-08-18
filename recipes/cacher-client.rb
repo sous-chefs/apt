@@ -17,10 +17,6 @@
 # limitations under the License.
 #
 
-class ::Chef::Recipe
-  include ::Apt
-end
-
 # remove Acquire::http::Proxy lines from /etc/apt/apt.conf since we use 01proxy
 # these are leftover from preseed installs
 execute 'Remove proxy from /etc/apt/apt.conf' do
@@ -28,56 +24,29 @@ execute 'Remove proxy from /etc/apt/apt.conf' do
   only_if 'grep Acquire::http::Proxy /etc/apt/apt.conf'
 end
 
-servers = []
-if node['apt']
-  if node['apt']['cacher_ipaddress']
-    cacher = Chef::Node.new
-    cacher.default.name = node['apt']['cacher_ipaddress']
-    cacher.default.ipaddress = node['apt']['cacher_ipaddress']
-    cacher.default.apt.cacher_port = node['apt']['cacher_port']
-    cacher.default.apt.cacher_interface = node['apt']['cacher_interface']
-    cacher.default.apt.cacher_ssl_support = node['apt']['cacher_ssl_support']
-    servers << cacher
-  elsif node['apt']['caching_server']
-    node.override['apt']['compiletime'] = false
-    servers << node
+if node['apt']['cacher_client']['cacher_server'].empty?
+  Chef::Log.warn("No cache server defined in node['apt']['cacher_servers']. Not setting up caching")
+  f = file '/etc/apt/apt.conf.d/01proxy' do
+    action(node['apt']['compiletime'] ? :nothing : :delete)
   end
-end
+  f.run_action(:delete) if node['apt']['compiletime']
+else
+  execute 'apt-get update' do
+    action :nothing
+  end
 
-unless Chef::Config[:solo] || !servers.empty?
-  query = 'apt_caching_server:true'
-  query += " AND chef_environment:#{node.chef_environment}" if node['apt']['cacher-client']['restrict_environment']
-  Chef::Log.debug("apt::cacher-client searching for '#{query}'")
-  servers += search(:node, query)
-end
-
-if !servers.empty?
-  Chef::Log.info("apt-cacher-ng server found on #{servers[0]}.")
-  cacher_ipaddress = if servers[0]['apt']['cacher_interface']
-                       interface_ipaddress(servers[0], servers[0]['apt']['cacher_interface'])
-                     else
-                       servers[0].ipaddress
-                     end
   t = template '/etc/apt/apt.conf.d/01proxy' do
     source '01proxy.erb'
     owner 'root'
     group 'root'
     mode '0644'
     variables(
-      proxy: cacher_ipaddress,
-      port: servers[0]['apt']['cacher_port'],
-      proxy_ssl: servers[0]['apt']['cacher_ssl_support'],
-      bypass: node['apt']['cache_bypass']
+      server: node['apt']['cacher_client']['cacher_server']
     )
     action(node['apt']['compiletime'] ? :nothing : :create)
     notifies :run, 'execute[apt-get update]', :immediately
   end
   t.run_action(:create) if node['apt']['compiletime']
-else
-  Chef::Log.info('No apt-cacher-ng server found.')
-  file '/etc/apt/apt.conf.d/01proxy' do
-    action :delete
-  end
 end
 
 include_recipe 'apt::default'

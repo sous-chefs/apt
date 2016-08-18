@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: apt_test
-# Recipe:: default
+# Recipe:: base
 #
-# Copyright 2012, Chef Software, Inc.
+# Copyright 2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,18 @@
 # limitations under the License.
 #
 
-require_relative './spec_helper'
+apt_update 'update'
 
-describe 'apt_test::default' do
-  it 'runs the cacher service' do
-    expect(service('apt-cacher-ng')).to be_running
+# without this dist data won't be populated by Ohai in docker
+if platform?('debian')
+  package 'lsb-release' do
+    action :install
+    notifies :reload, 'ohai[reload_ohai]', :immediately
+  end
+
+  ohai 'reload_ohai' do
+    action :nothing
   end
 end
+
+include_recipe 'apt::default'

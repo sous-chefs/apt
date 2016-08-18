@@ -21,25 +21,26 @@ services: docker
 env:
   matrix:
   - INSTANCE=default-centos-7
-  - INSTANCE=default-debian-8 
+  - INSTANCE=default-debian-7
+  - INSTANCE=default-debian-8
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1204
-  - INSTANCE=cacher-client-ubuntu-1604
-  - INSTANCE=cacher-client-ubuntu-1404
-  - INSTANCE=cacher-client-ubuntu-1204
-  - INSTANCE=cacher-ng-ubuntu-1604
-  - INSTANCE=cacher-ng-ubuntu-1404
-  - INSTANCE=cacher-ng-ubuntu-1204
-  - INSTANCE=cacher-ng-client-ubuntu-1604
-  - INSTANCE=cacher-ng-client-ubuntu-1404
-  - INSTANCE=cacher-ng-client-ubuntu-1204
+  # - INSTANCE=cacher-debian-7 #ipv6 failures
+  - INSTANCE=cacher-debian-8
+  - INSTANCE=cacher-ubuntu-1604
+  - INSTANCE=cacher-ubuntu-1404
+  - INSTANCE=cacher-ubuntu-1204
   - INSTANCE=compile-time-ubuntu-1604
   - INSTANCE=compile-time-ubuntu-1404
   - INSTANCE=compile-time-ubuntu-1204
+  - INSTANCE=compile-time-debian-7
+  - INSTANCE=compile-time-debian-8
   - INSTANCE=lwrps-ubuntu-1604
   - INSTANCE=lwrps-ubuntu-1404
   - INSTANCE=lwrps-ubuntu-1204
+  - INSTANCE=lwrps-debian-7
+  - INSTANCE=lwrps-debian-8
   - INSTANCE=unattended-upgrades-ubuntu-1404
   - INSTANCE=unattended-upgrades-ubuntu-1204
 

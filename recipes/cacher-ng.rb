@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-node.set['apt']['caching_server'] = true
-
 package 'apt-cacher-ng'
 
 directory node['apt']['cacher_dir'] do

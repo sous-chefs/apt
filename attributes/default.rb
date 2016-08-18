@@ -17,16 +17,12 @@
 # limitations under the License.
 #
 
-default['apt']['cacher-client']['restrict_environment'] = false
 default['apt']['cacher_dir'] = '/var/cache/apt-cacher-ng'
 default['apt']['cacher_interface'] = nil
 default['apt']['cacher_port'] = 3142
-default['apt']['cacher_ssl_support'] = false
-default['apt']['caching_server'] = false
 default['apt']['compiletime'] = false
 default['apt']['compile_time_update'] = false
 default['apt']['key_proxy'] = ''
-default['apt']['cache_bypass'] = {}
 default['apt']['periodic_update_min_delay'] = 86_400
 default['apt']['launchpad_api_version'] = '1.0'
 default['apt']['unattended_upgrades']['enable'] = false
@@ -36,6 +32,9 @@ codename = node.attribute?('lsb') ? node['lsb']['codename'] : 'notlinux'
 default['apt']['unattended_upgrades']['allowed_origins'] = [
   "#{node['platform'].capitalize} #{codename}"
 ]
+
+default['apt']['cacher_client']['cacher_server'] = {}
+
 default['apt']['unattended_upgrades']['origins_patterns'] = []
 default['apt']['unattended_upgrades']['package_blacklist'] = []
 default['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg'] = false
