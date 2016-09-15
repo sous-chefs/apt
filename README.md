@@ -148,6 +148,8 @@ There is an `interface_ipaddress` method that returns the IP address for a parti
 
 ### `apt_repository`
 
+NOTE: The apt_repository resource is no longer shipped with this cookbook. Instead we use compat_resource to backport the resource from Chef
+
 This LWRP provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
 
 #### Actions
