@@ -16,7 +16,6 @@ end
 
 source_url 'https://github.com/chef-cookbooks/apt'
 issues_url 'https://github.com/chef-cookbooks/apt/issues'
-
 chef_version '>= 12.1'
 
-depends 'compat_resource', '>= 12.14'
+depends 'compat_resource', '>= 12.14.7'
