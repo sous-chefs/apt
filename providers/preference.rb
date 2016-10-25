@@ -49,7 +49,8 @@ action :add do
 
   name = safe_name(new_resource.name)
 
-  file "/etc/apt/preferences.d/#{new_resource.name}.pref" do
+  file "cleanup_#{new_resource.name}.pref" do
+    path "/etc/apt/preferences.d/#{new_resource.name}.pref"
     action :delete
     if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
       Chef::Log.warn "Replacing #{new_resource.name}.pref with #{name}.pref in /etc/apt/preferences.d/"
@@ -57,7 +58,8 @@ action :add do
     only_if { name != new_resource.name }
   end
 
-  file "/etc/apt/preferences.d/#{new_resource.name}" do
+  file "cleanup_#{new_resource.name}" do
+    path "/etc/apt/preferences.d/#{new_resource.name}"
     action :delete
     if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
       Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
@@ -77,7 +79,8 @@ action :remove do
   name = safe_name(new_resource.name)
   if ::File.exist?("/etc/apt/preferences.d/#{name}.pref")
     Chef::Log.info "Un-pinning #{name} from /etc/apt/preferences.d/"
-    file "/etc/apt/preferences.d/#{name}.pref" do
+    file "remove_#{name}.pref" do
+      path "/etc/apt/preferences.d/#{name}.pref"
       action :delete
     end
   end
