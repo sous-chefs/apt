@@ -146,14 +146,14 @@ There is an `interface_ipaddress` method that returns the IP address for a parti
 
 ## Resources/Providers
 
-### `apt_repository`
+### apt_repository
 
-This LWRP provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
+This resource provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
 
 #### Actions
 
-- :add: creates a repository file and builds the repository listing (default)
-- :remove: removes the repository file
+- `:add`: creates a repository file and builds the repository listing (default)
+- `:remove`: removes the repository file
 
 #### Attribute Parameters
 
@@ -234,16 +234,16 @@ apt_repository 'zenoss' do
 end
 ```
 
-### `apt_preference`
+### apt_preference
 
-This LWRP provides an easy way to pin packages in /etc/apt/preferences.d. Although apt-pinning is quite helpful from time to time please note that Debian does not encourage its use without thorough consideration.
+This resource provides an easy way to pin packages in /etc/apt/preferences.d. Although apt-pinning is quite helpful from time to time please note that Debian does not encourage its use without thorough consideration.
 
 Further information regarding apt-pinning is available via <http://wiki.debian.org/AptPreferences>.
 
 #### Actions
 
-- :add: creates a preferences file under /etc/apt/preferences.d
-- :remove: Removes the file, therefore unpin the package
+- `:add`: creates a preferences file under /etc/apt/preferences.d
+- `:remove`: Removes the file, therefore unpin the package
 
 #### Attribute Parameters
 
