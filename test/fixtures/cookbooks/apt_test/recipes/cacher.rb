@@ -26,8 +26,8 @@ node.default['apt']['cacher_client']['cacher_server'] = {
   proxy_ssl: true,
   cache_bypass: {
     'download.oracle.com' => 'https',
-    'nginx.org' => 'https'
-  }
+    'nginx.org' => 'https',
+  },
 }
 
 include_recipe 'apt_test::base'

@@ -30,7 +30,7 @@ default['apt']['unattended_upgrades']['update_package_lists'] = true
 # this needs a good default
 codename = node.attribute?('lsb') ? node['lsb']['codename'] : 'notlinux'
 default['apt']['unattended_upgrades']['allowed_origins'] = [
-  "#{node['platform'].capitalize} #{codename}"
+  "#{node['platform'].capitalize} #{codename}",
 ]
 
 default['apt']['cacher_client']['cacher_server'] = {}

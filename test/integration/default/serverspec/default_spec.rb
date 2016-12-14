@@ -11,7 +11,7 @@ if %w(debian ubuntu).include?(os[:family])
     content = [
       '# Managed by Chef',
       'APT::Install-Recommends "1";',
-      'APT::Install-Suggests "0";'
+      'APT::Install-Suggests "0";',
     ].join("\n") << "\n"
 
     describe file('/etc/apt/apt.conf.d/10recommends') do

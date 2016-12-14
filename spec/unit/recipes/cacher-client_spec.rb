@@ -19,7 +19,7 @@ describe 'apt::cacher-client' do
       runner.node.normal['apt']['cacher_client']['cacher_server'] = {
         host: 'localhost',
         port: 9876,
-        proxy_ssl: true
+        proxy_ssl: true,
       }
       runner.converge('apt::cacher-client')
     end
