@@ -1,7 +1,6 @@
 driver:
   name: dokken
   privileged: true # because Docker and SystemD/Upstart
-  chef_image: chef/chef
   chef_version: current
 
 transport:
@@ -11,8 +10,7 @@ provisioner:
   name: dokken
 
 verifier:
-  root_path: '/opt/verifier'
-  sudo: false
+  name: inspec
 
 platforms:
 - name: debian-7
@@ -30,8 +28,6 @@ platforms:
     image: centos:7
     platform: rhel
     pid_one_command: /usr/lib/systemd/systemd
-    intermediate_instructions:
-      - RUN yum -y install lsof which
 
 - name: ubuntu-12.04
   driver:
@@ -55,7 +51,7 @@ suites:
 
   - name: cacher
     run_list:
-      - recipe[apt_test::cacher]
+      - recipe[test::cacher]
 
   - name: compile-time
     run_list:
@@ -64,13 +60,13 @@ suites:
       apt:
         compile_time_update: true
 
-  - name: lwrps
+  - name: resources
     run_list:
-      - recipe[apt_test::lwrps]
+      - recipe[test::resources]
 
   - name: unattended-upgrades
     run_list:
-      - recipe[apt_test::unattended-upgrades]
+      - recipe[test::unattended-upgrades]
     attributes:
       apt:
         unattended_upgrades:

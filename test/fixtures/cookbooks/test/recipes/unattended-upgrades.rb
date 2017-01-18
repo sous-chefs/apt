@@ -1,5 +1,5 @@
 #
-# Cookbook:: apt_test
+# Cookbook:: test
 # Recipe:: unattended-upgrades
 #
 # Copyright:: 2016, Chef Software, Inc.
@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe 'apt_test::base'
+include_recipe 'test::base'
 include_recipe 'apt::unattended-upgrades'

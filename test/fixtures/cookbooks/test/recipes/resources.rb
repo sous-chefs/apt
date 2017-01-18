@@ -1,6 +1,6 @@
 #
-# Cookbook:: apt_test
-# Recipe:: lwrps
+# Cookbook:: test
+# Recipe:: resources
 #
 # Copyright:: 2012-2016, Chef Software, Inc.
 #
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'apt_test::base'
+include_recipe 'test::base'
 
 if node['platform'] == 'ubuntu'
   # Apt Repository
