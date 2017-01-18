@@ -1,5 +1,5 @@
 #
-# Cookbook:: apt_test
+# Cookbook:: test
 # Recipe:: cacher
 #
 # Copyright:: 2013-2016, Chef Software, Inc.
@@ -30,7 +30,7 @@ node.default['apt']['cacher_client']['cacher_server'] = {
   },
 }
 
-include_recipe 'apt_test::base'
+include_recipe 'test::base'
 
 include_recipe 'apt::cacher-ng'
 include_recipe 'apt::cacher-client'

@@ -1,5 +1,5 @@
 #
-# Cookbook:: apt_test
+# Cookbook:: test
 # Recipe:: cacher-ng-client_test.rb
 #
 # Copyright:: 2013-2016, Chef Software, Inc.
@@ -17,9 +17,7 @@
 # limitations under the License.
 #
 
-require_relative './spec_helper'
-
-describe 'apt_test::cacher' do
+describe 'test::cacher' do
   it 'runs the cacher service' do
     expect(service('apt-cacher-ng')).to be_running
   end

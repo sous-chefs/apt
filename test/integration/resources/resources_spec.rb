@@ -1,6 +1,6 @@
 #
-# Cookbook:: apt_test
-# Recipe:: lwrps
+# Cookbook:: test
+# Recipe:: resources
 #
 # Copyright:: 2012-2016, Chef Software, Inc.
 #
@@ -16,33 +16,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-require_relative './spec_helper'
-
-describe 'apt_test::lwrps' do
+describe 'apt::resources' do
   it 'creates the JuJu sources.list' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     expect(file('/etc/apt/sources.list.d/juju.list')).to exist
   end
 
   it 'creates the NodeJS sources.list' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     expect(file('/etc/apt/sources.list.d/nodejs.list')).to exist
   end
 
   it 'creates the HAProxy sources.list' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     expect(file('/etc/apt/sources.list.d/haproxy.list')).to exist
   end
 
   it 'creates a repo with a url that is already quoted' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     src = 'deb\s+\"http://ppa.launchpad.net/juju/stable/ubuntu\" trusty main'
     expect(file('/etc/apt/sources.list.d/juju.list').content).to match(/#{src}/)
   end
 
   it 'adds the JuJu package signing key' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     expect(command('apt-key list').stdout).to contain('Launchpad Ensemble PPA')
   end
 
@@ -52,7 +49,7 @@ describe 'apt_test::lwrps' do
   end
 
   it 'correctly handles a ppa: repository' do
-    skip('not on ubuntu') unless os[:family] == 'ubuntu'
+    skip('not on ubuntu') unless os[:platform] == 'ubuntu'
     gimp = 'http://ppa.launchpad.net/otto-kesselgulasch/gimp/ubuntu'
     expect(file('/etc/apt/sources.list.d/gimp.list').content).to match(/#{gimp}/)
   end

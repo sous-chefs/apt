@@ -1,5 +1,5 @@
 #
-# Cookbook:: apt_test
+# Cookbook:: test
 # Recipe:: base
 #
 # Copyright:: 2016, Chef Software, Inc.
