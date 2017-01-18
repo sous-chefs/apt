@@ -4,6 +4,9 @@ driver:
 provisioner:
   name: chef_zero
 
+verifier:
+  name: inspec
+
 platforms:
   - name: centos-7.2
   - name: debian-7.11
@@ -24,7 +27,7 @@ suites:
 
   - name: cacher
     run_list:
-      - recipe[apt_test::cacher]
+      - recipe[test::cacher]
     excludes: centos-7.2
 
   - name: compile-time
@@ -35,14 +38,14 @@ suites:
         compile_time_update: true
     excludes: centos-7.2
 
-  - name: lwrps
+  - name: resources
     run_list:
-      - recipe[apt_test::lwrps]
+      - recipe[test::resources]
     excludes: centos-7.2
 
   - name: unattended-upgrades
     run_list:
-      - recipe[apt_test::unattended-upgrades]
+      - recipe[test::unattended-upgrades]
     attributes:
       apt:
         unattended_upgrades:

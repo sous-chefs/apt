@@ -1,4 +1,4 @@
-name 'apt_test'
+name 'test'
 maintainer 'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license 'Apache 2.0'
