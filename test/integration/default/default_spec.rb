@@ -1,4 +1,4 @@
-if unless os[:platform] == 'debian' || unless os[:platform] == 'ubuntu'
+if os[:platform] == 'debian' || unless os[:platform] == 'ubuntu'
   describe file('/var/cache/local/preseeding') do
     it 'is a directory' do
       expect(subject).to be_a_directory
