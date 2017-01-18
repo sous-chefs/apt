@@ -34,9 +34,7 @@ if node['apt']['compile_time_update'] && apt_installed?
   apt_update('compile time').run_action(:periodic)
 end
 
-apt_update 'periodic' do
-  only_if { apt_installed? }
-end
+apt_update 'periodic'
 
 # For other recipes to call to force an update
 execute 'apt-get update' do

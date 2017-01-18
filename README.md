@@ -146,94 +146,6 @@ There is an `interface_ipaddress` method that returns the IP address for a parti
 
 ## Resources/Providers
 
-### apt_repository
-
-This resource provides an easy way to manage additional APT repositories. Adding a new repository will notify running the `execute[apt-get-update]` resource immediately.
-
-#### Actions
-
-- `:add`: creates a repository file and builds the repository listing (default)
-- `:remove`: removes the repository file
-
-#### Attribute Parameters
-
-- repo_name: name attribute. The name of the channel to discover
-- uri: the base of the Debian distribution
-- distribution: this is usually your release's codename...ie something like `karmic`, `lucid` or `maverick`
-- components: package groupings... when in doubt use `main`
-- arch: constrain package to a particular arch like `i386`, `amd64` or even `armhf` or `powerpc`. Defaults to nil.
-- trusted: treat all packages from this repository as authenticated regardless of signature
-- deb_src: whether or not to add the repository as a source repo as well - value can be `true` or `false`, default `false`.
-- keyserver: the GPG keyserver where the key for the repo should be retrieved
-- key: if a `keyserver` is provided, this is assumed to be the fingerprint, otherwise it can be either the URI to the GPG key for the repo, or a cookbook_file.
-- key_proxy: if set, pass the specified proxy via `http-proxy=` to GPG.
-- cookbook: if key should be a cookbook_file, specify a cookbook where the key is located for files/default. Defaults to nil, so it will use the cookbook where the resource is used.
-
-#### Examples
-
-Add the Zenoss repo:
-
-```ruby
-apt_repository 'zenoss' do
-  uri        'http://dev.zenoss.org/deb'
-  components ['main', 'stable']
-end
-```
-
-Enable Ubuntu [multiverse](https://help.ubuntu.com/community/Repositories/Ubuntu) repositories:
-
-```ruby
-apt_repository 'security-ubuntu-multiverse' do
-  uri          'http://security.ubuntu.com/ubuntu'
-  distribution 'trusty-security'
-  components   ['multiverse']
-  deb_src      true
-end
-```
-
-Add the Nginx PPA, autodetect the key and repository url:
-
-```ruby
-apt_repository 'nginx-php' do
-  uri          'ppa:nginx/stable'
-  distribution node['lsb']['codename']
-end
-```
-
-Add the JuJu PPA, grab the key from the keyserver, and add source repo:
-
-```ruby
-apt_repository 'juju' do
-  uri 'http://ppa.launchpad.net/juju/stable/ubuntu'
-  components ['main']
-  distribution 'trusty'
-  key 'C8068B11'
-  keyserver 'keyserver.ubuntu.com'
-  action :add
-  deb_src true
-end
-```
-
-Add the Cloudera Repo of CDH4 packages for Ubuntu 12.04 on AMD64:
-
-```ruby
-apt_repository 'cloudera' do
-  uri          'http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh'
-  arch         'amd64'
-  distribution 'precise-cdh4'
-  components   ['contrib']
-  key          'http://archive.cloudera.com/debian/archive.key'
-end
-```
-
-Remove Zenoss repo:
-
-```ruby
-apt_repository 'zenoss' do
-  action :remove
-end
-```
-
 ### apt_preference
 
 This resource provides an easy way to pin packages in /etc/apt/preferences.d. Although apt-pinning is quite helpful from time to time please note that Debian does not encourage its use without thorough consideration.
@@ -296,6 +208,18 @@ The above will run during execution phase since it is a normal template resource
 Put `recipe[apt::cacher-ng]` in the run_list for a server to provide APT caching and add `recipe[apt::cacher-client]` on the rest of the Debian-based nodes to take advantage of the caching server.
 
 If you want to cleanup unused packages, there is also the `apt-get autoclean` and `apt-get autoremove` resources provided for automated cleanup.
+
+### apt_repository
+
+The apt_repository resource has been moved into chef-client in Chef 12.9\. This cookbook uses compat_resource, which backports the latest apt_repository chef-client functionality to older versions of chef-client.
+
+See <https://docs.chef.io/resource_apt_repository.html> for usage details
+
+### apt_update
+
+The apt_update resource has been moved into chef-client in Chef 12.7\. This cookbook uses compat_resource, which backports the latest apt_update chef-client functionality to older versions of chef-client.
+
+See <https://docs.chef.io/resource_apt_update.html> for usage details
 
 ## License & Authors
 
