@@ -48,5 +48,10 @@ default['apt']['unattended_upgrades']['automatic_reboot_time'] = 'now'
 default['apt']['unattended_upgrades']['dl_limit'] = nil
 default['apt']['unattended_upgrades']['random_sleep'] = nil
 
+default['apt']['confd']['force_confask'] = false
+default['apt']['confd']['force_confdef'] = false
+default['apt']['confd']['force_confmiss'] = false
+default['apt']['confd']['force_confnew'] = false
+default['apt']['confd']['force_confold'] = false
 default['apt']['confd']['install_recommends'] = true
 default['apt']['confd']['install_suggests'] = false

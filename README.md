@@ -137,6 +137,11 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 
 ### Configuration for APT
 
+- `['apt']['confd']['force_confask']` - Prompt when overwriting configuration files. (default: false)
+- `['apt']['confd']['force_confdef']` - Don't prompt when overwriting configuration files. (default: false)
+- `['apt']['confd']['force_confmiss']` - Install removed configuration files when upgrading packages. (default: false)
+- `['apt']['confd']['force_confnew']` - Overwrite configuration files when installing packages. (default: false)
+- `['apt']['confd']['force_confold']` - Keep modified configuration files when installing packages. (default: false)
 - `['apt']['confd']['install_recommends']` - Consider recommended packages as a dependency for installing. (default: true)
 - `['apt']['confd']['install_suggests']` - Consider suggested packages as a dependency for installing. (default: false)
 
