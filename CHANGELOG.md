@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 5.1.0 (2017-02-01)
+
+- Convert integration tests to inspec
+- Add management of the /etc/apt/apt.conf.d/10dpkg-options file with new attributes. This allows tuning of how dpkg will handle package prompts during package installation. Note that Chef 12.19+ will automatically suppress package prompts
+
 ## 5.0.1 (2016-12-22)
 - Avoid CHEF-3694 in apt_preferences resource
 - Cookstyle fixes
