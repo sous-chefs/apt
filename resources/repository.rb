@@ -39,14 +39,14 @@ attribute :repo_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A
 attribute :uri, kind_of: String
 attribute :distribution, kind_of: String
 attribute :components, kind_of: Array, default: []
-attribute :arch, kind_of: String, default: nil
+attribute :arch, kind_of: String
 attribute :trusted, kind_of: [TrueClass, FalseClass], default: false
 # whether or not to add the repository as a source repo as well
 attribute :deb_src, default: false
-attribute :keyserver, kind_of: String, default: nil
-attribute :key, kind_of: String, default: nil
+attribute :keyserver, kind_of: String
+attribute :key, kind_of: String
 attribute :key_proxy, kind_of: String, default: node['apt']['key_proxy']
-attribute :cookbook, kind_of: String, default: nil
+attribute :cookbook, kind_of: String
 # trigger cache rebuild
 # If not you can trigger in the recipe itself after checking the status of resource.updated{_by_last_action}?
 attribute :cache_rebuild, kind_of: [TrueClass, FalseClass], default: true
