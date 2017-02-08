@@ -28,4 +28,4 @@ state_attrs :glob,
 attribute :package_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*|\+)+$/]
 attribute :glob, kind_of: String
 attribute :pin, kind_of: String
-attribute :pin_priority, kind_of: String
+attribute :pin_priority, kind_of: String, required: true

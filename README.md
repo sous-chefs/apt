@@ -167,7 +167,7 @@ Further information regarding apt-pinning is available via <http://wiki.debian.o
 - package_name: name attribute. The name of the package
 - glob: Pin by glob() expression or regexp surrounded by /.
 - pin: The package version/repository to pin
-- pin_priority: The pinning priority aka "the highest package version wins"
+- pin_priority: The pinning priority aka "the highest package version wins" (required)
 
 #### Examples
 

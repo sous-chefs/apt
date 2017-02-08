@@ -25,7 +25,9 @@ end
 
 # Build preferences.d file contents
 def build_pref(package_name, pin, pin_priority)
-  "Package: #{package_name}\nPin: #{pin}\nPin-Priority: #{pin_priority}\n"
+  pref = "Package: #{package_name}\nPin: #{pin}\n"
+  pref << "Pin-Priority: #{pin_priority}\n" unless pin_priority.nil?
+  pref
 end
 
 def safe_name(name)
