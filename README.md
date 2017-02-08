@@ -15,7 +15,7 @@ May work with or without modification on other Debian derivatives.
 
 ### Chef
 
-- Chef 12.1+
+- Chef 12.9+
 
 ### Cookbooks
 
@@ -216,13 +216,13 @@ If you want to cleanup unused packages, there is also the `apt-get autoclean` an
 
 ### apt_repository
 
-The apt_repository resource has been moved into chef-client in Chef 12.9\. This cookbook uses compat_resource, which backports the latest apt_repository chef-client functionality to older versions of chef-client.
+The apt_repository resource has been moved into chef-client in Chef 12.9.
 
 See <https://docs.chef.io/resource_apt_repository.html> for usage details
 
 ### apt_update
 
-The apt_update resource has been moved into chef-client in Chef 12.7\. This cookbook uses compat_resource, which backports the latest apt_update chef-client functionality to older versions of chef-client.
+The apt_update resource has been moved into chef-client in Chef 12.7.
 
 See <https://docs.chef.io/resource_apt_update.html> for usage details
 
