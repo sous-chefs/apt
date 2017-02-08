@@ -1,7 +1,7 @@
 sudo: required
 dist: trusty
 
-# install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
+# install the pre-release chef-dk.  Use chef-stable-trusty to install the stable release
 addons:
   apt:
     sources:
@@ -25,38 +25,31 @@ env:
   - INSTANCE=default-debian-8
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1404
-  - INSTANCE=default-ubuntu-1204
   # - INSTANCE=cacher-debian-7 #ipv6 failures
   - INSTANCE=cacher-debian-8
   - INSTANCE=cacher-ubuntu-1604
   - INSTANCE=cacher-ubuntu-1404
-  - INSTANCE=cacher-ubuntu-1204
   - INSTANCE=compile-time-ubuntu-1604
   - INSTANCE=compile-time-ubuntu-1404
-  - INSTANCE=compile-time-ubuntu-1204
   - INSTANCE=compile-time-debian-7
   - INSTANCE=compile-time-debian-8
   - INSTANCE=resources-ubuntu-1604
   - INSTANCE=resources-ubuntu-1404
-  - INSTANCE=resources-ubuntu-1204
   - INSTANCE=resources-debian-7
   - INSTANCE=resources-debian-8
   - INSTANCE=unattended-upgrades-ubuntu-1404
-  - INSTANCE=unattended-upgrades-ubuntu-1204
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/foodcritic --version
 
 script: KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
 matrix:
   include:
-    - before_script:
-      - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-      - /opt/chefdk/embedded/bin/chef --version
-      - /opt/chefdk/embedded/bin/cookstyle --version
-      - /opt/chefdk/embedded/bin/foodcritic --version
     - script:
       - /opt/chefdk/bin/chef exec rake
       env: UNIT_AND_LINT=1

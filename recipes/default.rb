@@ -72,6 +72,14 @@ end
   end
 end
 
+template '/etc/apt/apt.conf.d/10dpkg-options' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  source '10dpkg-options.erb'
+  only_if { apt_installed? }
+end
+
 template '/etc/apt/apt.conf.d/10recommends' do
   owner 'root'
   group 'root'

@@ -29,10 +29,6 @@ platforms:
     platform: rhel
     pid_one_command: /usr/lib/systemd/systemd
 
-- name: ubuntu-12.04
-  driver:
-    image: ubuntu-upstart:12.04
-    pid_one_command: /sbin/init
 
 - name: ubuntu-14.04
   driver:
