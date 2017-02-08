@@ -40,7 +40,7 @@ if node['platform'] == 'ubuntu'
     action :add
   end
 
-  # PPA Repository
+  # PPA Repository w/o key specified
   apt_repository 'gimp' do
     uri 'ppa:otto-kesselgulasch/gimp'
   end
@@ -91,6 +91,7 @@ end
 
 apt_preference 'wget' do
   pin 'version 1.13.4-3'
+  pin_priority '1001'
 end
 
 # COOK-2338
@@ -107,6 +108,7 @@ end
 
 apt_preference '*' do
   pin 'origin nginx.org'
+  pin_priority '1001'
 end
 
 # Preference file removal
