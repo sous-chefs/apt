@@ -173,6 +173,7 @@ This resource provides an easy way to manage additional APT repositories. Adding
 - key: if a `keyserver` is provided, this is assumed to be the fingerprint, otherwise it can be either the URI to the GPG key for the repo, or a cookbook_file.
 - key_proxy: if set, pass the specified proxy via `http-proxy=` to GPG.
 - cookbook: if key should be a cookbook_file, specify a cookbook where the key is located for files/default. Defaults to nil, so it will use the cookbook where the resource is used.
+- ignore_apt_update_failure: set to false if you don't want to ignore `apt update` failing to fetch the repository
 
 #### Examples
 
