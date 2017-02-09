@@ -2,12 +2,23 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 6.0.0 (2017-02-08)
+
+### Breaking changes
+
+- Remove apt_update and apt_repository resources have been removed. These resources were both added to the chef-client itself. Due to this we now require Chef 12.9 or later, which has both of these resources built in. If you require compatibility with older chef-client releases you will need to pin to the 5.X release.
+
+### Other changes
+
+- apt_preference resource now properly required a pin_priority, which prevents us from writing out bad preference files that must be manually removed
+
 ## 5.1.0 (2017-02-01)
 
 - Convert integration tests to inspec
 - Add management of the /etc/apt/apt.conf.d/10dpkg-options file with new attributes. This allows tuning of how dpkg will handle package prompts during package installation. Note that Chef 12.19+ will automatically suppress package prompts
 
 ## 5.0.1 (2016-12-22)
+
 - Avoid CHEF-3694 in apt_preferences resource
 - Cookstyle fixes
 
