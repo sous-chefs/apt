@@ -6,7 +6,7 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ### Breaking changes
 
-- Remove apt_update and apt_repository resources have been removed. These resources were both added to the chef-client itself. Due to this we now require Chef 12.9 or later, which has both of these resources built in. If you require compatibility with older chef-client releases you will need to pin to the 5.X release.
+- apt_update and apt_repository resources have been removed from the cookbook. These resources were both added to the chef-client itself. Due to this we now require Chef 12.9 or later, which has both of these resources built in. If you require compatibility with older chef-client releases you will need to pin to the 5.X release.
 
 ### Other changes
 
