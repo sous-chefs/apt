@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/chef-cookbooks/apt.svg)][travis] [![Cookbook Version](https://img.shields.io/cookbook/v/apt.svg)][cookbook]
 
-This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a custom resource for managing APT repositories in /etc/apt/sources.list.d as well as an custom resource for pinning packages via /etc/apt/preferences.d.
+This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a custom resource for pinning packages via /etc/apt/preferences.d.
 
 ## Requirements
 
