@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 6.0.1 (2017-02-27)
+
+- Update cookbook description
+- Testing updates for Chef 13 and fixes to the cacher recipe
+
 ## 6.0.0 (2017-02-08)
 
 ### Breaking changes
