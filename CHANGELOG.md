@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 6.1.0 (2017-04-11)
+
+- Test with local delivery and not Rake
+- Use proper value type for bsd-mailx package only_if/not_if block
+- Update apache2 license string
+- Convert apt_preference to a custom resource
+
 ## 6.0.1 (2017-02-27)
 
 - Update cookbook description
