@@ -76,7 +76,7 @@ action :remove do
   end
 end
 
-action_class.class_eval do
+action_class do
   # Build preferences.d file contents
   def build_pref(package_name, pin, pin_priority)
     pref = "Package: #{package_name}\nPin: #{pin}\n"
