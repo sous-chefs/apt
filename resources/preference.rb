@@ -42,7 +42,7 @@ action :add do
   file "cleanup_#{new_resource.name}.pref" do
     path "/etc/apt/preferences.d/#{new_resource.name}.pref"
     action :delete
-    if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref")
+    if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}.pref") && name != new_resource.name
       Chef::Log.warn "Replacing #{new_resource.name}.pref with #{name}.pref in /etc/apt/preferences.d/"
     end
     only_if { name != new_resource.name }
@@ -52,7 +52,7 @@ action :add do
     path "/etc/apt/preferences.d/#{new_resource.name}"
     action :delete
     if ::File.exist?("/etc/apt/preferences.d/#{new_resource.name}")
-      Chef::Log.warn "Replacing #{new_resource.name} with #{new_resource.name}.pref in /etc/apt/preferences.d/"
+      Chef::Log.warn "Replacing #{new_resource.name} with #{name}.pref in /etc/apt/preferences.d/"
     end
   end
 
