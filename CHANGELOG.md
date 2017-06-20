@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 6.1.2 (2017-06-20)
+
+- restore backwards compatability by respecting node['apt']['periodic_update_min_delay']
+
 ## 6.1.1 (2017-06-20)
 
 - Remove action_class.class_eval usage that caused failures
