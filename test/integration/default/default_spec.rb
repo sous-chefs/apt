@@ -5,7 +5,7 @@ if os.name == 'debian' || os.name == 'ubuntu'
 
   content_dpkg_options = [
     '# Managed by Chef',
-    'Dpkg::Options {',
+    'DPkg::Options {',
     '}',
   ].join("\n") << "\n"
 
