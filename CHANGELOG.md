@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 6.1.3 (2017-07-19)
+
+- Fixed typo in readme
+- Fixed config namespace in the 10dpkg-options file 
+
 ## 6.1.2 (2017-06-20)
 
 - restore backwards compatability by respecting node['apt']['periodic_update_min_delay']
