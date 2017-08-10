@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-property :package_name, String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*|\+)+$/]
+property :package_name, String, name_property: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*|\+)+$/]
 property :glob, String
 property :pin, String
 property :pin_priority, String, required: true
