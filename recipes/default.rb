@@ -33,6 +33,7 @@ end
 if node['apt']['compile_time_update'] && apt_installed?
   apt_update('compile time') do
     frequency node['apt']['periodic_update_min_delay']
+    ignore_failure true
   end.run_action(:periodic)
 end
 
