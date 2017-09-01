@@ -155,7 +155,7 @@ There is an `interface_ipaddress` method that returns the IP address for a parti
 
 This resource provides an easy way to pin packages in /etc/apt/preferences.d. Although apt-pinning is quite helpful from time to time please note that Debian does not encourage its use without thorough consideration.
 
-Further information regarding apt-pinning is available via <http://wiki.debian.org/AptPreferences>.
+Further information regarding apt-pinning is available via <https://wiki.debian.org/AptPreferences>.
 
 #### Actions
 
