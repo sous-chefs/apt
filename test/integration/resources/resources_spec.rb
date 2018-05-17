@@ -40,7 +40,7 @@ describe 'apt::resources' do
 
   it 'adds the JuJu package signing key' do
     skip('not on ubuntu') unless os.name == 'ubuntu'
-    expect(command('apt-key list').stdout).to contain('Launchpad Ensemble PPA')
+    expect(command('apt-key list').stdout).to include('Launchpad Ensemble PPA')
   end
 
   it 'creates the correct pinning preferences for chef' do
