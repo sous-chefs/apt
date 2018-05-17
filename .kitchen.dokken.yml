@@ -32,6 +32,7 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
       - RUN /usr/bin/apt-get install -y systemd
+      - RUN rm /etc/systemd/system/getty.target.wants/getty\@tty1.service
 
 - name: centos-7
   driver:
