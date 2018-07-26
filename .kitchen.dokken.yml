@@ -21,8 +21,13 @@ platforms:
 
 - name: debian-9
   driver:
-    image: dokken/debian-9
+    # Need a custom Stretch image as dokken one contains extra packages and then we hit https://github.com/chef-cookbooks/apt/issues/234
+    image: debian:9
     pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install -y systemd
+      - RUN rm /etc/systemd/system/getty.target.wants/getty\@tty1.service
 
 - name: centos-7
   driver:
