@@ -2,8 +2,9 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
-## 7.0.1 (2018-09-05)
+## 7.1.0 (2018-09-05)
 
+- Add the installation of dirmngr and gnupg to the apt default cookbook to support secure repositories
 - Added support for the unattended-upgrade SyslogEnable configuration feature
 - Added support for the unattended-upgrade SyslogFacility configuration feature
 
