@@ -134,6 +134,8 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 - `['apt']['unattended_upgrades']['automatic_reboot']` - Automatically reboots _without confirmation_ if a restart is required after the upgrade. Defaults to false.
 - `['apt']['unattended_upgrades']['dl_limit']` - Limits the bandwidth used by apt to download packages. Value given as an integer in kb/sec. Defaults to nil (no limit).
 - `['apt']['unattended_upgrades']['random_sleep']` - Wait a random number of seconds up to this value before running daily periodic apt actions. System default is 1800 seconds (30 minutes).
+- `['apt']['unattended_upgrades']['syslog_enable']` - Enable logging to syslog. Defaults to false.
+- `['apt']['unattended_upgrades']['syslog_facility']` - Specify syslog facility. Defaults to 'daemon'.
 
 ### Configuration for APT
 
