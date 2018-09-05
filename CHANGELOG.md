@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 7.0.1 (2018-09-05)
+
+- Added support for the unattended-upgrade SyslogEnable configuration feature
+- Added support for the unattended-upgrade SyslogFacility configuration feature
+
 ## 7.0.0 (2018-04-06)
 
 ### Breaking Change
