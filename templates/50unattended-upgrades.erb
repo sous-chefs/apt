@@ -73,3 +73,9 @@ Unattended-Upgrade::Automatic-Reboot-Time "<%= node['apt']['unattended_upgrades'
 <% if node['apt']['unattended_upgrades']['dl_limit'] -%>
 Acquire::http::Dl-Limit "<%= node['apt']['unattended_upgrades']['dl_limit'] %>";
 <% end -%>
+
+// Enable logging to syslog. Default is False
+Unattended-Upgrade::SyslogEnable "<%= node['apt']['unattended_upgrades']['syslog_enable'] ? 'true' : 'false' %>";
+
+// Specify syslog facility. Default is daemon
+Unattended-Upgrade::SyslogFacility "<%= node['apt']['unattended_upgrades']['syslog_facility']";
