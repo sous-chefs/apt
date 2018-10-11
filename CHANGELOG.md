@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 7.1.1 (2018-10-11)
+
+- Allow to customize sender email for unattended-upgrades
+
 ## 7.1.0 (2018-09-05)
 
 - Add the installation of dirmngr and gnupg to the apt default cookbook to support secure repositories
