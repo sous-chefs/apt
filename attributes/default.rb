@@ -51,6 +51,8 @@ default['apt']['unattended_upgrades']['random_sleep'] = nil
 default['apt']['unattended_upgrades']['syslog_enable'] = false
 default['apt']['unattended_upgrades']['syslog_facility'] = 'daemon'
 
+default['apt']['unattended_upgrades']['dpkg_options'] = []
+
 default['apt']['confd']['force_confask'] = false
 default['apt']['confd']['force_confdef'] = false
 default['apt']['confd']['force_confmiss'] = false
