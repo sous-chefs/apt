@@ -85,3 +85,20 @@ Unattended-Upgrade::SyslogEnable "<%= node['apt']['unattended_upgrades']['syslog
 
 // Specify syslog facility. Default is daemon
 Unattended-Upgrade::SyslogFacility "<%= node['apt']['unattended_upgrades']['syslog_facility'] %>";
+
+// specify any dpkg options you want to run
+// for example if you wanted to upgrade and use
+// the installed version of config files when
+// resolving conflicts during an upgrade you
+// typically need:
+// Dpkg::Options {
+//   "--force-confdef";
+//   "--force-confold";
+//};
+<% unless node['apt']['unattended_upgrades']['dpkg_options'].empty? -%>
+Dpkg::Options {
+<% node['apt']['unattended_upgrades']['dpkg_options'].each do |option|%>
+	"<%= option %>";
+<% end -%>
+};
+<% end -%>
