@@ -20,27 +20,22 @@ services: docker
 env:
   matrix:
   - INSTANCE=default-centos-7
-  - INSTANCE=default-debian-7
   - INSTANCE=default-debian-8
   - INSTANCE=default-debian-9
   - INSTANCE=default-ubuntu-1604
-  - INSTANCE=default-ubuntu-1404
-  # - INSTANCE=cacher-debian-7 #ipv6 failures
+  - INSTANCE=default-ubuntu-1804
   - INSTANCE=cacher-debian-8
   - INSTANCE=cacher-debian-9
   - INSTANCE=cacher-ubuntu-1604
-  - INSTANCE=cacher-ubuntu-1404
   - INSTANCE=compile-time-ubuntu-1604
-  - INSTANCE=compile-time-ubuntu-1404
-  - INSTANCE=compile-time-debian-7
+  - INSTANCE=compile-time-ubuntu-1804
   - INSTANCE=compile-time-debian-8
   - INSTANCE=compile-time-debian-9
   - INSTANCE=resources-ubuntu-1604
-  - INSTANCE=resources-ubuntu-1404
-  - INSTANCE=resources-debian-7
+  - INSTANCE=resources-ubuntu-1804
   - INSTANCE=resources-debian-8
   - INSTANCE=resources-debian-9
-  - INSTANCE=unattended-upgrades-ubuntu-1404
+  - INSTANCE=unattended-upgrades-ubuntu-1604
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
@@ -49,7 +44,7 @@ before_script:
   - cookstyle --version
   - foodcritic --version
 
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+script: KITCHEN_LOCAL_YAML=kitchen.dokken.yml kitchen verify ${INSTANCE}
 
 matrix:
   include:
