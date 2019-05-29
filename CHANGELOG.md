@@ -2,6 +2,22 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 7.1.1 (2018-10-11)
+
+- Allow to customize sender email for unattended-upgrades
+
+## 7.1.0 (2018-09-05)
+
+- Add the installation of dirmngr and gnupg to the apt default cookbook to support secure repositories
+- Added support for the unattended-upgrade SyslogEnable configuration feature
+- Added support for the unattended-upgrade SyslogFacility configuration feature
+
+## 7.0.0 (2018-04-06)
+
+### Breaking Change
+
+- This cookbook no longer includes apt_preference as that resource was moved into Chef Client 13.3. The cookbook now also requires Chef 13.3 or later. If you require support for an older release of Chef you will need to pin to a 6.X release.
+
 ## 6.1.4 (2017-08-31)
 
 - Restores ignore_failure true on compile time update.

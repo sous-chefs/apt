@@ -14,8 +14,8 @@ describe 'apt::default' do
     expect(chef_run).to render_file('/etc/apt/apt.conf.d/10recommends').with_content('APT::Install-Suggests "0";')
   end
 
-  it 'installs apt-transport-https' do
-    expect(chef_run).to install_package('apt-transport-https')
+  it 'installs apt-transport-https, gnupg and dirmngr' do
+    expect(chef_run).to install_package(['apt-transport-https', 'gnupg', 'dirmngr'])
   end
 
   it 'creates preseeding directory' do
