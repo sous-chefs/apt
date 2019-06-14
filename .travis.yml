@@ -1,15 +1,15 @@
-sudo: required
-dist: trusty
-
 addons:
   apt:
     sources:
-      - chef-current-trusty
+      - chef-current-xenial
     packages:
-      - chefdk
+      - chef-workstation
 
 # Don't `bundle install` which takes about 1.5 mins
 install: echo "skip bundle install"
+
+env:
+  - CHEF_LICENSE=accept
 
 branches:
   only:
@@ -50,4 +50,6 @@ matrix:
   include:
     - script:
       - chef exec delivery local all
-      env: UNIT_AND_LINT=1
+      env:
+        - UNIT_AND_LINT=1
+        - CHEF_LICENSE=accept
