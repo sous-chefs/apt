@@ -39,19 +39,6 @@ suites:
         compile_time_update: true
     excludes: centos-7
 
-  - name: resources
-    run_list:
-      - recipe[test::resources]
-      # test that you can specifically modify some unattended upgrades options but leave the majority in place
-      - recipe[test::unattended-upgrades]
-    excludes: centos-7
-    attributes:
-      apt:
-        unattended_upgrades:
-          dpkg_options:
-            - --force-confdef
-            - --force-confold
-
   - name: unattended-upgrades
     run_list:
       - recipe[test::unattended-upgrades]
