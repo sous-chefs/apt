@@ -23,7 +23,7 @@
 # systems.
 #
 
-package 'unattended-upgrades' do
+package 'unattended-upgrades' do # ~FC009
   response_file 'unattended-upgrades.seed.erb'
   action :install
 end

@@ -2,6 +2,7 @@ driver:
   name: dokken
   privileged: true # because Docker and SystemD/Upstart
   chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  chef_license: accept-no-persist
 
 transport:
   name: dokken
@@ -14,15 +15,19 @@ verifier:
   name: inspec
 
 platforms:
-- name: debian-8
-  driver:
-    image: dokken/debian-8
-    pid_one_command: /bin/systemd
-
 - name: debian-9
   driver:
-    # Need a custom Stretch image as dokken one contains extra packages and then we hit https://github.com/chef-cookbooks/apt/issues/234
     image: debian:9
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install -y systemd
+      - RUN rm /etc/systemd/system/getty.target.wants/getty\@tty1.service
+
+- name: debian-10
+  driver:
+    # Need a custom Stretch image as dokken one contains extra packages and then we hit https://github.com/chef-cookbooks/apt/issues/234
+    image: debian:10
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update

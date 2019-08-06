@@ -15,7 +15,7 @@ describe 'apt::default' do
   end
 
   it 'installs apt-transport-https, gnupg and dirmngr' do
-    expect(chef_run).to install_package(['apt-transport-https', 'gnupg', 'dirmngr'])
+    expect(chef_run).to install_package(%w(apt-transport-https gnupg dirmngr))
   end
 
   it 'creates preseeding directory' do
