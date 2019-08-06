@@ -2,6 +2,17 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 7.2.0 (2019-08-05)
+
+- Allow you to specify dpkg options just for unattended upgrades - [@majormoses](https://github.com/majormoses)
+- Adding documentation and tests for setting dpkg options unattended upgrades - [@majormoses](https://github.com/majormoses)
+- Test on Chef 15 + Chef Workstation - [@tas50](https://github.com/tas50)
+- Remove tests of the resources now built into Chef - [@tas50](https://github.com/tas50)
+- Remove respond_to from the metadata - [@tas50](https://github.com/tas50)
+- Remove the recipe description from the metadata as these aren't used - [@tas50](https://github.com/tas50)
+- Replace Chef 12 testing with 13.3 - [@tas50](https://github.com/tas50)
+- Remove Ubuntu 14.04 / Debian 8 testing and add Debian 10 testing - [@tas50](https://github.com/tas50)
+
 ## 7.1.1 (2018-10-11)
 
 - Allow to customize sender email for unattended-upgrades
@@ -26,7 +37,7 @@ This file is used to list changes made in each version of the apt cookbook.
 ## 6.1.3 (2017-07-19)
 
 - Fixed typo in readme
-- Fixed config namespace in the 10dpkg-options file 
+- Fixed config namespace in the 10dpkg-options file
 
 ## 6.1.2 (2017-06-20)
 
