@@ -16,7 +16,7 @@ describe 'apt::cacher-client' do
   context 'server provided' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
-      runner.node.normal['apt']['cacher_client']['cacher_server'] = {
+      runner.node.override['apt']['cacher_client']['cacher_server'] = {
         host: 'localhost',
         port: 9876,
         proxy_ssl: true,

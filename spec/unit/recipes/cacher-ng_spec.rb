@@ -4,7 +4,7 @@ describe 'apt::cacher-ng' do
   context 'server' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new
-      runner.node.normal['apt']['cacher_port'] = '9876'
+      runner.node.override['apt']['cacher_port'] = '9876'
       runner.converge('apt::cacher-ng')
     end
 

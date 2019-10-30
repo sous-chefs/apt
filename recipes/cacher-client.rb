@@ -2,7 +2,7 @@
 # Cookbook:: apt
 # Recipe:: cacher-client
 #
-# Copyright:: 2011-2017, Chef Software, Inc.
+# Copyright:: 2011-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,4 +49,4 @@ else
   t.run_action(:create) if node['apt']['compiletime']
 end
 
-include_recipe 'apt::default'
+include_recipe 'apt::default' # rubocop: disable ChefModernize/IncludingAptDefaultRecipe

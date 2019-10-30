@@ -2,8 +2,8 @@
 # Cookbook:: apt
 # Recipe:: default
 #
-# Copyright:: 2008-2017, Chef Software, Inc.
-# Copyright:: 2009-2017, Bryan McLellan <btm@loftninjas.org>
+# Copyright:: 2008-2019, Chef Software, Inc.
+# Copyright:: 2009-2019, Bryan McLellan <btm@loftninjas.org>
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ apt_update 'periodic' do
 end
 
 # For other recipes to call to force an update
-execute 'apt-get update' do
+execute 'apt-get update' do # rubocop: disable ChefModernize/ExecuteAptUpdate
   command 'apt-get update'
   ignore_failure true
   action :nothing

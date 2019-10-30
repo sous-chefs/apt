@@ -2,7 +2,7 @@
 # Cookbook:: apt
 # Library:: helpers
 #
-# Copyright:: 2013-2017, Chef Software, Inc.
+# Copyright:: 2013-2019, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,6 +44,6 @@ module Apt
   end
 end
 
-Chef::Recipe.send(:include, ::Apt::Helpers)
-Chef::Resource.send(:include, ::Apt::Helpers)
-Chef::Provider.send(:include, ::Apt::Helpers)
+Chef::Recipe.include ::Apt::Helpers
+Chef::Resource.include ::Apt::Helpers
+Chef::Provider.include ::Apt::Helpers
