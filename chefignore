@@ -53,11 +53,13 @@ features/*
 examples/*
 Procfile
 .kitchen*
+kitchen*
 .rubocop.yml
 spec/*
 .travis.yml
 .foodcritic
 appveyor.yml
+Rakefile
 
 # SCM #
 #######
@@ -89,4 +91,3 @@ Policyfile.lock.json
 CONTRIBUTING*
 CHANGELOG*
 TESTING*
-
