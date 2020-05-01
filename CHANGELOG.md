@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## 7.3.0 (2020-05-01)
+
+- Cookstyle fixes - [@tas50](https://github.com/tas50)
+- Remove unnecessary Foodcritic comments - [@tas50](https://github.com/tas50)
+- Simplify the metadata.rb to resolve cookstyle warnings - [@tas50](https://github.com/tas50)
+- Prevent helper collisions in Chef Infra Client 16 - [@tas50](https://github.com/tas50)
+
 ## 7.2.0 (2019-08-05)
 
 - Allow you to specify dpkg options just for unattended upgrades - [@majormoses](https://github.com/majormoses)

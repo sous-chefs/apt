@@ -3,7 +3,7 @@ maintainer 'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license 'Apache-2.0'
 description 'Configures apt and apt caching.'
-version '7.2.0'
+version '7.3.0'
 
 supports 'ubuntu'
 supports 'debian'
