@@ -23,11 +23,13 @@ env:
   - INSTANCE=default-debian-10
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1804
+  - INSTANCE=default-ubuntu-2004
   - INSTANCE=cacher-debian-9
   - INSTANCE=cacher-debian-10
   - INSTANCE=cacher-ubuntu-1604
   - INSTANCE=compile-time-ubuntu-1604
   - INSTANCE=compile-time-ubuntu-1804
+  - INSTANCE=compile-time-ubuntu-2004
   - INSTANCE=compile-time-debian-9
   - INSTANCE=compile-time-debian-10
   - INSTANCE=unattended-upgrades-ubuntu-1604

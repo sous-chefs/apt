@@ -43,7 +43,6 @@ end
 
 # For other recipes to call to force an update
 execute 'apt-get update' do # rubocop: disable ChefModernize/ExecuteAptUpdate
-  command 'apt-get update'
   ignore_failure true
   action :nothing
   notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
