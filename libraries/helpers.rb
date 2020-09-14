@@ -44,6 +44,6 @@ module Apt
   end
 end
 
-Chef::Recipe.include ::Apt::Helpers
+Chef::DSL::Recipe.include ::Apt::Helpers
 Chef::Resource.include ::Apt::Helpers
-Chef::Provider.include ::Apt::Helpers
+Chef::DSL::Recipe.include ::Apt::Helpers
