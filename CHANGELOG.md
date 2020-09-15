@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: libraries/helpers.rb:47:1 refactor: `ChefCorrectness/IncorrectLibraryInjection`
+- resolved cookstyle error: libraries/helpers.rb:49:1 refactor: `ChefCorrectness/IncorrectLibraryInjection`
+
 ## 7.3.0 (2020-05-01)
 
 - Cookstyle fixes - [@tas50](https://github.com/tas50)
