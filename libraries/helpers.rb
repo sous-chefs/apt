@@ -46,4 +46,3 @@ end
 
 Chef::DSL::Recipe.include ::Apt::Helpers
 Chef::Resource.include ::Apt::Helpers
-Chef::DSL::Recipe.include ::Apt::Helpers
