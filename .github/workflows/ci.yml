@@ -1,0 +1,66 @@
+---
+name: ci
+
+"on":
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Run Chef Delivery
+        uses: actionshub/chef-delivery@master
+        env:
+          CHEF_LICENSE: accept-no-persist
+
+  dokken:
+    needs: [delivery]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - 'debian-9'
+          - 'debian-10'
+          - 'centos-7'
+          - 'ubuntu-1604'
+          - 'ubuntu-1804'
+          - 'ubuntu-2004'
+        suite:
+          - 'default'
+          - 'cacher'
+          - 'compile-time'
+          - 'unattended-upgrades'
+        exclude:
+          - os: centos-7
+            suite: cacher
+          - os: centos-7
+            suite: compile-time
+          - os: centos-7
+            suite: unattended-upgrades
+      fail-fast: false
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Install Chef
+        uses: actionshub/chef-install@master
+      - name: Dokken
+        uses: actionshub/kitchen-dokken@master
+        env:
+          CHEF_LICENSE: accept-no-persist
+          KITCHEN_LOCAL_YAML: kitchen.dokken.yml
+        with:
+          suite: ${{ matrix.suite }}
+          os: ${{ matrix.os }}
+
+  final:
+    needs: [dokken]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
