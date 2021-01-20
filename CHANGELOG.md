@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## Unreleased
+
+- Sous Chefs Adoption
+- Cookstyle fixes
+- Standardise files with files in sous-chefs/repo-management
+- Update libraries/helpers.rb
+
 ## 7.3.0 (2020-05-01)
 
 - Cookstyle fixes - [@tas50](https://github.com/tas50)
@@ -132,7 +139,7 @@ This cookbook now requires Chef 12\. If you require Chef 11 compatibility you wi
 
 ## v2.9.2
 
-- # 168 Adding guard to package resource.
+- # 168 Adding guard to package resource
 
 ## v2.9.1
 

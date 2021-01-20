@@ -3,8 +3,10 @@ driver:
 
 provisioner:
   name: chef_zero
+  product_name: chef
+  enforce_idempotency: true
+  multiple_converge: 2
   deprecations_as_errors: true
-  chef_license: accept-no-persist
 
 verifier:
   name: inspec
@@ -15,6 +17,7 @@ platforms:
   - name: debian-10
   - name: ubuntu-16.04
   - name: ubuntu-18.04
+  - name: ubuntu-20.04
   - name: ubuntu-16.04-chef-13.3
     driver_config:
       box: bento/ubuntu-16.04
