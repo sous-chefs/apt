@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
-## Unreleased
+## 7.4.0 - *2021-01-20*
 
 - Sous Chefs Adoption
 - Cookstyle fixes
