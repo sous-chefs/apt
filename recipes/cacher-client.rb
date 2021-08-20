@@ -26,27 +26,22 @@ end
 
 if node['apt']['cacher_client']['cacher_server'].empty?
   Chef::Log.warn("No cache server defined in node['apt']['cacher_client']['cacher_server']. Not setting up caching")
-  f = file '/etc/apt/apt.conf.d/01proxy' do
-    action(node['apt']['compiletime'] ? :nothing : :delete)
+  file '/etc/apt/apt.conf.d/01proxy' do
+    action :delete
   end
-  f.run_action(:delete) if node['apt']['compiletime']
 else
   apt_update 'update for notification' do
     action :nothing
   end
 
-  t = template '/etc/apt/apt.conf.d/01proxy' do
+  template '/etc/apt/apt.conf.d/01proxy' do
     source '01proxy.erb'
-    owner 'root'
-    group 'root'
-    mode '0644'
+    mode '644'
     variables(
       server: node['apt']['cacher_client']['cacher_server']
     )
-    action(node['apt']['compiletime'] ? :nothing : :create)
     notifies :update, 'apt_update[update for notification]', :immediately
   end
-  t.run_action(:create) if node['apt']['compiletime']
 end
 
-include_recipe 'apt::default' # rubocop: disable ChefModernize/IncludingAptDefaultRecipe
+include_recipe 'apt::default' # rubocop: disable Chef/Modernize/IncludingAptDefaultRecipe

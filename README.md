@@ -16,8 +16,8 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Ubuntu 12.04+
-- Debian 7+
+- Ubuntu 18.04+
+- Debian 9+
 
 May work with or without modification on other Debian derivatives.
 
@@ -115,7 +115,6 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 
 ### General
 
-- `['apt']['compile_time_update']` - force the default recipe to run `apt-get update` at compile time.
 - `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) between two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
 
 ### Caching
@@ -124,8 +123,7 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 - `['apt']['cacher_interface']` - interface to connect to the cacher-ng service, no default.
 - `['apt']['cacher_port']` - port for the cacher-ng service (used by server recipe only), default is '3142'
 - `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-- `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-
+-
 ### Unattended Upgrades
 
 - `['apt']['unattended_upgrades']['enable']` - enables unattended upgrades, default is false

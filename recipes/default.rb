@@ -24,8 +24,6 @@
 # systems.
 
 file '/var/lib/apt/periodic/update-success-stamp' do
-  owner 'root'
-  group 'root'
   action :nothing
 end
 
@@ -42,7 +40,7 @@ apt_update 'periodic' do
 end
 
 # For other recipes to call to force an update
-execute 'apt-get update' do # rubocop: disable ChefModernize/ExecuteAptUpdate
+execute 'apt-get update' do # rubocop: disable Chef/Modernize/ExecuteAptUpdate
   ignore_failure true
   action :nothing
   notifies :touch, 'file[/var/lib/apt/periodic/update-success-stamp]', :immediately
@@ -68,26 +66,20 @@ end
 
 %w(/var/cache/local /var/cache/local/preseeding).each do |dirname|
   directory dirname do
-    owner 'root'
-    group 'root'
-    mode '0755'
+    mode '755'
     action :create
     only_if { apt_installed? }
   end
 end
 
 template '/etc/apt/apt.conf.d/10dpkg-options' do
-  owner 'root'
-  group 'root'
-  mode '0644'
+  mode '644'
   source '10dpkg-options.erb'
   only_if { apt_installed? }
 end
 
 template '/etc/apt/apt.conf.d/10recommends' do
-  owner 'root'
-  group 'root'
-  mode '0644'
+  mode '644'
   source '10recommends.erb'
   only_if { apt_installed? }
 end

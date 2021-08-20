@@ -22,14 +22,12 @@ package 'apt-cacher-ng'
 directory node['apt']['cacher_dir'] do
   owner 'apt-cacher-ng'
   group 'apt-cacher-ng'
-  mode '0755'
+  mode '755'
 end
 
 template '/etc/apt-cacher-ng/acng.conf' do
   source 'acng.conf.erb'
-  owner 'root'
-  group 'root'
-  mode '0644'
+  mode '644'
   notifies :restart, 'service[apt-cacher-ng]', :immediately
 end
 

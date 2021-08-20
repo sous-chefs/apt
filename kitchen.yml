@@ -4,8 +4,10 @@ driver:
 provisioner:
   name: chef_zero
   product_name: chef
-  enforce_idempotency: true
+  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  chef_license: accept-no-persist
   multiple_converge: 2
+  enforce_idempotency: true
   deprecations_as_errors: true
 
 verifier:
@@ -15,31 +17,17 @@ platforms:
   - name: centos-7
   - name: debian-9
   - name: debian-10
-  - name: ubuntu-16.04
   - name: ubuntu-18.04
   - name: ubuntu-20.04
-  - name: ubuntu-16.04-chef-13.3
-    driver_config:
-      box: bento/ubuntu-16.04
-    provisioner:
-      require_chef_omnibus: 13.3
 
 suites:
   - name: default
     run_list:
-      - recipe[apt]
+      - recipe[apt::default]
 
   - name: cacher
     run_list:
       - recipe[test::cacher]
-    excludes: centos-7
-
-  - name: compile-time
-    run_list:
-      - recipe[apt::default]
-    attributes:
-      apt:
-        compile_time_update: true
     excludes: centos-7
 
   - name: unattended_upgrades
