@@ -1,24 +1,15 @@
 require 'spec_helper'
 
 describe 'apt::cacher-ng' do
+  platform 'ubuntu'
+
   context 'server' do
-    let(:chef_run) do
-      runner = ChefSpec::ServerRunner.new
-      runner.node.override['apt']['cacher_port'] = '9876'
-      runner.converge('apt::cacher-ng')
-    end
+    override_attributes['apt']['cacher_port'] = '9876'
 
-    # it 'installs apt-cacher-ng' do
-    #   expect(chef_run).to install_package('apt-cacher-ng')
-    # end
+    it { expect(chef_run).to install_package('apt-cacher-ng') }
 
-    # it 'creates acng.conf file' do
-    #   expect(chef_run).to create_file('/etc/apt-cacher-ng/acng.conf')
-    # end
+    it { expect(chef_run).to create_template('/etc/apt-cacher-ng/acng.conf') }
 
-    # it 'enables and starts apt-cacher-ng' do
-    #   expect(chef_run).to set_service_to_start_on_boot 'apt-cacher-ng'
-    #   expect(chef_run).to start_service 'apt-cacher-ng'
-    # end
+    it { expect(chef_run).to enable_service('apt-cacher-ng') }
   end
 end
