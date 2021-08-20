@@ -19,16 +19,4 @@
 
 apt_update 'update'
 
-# without this dist data won't be populated by Ohai in docker
-if platform?('debian')
-  package 'lsb-release' do
-    action :install
-    notifies :reload, 'ohai[reload_ohai]', :immediately
-  end
-
-  ohai 'reload_ohai' do
-    action :nothing
-  end
-end
-
-include_recipe 'apt::default' # rubocop: disable ChefModernize/IncludingAptDefaultRecipe
+include_recipe 'apt::default' # rubocop: disable Chef/Modernize/IncludingAptDefaultRecipe

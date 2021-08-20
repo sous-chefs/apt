@@ -3,17 +3,17 @@ if os.name == 'debian' || os.name == 'ubuntu'
     it { should be_a_directory }
   end
 
-  content_dpkg_options = [
-    '# Managed by Chef',
-    'DPkg::Options {',
-    '}',
-  ].join("\n") << "\n"
+  content_dpkg_options = <<~EOF
+    # Managed by Chef
+    DPkg::Options {
+    }
+  EOF
 
-  content_recommends = [
-    '# Managed by Chef',
-    'APT::Install-Recommends "1";',
-    'APT::Install-Suggests "0";',
-  ].join("\n") << "\n"
+  content_recommends = <<~EOF
+    # Managed by Chef
+    APT::Install-Recommends "1";
+    APT::Install-Suggests "0";
+  EOF
 
   describe file('/etc/apt/apt.conf.d/10dpkg-options') do
     it { should be_file }

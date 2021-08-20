@@ -42,7 +42,7 @@ suites:
         compile_time_update: true
     excludes: centos-7
 
-  - name: unattended-upgrades
+  - name: unattended_upgrades
     run_list:
       - recipe[test::unattended-upgrades]
     attributes:
