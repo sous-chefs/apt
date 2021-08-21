@@ -4,6 +4,11 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Remove references to `compile_time`
+  - Unified mode merges compile and converge phases
+  - Chef 17 deprecates non-unified_mode resources, so these options are no longer needed.
+- Modernize tests
+
 ## 7.4.1 - *2021-08-30*
 
 - Standardise files with files in sous-chefs/repo-management
