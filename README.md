@@ -123,7 +123,7 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 - `['apt']['cacher_interface']` - interface to connect to the cacher-ng service, no default.
 - `['apt']['cacher_port']` - port for the cacher-ng service (used by server recipe only), default is '3142'
 - `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
--
+
 ### Unattended Upgrades
 
 - `['apt']['unattended_upgrades']['enable']` - enables unattended upgrades, default is false
