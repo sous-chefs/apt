@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 7.4.0 - *2021-01-20*
 
 - Sous Chefs Adoption
