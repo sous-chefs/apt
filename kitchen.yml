@@ -12,10 +12,9 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-7
-  - name: debian-9
+  - name: centos-stream-8
   - name: debian-10
-  - name: ubuntu-16.04
+  - name: debian-11
   - name: ubuntu-18.04
   - name: ubuntu-20.04
   - name: ubuntu-16.04-chef-13.3
@@ -32,7 +31,7 @@ suites:
   - name: cacher
     run_list:
       - recipe[test::cacher]
-    excludes: centos-7
+    excludes: centos-stream-8
 
   - name: compile-time
     run_list:
@@ -40,7 +39,7 @@ suites:
     attributes:
       apt:
         compile_time_update: true
-    excludes: centos-7
+    excludes: centos-stream-8
 
   - name: unattended-upgrades
     run_list:
@@ -49,4 +48,4 @@ suites:
       apt:
         unattended_upgrades:
           enable: true
-    excludes: centos-7
+    excludes: centos-stream-8
