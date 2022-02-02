@@ -17,10 +17,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - 'debian-9'
+          - 'centos-stream-8'
           - 'debian-10'
-          - 'centos-7'
-          - 'ubuntu-1604'
+          - 'debian-11'
           - 'ubuntu-1804'
           - 'ubuntu-2004'
         suite:
@@ -29,11 +28,11 @@ jobs:
           - 'compile-time'
           - 'unattended-upgrades'
         exclude:
-          - os: centos-7
+          - os: centos-stream-8
             suite: cacher
-          - os: centos-7
+          - os: centos-stream-8
             suite: compile-time
-          - os: centos-7
+          - os: centos-stream-8
             suite: unattended-upgrades
       fail-fast: false
 

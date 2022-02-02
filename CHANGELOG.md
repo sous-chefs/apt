@@ -6,6 +6,7 @@ This file is used to list changes made in each version of the apt cookbook.
 
 - Standardise files with files in sous-chefs/repo-management
 - Remove delivery and move to calling RSpec directly via a reusable workflow
+- Update tested platforms
 
 ## 7.4.1 - *2021-08-30*
 
