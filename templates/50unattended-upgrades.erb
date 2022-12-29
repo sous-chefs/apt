@@ -105,7 +105,7 @@ Acquire::http::Dl-Limit "<%= node['apt']['unattended_upgrades']['dl_limit'] %>";
 Unattended-Upgrade::SyslogEnable "<%= node['apt']['unattended_upgrades']['syslog_enable'] ? 'true' : 'false' %>";
 
 // Specify syslog facility. Default is daemon
-Unattended-Upgrade::SyslogFacility "<%= node['apt']['unattended_upgrades']['syslog_facility'] %>"
+Unattended-Upgrade::SyslogFacility "<%= node['apt']['unattended_upgrades']['syslog_facility'] %>";
 
 
 <% unless node['apt']['unattended_upgrades']['dpkg_options'].empty? -%>
