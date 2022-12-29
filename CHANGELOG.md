@@ -4,11 +4,13 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Update `50unattended-upgrades` to package defaults
+- Add testing for Ubuntu 22.04
+- CI updates
+
 ## 7.4.3 - *2022-12-05*
 
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 7.4.2 - *2022-02-02*
 
