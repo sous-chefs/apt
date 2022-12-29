@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## Unreleased
+
 ## 7.5.0 - *2022-12-29*
 
 - Update `50unattended-upgrades` to package defaults
