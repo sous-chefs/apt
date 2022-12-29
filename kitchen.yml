@@ -17,6 +17,7 @@ platforms:
   - name: debian-11
   - name: ubuntu-18.04
   - name: ubuntu-20.04
+  - name: ubuntu-22.04
   - name: ubuntu-16.04-chef-13.3
     driver_config:
       box: bento/ubuntu-16.04
