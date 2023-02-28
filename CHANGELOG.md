@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+
 ## 7.5.5 - *2023-03-02*
 
 - Fix yaml
@@ -15,15 +17,15 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## 7.5.3 - *2023-02-20*
 
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.2 - *2023-02-14*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.1 - *2023-02-14*
+
+- Remove CircleCI
 
 ## 7.5.0 - *2022-12-29*
 
