@@ -4,6 +4,9 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Update workflows to 2.0.1
+- Remove mdl and replace with markdownlint-cli2
+
 ## 7.5.3 - *2023-02-20*
 
 Standardise files with files in sous-chefs/repo-management
