@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Fix yaml
+
 ## 7.5.4 - *2023-03-01*
 
 - Update workflows to 2.0.1
