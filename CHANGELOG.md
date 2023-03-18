@@ -4,6 +4,9 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Standardise files with files in sous-chefs/repo-management
+- Various markdown fixes
+
 ## 7.5.6 - *2023-03-15*
 
 - Standardise files with files in sous-chefs/repo-management
@@ -102,7 +105,7 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## 6.1.2 (2017-06-20)
 
-- restore backwards compatability by respecting node['apt']['periodic_update_min_delay']
+- restore backwards compatability by respecting `node['apt']['periodic_update_min_delay']`
 
 ## 6.1.1 (2017-06-20)
 
@@ -186,7 +189,7 @@ This cookbook now requires Chef 12\. If you require Chef 11 compatibility you wi
 
 ## v2.9.2
 
-- # 168 Adding guard to package resource
+- #168 Adding guard to package resource
 
 ## v2.9.1
 
@@ -232,7 +235,7 @@ This cookbook now requires Chef 12\. If you require Chef 11 compatibility you wi
 
 ## v2.5.3 (2014-08-14)
 
-- # 87 - Improve default settings, account for non-linux platforms
+- #87 - Improve default settings, account for non-linux platforms
 
 ## v2.5.2 (2014-08-14)
 
@@ -262,7 +265,7 @@ This cookbook now requires Chef 12\. If you require Chef 11 compatibility you wi
 
 ### Bug
 
-- **[COOK-4287](https://tickets.opscode.com/browse/COOK-4287)** - Cleanup the Kitchen
+- [COOK-4287] - Cleanup the Kitchen
 
 ## v2.3.6
 
@@ -288,35 +291,35 @@ No change. Version bump for toolchain sanity
 
 ### Bug
 
-- **[COOK-3812](https://tickets.opscode.com/browse/COOK-3812)** - Add a way to bypass the apt existence check
+- [COOK-3812] - Add a way to bypass the apt existence check
 
 ### Improvement
 
-- **[COOK-3567](https://tickets.opscode.com/browse/COOK-3567)** - Allow users to bypass apt-cache via attributes
+- [COOK-3567] - Allow users to bypass apt-cache via attributes
 
 ## v2.2.1
 
 ### Improvement
 
-- **[COOK-664](https://tickets.opscode.com/browse/COOK-664)** - Check platform before running apt-specific commands
+- [COOK-664] - Check platform before running apt-specific commands
 
 ## v2.2.0
 
 ### Bug
 
-- **[COOK-3707](https://tickets.opscode.com/browse/COOK-3707)** - multiple nics confuse apt::cacher-client
+- [COOK-3707] - multiple nics confuse apt::cacher-client
 
 ## v2.1.2
 
 ### Improvement
 
-- **[COOK-3551](https://tickets.opscode.com/browse/COOK-3551)** - Allow user to set up a trusted APT repository
+- [COOK-3551] - Allow user to set up a trusted APT repository
 
 ## v2.1.1
 
 ### Bug
 
-- **[COOK-1856](https://tickets.opscode.com/browse/COOK-1856)** - Match GPG keys without case sensitivity
+- [COOK-1856] - Match GPG keys without case sensitivity
 
 ## v2.1.0
 
