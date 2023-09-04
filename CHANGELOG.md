@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
-## Unreleased
+## 7.5.15 - *2023-09-04*
 
 ## 7.5.14 - *2023-07-10*
 
