@@ -118,7 +118,7 @@ Dpkg::Options {
 
 // Download and install upgrades only on AC power
 // (i.e. skip or gracefully stop updates on battery)
-// Unattended-Upgrade::OnlyOnACPower "true";
+Unattended-Upgrade::OnlyOnACPower "<%= node['apt']['unattended_upgrades']['only_on_ac_power'] ? 'true' : 'false' %>";
 
 // Download and install upgrades only on non-metered connection
 // (i.e. skip or gracefully stop updates on a metered connection)
