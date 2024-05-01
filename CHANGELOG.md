@@ -2,6 +2,8 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
+## Unreleased
+
 ## 7.5.20 - *2024-05-01*
 
 - Fix dead link (that's not supposed to work!)
