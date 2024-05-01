@@ -101,7 +101,7 @@ For example, to prevent caching and directly connect to the repository at `downl
 
 ### cacher-ng
 
-Installs the `apt-cacher-ng` package and service so the system can provide APT caching. You can check the usage report at <http://{hostname}:3142/acng-report.html>.
+Installs the `apt-cacher-ng` package and service so the system can provide APT caching. You can check the usage report at `http://{hostname}:3142/acng-report.html`.
 
 If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly include the `cacher-client` recipe in your run list **after** `cacher-ng` or you will block your ability to install any packages (ie. `apt-cacher-ng`).
 

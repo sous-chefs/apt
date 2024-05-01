@@ -6,6 +6,10 @@ This file is used to list changes made in each version of the apt cookbook.
 
 Added attribute to control OnlyOnACPower unattended upgrades setting.
 
+## 7.5.20 - *2024-05-01*
+
+- Fix dead link (that's not supposed to work!)
+
 ## 7.5.19 - *2024-05-01*
 
 ## 7.5.18 - *2024-05-01*
