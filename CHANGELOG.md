@@ -4,6 +4,8 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 7.5.22 - *2024-05-02*
 
 ## 7.5.21 - *2024-05-02*
