@@ -6,6 +6,12 @@ This file is used to list changes made in each version of the apt cookbook.
 
 - Added attribute to control OnlyOnACPower unattended upgrades setting.
 
+## 7.5.24 - *2025-04-14*
+
+## 7.5.23 - *2024-11-18*
+
+Standardise files with files in sous-chefs/repo-management
+
 ## 7.5.22 - *2024-05-02*
 
 ## 7.5.21 - *2024-05-02*
