@@ -4,17 +4,11 @@ This file is used to list changes made in each version of the apt cookbook.
 
 ## Unreleased
 
+- Added attribute to control OnlyOnACPower unattended upgrades setting.
+
 ## 7.5.24 - *2025-04-14*
 
 ## 7.5.23 - *2024-11-18*
-
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
 
 Standardise files with files in sous-chefs/repo-management
 

@@ -145,6 +145,7 @@ To pull just security updates, set `origins_patterns` to something like `["origi
 - `['apt']['unattended_upgrades']['random_sleep']` - Wait a random number of seconds up to this value before running daily periodic apt actions. System default is 1800 seconds (30 minutes).
 - `['apt']['unattended_upgrades']['syslog_enable']` - Enable logging to syslog. Defaults to false.
 - `['apt']['unattended_upgrades']['syslog_facility']` - Specify syslog facility. Defaults to 'daemon'.
+- `['apt']['unattended_upgrades']['only_on_ac_power']` - Download and install upgrades only on AC power. Default is true.
 - `['apt']['unattended_upgrades']['dpkg_options']` An array of dpkg options to be used specifically only for unattended upgrades. Defaults to `[]` which will prevent it from being rendered from the template in the resulting file.
 
 ### Configuration for APT
