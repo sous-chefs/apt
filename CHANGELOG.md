@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the apt cookbook.
 
-## Unreleased
+## 7.6.0 - *2025-04-14*
 
 - Added attribute to control OnlyOnACPower unattended upgrades setting.
 
