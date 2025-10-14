@@ -8,6 +8,8 @@ Standardise files with files in sous-chefs/repo-management
 
 Standardise files with files in sous-chefs/repo-management
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 7.6.1 - *2025-09-04*
 
 ## 7.6.0 - *2025-04-14*
