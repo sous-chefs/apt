@@ -23,25 +23,39 @@ jobs:
     strategy:
       matrix:
         os:
-          - "centos-stream-8"
-          - "debian-10"
-          - "debian-11"
-          - "ubuntu-1804"
+          - "almalinux-8"
+          - "almalinux-9"
+          - "centos-stream-9"
+          - "debian-12"
+          - "debian-13"
           - "ubuntu-2004"
           - "ubuntu-2204"
+          - "ubuntu-2404"
         suite:
           - "default"
           - "cacher"
           - "compile-time"
           - "unattended-upgrades"
         exclude:
-          - os: centos-stream-8
+          - os: almalinux-8
             suite: cacher
-          - os: centos-stream-8
+          - os: almalinux-8
             suite: compile-time
-          - os: centos-stream-8
+          - os: almalinux-8
             suite: unattended-upgrades
-      fail-fast: false
+          - os: almalinux-9
+            suite: cacher
+          - os: almalinux-9
+            suite: compile-time
+          - os: almalinux-9
+            suite: unattended-upgrades
+          - os: centos-stream-9
+            suite: cacher
+          - os: centos-stream-9
+            suite: compile-time
+          - os: centos-stream-9
+            suite: unattended-upgrades
+      fail-fast: true
 
     steps:
       - name: Check out code
