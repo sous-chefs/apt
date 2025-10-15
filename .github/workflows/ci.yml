@@ -55,7 +55,7 @@ jobs:
             suite: compile-time
           - os: centos-stream-9
             suite: unattended-upgrades
-      fail-fast: false
+      fail-fast: true
 
     steps:
       - name: Check out code
