@@ -13,7 +13,7 @@ Standardise files with files in sous-chefs/repo-management
 
 ### Features
 
-* **ci:** migrate to reusable workflows ([#320](https://github.com/sous-chefs/apt/issues/320)) ([8e9b271](https://github.com/sous-chefs/apt/commit/8e9b2717b772b49b669b82157ff4efe890ca007a))
+- **ci:** migrate to reusable workflows ([#320](https://github.com/sous-chefs/apt/issues/320)) ([8e9b271](https://github.com/sous-chefs/apt/commit/8e9b2717b772b49b669b82157ff4efe890ca007a))
 
 ## 7.6.1 - *2025-09-04*
 
