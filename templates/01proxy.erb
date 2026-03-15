@@ -1,11 +1,11 @@
-Acquire::http::Proxy "http://<%= @server['host'] %>:<%= @server['port'] %>";
-<% if @server['proxy_ssl'] %>
-Acquire::https::Proxy "http://<%= @server['host'] %>:<%= @server['port'] %>";
+Acquire::http::Proxy "http://<%= @cacher_server['host'] %>:<%= @cacher_server['port'] %>";
+<% if @cacher_server['proxy_ssl'] %>
+Acquire::https::Proxy "http://<%= @cacher_server['host'] %>:<%= @cacher_server['port'] %>";
 <% else %>
 Acquire::https::Proxy "DIRECT";
 <% end %>
-<% unless @server['cache_bypass'].nil? %>
-<% @server['cache_bypass'].each do |bypass, type| %>
+<% unless @cacher_server['cache_bypass'].nil? %>
+<% @cacher_server['cache_bypass'].each do |bypass, type| %>
 Acquire::<%= type %>::Proxy::<%= bypass %> "DIRECT";
 <% end %>
 <% end %>

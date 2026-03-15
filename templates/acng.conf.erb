@@ -1,7 +1,7 @@
 # Letter case in directive names does not matter. Must be separated with colons.
 # Valid boolean values are a zero number for false, non-zero numbers for true.
 
-CacheDir: <%= node['apt']['cacher_dir'] %>
+CacheDir: <%= @cacher_dir %>
 
 # set empty to disable logging
 LogDir: /var/log/apt-cacher-ng
@@ -12,7 +12,7 @@ LogDir: /var/log/apt-cacher-ng
 
 # TCP (http) port
 # Set to 9999 to emulate apt-proxy
-Port:<%= node['apt']['cacher_port'] %>
+Port:<%= @cacher_port %>
 
 # Addresses or hostnames to listen on. Multiple addresses must be separated by
 # spaces. Each entry must be an exact local address which is associated with a
@@ -23,7 +23,11 @@ Port:<%= node['apt']['cacher_port'] %>
 #
 # Default: not set, will listen on all interfaces and protocols
 #
+<% if @cacher_interface -%>
+BindAddress: <%= @cacher_interface %>
+<% else -%>
 # BindAddress: localhost 192.168.7.254 publicNameOnMainInterface
+<% end -%>
 
 # The specification of another proxy which shall be used for downloads.
 # Username and password are, and see manual for limitations.

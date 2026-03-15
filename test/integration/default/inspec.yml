@@ -1,0 +1,7 @@
+---
+name: default
+title: Default apt resource tests
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verifies the apt_config resource
+version: 1.0.0

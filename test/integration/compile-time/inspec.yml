@@ -1,0 +1,7 @@
+---
+name: compile-time
+title: Compile-time apt tests
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verifies the compile-time apt update path
+version: 1.0.0

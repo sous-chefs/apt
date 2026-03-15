@@ -1,0 +1,7 @@
+---
+name: cacher
+title: Apt cacher tests
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verifies the apt_cacher_ng and apt_cacher_client resources
+version: 1.0.0
