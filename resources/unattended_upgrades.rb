@@ -36,8 +36,12 @@ action :create do
     sensitive true
   end
 
+  execute 'preseed unattended-upgrades' do
+    command 'debconf-set-selections /tmp/unattended-upgrades.seed'
+    action :run
+  end
+
   package 'unattended-upgrades' do
-    response_file '/tmp/unattended-upgrades.seed'
     action :install
   end
 

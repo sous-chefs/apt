@@ -14,6 +14,7 @@ describe 'apt_unattended_upgrades' do
     end
   end
 
+  it { is_expected.to run_execute('preseed unattended-upgrades') }
   it { is_expected.to install_package('unattended-upgrades') }
   it { is_expected.to install_package('bsd-mailx') }
   it { is_expected.to render_file('/etc/apt/apt.conf.d/20auto-upgrades').with_content('APT::Periodic::Unattended-Upgrade "1";') }
