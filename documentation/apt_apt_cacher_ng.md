@@ -23,5 +23,6 @@ Installs and configures an apt-cacher-ng service instance.
 apt_cacher_ng 'default' do
   cacher_dir '/tmp/apt-cacher'
   cacher_port 9876
+  cacher_interface '0.0.0.0'
 end
 ```

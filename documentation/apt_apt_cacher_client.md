@@ -6,7 +6,7 @@ Configures APT clients to use an apt-cacher-ng proxy.
 
 | Action | Description |
 |--------|-------------|
-| `:create` | Creates `/etc/apt/apt.conf.d/01proxy` when a server is provided (default). |
+| `:create` | Creates `/etc/apt/apt.conf.d/01proxy` when a server is provided and refreshes APT metadata if the proxy changes (default). |
 | `:delete` | Removes the proxy configuration file. |
 
 ## Properties
@@ -22,7 +22,11 @@ apt_cacher_client 'default' do
   cacher_server(
     host: 'localhost',
     port: 9876,
-    proxy_ssl: true
+    proxy_ssl: true,
+    cache_bypass: {
+      'download.oracle.com' => 'https',
+      'nginx.org' => 'https',
+    }
   )
 end
 ```

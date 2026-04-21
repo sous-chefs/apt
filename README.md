@@ -6,7 +6,7 @@
 [![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date. There are recipes for managing the apt-cacher-ng caching proxy and proxy clients. It also includes a custom resource for pinning packages via /etc/apt/preferences.d.
+This cookbook is resource-first. It provides custom resources for base APT configuration, apt-cacher client and server management, and unattended-upgrades configuration on Debian-family systems. It does not ship recipe entrypoints or attribute-driven configuration.
 
 ## Maintainers
 
@@ -16,167 +16,82 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Platforms
 
-- Ubuntu 12.04+
-- Debian 7+
+- Debian 12+
+- Ubuntu 22.04+
 
 May work with or without modification on other Debian derivatives.
 
 ### Chef
 
-- Chef 13.3+
+- Chef 15.3+
 
 ### Cookbooks
 
 - None
 
-## Recipes
-
-### default
-
-This recipe manually updates the timestamp file used to only run `apt-get update` if the cache is more than one day old.
-
-This recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before managing any `package` resources with Chef.
-
-This recipe also sets up a local cache directory for preseeding packages.
-
-**Including the default recipe on a node that does not support apt (such as Windows or RHEL) results in a noop.**
-
-### cacher-client
-
-Configures the node to use a `apt-cacher-ng` server to cache apt requests. Configuration of the server to use is located in `default['apt']['cacher_client']['cacher_server']` which is a hash containing `host`, `port`, `proxy_ssl`, and `bypass` keys. Example:
-
-```json
-{
-  "apt": {
-    "cacher_client": {
-      "cacher_server": {
-        "host": "cache_server.mycorp.dmz",
-        "port": 1234,
-        "proxy_ssl": true,
-        "cache_bypass": {
-          "download.oracle.com": "http"
-        }
-      }
-    }
-  }
-}
-```
-
-#### Bypassing the cache
-
-Occasionally you may come across repositories that do not play nicely when the node is using an `apt-cacher-ng` server. You can configure `cacher-client` to bypass the server and connect directly to the repository with the `cache_bypass` attribute.
-
-To do this, you need to override the `cache_bypass` attribute with an hash of repositories, with each key as the repository URL and value as the protocol to use:
-
-```json
-{
-  "apt": {
-    "cacher_client": {
-      "cacher_server": {
-        "cache_bypass": {
-          "URL": "PROTOCOL"
-        }
-      }
-    }
-  }
-}
-```
-
-For example, to prevent caching and directly connect to the repository at `download.oracle.com` via http and the repo at `nginx.org` via https
-
-```json
-{
-  "apt": {
-    "cacher_client": {
-      "cacher_server": {
-        "cache_bypass": {
-          "download.oracle.com": "http",
-          "nginx.org": "https"
-        }
-      }
-    }
-  }
-}
-```
-
-### cacher-ng
-
-Installs the `apt-cacher-ng` package and service so the system can provide APT caching. You can check the usage report at `http://{hostname}:3142/acng-report.html`.
-
-If you wish to help the `cacher-ng` recipe seed itself, you must now explicitly include the `cacher-client` recipe in your run list **after** `cacher-ng` or you will block your ability to install any packages (ie. `apt-cacher-ng`).
-
-### unattended-upgrades
-
-Installs and configures the `unattended-upgrades` package to provide automatic package updates. This can be configured to upgrade all packages or to just install security updates by setting `['apt']['unattended_upgrades']['allowed_origins']`.
-
-To pull just security updates, set `origins_patterns` to something like `["origin=Ubuntu,archive=trusty-security"]` (for Ubuntu trusty) or `["origin=Debian,label=Debian-Security"]` (for Debian).
-
-## Attributes
-
-### General
-
-- `['apt']['compile_time_update']` - force the default recipe to run `apt-get update` at compile time.
-- `['apt']['periodic_update_min_delay']` - minimum delay (in seconds) between two actual executions of `apt-get update` by the `execute[apt-get-update-periodic]` resource, default is '86400' (24 hours)
-
-### Caching
-
-- `['apt']['cacher_client']['cacher_server']` - Hash containing server information used by clients for caching. See the example in the recipes section above for the full format of the hash.
-- `['apt']['cacher_interface']` - interface to connect to the cacher-ng service, no default.
-- `['apt']['cacher_port']` - port for the cacher-ng service (used by server recipe only), default is '3142'
-- `['apt']['cacher_dir']` - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng'
-- `['apt']['compiletime']` - force the `cacher-client` recipe to run before other recipes. It forces apt to use the proxy before other recipes run. Useful if your nodes have limited access to public apt repositories. This is overridden if the `cacher-ng` recipe is in your run list. Default is 'false'
-
-### Unattended Upgrades
-
-- `['apt']['unattended_upgrades']['enable']` - enables unattended upgrades, default is false
-- `['apt']['unattended_upgrades']['update_package_lists']` - automatically update package list (`apt-get update`) daily, default is true
-- `['apt']['unattended_upgrades']['allowed_origins']` - array of allowed apt origins from which to pull automatic upgrades, defaults to a guess at the system's main origin and should almost always be overridden
-- `['apt']['unattended_upgrades']['origins_patterns']` - array of allowed apt origin patterns from which to pull automatic upgrades, defaults to none.
-- `['apt']['unattended_upgrades']['package_blacklist']` - an array of package which should never be automatically upgraded, defaults to none
-- `['apt']['unattended_upgrades']['auto_fix_interrupted_dpkg']` - attempts to repair dpkg state with `dpkg --force-confold --configure -a` if it exits uncleanly, defaults to false (contrary to the unattended-upgrades default)
-- `['apt']['unattended_upgrades']['minimal_steps']` - Split the upgrade into the smallest possible chunks. This makes the upgrade a bit slower but it has the benefit that shutdown while a upgrade is running is possible (with a small delay). Defaults to false.
-- `['apt']['unattended_upgrades']['install_on_shutdown']` - Install upgrades when the machine is shuting down instead of doing it in the background while the machine is running. This will (obviously) make shutdown slower. Defaults to false.
-- `['apt']['unattended_upgrades']['mail']` - Send email to this address for problems or packages upgrades. Defaults to no email.
-- `['apt']['unattended_upgrades']['sender']` - Send email from this address for problems or packages upgrades. Defaults to 'root'.
-- `['apt']['unattended_upgrades']['mail_only_on_error']` - If set, email will only be set on upgrade errors. Otherwise, an email will be sent after each upgrade. Defaults to true.
-- `['apt']['unattended_upgrades']['remove_unused_dependencies']` Do automatic removal of new unused dependencies after the upgrade. Defaults to false.
-- `['apt']['unattended_upgrades']['automatic_reboot']` - Automatically reboots _without confirmation_ if a restart is required after the upgrade. Defaults to false.
-- `['apt']['unattended_upgrades']['dl_limit']` - Limits the bandwidth used by apt to download packages. Value given as an integer in kb/sec. Defaults to nil (no limit).
-- `['apt']['unattended_upgrades']['random_sleep']` - Wait a random number of seconds up to this value before running daily periodic apt actions. System default is 1800 seconds (30 minutes).
-- `['apt']['unattended_upgrades']['syslog_enable']` - Enable logging to syslog. Defaults to false.
-- `['apt']['unattended_upgrades']['syslog_facility']` - Specify syslog facility. Defaults to 'daemon'.
-- `['apt']['unattended_upgrades']['only_on_ac_power']` - Download and install upgrades only on AC power. Default is true.
-- `['apt']['unattended_upgrades']['dpkg_options']` An array of dpkg options to be used specifically only for unattended upgrades. Defaults to `[]` which will prevent it from being rendered from the template in the resulting file.
-
-### Configuration for APT
-
-- `['apt']['confd']['force_confask']` - Prompt when overwriting configuration files. (default: false)
-- `['apt']['confd']['force_confdef']` - Don't prompt when overwriting configuration files. (default: false)
-- `['apt']['confd']['force_confmiss']` - Install removed configuration files when upgrading packages. (default: false)
-- `['apt']['confd']['force_confnew']` - Overwrite configuration files when installing packages. (default: false)
-- `['apt']['confd']['force_confold']` - Keep modified configuration files when installing packages. (default: false)
-- `['apt']['confd']['install_recommends']` - Consider recommended packages as a dependency for installing. (default: true)
-- `['apt']['confd']['install_suggests']` - Consider suggested packages as a dependency for installing. (default: false)
-
-## Libraries
-
-There is an `interface_ipaddress` method that returns the IP address for a particular host and interface, used by the `cacher-client` recipe. To enable it on the server use the `['apt']['cacher_interface']` attribute.
-
 ## Usage
 
-Put `recipe[apt]` first in the run list. If you have other recipes that you want to use to configure how apt behaves, like new sources, notify the execute resource to run, e.g.:
+Declare `apt_config` early in the run so APT metadata and common configuration are in place before package resources that depend on them.
+
+### Base configuration
 
 ```ruby
-template '/etc/apt/sources.list.d/my_apt_sources.list' do
-  notifies :run, 'execute[apt-get update]', :immediately
+apt_config 'default'
+```
+
+To force the initial update during compile phase, use the common `compile_time` property on the resource:
+
+```ruby
+apt_config 'compile-time' do
+  periodic_update_min_delay 0
+  compile_time_update true
+  compile_time true
 end
 ```
 
-The above will run during execution phase since it is a normal template resource, and should appear before other package resources that need the sources in the template.
+### Client-side apt-cacher
 
-Put `recipe[apt::cacher-ng]` in the run_list for a server to provide APT caching and add `recipe[apt::cacher-client]` on the rest of the Debian-based nodes to take advantage of the caching server.
+```ruby
+apt_cacher_client 'default' do
+  cacher_server(
+    host: 'cache.example.com',
+    port: 3142,
+    proxy_ssl: true,
+    cache_bypass: {
+      'download.oracle.com' => 'https',
+      'nginx.org' => 'https',
+    }
+  )
+end
+```
 
-If you want to cleanup unused packages, there is also the `apt-get autoclean` and `apt-get autoremove` resources provided for automated cleanup.
+### Server-side apt-cacher
+
+```ruby
+apt_cacher_ng 'default' do
+  cacher_dir '/var/cache/apt-cacher-ng'
+  cacher_port 3142
+  cacher_interface '0.0.0.0'
+end
+```
+
+### Unattended upgrades
+
+```ruby
+apt_unattended_upgrades 'default' do
+  enable true
+  allowed_origins []
+  origins_patterns ['origin=Debian,label=Debian-Security']
+  dpkg_options ['--force-confold']
+end
+```
+
+## Resource Reference
+
+- [`apt_config`](documentation/apt_apt_config.md)
+- [`apt_cacher_client`](documentation/apt_apt_cacher_client.md)
+- [`apt_cacher_ng`](documentation/apt_apt_cacher_ng.md)
+- [`apt_unattended_upgrades`](documentation/apt_apt_unattended_upgrades.md)
 
 ## Resources
 

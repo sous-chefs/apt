@@ -5,7 +5,7 @@ apt_config 'default'
 apt_cacher_ng 'default' do
   cacher_dir '/tmp/apt-cacher'
   cacher_port 9876
-  cacher_interface 'eth0'
+  cacher_interface '0.0.0.0'
 end
 
 apt_cacher_client 'default' do

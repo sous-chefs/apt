@@ -1,12 +1,12 @@
 # apt_apt_unattended_upgrades
 
-Installs and configures unattended-upgrades.
+Installs and configures unattended-upgrades, including the debconf preseed used during package installation.
 
 ## Actions
 
 | Action | Description |
 |--------|-------------|
-| `:create` | Installs unattended-upgrades and writes its config files (default). |
+| `:create` | Stages the preseed, installs unattended-upgrades, and writes its config files (default). |
 | `:delete` | Removes unattended-upgrades packages and config files. |
 
 ## Properties
@@ -39,6 +39,7 @@ Installs and configures unattended-upgrades.
 ```ruby
 apt_unattended_upgrades 'default' do
   enable true
+  allowed_origins []
   dpkg_options ['--force-confold']
 end
 ```

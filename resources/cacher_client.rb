@@ -16,6 +16,10 @@ action_class do
 end
 
 action :create do
+  apt_update 'update for proxy change' do
+    action :nothing
+  end
+
   execute 'remove legacy proxy from /etc/apt/apt.conf' do
     command "sed --in-place '/^Acquire::http::Proxy/d' /etc/apt/apt.conf"
     only_if 'grep Acquire::http::Proxy /etc/apt/apt.conf'
@@ -33,6 +37,7 @@ action :create do
       group 'root'
       mode '0644'
       variables(cacher_server: normalized_cacher_server)
+      notifies :update, 'apt_update[update for proxy change]', :immediately
     end
   end
 end

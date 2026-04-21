@@ -29,16 +29,27 @@ property :dpkg_options, Array, default: []
 default_action :create
 
 action :create do
-  template '/tmp/unattended-upgrades.seed' do
+  directory '/var/cache/local/preseeding' do
+    owner 'root'
+    group 'root'
+    mode '0755'
+  end
+
+  template '/var/cache/local/preseeding/unattended-upgrades.seed' do
     cookbook 'apt'
     source 'unattended-upgrades.seed.erb'
+    owner 'root'
+    group 'root'
+    mode '0600'
     variables(enable: new_resource.enable)
     sensitive true
+    notifies :run, 'execute[preseed unattended-upgrades]', :immediately
   end
 
   execute 'preseed unattended-upgrades' do
-    command 'debconf-set-selections /tmp/unattended-upgrades.seed'
-    action :run
+    command 'debconf-set-selections /var/cache/local/preseeding/unattended-upgrades.seed'
+    sensitive true
+    action :nothing
   end
 
   package 'unattended-upgrades' do
@@ -98,7 +109,7 @@ action :delete do
     end
   end
 
-  file '/tmp/unattended-upgrades.seed' do
+  file '/var/cache/local/preseeding/unattended-upgrades.seed' do
     action :delete
   end
 
