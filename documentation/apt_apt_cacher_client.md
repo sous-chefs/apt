@@ -4,16 +4,16 @@ Configures APT clients to use an apt-cacher-ng proxy.
 
 ## Actions
 
-| Action | Description |
-|--------|-------------|
+| Action    | Description                                                                                                                |
+|-----------|----------------------------------------------------------------------------------------------------------------------------|
 | `:create` | Creates `/etc/apt/apt.conf.d/01proxy` when a server is provided and refreshes APT metadata if the proxy changes (default). |
-| `:delete` | Removes the proxy configuration file. |
+| `:delete` | Removes the proxy configuration file.                                                                                      |
 
 ## Properties
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `cacher_server` | Hash | `{}` | Hash with `host`, `port`, `proxy_ssl`, and optional `cache_bypass`. |
+| Property        | Type | Default | Description                                                         |
+|-----------------|------|---------|---------------------------------------------------------------------|
+| `cacher_server` | Hash | `{}`    | Hash with `host`, `port`, `proxy_ssl`, and optional `cache_bypass`. |
 
 ## Examples
 
