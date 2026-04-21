@@ -1,4 +1,4 @@
-# apt_apt_config
+# apt_config
 
 Configures base APT update behavior, the local preseeding cache, and common `apt.conf` settings.
 

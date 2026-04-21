@@ -24,6 +24,7 @@ jobs:
       matrix:
         os:
           - "debian-12"
+          - "debian-13"
           - "ubuntu-2204"
           - "ubuntu-2404"
         suite:

@@ -88,10 +88,10 @@ end
 
 ## Resource Reference
 
-- [`apt_config`](documentation/apt_apt_config.md)
-- [`apt_cacher_client`](documentation/apt_apt_cacher_client.md)
-- [`apt_cacher_ng`](documentation/apt_apt_cacher_ng.md)
-- [`apt_unattended_upgrades`](documentation/apt_apt_unattended_upgrades.md)
+- [`apt_config`](documentation/apt_config.md)
+- [`apt_cacher_client`](documentation/apt_cacher_client.md)
+- [`apt_cacher_ng`](documentation/apt_cacher_ng.md)
+- [`apt_unattended_upgrades`](documentation/apt_unattended_upgrades.md)
 
 ## Resources
 

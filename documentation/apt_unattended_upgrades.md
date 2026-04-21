@@ -1,4 +1,4 @@
-# apt_apt_unattended_upgrades
+# apt_unattended_upgrades
 
 Installs and configures unattended-upgrades, including the debconf preseed used during package installation.
 

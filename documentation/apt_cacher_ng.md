@@ -1,4 +1,4 @@
-# apt_apt_cacher_ng
+# apt_cacher_ng
 
 Installs and configures an apt-cacher-ng service instance.
 

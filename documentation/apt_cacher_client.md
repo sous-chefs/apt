@@ -1,4 +1,4 @@
-# apt_apt_cacher_client
+# apt_cacher_client
 
 Configures APT clients to use an apt-cacher-ng proxy.
 
