@@ -13,13 +13,13 @@ Standardise files with files in sous-chefs/repo-management
 
 ### Features
 
-- **ci:** migrate to reusable workflows ([#320](https://github.com/sous-chefs/apt/issues/320)) ([8e9b271](https://github.com/sous-chefs/apt/commit/8e9b2717b772b49b669b82157ff4efe890ca007a))
+* **ci:** migrate to reusable workflows ([#320](https://github.com/sous-chefs/apt/issues/320)) ([8e9b271](https://github.com/sous-chefs/apt/commit/8e9b2717b772b49b669b82157ff4efe890ca007a))
 
 ## 7.6.1 - *2025-09-04*
 
 ## 7.6.0 - *2025-04-14*
 
-- Added attribute to control OnlyOnACPower unattended upgrades setting.
+* Added attribute to control OnlyOnACPower unattended upgrades setting.
 
 ## 7.5.24 - *2025-04-14*
 
@@ -33,7 +33,7 @@ Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.20 - *2024-05-01*
 
-- Fix dead link (that's not supposed to work!)
+* Fix dead link (that's not supposed to work!)
 
 ## 7.5.19 - *2024-05-01*
 
@@ -65,278 +65,278 @@ Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.7 - *2023-03-18*
 
-- Standardise files with files in sous-chefs/repo-management
-- Various markdown fixes
+* Standardise files with files in sous-chefs/repo-management
+* Various markdown fixes
 
 ## 7.5.6 - *2023-03-15*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.5 - *2023-03-02*
 
-- Fix yaml
+* Fix yaml
 
 ## 7.5.4 - *2023-03-01*
 
-- Update workflows to 2.0.1
-- Remove mdl and replace with markdownlint-cli2
+* Update workflows to 2.0.1
+* Remove mdl and replace with markdownlint-cli2
 
 ## 7.5.3 - *2023-02-20*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.2 - *2023-02-14*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 7.5.1 - *2023-02-14*
 
-- Remove CircleCI
+* Remove CircleCI
 
 ## 7.5.0 - *2022-12-29*
 
-- Update `50unattended-upgrades` to package defaults
-- Add testing for Ubuntu 22.04
-- CI updates
+* Update `50unattended-upgrades` to package defaults
+* Add testing for Ubuntu 22.04
+* CI updates
 
 ## 7.4.3 - *2022-12-05*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 7.4.2 - *2022-02-02*
 
-- Standardise files with files in sous-chefs/repo-management
-- Remove delivery and move to calling RSpec directly via a reusable workflow
-- Update tested platforms
+* Standardise files with files in sous-chefs/repo-management
+* Remove delivery and move to calling RSpec directly via a reusable workflow
+* Update tested platforms
 
 ## 7.4.1 - *2021-08-30*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 7.4.0 - *2021-01-20*
 
-- Sous Chefs Adoption
-- Cookstyle fixes
-- Standardise files with files in sous-chefs/repo-management
-- Update libraries/helpers.rb
+* Sous Chefs Adoption
+* Cookstyle fixes
+* Standardise files with files in sous-chefs/repo-management
+* Update libraries/helpers.rb
 
 ## 7.3.0 (2020-05-01)
 
-- Cookstyle fixes - [@tas50](https://github.com/tas50)
-- Remove unnecessary Foodcritic comments - [@tas50](https://github.com/tas50)
-- Simplify the metadata.rb to resolve cookstyle warnings - [@tas50](https://github.com/tas50)
-- Prevent helper collisions in Chef Infra Client 16 - [@tas50](https://github.com/tas50)
+* Cookstyle fixes - [@tas50](https://github.com/tas50)
+* Remove unnecessary Foodcritic comments - [@tas50](https://github.com/tas50)
+* Simplify the metadata.rb to resolve cookstyle warnings - [@tas50](https://github.com/tas50)
+* Prevent helper collisions in Chef Infra Client 16 - [@tas50](https://github.com/tas50)
 
 ## 7.2.0 (2019-08-05)
 
-- Allow you to specify dpkg options just for unattended upgrades - [@majormoses](https://github.com/majormoses)
-- Adding documentation and tests for setting dpkg options unattended upgrades - [@majormoses](https://github.com/majormoses)
-- Test on Chef 15 + Chef Workstation - [@tas50](https://github.com/tas50)
-- Remove tests of the resources now built into Chef - [@tas50](https://github.com/tas50)
-- Remove respond_to from the metadata - [@tas50](https://github.com/tas50)
-- Remove the recipe description from the metadata as these aren't used - [@tas50](https://github.com/tas50)
-- Replace Chef 12 testing with 13.3 - [@tas50](https://github.com/tas50)
-- Remove Ubuntu 14.04 / Debian 8 testing and add Debian 10 testing - [@tas50](https://github.com/tas50)
+* Allow you to specify dpkg options just for unattended upgrades - [@majormoses](https://github.com/majormoses)
+* Adding documentation and tests for setting dpkg options unattended upgrades - [@majormoses](https://github.com/majormoses)
+* Test on Chef 15 + Chef Workstation - [@tas50](https://github.com/tas50)
+* Remove tests of the resources now built into Chef - [@tas50](https://github.com/tas50)
+* Remove respond_to from the metadata - [@tas50](https://github.com/tas50)
+* Remove the recipe description from the metadata as these aren't used - [@tas50](https://github.com/tas50)
+* Replace Chef 12 testing with 13.3 - [@tas50](https://github.com/tas50)
+* Remove Ubuntu 14.04 / Debian 8 testing and add Debian 10 testing - [@tas50](https://github.com/tas50)
 
 ## 7.1.1 (2018-10-11)
 
-- Allow to customize sender email for unattended-upgrades
+* Allow to customize sender email for unattended-upgrades
 
 ## 7.1.0 (2018-09-05)
 
-- Add the installation of dirmngr and gnupg to the apt default cookbook to support secure repositories
-- Added support for the unattended-upgrade SyslogEnable configuration feature
-- Added support for the unattended-upgrade SyslogFacility configuration feature
+* Add the installation of dirmngr and gnupg to the apt default cookbook to support secure repositories
+* Added support for the unattended-upgrade SyslogEnable configuration feature
+* Added support for the unattended-upgrade SyslogFacility configuration feature
 
 ## 7.0.0 (2018-04-06)
 
 ### Breaking Change
 
-- This cookbook no longer includes apt_preference as that resource was moved into Chef Client 13.3. The cookbook now also requires Chef 13.3 or later. If you require support for an older release of Chef you will need to pin to a 6.X release.
+* This cookbook no longer includes apt_preference as that resource was moved into Chef Client 13.3. The cookbook now also requires Chef 13.3 or later. If you require support for an older release of Chef you will need to pin to a 6.X release.
 
 ## 6.1.4 (2017-08-31)
 
-- Restores ignore_failure true on compile time update.
-- name_property vs name_attribute in the resource
+* Restores ignore_failure true on compile time update.
+* name_property vs name_attribute in the resource
 
 ## 6.1.3 (2017-07-19)
 
-- Fixed typo in readme
-- Fixed config namespace in the 10dpkg-options file
+* Fixed typo in readme
+* Fixed config namespace in the 10dpkg-options file
 
 ## 6.1.2 (2017-06-20)
 
-- restore backwards compatability by respecting `node['apt']['periodic_update_min_delay']`
+* restore backwards compatability by respecting `node['apt']['periodic_update_min_delay']`
 
 ## 6.1.1 (2017-06-20)
 
-- Remove action_class.class_eval usage that caused failures
-- Remove wrong warning logs generated by apt_preference
-- Fix wrong warning log in cacher-client recipe
+* Remove action_class.class_eval usage that caused failures
+* Remove wrong warning logs generated by apt_preference
+* Fix wrong warning log in cacher-client recipe
 
 ## 6.1.0 (2017-04-11)
 
-- Test with local delivery and not Rake
-- Use proper value type for bsd-mailx package only_if/not_if block
-- Update apache2 license string
-- Convert apt_preference to a custom resource
+* Test with local delivery and not Rake
+* Use proper value type for bsd-mailx package only_if/not_if block
+* Update apache2 license string
+* Convert apt_preference to a custom resource
 
 ## 6.0.1 (2017-02-27)
 
-- Update cookbook description
-- Testing updates for Chef 13 and fixes to the cacher recipe
+* Update cookbook description
+* Testing updates for Chef 13 and fixes to the cacher recipe
 
 ## 6.0.0 (2017-02-08)
 
 ### Breaking changes
 
-- apt_update and apt_repository resources have been removed from the cookbook. These resources were both added to the chef-client itself. Due to this we now require Chef 12.9 or later, which has both of these resources built in. If you require compatibility with older chef-client releases you will need to pin to the 5.X release.
+* apt_update and apt_repository resources have been removed from the cookbook. These resources were both added to the chef-client itself. Due to this we now require Chef 12.9 or later, which has both of these resources built in. If you require compatibility with older chef-client releases you will need to pin to the 5.X release.
 
 ### Other changes
 
-- apt_preference resource now properly required a pin_priority, which prevents us from writing out bad preference files that must be manually removed
+* apt_preference resource now properly required a pin_priority, which prevents us from writing out bad preference files that must be manually removed
 
 ## 5.1.0 (2017-02-01)
 
-- Convert integration tests to inspec
-- Add management of the /etc/apt/apt.conf.d/10dpkg-options file with new attributes. This allows tuning of how dpkg will handle package prompts during package installation. Note that Chef 12.19+ will automatically suppress package prompts
+* Convert integration tests to inspec
+* Add management of the /etc/apt/apt.conf.d/10dpkg-options file with new attributes. This allows tuning of how dpkg will handle package prompts during package installation. Note that Chef 12.19+ will automatically suppress package prompts
 
 ## 5.0.1 (2016-12-22)
 
-- Avoid CHEF-3694 in apt_preferences resource
-- Cookstyle fixes
+* Avoid CHEF-3694 in apt_preferences resource
+* Cookstyle fixes
 
 ## 5.0.0 (2016-10-14)
 
-- Remove search logic from the cacher client cookbook and rework attribute structure. See the attributes file and readme for new structure. Determining what servers to cache against is better handled in a wrapper cookbook where you can define the exact search syntax yourself
-- Corrected readme examples for the cacher client setup
-- Depend on the latest compat_resource
-- Define matchers for ChefSpec
-- Testing updates to better test the various recipes and providers in the cookbook on Travis
+* Remove search logic from the cacher client cookbook and rework attribute structure. See the attributes file and readme for new structure. Determining what servers to cache against is better handled in a wrapper cookbook where you can define the exact search syntax yourself
+* Corrected readme examples for the cacher client setup
+* Depend on the latest compat_resource
+* Define matchers for ChefSpec
+* Testing updates to better test the various recipes and providers in the cookbook on Travis
 
 ## 4.0.2 (2016-08-13)
 
-- The cookbook requires Chef 12.1+ not 12.0\. Update docs
-- Test on Chef 12.1 to ensure compatibility
-- Restore compatibility with Chef < 12.4
+* The cookbook requires Chef 12.1+ not 12.0\. Update docs
+* Test on Chef 12.1 to ensure compatibility
+* Restore compatibility with Chef < 12.4
 
 ## 4.0.1 (2016-06-21)
 
-- Fix bug that prevented adding the cookbook to non Debian/Ubuntu nodes without chef run failures
+* Fix bug that prevented adding the cookbook to non Debian/Ubuntu nodes without chef run failures
 
 ## 4.0.0 (2016-06-02)
 
 This cookbook now requires Chef 12\. If you require Chef 11 compatibility you will need to pin to the 3.X cookbook version
 
-- The apt-get update logic in the default recipe has been converted to apt_update custom resource and compat_resource cookbook has been added for backwards compatibility with all Chef 12.X releases. In addition this resource is now included in core chef-client and the cookbook will use the built-in resource if available
-- Added support for the unattended-upgrade RandomSleep configuration feature
-- Added support for the unattended-upgrade Unattended-Upgrade::Origins-Pattern configuration feature
-- Added Chefspec matchers for apt_update
-- Fixed apt_repository documentation to correctly reflect the deb_src property
+* The apt-get update logic in the default recipe has been converted to apt_update custom resource and compat_resource cookbook has been added for backwards compatibility with all Chef 12.X releases. In addition this resource is now included in core chef-client and the cookbook will use the built-in resource if available
+* Added support for the unattended-upgrade RandomSleep configuration feature
+* Added support for the unattended-upgrade Unattended-Upgrade::Origins-Pattern configuration feature
+* Added Chefspec matchers for apt_update
+* Fixed apt_repository documentation to correctly reflect the deb_src property
 
 ## 3.0.0 (2016-03-01)
 
-- Removed Chef 10 compatibility code. This cookbook requires Chef 11 or greater now
-- The default recipe will no longer create /etc/apt/ and other directories on non-Debian based systems
-- Updated the autoremove command in the default recipe to run in non-interactive mode
-- Added CentOS 7 to Test Kitchenwith tests to ensure we don't create any files on RHEL or other non-Debian hosts
-- Updated Chefspec to 4.X format
-- Properly mock the existence of apt for the Chefspec runs so they don't just skip over the resources
-- Fixed lwrp test kitchen tests to pass
-- Resolved or disabled all Rubocop warnings
-- Enabled testing in Travis CI
-- Removed Apt Cacher NG support for Ubuntu 10.04 and Debian 6.X as they are both deprecated
-- Fixed + signs in packages names with the preference LWRP being rejected
+* Removed Chef 10 compatibility code. This cookbook requires Chef 11 or greater now
+* The default recipe will no longer create /etc/apt/ and other directories on non-Debian based systems
+* Updated the autoremove command in the default recipe to run in non-interactive mode
+* Added CentOS 7 to Test Kitchenwith tests to ensure we don't create any files on RHEL or other non-Debian hosts
+* Updated Chefspec to 4.X format
+* Properly mock the existence of apt for the Chefspec runs so they don't just skip over the resources
+* Fixed lwrp test kitchen tests to pass
+* Resolved or disabled all Rubocop warnings
+* Enabled testing in Travis CI
+* Removed Apt Cacher NG support for Ubuntu 10.04 and Debian 6.X as they are both deprecated
+* Fixed + signs in packages names with the preference LWRP being rejected
 
 ## v2.9.2
 
-- #168 Adding guard to package resource
+* #168 Adding guard to package resource
 
 ## v2.9.1
 
-- Adding package apt-transport-https to default.rb
+* Adding package apt-transport-https to default.rb
 
 ## v2.9.0
 
-- Add `sensitive` flag for apt_repositories
-- Enable installation of recommended or suggested packages
-- Tidy up `apt-get update` logic
-- Fixing not_if guard on ruby_block[validate-key #{key}]
+* Add `sensitive` flag for apt_repositories
+* Enable installation of recommended or suggested packages
+* Tidy up `apt-get update` logic
+* Fixing not_if guard on ruby_block[validate-key #{key}]
 
 ## v2.8.2 (2015-08-24)
 
-- Fix removal of apt_preferences
+* Fix removal of apt_preferences
 
 ## v2.8.1 (2015-08-18)
 
-- Handle keyservers as URLs and bare hostnames
+* Handle keyservers as URLs and bare hostnames
 
 ## v2.8.0 (2015-08-18)
 
-- Access keyservers on port 80
-- Adds key_proxy as LWRP attribute for apt_repository
-- Fix wildcard glob preferences files
-- Fix text output verification for non en_US locales
-- Quote repo URLs to deal with spaces
+* Access keyservers on port 80
+* Adds key_proxy as LWRP attribute for apt_repository
+* Fix wildcard glob preferences files
+* Fix text output verification for non en_US locales
+* Quote repo URLs to deal with spaces
 
 ## v2.7.0 (2015-03-23)
 
-- Support Debian 8.0
-- Filename verification for LWRPs
-- Support SSL enabled apt repositories
+* Support Debian 8.0
+* Filename verification for LWRPs
+* Support SSL enabled apt repositories
 
 ## v2.6.1 (2014-12-29)
 
-- Remove old preference files without .pref extension from previous versions
+* Remove old preference files without .pref extension from previous versions
 
 ## v2.6.0 (2014-09-09)
 
-- Always update on first run - check
-- Adding ppa support for apt_repository
+* Always update on first run - check
+* Adding ppa support for apt_repository
 
 ## v2.5.3 (2014-08-14)
 
-- #87 - Improve default settings, account for non-linux platforms
+* #87 - Improve default settings, account for non-linux platforms
 
 ## v2.5.2 (2014-08-14)
 
-- Fully restore 2.3.10 behaviour
+* Fully restore 2.3.10 behaviour
 
 ## v2.5.1 (2014-08-14)
 
-- fix breakage introduced in apt 2.5.0
+* fix breakage introduced in apt 2.5.0
 
 ## v2.5.0 (2014-08-12)
 
-- Add unattended-upgrades recipe
-- Only update the cache for the created repository
-- Added ChefSpec matchers and default_action for resources
-- Avoid cloning resource attributes
-- Minor documentation updates
+* Add unattended-upgrades recipe
+* Only update the cache for the created repository
+* Added ChefSpec matchers and default_action for resources
+* Avoid cloning resource attributes
+* Minor documentation updates
 
 ## v2.4.0 (2014-05-15)
 
-- [COOK-4534]: Add option to update apt cache at compile time
+* [COOK-4534]: Add option to update apt cache at compile time
 
 ## v2.3.10 (2014-04-23)
 
-- [COOK-4512] Bugfix: Use empty PATH if PATH is nil
+* [COOK-4512] Bugfix: Use empty PATH if PATH is nil
 
 ## v2.3.8 (2014-02-14)
 
 ### Bug
 
-- [COOK-4287] - Cleanup the Kitchen
+* [COOK-4287] - Cleanup the Kitchen
 
 ## v2.3.6
 
-- [COOK-4154] - Add chefspec matchers.rb file to apt cookbook
-- [COOK-4102] - Only index created repository
+* [COOK-4154] - Add chefspec matchers.rb file to apt cookbook
+* [COOK-4102] - Only index created repository
 
 ## v2.3.6
 
-- [COOK-4154] - Add chefspec matchers.rb file to apt cookbook
-- [COOK-4102] - Only index created repository
+* [COOK-4154] - Add chefspec matchers.rb file to apt cookbook
+* [COOK-4102] - Only index created repository
 
 ## v2.3.4
 
@@ -344,150 +344,150 @@ No change. Version bump for toolchain sanity
 
 ## v2.3.2
 
-- [COOK-3905] apt-get-update-periodic: configuration for the update period
-- Updating style for rubocops
-- Updating test-kitchen harness
+* [COOK-3905] apt-get-update-periodic: configuration for the update period
+* Updating style for rubocops
+* Updating test-kitchen harness
 
 ## v2.3.0
 
 ### Bug
 
-- [COOK-3812] - Add a way to bypass the apt existence check
+* [COOK-3812] - Add a way to bypass the apt existence check
 
 ### Improvement
 
-- [COOK-3567] - Allow users to bypass apt-cache via attributes
+* [COOK-3567] - Allow users to bypass apt-cache via attributes
 
 ## v2.2.1
 
 ### Improvement
 
-- [COOK-664] - Check platform before running apt-specific commands
+* [COOK-664] - Check platform before running apt-specific commands
 
 ## v2.2.0
 
 ### Bug
 
-- [COOK-3707] - multiple nics confuse apt::cacher-client
+* [COOK-3707] - multiple nics confuse apt::cacher-client
 
 ## v2.1.2
 
 ### Improvement
 
-- [COOK-3551] - Allow user to set up a trusted APT repository
+* [COOK-3551] - Allow user to set up a trusted APT repository
 
 ## v2.1.1
 
 ### Bug
 
-- [COOK-1856] - Match GPG keys without case sensitivity
+* [COOK-1856] - Match GPG keys without case sensitivity
 
 ## v2.1.0
 
-- [COOK-3426]: cacher-ng fails with restrict_environment set to true
-- [COOK-2859]: cacher-client executes out of order
-- [COOK-3052]: Long GPG keys are downloaded on every run
-- [COOK-1856]: apt cookbook should match keys without case sensitivity
-- [COOK-3255]: Attribute name incorrect in README
-- [COOK-3225]: Call use_inline_resources only if defined
-- [COOK-3386]: Cache dir for apt-cacher-ng
-- [COOK-3291]: apt_repository: enable usage of a keyserver on port 80
-- Greatly expanded test coverage with ChefSpec and Test-Kitchen
+* [COOK-3426]: cacher-ng fails with restrict_environment set to true
+* [COOK-2859]: cacher-client executes out of order
+* [COOK-3052]: Long GPG keys are downloaded on every run
+* [COOK-1856]: apt cookbook should match keys without case sensitivity
+* [COOK-3255]: Attribute name incorrect in README
+* [COOK-3225]: Call use_inline_resources only if defined
+* [COOK-3386]: Cache dir for apt-cacher-ng
+* [COOK-3291]: apt_repository: enable usage of a keyserver on port 80
+* Greatly expanded test coverage with ChefSpec and Test-Kitchen
 
 ## v2.0.0
 
 ### Bug
 
-- [COOK-2258]: apt: LWRP results in error under why-run mode in apt 1.9.0 cookbook
+* [COOK-2258]: apt: LWRP results in error under why-run mode in apt 1.9.0 cookbook
 
 ## v1.10.0
 
 ### Improvement
 
-- [COOK-2885]: Improvements for apt cache server search
+* [COOK-2885]: Improvements for apt cache server search
 
 ### Bug
 
-- [COOK-2441]: Apt recipe broken in new chef version
-- [COOK-2660]: Create Debian 6.0 "squeeze" specific template for
-- apt-cacher-ng
+* [COOK-2441]: Apt recipe broken in new chef version
+* [COOK-2660]: Create Debian 6.0 "squeeze" specific template for
+* apt-cacher-ng
 
 ## v1.9.2
 
-- [COOK-2631] - Create Ubuntu 10.04 specific template for apt-cacher-ng
+* [COOK-2631] - Create Ubuntu 10.04 specific template for apt-cacher-ng
 
 ## v1.9.0
 
-- [COOK-2185] - Proxy for apt-key
-- [COOK-2338] - Support pinning by glob() or regexp
+* [COOK-2185] - Proxy for apt-key
+* [COOK-2338] - Support pinning by glob() or regexp
 
 ## v1.8.4
 
-- [COOK-2171] - Update README to clarify required Chef version: 10.18.0
-- or higher.
+* [COOK-2171] - Update README to clarify required Chef version: 10.18.0
+* or higher.
 
 ## v1.8.2
 
-- [COOK-2112] - need [] around "arch" in sources.list entries
-- [COOK-2171] - fixes a regression in the notification
+* [COOK-2112] - need [] around "arch" in sources.list entries
+* [COOK-2171] - fixes a regression in the notification
 
 ## v1.8.0
 
-- [COOK-2143] - Allow for a custom cacher-ng port
-- [COOK-2171] - On `apt_repository.run_action(:add)` the source file
-- is not created.
-- [COOK-2184] - apt::cacher-ng, use `cacher_port` attribute in
-- acng.conf
+* [COOK-2143] - Allow for a custom cacher-ng port
+* [COOK-2171] - On `apt_repository.run_action(:add)` the source file
+* is not created.
+* [COOK-2184] - apt::cacher-ng, use `cacher_port` attribute in
+* acng.conf
 
 ## v1.7.0
 
-- [COOK-2082] - add "arch" parameter to apt_repository LWRP
+* [COOK-2082] - add "arch" parameter to apt_repository LWRP
 
 ## v1.6.0
 
-- [COOK-1893] - `apt_preference` use "`package_name`" resource instead of "name"
-- [COOK-1894] - change filename for sources.list.d files
-- [COOK-1914] - Wrong dir permissions for /etc/apt/preferences.d/
-- [COOK-1942] - README.md has wrong name for the keyserver attribute
-- [COOK-2019] - create 01proxy before any other apt-get updates get executed
+* [COOK-1893] - `apt_preference` use "`package_name`" resource instead of "name"
+* [COOK-1894] - change filename for sources.list.d files
+* [COOK-1914] - Wrong dir permissions for /etc/apt/preferences.d/
+* [COOK-1942] - README.md has wrong name for the keyserver attribute
+* [COOK-2019] - create 01proxy before any other apt-get updates get executed
 
 ## v1.5.2
 
-- [COOK-1682] - use template instead of file resource in apt::cacher-client
-- [COOK-1875] - cacher-client should be Environment-aware
+* [COOK-1682] - use template instead of file resource in apt::cacher-client
+* [COOK-1875] - cacher-client should be Environment-aware
 
 ## V1.5.0
 
-- [COOK-1500] - Avoid triggering apt-get update
-- [COOK-1548] - Add execute commands for autoclean and autoremove
-- [COOK-1591] - Setting up the apt proxy should leave https
-- connections direct
-- [COOK-1596] - execute[apt-get-update-periodic] never runs
-- [COOK-1762] - create /etc/apt/preferences.d directory
-- [COOK-1776] - apt key check isn't idempotent
+* [COOK-1500] - Avoid triggering apt-get update
+* [COOK-1548] - Add execute commands for autoclean and autoremove
+* [COOK-1591] - Setting up the apt proxy should leave https
+* connections direct
+* [COOK-1596] - execute[apt-get-update-periodic] never runs
+* [COOK-1762] - create /etc/apt/preferences.d directory
+* [COOK-1776] - apt key check isn't idempotent
 
 ## v1.4.8
 
-- Adds test-kitchen support
-- [COOK-1435] - repository lwrp is not idempotent with http key
+* Adds test-kitchen support
+* [COOK-1435] - repository lwrp is not idempotent with http key
 
 ## v1.4.6
 
-- [COOK-1530] - apt_repository isn't aware of update-success-stamp
-- file (also reverts COOK-1382 patch).
+* [COOK-1530] - apt_repository isn't aware of update-success-stamp
+* file (also reverts COOK-1382 patch).
 
 ## v1.4.4
 
-- [COOK-1229] - Allow cacher IP to be set manually in non-Chef Solo
-- environments
-- [COOK-1530] - Immediately update apt-cache when sources.list file is dropped off
+* [COOK-1229] - Allow cacher IP to be set manually in non-Chef Solo
+* environments
+* [COOK-1530] - Immediately update apt-cache when sources.list file is dropped off
 
 ## v1.4.2
 
-- [COOK-1155] - LWRP for apt pinning
+* [COOK-1155] - LWRP for apt pinning
 
 ## v1.4.0
 
-- [COOK-889] - overwrite existing repo source files
-- [COOK-921] - optionally use cookbook_file or remote_file for key
-- [COOK-1032] - fixes problem with apt repository key installation
+* [COOK-889] - overwrite existing repo source files
+* [COOK-921] - optionally use cookbook_file or remote_file for key
+* [COOK-1032] - fixes problem with apt repository key installation
