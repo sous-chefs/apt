@@ -48,17 +48,25 @@ x-verifiers:
 
 suites:
   - name: default
+    provisioner:
+      named_run_list: default
     run_list: *default_run_list
     verifier: *default_verifier
 
   - name: cacher
+    provisioner:
+      named_run_list: cacher
     run_list: *cacher_run_list
     verifier: *cacher_verifier
 
   - name: compile-time
+    provisioner:
+      named_run_list: compile_time
     run_list: *compile_time_run_list
     verifier: *compile_time_verifier
 
   - name: unattended-upgrades
+    provisioner:
+      named_run_list: unattended_upgrades
     run_list: *unattended_run_list
     verifier: *unattended_verifier
