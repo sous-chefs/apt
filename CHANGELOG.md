@@ -8,6 +8,17 @@ Standardise files with files in sous-chefs/repo-management
 
 Standardise files with files in sous-chefs/repo-management
 
+## [8.0.0](https://github.com/sous-chefs/apt/compare/v7.7.0...v8.0.0) (2026-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate apt to custom resources ([#646](https://github.com/sous-chefs/apt/issues/646))
+
+### Features
+
+* migrate apt to custom resources ([#646](https://github.com/sous-chefs/apt/issues/646)) ([01b8c51](https://github.com/sous-chefs/apt/commit/01b8c51f3706e503b3e52aeefefca0b84fc34b89))
+
 ## [7.7.0](https://github.com/sous-chefs/apt/compare/7.6.1...v7.7.0) (2025-10-15)
 
 
